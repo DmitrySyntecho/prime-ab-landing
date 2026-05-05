@@ -196,77 +196,93 @@ export function FIFAPromoBanner() {
               </span>
             </div>
 
-            {/* RIGHT — countdown card */}
-            <div className="relative">
+            {/* RIGHT — photo with floating countdown card */}
+            <div className="relative hidden lg:block">
+              {/* Main image */}
+              <div className="relative rounded-[24px] overflow-hidden" style={{ boxShadow: "0 24px 60px -16px rgba(0,0,0,0.7)" }}>
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dont%20watch%20the%20match%20throw%20the%20match-N5nhDK5GHKm8KLjMZZB9dEfuNCzHrS.png"
+                  alt="Premium sports lounge with audience watching a live football match on a massive LED screen"
+                  className="w-full h-[340px] object-cover"
+                />
+                {/* Subtle bottom gradient to blend card */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(180deg, transparent 40%, rgba(6,10,24,0.72) 100%)",
+                  }}
+                  aria-hidden
+                />
+              </div>
+
+              {/* Floating countdown card — sits above image bottom edge */}
               <div
-                className="relative rounded-[24px] p-6 md:p-7 overflow-hidden"
+                className="absolute -bottom-6 left-4 right-4 rounded-[20px] p-4 md:p-5 overflow-hidden"
                 style={{
-                  background: "rgba(6, 10, 24, 0.65)",
-                  border: "1px solid rgba(255,255,255,0.10)",
-                  backdropFilter: "blur(24px)",
-                  boxShadow: "0 24px 60px -16px rgba(0,0,0,0.6)",
+                  background: "rgba(6, 10, 24, 0.80)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  backdropFilter: "blur(28px)",
+                  boxShadow: "0 20px 50px -12px rgba(0,0,0,0.70)",
+                  animation: "fifaPromoFloat 4s ease-in-out infinite",
                 }}
               >
-                {/* Mini stadium glow */}
+                {/* Mini glow */}
                 <div
                   className="absolute -top-1/2 left-1/2 -translate-x-1/2 w-[200%] h-[100%] pointer-events-none"
                   style={{
-                    background:
-                      "radial-gradient(ellipse 50% 100% at 50% 100%, rgba(60,172,59,0.20) 0%, transparent 70%)",
+                    background: "radial-gradient(ellipse 50% 100% at 50% 100%, rgba(60,172,59,0.18) 0%, transparent 70%)",
                   }}
                   aria-hidden
                 />
 
-                <div className="relative">
-                  <div
-                    className="text-[10px] tracking-[0.18em] uppercase font-bold mb-3"
-                    style={{ color: "#5BC25A" }}
-                  >
-                    Kickoff in
-                  </div>
-                  <div className="flex items-baseline gap-3 mb-5">
-                    {[
-                      { num: t.days, lbl: "DAYS" },
-                      { num: t.hours, lbl: "HRS" },
-                      { num: t.mins, lbl: "MIN" },
-                    ].map((c, i) => (
-                      <div key={i} className="text-center">
-                        <div
-                          className="font-mono font-black text-[34px] sm:text-[40px] leading-none tabular-nums"
-                          style={{
-                            background: "linear-gradient(135deg, #FFD24A 0%, #FF5E3A 100%)",
-                            WebkitBackgroundClip: "text",
-                            backgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                          }}
-                        >
-                          {String(c.num).padStart(2, "0")}
+                <div className="relative flex items-center justify-between gap-4">
+                  {/* Countdown numbers */}
+                  <div>
+                    <div className="text-[9px] tracking-[0.18em] uppercase font-bold mb-2" style={{ color: "#5BC25A" }}>
+                      Kickoff in
+                    </div>
+                    <div className="flex items-baseline gap-2.5">
+                      {[
+                        { num: t.days, lbl: "DAYS" },
+                        { num: t.hours, lbl: "HRS" },
+                        { num: t.mins, lbl: "MIN" },
+                      ].map((c, i) => (
+                        <div key={i} className="text-center">
+                          <div
+                            className="font-mono font-black text-[30px] leading-none tabular-nums"
+                            style={{
+                              background: "linear-gradient(135deg, #FFD24A 0%, #FF5E3A 100%)",
+                              WebkitBackgroundClip: "text",
+                              backgroundClip: "text",
+                              WebkitTextFillColor: "transparent",
+                            }}
+                          >
+                            {String(c.num).padStart(2, "0")}
+                          </div>
+                          <div className="text-[8px] tracking-[0.14em] text-white/45 font-bold mt-0.5">{c.lbl}</div>
                         </div>
-                        <div className="text-[9px] tracking-[0.14em] text-white/45 font-bold mt-1">
-                          {c.lbl}
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="h-px bg-white/[0.10] mb-4" />
+                  {/* Divider */}
+                  <div className="w-px self-stretch bg-white/[0.10]" />
 
-                  <div className="flex items-center gap-2.5">
+                  {/* Match info */}
+                  <div className="flex items-center gap-2.5 min-w-0">
                     <span
-                      className="w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0"
+                      className="w-8 h-8 rounded-[8px] flex items-center justify-center flex-shrink-0"
                       style={{
                         background: "rgba(230,29,37,0.18)",
                         border: "1px solid rgba(230,29,37,0.32)",
                         color: "#FF6B71",
                       }}
                     >
-                      <Trophy className="w-[18px] h-[18px]" strokeWidth={2.2} />
+                      <Trophy className="w-[16px] h-[16px]" strokeWidth={2.2} />
                     </span>
-                    <div>
-                      <div className="text-white text-[13px] font-bold leading-tight">
-                        June 11 — Estadio Azteca
-                      </div>
-                      <div className="text-white/50 text-[11px]">Mexico vs South Africa · Opener</div>
+                    <div className="min-w-0">
+                      <div className="text-white text-[12px] font-bold leading-tight truncate">June 11 — Estadio Azteca</div>
+                      <div className="text-white/50 text-[10px] truncate">Mexico vs South Africa · Opener</div>
                     </div>
                   </div>
                 </div>
@@ -281,6 +297,7 @@ export function FIFAPromoBanner() {
                   color: "#FF6B71",
                   boxShadow: "0 8px 20px -6px rgba(230,29,37,0.45)",
                   animation: "fifaPromoFloat 4s ease-in-out infinite",
+                  animationDelay: "1s",
                 }}
               >
                 <span

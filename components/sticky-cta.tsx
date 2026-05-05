@@ -25,7 +25,6 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
       const y = window.scrollY
       const delta = y - lastScrollY.current
 
-      // only react past hero
       if (y < 400) {
         setShow(false)
       } else if (delta < -3) {
@@ -35,13 +34,7 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
         // Scrolling DOWN — hide
         setShow(false)
       }
-
-      // Reset idle timer on every scroll move
-      if (idleTimer.current) clearTimeout(idleTimer.current)
-      idleTimer.current = setTimeout(() => {
-        // Idle for 1.2s → hide
-        setShow(false)
-      }, 1200)
+      // Idle / micro-jitter (|delta| ≤ 3) → keep current state
 
       lastScrollY.current = y
     }
@@ -61,12 +54,12 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
     }
   }, [])
 
-  const accent = isFifa ? "#FF2D6F" : "#4ADE80"
-  const accentDeep = isFifa ? "#FF5E3A" : "#16A34A"
+  const accent = isFifa ? "#FF2D6F" : "#FF2D6F"
+  const accentDeep = isFifa ? "#FF5E3A" : "#FF5E3A"
   const ctaTextColor = isFifa ? "#fff" : "#03070a"
   const ctaShadow = isFifa
     ? "0 16px 40px -8px rgba(255,45,111,0.6), inset 0 1px 0 rgba(255,255,255,0.30)"
-    : "0 16px 40px -8px rgba(74,222,128,0.55), inset 0 1px 0 rgba(255,255,255,0.30)"
+    : "0 16px 40px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)"
 
   return (
     <div

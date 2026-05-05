@@ -44,7 +44,7 @@ const portfolioItems = [
   {
     title: "Marriott Annual Conference",
     category: "Conference",
-    categoryColor: "#4ADE80",
+    categoryColor: "#FF2D6F",
     image: "/marriott-hotel-conference.jpg",
     hasVideo: true,
   },
@@ -100,7 +100,7 @@ export function ServicePageTemplate({
       <section className="relative bg-[#0B1217] text-white py-12 md:py-20 overflow-hidden">
         <div className="absolute inset-0">
           <img src="/images/dji-0996.jpeg" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1217]/90 via-[#0B1217]/80 to-[#14532D]/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1217]/90 via-[#0B1217]/80 to-[#7C2D5A]/85" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4">
@@ -108,7 +108,7 @@ export function ServicePageTemplate({
             {/* LEFT COLUMN - Text */}
             <div className="order-2 lg:order-1">
               <p className="inline-flex items-center gap-2 text-sm font-medium text-gray-300 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-md mb-6">
-                <span className="w-2 h-2 bg-[#4ADE80] rounded-md" />
+                <span className="w-2 h-2 bg-[#FF2D6F] rounded-md" />
                 {serviceName}
               </p>
 
@@ -121,7 +121,7 @@ export function ServicePageTemplate({
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   onClick={handleStartQuote}
-                  className="bg-[#4ADE80] hover:bg-[#4ADE80]/90 text-[#0B1217] font-bold px-8 py-6 text-base rounded-lg"
+                  className="bg-[#FF2D6F] hover:bg-[#FF2D6F]/90 text-[#0B1217] font-bold px-8 py-6 text-base rounded-lg"
                 >
                   Start Your Quote
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -166,7 +166,7 @@ export function ServicePageTemplate({
       <section className="py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-3">Our Approach</p>
+            <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-3">Our Approach</p>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Why Choose Us for {serviceName}</h2>
           </div>
 
@@ -174,10 +174,10 @@ export function ServicePageTemplate({
             {whyChooseUs.map((item, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-xl border border-gray-200 hover:border-[#4ADE80] hover:shadow-lg transition-all"
+                className="bg-white p-6 rounded-xl border border-gray-200 hover:border-[#FF2D6F] hover:shadow-lg transition-all"
               >
-                <div className="w-10 h-10 bg-[#4ADE80]/10 rounded-lg flex items-center justify-center mb-4">
-                  <CheckCircle2 className="w-5 h-5 text-[#4ADE80]" />
+                <div className="w-10 h-10 bg-[#FF2D6F]/10 rounded-lg flex items-center justify-center mb-4">
+                  <CheckCircle2 className="w-5 h-5 text-[#FF2D6F]" />
                 </div>
                 <h3 className="font-bold text-gray-900 text-lg mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm">{item.description}</p>
@@ -191,7 +191,7 @@ export function ServicePageTemplate({
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-3">Our Work</p>
+            <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-3">Our Work</p>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">See This Service in Action</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               A look at recent events where we provided {serviceName.toLowerCase()}.
@@ -239,7 +239,7 @@ export function ServicePageTemplate({
       <section className="py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-3">Packages</p>
+            <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-3">Packages</p>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular {serviceName} Packages</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Ready-to-go options tailored for common event needs.</p>
           </div>
@@ -248,7 +248,7 @@ export function ServicePageTemplate({
             {packages.map((pkg, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-[#4ADE80] hover:shadow-lg transition-all group"
+                className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-[#FF2D6F] hover:shadow-lg transition-all group"
               >
                 <div className="relative h-48 overflow-hidden">
                   <Image
@@ -263,7 +263,7 @@ export function ServicePageTemplate({
                   <p className="text-gray-600 text-sm mb-4">{pkg.description}</p>
                   <button
                     onClick={handleStartQuote}
-                    className="inline-flex items-center gap-2 text-[#4ADE80] font-medium text-sm hover:underline"
+                    className="inline-flex items-center gap-2 text-[#FF2D6F] font-medium text-sm hover:underline"
                   >
                     Start Your Quote
                     <ArrowRight className="w-4 h-4" />
@@ -286,7 +286,7 @@ export function ServicePageTemplate({
           </p>
           <Button
             onClick={handleStartQuote}
-            className="inline-flex items-center gap-2 px-10 py-5 bg-[#4ADE80] text-[#0B1217] font-semibold text-lg rounded-md hover:bg-[#3ab8c9] transition-colors"
+            className="inline-flex items-center gap-2 px-10 py-5 bg-[#FF2D6F] text-[#0B1217] font-semibold text-lg rounded-md hover:bg-[#3ab8c9] transition-colors"
           >
             Start Your Quote
             <ArrowRight className="w-5 h-5" />

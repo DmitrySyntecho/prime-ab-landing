@@ -1,5 +1,7 @@
-import { Check, ArrowRight } from "lucide-react"
-import Link from "next/link"
+"use client"
+
+import { Check, ArrowRight, Phone } from "lucide-react"
+import { CountUp } from "./count-up"
 
 const features = [
   "Full-service AV production from concept to execution",
@@ -7,6 +9,8 @@ const features = [
   "24/7 dedicated support during your event",
   "In-house creative and technical teams",
 ]
+
+const openQuote = () => document.dispatchEvent(new CustomEvent("openQuoteForm"))
 
 export function AboutUsSection() {
   return (
@@ -32,25 +36,34 @@ export function AboutUsSection() {
             <ul className="space-y-3">
               {features.map((feature, index) => (
                 <li key={index} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-md bg-[#4ADE80]/15 border border-[#4ADE80]/25 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-3.5 h-3.5 text-[#4ADE80]" strokeWidth={3} />
+                  <div className="w-6 h-6 rounded-md bg-[#FF2D6F]/15 border border-[#FF2D6F]/25 flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3.5 h-3.5 text-[#FF2D6F]" strokeWidth={3} />
                   </div>
                   <span className="text-white/75 text-[14px] md:text-[15px]">{feature}</span>
                 </li>
               ))}
             </ul>
 
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-br from-[#4ADE80] to-[#16A34A] text-[#03070a] font-bold transition-all hover:-translate-y-0.5 mt-2"
-              style={{
-                boxShadow:
-                  "0 12px 36px -8px rgba(74,222,128,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",
-              }}
-            >
-              Work With Us
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="flex flex-wrap gap-3 mt-2">
+              <button
+                onClick={openQuote}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white font-bold transition-all hover:-translate-y-0.5"
+                style={{
+                  boxShadow:
+                    "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
+                }}
+              >
+                Get a Quote
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <a
+                href="tel:7869338488"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-semibold backdrop-blur-md transition-all hover:bg-white/[0.10]"
+              >
+                <Phone className="w-4 h-4" />
+                Talk to an Expert
+              </a>
+            </div>
           </div>
 
           <div className="relative h-[420px] md:h-[520px]">
@@ -65,14 +78,16 @@ export function AboutUsSection() {
 
             {/* Stats glass card */}
             <div
-              className="absolute top-4 right-[-10px] md:right-[-20px] px-5 py-4 rounded-[14px] border border-[#4ADE80]/25 backdrop-blur-2xl z-20"
+              className="absolute top-4 right-[-10px] md:right-[-20px] px-5 py-4 rounded-[14px] border border-[#FF2D6F]/25 backdrop-blur-2xl z-20"
               style={{
                 background: "rgba(8,18,26,0.85)",
                 boxShadow:
                   "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
               }}
             >
-              <p className="text-3xl md:text-4xl font-extrabold text-[#4ADE80] tracking-[-0.02em]">500+</p>
+              <p className="text-3xl md:text-4xl font-extrabold text-[#FF2D6F] tracking-[-0.02em]">
+                <CountUp end={500} suffix="+" />
+              </p>
               <p className="text-white/55 text-[12px] tracking-[0.04em] uppercase font-semibold">Successful Events</p>
             </div>
 

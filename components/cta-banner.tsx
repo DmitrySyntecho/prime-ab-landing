@@ -14,12 +14,12 @@ export function CTABanner({ onStartQuote }: CTABannerProps) {
     <section className="py-24 md:py-28 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div
-          className="relative px-6 md:px-14 py-14 md:py-20 rounded-[28px] border border-[#4ADE80]/20 backdrop-blur-2xl text-center overflow-hidden"
+          className="relative px-6 md:px-14 py-14 md:py-20 rounded-[28px] border border-[#FF2D6F]/20 backdrop-blur-2xl text-center overflow-hidden"
           style={{
             background:
-              "linear-gradient(135deg, rgba(74,222,128,0.08) 0%, rgba(20,83,45,0.04) 100%)",
+              "linear-gradient(135deg, rgba(255, 45, 111,0.08) 0%, rgba(124, 45, 90,0.04) 100%)",
             boxShadow:
-              "inset 0 1px 0 rgba(255,255,255,0.08), 0 40px 80px -20px rgba(20,83,45,0.5)",
+              "inset 0 1px 0 rgba(255,255,255,0.08), 0 40px 80px -20px rgba(124, 45, 90,0.5)",
           }}
         >
           {/* Decorative radial glows */}
@@ -27,7 +27,7 @@ export function CTABanner({ onStartQuote }: CTABannerProps) {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse 60% 50% at 30% 100%, rgba(74,222,128,0.16) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 70% 0%, rgba(45,212,191,0.12) 0%, transparent 70%)",
+                "radial-gradient(ellipse 60% 50% at 30% 100%, rgba(255, 45, 111,0.16) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 70% 0%, rgba(255, 210, 74,0.12) 0%, transparent 70%)",
             }}
             aria-hidden
           />
@@ -46,10 +46,10 @@ export function CTABanner({ onStartQuote }: CTABannerProps) {
 
             <button
               onClick={onStartQuote}
-              className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-br from-[#4ADE80] to-[#16A34A] text-[#03070a] font-extrabold text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-[#03070a] font-extrabold text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
               style={{
                 boxShadow:
-                  "0 12px 36px -8px rgba(74,222,128,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",
+                  "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",
               }}
             >
               {t("cta.button")}

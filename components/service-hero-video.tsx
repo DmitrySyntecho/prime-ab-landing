@@ -44,7 +44,7 @@ export function ServiceHeroVideo({ title, subtitle, onStartQuote }: ServiceHeroV
     <section className="relative bg-[#0B1217] text-white py-12 md:py-20 overflow-hidden">
       <div className="absolute inset-0">
         <img src="/images/dji-0996.jpeg" alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0B1217]/90 via-[#0B1217]/80 to-[#14532D]/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0B1217]/90 via-[#0B1217]/80 to-[#7C2D5A]/85" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4">
@@ -60,7 +60,7 @@ export function ServiceHeroVideo({ title, subtitle, onStartQuote }: ServiceHeroV
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 onClick={onStartQuote}
-                className="bg-[#4ADE80] hover:bg-[#4ADE80]/90 text-[#0B1217] font-bold px-8 py-6 text-base rounded-lg"
+                className="bg-[#FF2D6F] hover:bg-[#FF2D6F]/90 text-[#0B1217] font-bold px-8 py-6 text-base rounded-lg"
               >
                 Start Your Quote
                 <ArrowRight className="w-5 h-5 ml-2" />

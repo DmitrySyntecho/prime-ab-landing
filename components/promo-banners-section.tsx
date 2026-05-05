@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+
+const openQuote = () => document.dispatchEvent(new CustomEvent("openQuoteForm"))
 
 const promoBanners = [
   {
@@ -104,17 +105,18 @@ export function PromoBannersSection() {
                       {banner.headline}
                     </h3>
                     <p className="text-sm md:text-base lg:text-lg mb-5 md:mb-6 text-white/65">{banner.subheadline}</p>
-                    <Link
-                      href={banner.ctaLink}
-                      className="inline-flex items-center gap-2 bg-gradient-to-br from-[#4ADE80] to-[#16A34A] text-[#03070a] font-bold px-5 py-2.5 md:px-6 md:py-3 rounded-xl transition-all hover:-translate-y-0.5 text-sm md:text-base"
+                    <button
+                      type="button"
+                      onClick={openQuote}
+                      className="inline-flex items-center gap-2 bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white font-bold px-5 py-2.5 md:px-6 md:py-3 rounded-xl transition-all hover:-translate-y-0.5 text-sm md:text-base"
                       style={{
                         boxShadow:
-                          "0 12px 36px -8px rgba(74,222,128,0.45), inset 0 1px 0 rgba(255,255,255,0.3)",
+                          "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
                       }}
                     >
                       {banner.cta}
                       <ChevronRight className="w-4 h-4" />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -123,14 +125,14 @@ export function PromoBannersSection() {
 
           <button
             onClick={prevSlide}
-            className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 bg-white/[0.05] hover:bg-[#4ADE80]/15 hover:border-[#4ADE80]/30 border border-white/[0.10] backdrop-blur-md text-white rounded-[12px] flex items-center justify-center transition-all"
+            className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 bg-white/[0.05] hover:bg-[#FF2D6F]/15 hover:border-[#FF2D6F]/30 border border-white/[0.10] backdrop-blur-md text-white rounded-[12px] flex items-center justify-center transition-all"
             aria-label="Previous banner"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 bg-white/[0.05] hover:bg-[#4ADE80]/15 hover:border-[#4ADE80]/30 border border-white/[0.10] backdrop-blur-md text-white rounded-[12px] flex items-center justify-center transition-all"
+            className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 bg-white/[0.05] hover:bg-[#FF2D6F]/15 hover:border-[#FF2D6F]/30 border border-white/[0.10] backdrop-blur-md text-white rounded-[12px] flex items-center justify-center transition-all"
             aria-label="Next banner"
           >
             <ChevronRight className="w-5 h-5" />
@@ -142,7 +144,7 @@ export function PromoBannersSection() {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? "bg-[#4ADE80] w-8" : "bg-white/40 hover:bg-white/60 w-2"
+                  index === currentIndex ? "bg-[#FF2D6F] w-8" : "bg-white/40 hover:bg-white/60 w-2"
                 }`}
                 aria-label={`Go to banner ${index + 1}`}
               />

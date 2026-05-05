@@ -383,7 +383,7 @@ export function RentalPackagesSection() {
       <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="max-w-3xl mb-8">
-          <p className="text-[#4ADE80] font-medium text-sm tracking-wide uppercase mb-3">Rental Packages</p>
+          <p className="text-[#FF2D6F] font-medium text-sm tracking-wide uppercase mb-3">Rental Packages</p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             Full AV Production or Simple Equipment Rentals — We've Got You Covered
           </h2>
@@ -440,7 +440,7 @@ export function RentalPackagesSection() {
               <Link
                 href={`/rentals/${activeTab}/${pkg.title.toLowerCase().replace(/\s+/g, "-")}`}
                 key={`${activeTab}-${index}`}
-                className="flex-shrink-0 w-[300px] bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-gray-200 hover:border-[#16A34A] group"
+                className="flex-shrink-0 w-[300px] bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-gray-200 hover:border-[#FF5E3A] group"
                 style={{ scrollSnapAlign: "start" }}
               >
                 <div className="relative h-48 overflow-hidden bg-gray-100">
@@ -465,7 +465,7 @@ export function RentalPackagesSection() {
 
                 <div className="p-4">
                   {/* Title */}
-                  <h3 className="font-bold text-gray-900 text-lg mb-3 line-clamp-2 leading-tight group-hover:text-[#16A34A] transition-colors">
+                  <h3 className="font-bold text-gray-900 text-lg mb-3 line-clamp-2 leading-tight group-hover:text-[#FF5E3A] transition-colors">
                     {pkg.title}
                   </h3>
 
@@ -474,7 +474,7 @@ export function RentalPackagesSection() {
                     {pkg.features.map((feature, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium bg-emerald-50 text-[#16A34A] rounded-md border border-emerald-200"
+                        className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium bg-[#FF2D6F]/10 text-[#FF5E3A] rounded-md border border-[#FF2D6F]/20"
                       >
                         {feature}
                       </span>
@@ -512,7 +512,7 @@ export function RentalPackagesSection() {
         <div className="mt-8 flex justify-start">
           <Link
             href={`/rentals/${activeTab}`}
-            className="inline-flex items-center gap-2 text-[#4ADE80] font-medium hover:underline"
+            className="inline-flex items-center gap-2 text-[#FF2D6F] font-medium hover:underline"
           >
             View All {categories.find((c) => c.id === activeTab)?.label} Packages
             <ArrowRight className="w-4 h-4" />

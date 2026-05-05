@@ -140,7 +140,7 @@ export function TestimonialsCarousel() {
         <div className="relative">
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 bg-white/[0.04] border border-white/[0.10] hover:bg-[#4ADE80]/10 hover:border-[#4ADE80]/30 rounded-[12px] p-2.5 backdrop-blur-md hidden md:block transition-all"
+            className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 bg-white/[0.04] border border-white/[0.10] hover:bg-[#FF2D6F]/10 hover:border-[#FF2D6F]/30 rounded-[12px] p-2.5 backdrop-blur-md hidden md:block transition-all"
             aria-label="Previous"
           >
             <ChevronLeft className="w-5 h-5 text-white" />
@@ -164,7 +164,7 @@ export function TestimonialsCarousel() {
                 </div>
                 <div className="mt-3 px-1">
                   <h3 className="text-white font-semibold text-[14px]">{testimonial.event}</h3>
-                  <p className="text-[#4ADE80] text-[13px] font-medium">{testimonial.name}</p>
+                  <p className="text-[#FF2D6F] text-[13px] font-medium">{testimonial.name}</p>
                   <p className="text-white/45 text-[11px]">{testimonial.role}</p>
                 </div>
               </div>
@@ -173,7 +173,7 @@ export function TestimonialsCarousel() {
 
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 bg-white/[0.04] border border-white/[0.10] hover:bg-[#4ADE80]/10 hover:border-[#4ADE80]/30 rounded-[12px] p-2.5 backdrop-blur-md hidden md:block transition-all"
+            className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 bg-white/[0.04] border border-white/[0.10] hover:bg-[#FF2D6F]/10 hover:border-[#FF2D6F]/30 rounded-[12px] p-2.5 backdrop-blur-md hidden md:block transition-all"
             aria-label="Next"
           >
             <ChevronRight className="w-5 h-5 text-white" />

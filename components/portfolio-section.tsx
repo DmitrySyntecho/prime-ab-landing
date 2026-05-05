@@ -1,8 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
-import { ArrowRight, Play } from "lucide-react"
+import { Play, Sparkles } from "lucide-react"
+
+const openQuote = () => document.dispatchEvent(new CustomEvent("openQuoteForm"))
 
 const projects = [
   {
@@ -66,9 +67,11 @@ export function PortfolioSection() {
           style={{ gridTemplateRows: "1fr 1fr", minHeight: "560px" }}
         >
           {/* Large card */}
-          <Link
-            href="/portfolio"
-            className="group relative rounded-[22px] overflow-hidden row-span-2 cursor-pointer border border-white/[0.08] transition-all hover:-translate-y-1 hover:border-[#4ADE80]/30"
+          <button
+            type="button"
+            onClick={openQuote}
+            aria-label={`Get a quote like ${projects[0].title}`}
+            className="group relative rounded-[22px] overflow-hidden row-span-2 cursor-pointer border border-white/[0.08] transition-all hover:-translate-y-1 hover:border-[#FF2D6F]/30 text-left"
           >
             <Image
               src={projects[0].image || "/placeholder.svg"}
@@ -77,20 +80,23 @@ export function PortfolioSection() {
               className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#03070a] via-[#03070a]/15 to-transparent" />
+            <PortfolioHoverCTA />
             <div className="absolute bottom-0 left-0 right-0 p-6">
               <span className="inline-block px-3 py-1.5 rounded-md bg-[#E85A5A] text-white text-[10px] font-extrabold tracking-[0.08em] uppercase mb-3">
                 {projects[0].category}
               </span>
               <h3 className="text-white text-2xl font-bold leading-tight">{projects[0].title}</h3>
             </div>
-          </Link>
+          </button>
 
           {/* Small cards */}
           {projects.slice(1, 5).map((project) => (
-            <Link
+            <button
               key={project.title}
-              href="/portfolio"
-              className="group relative rounded-[22px] overflow-hidden cursor-pointer border border-white/[0.08] transition-all hover:-translate-y-1 hover:border-[#4ADE80]/30"
+              type="button"
+              onClick={openQuote}
+              aria-label={`Get a quote like ${project.title}`}
+              className="group relative rounded-[22px] overflow-hidden cursor-pointer border border-white/[0.08] transition-all hover:-translate-y-1 hover:border-[#FF2D6F]/30 text-left"
               style={{ minHeight: "230px" }}
             >
               <Image
@@ -108,23 +114,26 @@ export function PortfolioSection() {
                   </div>
                 </div>
               )}
+              <PortfolioHoverCTA />
               <div className="absolute bottom-0 left-0 right-0 p-5">
-                <span className="inline-block px-2.5 py-1 rounded-md bg-[#4ADE80] text-[#03070a] text-[10px] font-extrabold tracking-[0.08em] uppercase mb-2">
+                <span className="inline-block px-2.5 py-1 rounded-md bg-[#FF2D6F] text-white text-[10px] font-extrabold tracking-[0.08em] uppercase mb-2">
                   {project.category}
                 </span>
                 <h3 className="text-white text-[17px] font-bold leading-tight">{project.title}</h3>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
 
         {/* Mobile */}
         <div className="md:hidden space-y-4">
           {projects.map((project) => (
-            <Link
+            <button
               key={project.title}
-              href="/portfolio"
-              className="group relative rounded-[22px] overflow-hidden block border border-white/[0.08]"
+              type="button"
+              onClick={openQuote}
+              aria-label={`Get a quote like ${project.title}`}
+              className="group relative rounded-[22px] overflow-hidden block border border-white/[0.08] text-left w-full"
               style={{ height: "240px" }}
             >
               <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
@@ -137,16 +146,33 @@ export function PortfolioSection() {
                 </div>
               )}
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <span className="inline-block px-2.5 py-1 rounded-md bg-[#4ADE80] text-[#03070a] text-[10px] font-extrabold tracking-[0.08em] uppercase mb-2">
+                <span className="inline-block px-2.5 py-1 rounded-md bg-[#FF2D6F] text-white text-[10px] font-extrabold tracking-[0.08em] uppercase mb-2">
                   {project.category}
                 </span>
                 <h3 className="text-white text-[17px] font-bold leading-tight">{project.title}</h3>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
 
       </div>
     </section>
+  )
+}
+
+function PortfolioHoverCTA() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+      <span
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-extrabold tracking-[0.06em] uppercase text-white"
+        style={{
+          background: "linear-gradient(135deg, #FF2D6F, #FF5E3A)",
+          boxShadow: "0 8px 22px -6px rgba(255,45,111,0.55)",
+        }}
+      >
+        <Sparkles className="w-3 h-3" />
+        Get a Similar Quote
+      </span>
+    </div>
   )
 }

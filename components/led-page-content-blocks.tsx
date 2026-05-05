@@ -47,7 +47,7 @@ export function LEDPageContentBlocks({ onOpenQuoteForm, ctaButton = "Get a Fail-
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-3">Full-Service Capabilities</p>
+              <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-3">Full-Service Capabilities</p>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 More Than LED Screens — Complete Event Video Production
               </h2>
@@ -62,10 +62,10 @@ export function LEDPageContentBlocks({ onOpenQuoteForm, ctaButton = "Get a Fail-
                 return (
                   <div
                     key={index}
-                    className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100 hover:border-[#16A34A]/30 transition-colors"
+                    className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100 hover:border-[#FF5E3A]/30 transition-colors"
                   >
-                    <div className="w-10 h-10 bg-[#16A34A]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 text-[#16A34A]" />
+                    <div className="w-10 h-10 bg-[#FF5E3A]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-[#FF5E3A]" />
                     </div>
                     <span className="text-gray-700 font-medium">{service.label}</span>
                   </div>
@@ -85,7 +85,7 @@ export function LEDPageContentBlocks({ onOpenQuoteForm, ctaButton = "Get a Fail-
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-3">Event Expertise</p>
+              <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-3">Event Expertise</p>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Built for High-Stakes Events
               </h2>
@@ -98,7 +98,7 @@ export function LEDPageContentBlocks({ onOpenQuoteForm, ctaButton = "Get a Fail-
               {eventTypes.map((eventType, index) => (
                 <div
                   key={index}
-                  className="p-5 bg-white rounded-xl border border-gray-200 text-center hover:border-[#4ADE80] hover:shadow-md transition-all"
+                  className="p-5 bg-white rounded-xl border border-gray-200 text-center hover:border-[#FF2D6F] hover:shadow-md transition-all"
                 >
                   <span className="text-gray-800 font-medium">{eventType}</span>
                 </div>
@@ -117,7 +117,7 @@ export function LEDPageContentBlocks({ onOpenQuoteForm, ctaButton = "Get a Fail-
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-3">Why Us</p>
+              <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-3">Why Us</p>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Why Teams Trust Us With Their Reputation
               </h2>
@@ -132,7 +132,7 @@ export function LEDPageContentBlocks({ onOpenQuoteForm, ctaButton = "Get a Fail-
                   key={index}
                   className="flex items-start gap-4 p-4 bg-white/5 rounded-lg border border-white/10"
                 >
-                  <CheckCircle2 className="w-5 h-5 text-[#4ADE80] flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-[#FF2D6F] flex-shrink-0 mt-0.5" />
                   <span className="text-gray-300">{reason}</span>
                 </div>
               ))}
@@ -152,7 +152,7 @@ export function LEDPageContentBlocks({ onOpenQuoteForm, ctaButton = "Get a Fail-
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-3">Our Promise</p>
+            <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-3">Our Promise</p>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               Our Commitment Is Simple
             </h2>
@@ -174,7 +174,7 @@ export function LEDPageContentBlocks({ onOpenQuoteForm, ctaButton = "Get a Fail-
       </section>
 
       {/* Block 8 - Second CTA */}
-      <section className="py-20 md:py-24 bg-gradient-to-br from-[#16A34A] to-[#14532D]">
+      <section className="py-20 md:py-24 bg-gradient-to-br from-[#FF5E3A] to-[#7C2D5A]">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8">
             Let's Make Sure Your Event Runs Perfectly
@@ -182,7 +182,7 @@ export function LEDPageContentBlocks({ onOpenQuoteForm, ctaButton = "Get a Fail-
           
           <button
             onClick={onOpenQuoteForm}
-            className="inline-flex items-center gap-2 px-10 py-5 bg-[#4ADE80] text-[#0B1217] font-semibold text-lg rounded-md hover:bg-[#22c55e] transition-colors shadow-lg"
+            className="inline-flex items-center gap-2 px-10 py-5 bg-[#FF2D6F] text-[#0B1217] font-semibold text-lg rounded-md hover:bg-[#22c55e] transition-colors shadow-lg"
           >
             {ctaButton}
             <ArrowRight className="w-5 h-5" />

@@ -167,11 +167,11 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
                 <span className="text-gray-600">
                   Step {currentStep + 1} of {totalSteps - 1}
                 </span>
-                <span className="text-[#16A34A] font-medium">{Math.round(progress)}% Complete</span>
+                <span className="text-[#FF5E3A] font-medium">{Math.round(progress)}% Complete</span>
               </div>
               <div className="h-2 bg-gray-200 rounded-md overflow-hidden">
                 <div
-                  className="h-full bg-[#16A34A] rounded-md transition-all duration-500 ease-out"
+                  className="h-full bg-[#FF5E3A] rounded-md transition-all duration-500 ease-out"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -201,8 +201,8 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
                       onClick={() => handleSingleSelect(option)}
                       className={`p-4 rounded-xl border-2 text-left transition-all ${
                         answers[currentQuestion.id] === option
-                          ? "border-[#16A34A] bg-[#16A34A]/10 text-[#16A34A]"
-                          : "border-gray-200 hover:border-[#16A34A]/50 text-gray-700"
+                          ? "border-[#FF5E3A] bg-[#FF5E3A]/10 text-[#FF5E3A]"
+                          : "border-gray-200 hover:border-[#FF5E3A]/50 text-gray-700"
                       }`}
                     >
                       {option}
@@ -223,14 +223,14 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
                           onClick={() => handleMultiSelect(option)}
                           className={`p-4 rounded-xl border-2 text-left transition-all ${
                             selected
-                              ? "border-[#16A34A] bg-[#16A34A]/10 text-[#16A34A]"
-                              : "border-gray-200 hover:border-[#16A34A]/50 text-gray-700"
+                              ? "border-[#FF5E3A] bg-[#FF5E3A]/10 text-[#FF5E3A]"
+                              : "border-gray-200 hover:border-[#FF5E3A]/50 text-gray-700"
                           }`}
                         >
                           <div className="flex items-center gap-3">
                             <div
                               className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-                                selected ? "border-[#16A34A] bg-[#16A34A]" : "border-gray-300"
+                                selected ? "border-[#FF5E3A] bg-[#FF5E3A]" : "border-gray-300"
                               }`}
                             >
                               {selected && <CheckCircle2 className="w-4 h-4 text-white" />}
@@ -241,7 +241,7 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
                       )
                     })}
                   </div>
-                  <Button onClick={handleNext} className="w-full bg-[#16A34A] hover:bg-[#16A34A]/90 mt-4">
+                  <Button onClick={handleNext} className="w-full bg-[#FF5E3A] hover:bg-[#FF5E3A]/90 mt-4">
                     Continue
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -262,8 +262,8 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
                         onClick={() => handleScaleSelect(num)}
                         className={`aspect-square rounded-xl border-2 font-bold text-lg transition-all ${
                           answers[currentQuestion.id] === num.toString()
-                            ? "border-[#16A34A] bg-[#16A34A] text-white"
-                            : "border-gray-200 hover:border-[#16A34A]/50 text-gray-700 hover:bg-gray-50"
+                            ? "border-[#FF5E3A] bg-[#FF5E3A] text-white"
+                            : "border-gray-200 hover:border-[#FF5E3A]/50 text-gray-700 hover:bg-gray-50"
                         }`}
                       >
                         {num}
@@ -281,12 +281,12 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
                     value={(answers[currentQuestion.id] as string) || ""}
                     onChange={(e) => handleTextInput(e.target.value)}
                     placeholder={currentQuestion.placeholder}
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-[#16A34A] focus:outline-none text-lg"
+                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-[#FF5E3A] focus:outline-none text-lg"
                   />
                   <Button
                     onClick={handleNext}
                     disabled={currentQuestion.required && !answers[currentQuestion.id]}
-                    className="w-full bg-[#16A34A] hover:bg-[#16A34A]/90"
+                    className="w-full bg-[#FF5E3A] hover:bg-[#FF5E3A]/90"
                   >
                     Continue
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -301,12 +301,12 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
                     type="date"
                     value={(answers[currentQuestion.id] as string) || ""}
                     onChange={(e) => handleTextInput(e.target.value)}
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-[#16A34A] focus:outline-none text-lg"
+                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-[#FF5E3A] focus:outline-none text-lg"
                   />
                   <Button
                     onClick={handleNext}
                     disabled={currentQuestion.required && !answers[currentQuestion.id]}
-                    className="w-full bg-[#16A34A] hover:bg-[#16A34A]/90"
+                    className="w-full bg-[#FF5E3A] hover:bg-[#FF5E3A]/90"
                   >
                     Continue
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -322,9 +322,9 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
                     onChange={(e) => handleTextInput(e.target.value)}
                     placeholder={currentQuestion.placeholder}
                     rows={4}
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-[#16A34A] focus:outline-none text-lg resize-none"
+                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-[#FF5E3A] focus:outline-none text-lg resize-none"
                   />
-                  <Button onClick={handleNext} className="w-full bg-[#16A34A] hover:bg-[#16A34A]/90">
+                  <Button onClick={handleNext} className="w-full bg-[#FF5E3A] hover:bg-[#FF5E3A]/90">
                     Continue
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -382,7 +382,7 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
               </div>
 
               <div className="flex flex-col gap-3">
-                <Button onClick={handleSubmit} className="w-full bg-[#16A34A] hover:bg-[#16A34A]/90 py-6 text-lg">
+                <Button onClick={handleSubmit} className="w-full bg-[#FF5E3A] hover:bg-[#FF5E3A]/90 py-6 text-lg">
                   Submit Quote Request
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
@@ -397,7 +397,7 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
         {/* Footer */}
         <div className="sticky bottom-0 bg-gray-50 px-6 py-4 text-center">
           <p className="text-sm text-gray-500">
-            <span className="font-semibold text-[#16A34A]">127 Brands</span> requested a quote in the past 24 hours.
+            <span className="font-semibold text-[#FF5E3A]">127 Brands</span> requested a quote in the past 24 hours.
           </p>
         </div>
       </div>

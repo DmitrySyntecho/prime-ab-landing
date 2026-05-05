@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface ParticleConfig {
   left: number
@@ -15,13 +15,12 @@ export function BackgroundFX() {
   const orbBref = useRef<HTMLDivElement>(null)
   const orbCref = useRef<HTMLDivElement>(null)
 
-  const [count, setCount] = useState(36)
+  // Generate particles ONLY on the client (after hydration) — Math.random() must
+  // never run during SSR or first client render, otherwise server/client HTML mismatches.
+  const [particles, setParticles] = useState<ParticleConfig[]>([])
 
   useEffect(() => {
-    setCount(window.innerWidth < 768 ? 18 : 36)
-  }, [])
-
-  const particles = useMemo<ParticleConfig[]>(() => {
+    const count = window.innerWidth < 768 ? 18 : 36
     const arr: ParticleConfig[] = []
     for (let i = 0; i < count; i++) {
       const dur = 12 + Math.random() * 18
@@ -33,8 +32,8 @@ export function BackgroundFX() {
         teal: Math.random() > 0.7,
       })
     }
-    return arr
-  }, [count])
+    setParticles(arr)
+  }, [])
 
   useEffect(() => {
     let mx = 0
@@ -71,11 +70,13 @@ export function BackgroundFX() {
   return (
     <>
       <div className="bg-stage" aria-hidden />
+      <div className="bg-rays" aria-hidden />
+      <div className="bg-bauhaus" aria-hidden />
       <div ref={orbAref} className="bg-orb a" aria-hidden />
       <div ref={orbBref} className="bg-orb b" aria-hidden />
       <div ref={orbCref} className="bg-orb c" aria-hidden />
       <div className="bg-noise" aria-hidden />
-      <div className="particles" aria-hidden>
+      <div className="particles" aria-hidden suppressHydrationWarning>
         {particles.map((p, i) => (
           <span
             key={i}
@@ -86,7 +87,7 @@ export function BackgroundFX() {
               animationDelay: `${p.delay}s`,
               transform: `scale(${p.scale})`,
               ...(p.teal
-                ? { background: "#2dd4bf", boxShadow: "0 0 6px #2dd4bf" }
+                ? { background: "#FFD24A", boxShadow: "0 0 6px #FFD24A" }
                 : {}),
             }}
           />

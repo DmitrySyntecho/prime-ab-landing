@@ -34,7 +34,7 @@ const portfolioItems = [
   {
     title: "TikTok Creator Summit",
     category: "Corporate Event",
-    categoryColor: "#4ADE80",
+    categoryColor: "#FF2D6F",
     image: "/tiktok-corporate-summit.jpg",
   },
   {
@@ -46,7 +46,7 @@ const portfolioItems = [
   {
     title: "Family Style Food Festival",
     category: "Festival",
-    categoryColor: "#4ADE80",
+    categoryColor: "#FF2D6F",
     image: "/food-festival-outdoor-event.jpg",
   },
 ]
@@ -105,14 +105,14 @@ export function RentalPageTemplate({
       <section className="relative bg-[#0B1217] text-white py-12 md:py-20 overflow-hidden">
         <div className="absolute inset-0">
           <Image src="/images/dji-0996.jpeg" alt="" fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1217]/90 via-[#0B1217]/80 to-[#14532D]/85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1217]/90 via-[#0B1217]/80 to-[#7C2D5A]/85" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* LEFT COLUMN - Text */}
             <div className="order-2 lg:order-1">
-              <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-4">Equipment Rentals</p>
+              <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-4">Equipment Rentals</p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight leading-[1.1] text-white">
                 {headline}
               </h1>
@@ -122,7 +122,7 @@ export function RentalPageTemplate({
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => setShowQuoteForm(true)}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#4ADE80] text-[#0B1217] font-semibold rounded-md hover:bg-[#22c55e] transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#FF2D6F] text-[#0B1217] font-semibold rounded-md hover:bg-[#22c55e] transition-colors"
                 >
                   {ctaButton}
                   <ArrowRight className="w-5 h-5" />
@@ -169,7 +169,7 @@ export function RentalPageTemplate({
       <section className="py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-3">Rental Packages</p>
+            <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-3">Rental Packages</p>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Most Popular {categoryName} Packages</h2>
           </div>
 
@@ -178,7 +178,7 @@ export function RentalPageTemplate({
               <button
                 key={index}
                 onClick={() => setShowQuoteForm(true)}
-                className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-[#16A34A] hover:shadow-lg transition-all group text-left"
+                className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-[#FF5E3A] hover:shadow-lg transition-all group text-left"
               >
                 <div className="relative h-44 overflow-hidden bg-gray-100">
                   <Image
@@ -189,14 +189,14 @@ export function RentalPageTemplate({
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold text-gray-900 text-base mb-2 line-clamp-2 group-hover:text-[#16A34A] transition-colors">
+                  <h3 className="font-bold text-gray-900 text-base mb-2 line-clamp-2 group-hover:text-[#FF5E3A] transition-colors">
                     {pkg.title}
                   </h3>
                   <div className="flex flex-wrap gap-1.5 mb-3">
                     {pkg.features.slice(0, 3).map((feature, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center px-2 py-0.5 text-xs font-medium bg-emerald-50 text-[#16A34A] rounded-md"
+                        className="inline-flex items-center px-2 py-0.5 text-xs font-medium bg-[#FF2D6F]/10 text-[#FF5E3A] rounded-md"
                       >
                         {feature}
                       </span>
@@ -204,7 +204,7 @@ export function RentalPageTemplate({
                   </div>
                   <button
                     onClick={() => setShowQuoteForm(true)}
-                    className="w-full mt-2 py-2 px-4 bg-[#16A34A] text-white text-sm font-semibold rounded-lg hover:bg-[#14532D] transition-colors"
+                    className="w-full mt-2 py-2 px-4 bg-[#FF5E3A] text-white text-sm font-semibold rounded-lg hover:bg-[#7C2D5A] transition-colors"
                   >
                     Get Quote
                   </button>
@@ -219,7 +219,7 @@ export function RentalPageTemplate({
       <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-[#4ADE80] font-semibold uppercase tracking-wider text-sm mb-3">Our Work</p>
+            <p className="text-[#FF2D6F] font-semibold uppercase tracking-wider text-sm mb-3">Our Work</p>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">See Our Work With {categoryName}</h2>
           </div>
 
@@ -263,7 +263,7 @@ export function RentalPageTemplate({
             <div className="grid sm:grid-cols-2 gap-4">
               {whyRentFromUs.map((item, index) => (
                 <div key={index} className="flex items-start gap-3 p-4 bg-white rounded-lg border border-gray-200">
-                  <CheckCircle2 className="w-5 h-5 text-[#4ADE80] flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-5 h-5 text-[#FF2D6F] flex-shrink-0 mt-0.5" />
                   <span className="text-gray-700">{item}</span>
                 </div>
               ))}
@@ -283,7 +283,7 @@ export function RentalPageTemplate({
           </p>
           <button
             onClick={() => setShowQuoteForm(true)}
-            className="inline-flex items-center gap-2 px-10 py-5 bg-[#4ADE80] text-[#0B1217] font-semibold text-lg rounded-md hover:bg-[#22c55e] transition-colors"
+            className="inline-flex items-center gap-2 px-10 py-5 bg-[#FF2D6F] text-[#0B1217] font-semibold text-lg rounded-md hover:bg-[#22c55e] transition-colors"
           >
             {ctaButton}
             <ArrowRight className="w-5 h-5" />

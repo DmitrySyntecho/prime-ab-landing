@@ -1,5 +1,8 @@
-import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
+"use client"
+
+import { ArrowUpRight, Sparkles } from "lucide-react"
+
+const openQuote = () => document.dispatchEvent(new CustomEvent("openQuoteForm"))
 
 const eventTypes = [
   {
@@ -108,36 +111,53 @@ export function EventTypesSection() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5">
           {eventTypes.map((event) => (
-            <Link
+            <button
               key={event.title}
-              href={event.href}
-              className="group relative aspect-[4/5] rounded-[18px] overflow-hidden border border-white/[0.08] cursor-pointer transition-all duration-500 hover:-translate-y-1 hover:border-[#4ADE80]/30"
+              type="button"
+              onClick={openQuote}
+              aria-label={`Get a quote for ${event.title}`}
+              className="group relative aspect-[4/5] rounded-[18px] overflow-hidden border border-white/[0.08] cursor-pointer transition-all duration-500 hover:-translate-y-1 hover:border-[#FF2D6F]/30 text-left"
             >
               <img
                 src={event.image || "/placeholder.svg"}
                 alt={event.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#03070a]/95 via-[#03070a]/55 to-[#03070a]/15 transition-all duration-500 group-hover:from-[#14532D]/92 group-hover:via-[#03070a]/55" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#03070a]/95 via-[#03070a]/55 to-[#03070a]/15 transition-all duration-500 group-hover:from-[#7C2D5A]/92 group-hover:via-[#03070a]/55" />
+
+              {/* Hover overlay with "Get a Quote" CTA */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <span
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-extrabold tracking-[0.06em] uppercase text-white"
+                  style={{
+                    background: "linear-gradient(135deg, #FF2D6F, #FF5E3A)",
+                    boxShadow: "0 8px 22px -6px rgba(255,45,111,0.55)",
+                  }}
+                >
+                  <Sparkles className="w-3 h-3" />
+                  Get a Quote
+                </span>
+              </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <span className="inline-block px-2.5 py-1 rounded-md bg-[#4ADE80] text-[#03070a] text-[10px] font-extrabold tracking-[0.08em] uppercase mb-2.5">
+                <span className="inline-block px-2.5 py-1 rounded-md bg-[#FF2D6F] text-white text-[10px] font-extrabold tracking-[0.08em] uppercase mb-2.5">
                   {event.tag}
                 </span>
                 <h3 className="text-white text-[15px] md:text-[16px] font-bold leading-tight">{event.title}</h3>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
 
         <div className="mt-10 text-center">
-          <Link
-            href="/events"
-            className="inline-flex items-center gap-1.5 text-white hover:text-[#4ADE80] transition-colors font-semibold text-sm"
+          <button
+            type="button"
+            onClick={openQuote}
+            className="inline-flex items-center gap-1.5 text-white hover:text-[#FF2D6F] transition-colors font-semibold text-sm"
           >
-            View All Event Types
+            Don&apos;t see your event? Get a Quote
             <ArrowUpRight className="w-4 h-4" />
-          </Link>
+          </button>
         </div>
       </div>
     </section>

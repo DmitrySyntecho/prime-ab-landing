@@ -3,6 +3,7 @@
 import type React from "react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import { CountUp } from "@/components/count-up"
 import {
   ArrowRight,
   CheckCircle2,
@@ -96,6 +97,17 @@ type FlagCode =
   | "ger"
   | "esp"
   | "por"
+  | "zaf"
+  | "par"
+  | "mar"
+  | "alg"
+  | "cro"
+  | "sen"
+  | "kor"
+  | "cze"
+  | "aus"
+  | "tur"
+  | "bih"
   | "tbd"
   | "champ-a"
   | "champ-b"
@@ -138,9 +150,58 @@ const flagStyles: Record<FlagCode, React.CSSProperties> = {
       "linear-gradient(180deg, #ef4444 0%, #ef4444 25%, #facc15 25%, #facc15 75%, #ef4444 75%, #ef4444 100%)",
   },
   por: { background: "linear-gradient(90deg, #16a34a 0%, #16a34a 40%, #ef4444 40%, #ef4444 100%)" },
+  // South Africa — simplified Y-shaped tricolor (green/yellow/black/white/red/blue)
+  zaf: {
+    background:
+      "#000 url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Crect width='36' height='26' fill='%23000'/%3E%3Cpolygon points='0,0 14,13 0,26' fill='%23007749'/%3E%3Cpolygon points='0,0 14,13 36,0' fill='%23ffb612'/%3E%3Cpolygon points='0,26 14,13 36,26' fill='%23de3831'/%3E%3Crect x='14' y='10' width='22' height='6' fill='%23fff'/%3E%3Crect x='14' y='11' width='22' height='4' fill='%23002395'/%3E%3C/svg%3E\") center/cover",
+  },
+  // Paraguay — red/white/blue with seal
+  par: {
+    background:
+      "linear-gradient(180deg, #d52b1e 0%, #d52b1e 33%, #fff 33%, #fff 66%, #0038a8 66%, #0038a8 100%)",
+  },
+  // Morocco — solid red with green pentagram (simplified to red/green star)
+  mar: {
+    background:
+      "#c1272d url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Cpolygon points='18,7 19.8,12.5 25.5,12.5 20.9,16 22.7,21.5 18,18 13.3,21.5 15.1,16 10.5,12.5 16.2,12.5' fill='none' stroke='%23006233' stroke-width='1.2'/%3E%3C/svg%3E\") center/cover",
+  },
+  // Algeria — green/white vertical with red star+crescent
+  alg: {
+    background:
+      "linear-gradient(90deg, #006233 0%, #006233 50%, #fff 50%, #fff 100%)",
+  },
+  // Croatia — red/white/blue tricolor (simplified)
+  cro: {
+    background:
+      "linear-gradient(180deg, #ff0000 0%, #ff0000 33%, #fff 33%, #fff 66%, #171796 66%, #171796 100%)",
+  },
+  // Senegal — green/yellow/red vertical
+  sen: {
+    background:
+      "linear-gradient(90deg, #00853f 0%, #00853f 33%, #fdef42 33%, #fdef42 66%, #e31b23 66%, #e31b23 100%)",
+  },
+  // South Korea — white with taeguk (simplified white/blue/red)
+  kor: {
+    background:
+      "#fff url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Crect width='36' height='26' fill='%23fff'/%3E%3Cpath d='M11 13 a7 7 0 0 1 14 0 a3.5 3.5 0 0 1 -7 0 a3.5 3.5 0 0 0 -7 0' fill='%23c60c30'/%3E%3Cpath d='M11 13 a7 7 0 0 0 14 0 a3.5 3.5 0 0 0 -7 0 a3.5 3.5 0 0 1 -7 0' fill='%23003478'/%3E%3C/svg%3E\") center/cover",
+  },
+  // Czechia — white/red horizontal with blue triangle
+  cze: {
+    background:
+      "linear-gradient(180deg, #fff 0%, #fff 50%, #d7141a 50%, #d7141a 100%)",
+  },
+  // Australia — blue with red/white cross + stars (simplified blue field)
+  aus: { background: "#012169" },
+  // Türkiye — solid red with white star+crescent (simplified solid red)
+  tur: { background: "#e30a17" },
+  // Bosnia — blue with yellow triangle
+  bih: {
+    background:
+      "#002395 url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Crect width='36' height='26' fill='%23002395'/%3E%3Cpolygon points='8,0 28,0 28,26' fill='%23fecb00'/%3E%3C/svg%3E\") center/cover",
+  },
   tbd: { background: "linear-gradient(135deg, #6b7280, #4b5563)" },
-  "champ-a": { background: "linear-gradient(135deg, #FFD24A, #FF2D6F)" },
-  "champ-b": { background: "linear-gradient(135deg, #FF2D6F, #FFD24A)" },
+  "champ-a": { background: "linear-gradient(135deg, #5BC25A, #E61D25)" },
+  "champ-b": { background: "linear-gradient(135deg, #E61D25, #5BC25A)" },
 }
 
 interface Match {
@@ -150,51 +211,59 @@ interface Match {
   homeFlag: FlagCode
   awayName: string
   awayFlag: FlagCode
+  venue: string
   featured?: boolean
   final?: boolean
 }
 
+// Real FIFA World Cup 2026 fixtures (post-draw, December 2025).
+// Six marquee matches selected for US watch-party demand.
 const matches: Match[] = [
   {
     date: "JUN 11 · 8 PM ET",
-    round: "Opener",
+    round: "Opener · Group A",
     homeName: "Mexico",
     homeFlag: "mex",
-    awayName: "TBD",
-    awayFlag: "tbd",
+    awayName: "South Africa",
+    awayFlag: "zaf",
+    venue: "Estadio Azteca, Mexico City",
     featured: true,
   },
   {
-    date: "JUN 15 · 6 PM ET",
-    round: "Group A",
+    date: "JUN 12 · 5 PM PT",
+    round: "Group D · USA Opener",
     homeName: "USA",
     homeFlag: "usa",
-    awayName: "TBD",
-    awayFlag: "tbd",
+    awayName: "Paraguay",
+    awayFlag: "par",
+    venue: "SoFi Stadium, Inglewood",
   },
   {
-    date: "JUN 18 · 9 PM ET",
-    round: "Group C",
+    date: "JUN 13 · 4 PM ET",
+    round: "Group · Marquee",
+    homeName: "Brazil",
+    homeFlag: "bra",
+    awayName: "Morocco",
+    awayFlag: "mar",
+    venue: "MetLife Stadium, NJ",
+  },
+  {
+    date: "JUN 16 · 9 PM ET",
+    round: "Group · Marquee",
     homeName: "Argentina",
     homeFlag: "arg",
-    awayName: "Brazil",
-    awayFlag: "bra",
+    awayName: "Algeria",
+    awayFlag: "alg",
+    venue: "Kansas City",
   },
   {
-    date: "JUN 24 · 3 PM ET",
-    round: "Group F",
-    homeName: "France",
-    homeFlag: "fra",
-    awayName: "England",
-    awayFlag: "eng",
-  },
-  {
-    date: "JUL 04 · 8 PM ET",
-    round: "Quarter-Final",
-    homeName: "Spain",
-    homeFlag: "esp",
-    awayName: "Germany",
-    awayFlag: "ger",
+    date: "JUN 17 · 8 PM ET",
+    round: "Group · Marquee",
+    homeName: "England",
+    homeFlag: "eng",
+    awayName: "Croatia",
+    awayFlag: "cro",
+    venue: "AT&T Stadium, Arlington",
   },
   {
     date: "JUL 19 · 3 PM ET",
@@ -203,6 +272,7 @@ const matches: Match[] = [
     homeFlag: "champ-a",
     awayName: "Champion 2",
     awayFlag: "champ-b",
+    venue: "MetLife Stadium, NJ",
     featured: true,
     final: true,
   },
@@ -256,7 +326,7 @@ function CountdownPill() {
 
   const cell = (val: number, label: string) => (
     <span
-      className="rounded-md px-2 py-1 min-w-[42px] text-center font-mono font-bold text-[#FFD24A]"
+      className="rounded-md px-2 py-1 min-w-[42px] text-center font-mono font-bold text-[#5BC25A]"
       style={{ background: "rgba(255,210,74,0.10)", border: "1px solid rgba(255,210,74,0.20)" }}
     >
       <span className="block text-[13px] leading-none">{String(val).padStart(2, "0")}</span>
@@ -273,7 +343,7 @@ function CountdownPill() {
         boxShadow: "0 10px 30px -8px rgba(255,210,74,0.20)",
       }}
     >
-      <b className="font-mono text-[12px] tracking-[0.14em] text-[#FFD24A]">KICKOFF IN</b>
+      <b className="font-mono text-[12px] tracking-[0.14em] text-[#5BC25A]">KICKOFF IN</b>
       <div className="flex gap-1.5">
         {cell(t.days, "DAYS")}
         {cell(t.hours, "HRS")}
@@ -293,50 +363,50 @@ export default function FIFA2026PackagesPage() {
 
   return (
     <div className="relative">
-      {/* FIFA-themed FULL background — opaque, fully covers the global emerald bg */}
+      {/* FIFA-themed FULL background — Mexican palette (green/blue/red), 20% darker than original */}
       <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden" aria-hidden>
-        {/* Solid base */}
+        {/* Solid base — deep navy with green/blue/red radial accents */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 80% 0%, rgba(255,45,111,0.55) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 0% 30%, rgba(124,58,237,0.50) 0%, transparent 60%), radial-gradient(ellipse 80% 60% at 50% 110%, rgba(255,94,58,0.40) 0%, transparent 60%), linear-gradient(180deg, #050310 0%, #0a0820 50%, #050310 100%)",
+              "radial-gradient(ellipse 70% 50% at 85% 0%, rgba(60,172,59,0.26) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 0% 25%, rgba(42,57,141,0.36) 0%, transparent 60%), radial-gradient(ellipse 80% 60% at 50% 110%, rgba(230,29,37,0.16) 0%, transparent 60%), linear-gradient(180deg, #060A18 0%, #0A0F1F 50%, #060A18 100%)",
           }}
         />
-        {/* Stadium-light conic rays */}
+        {/* Bauhaus-style geometric pattern overlay */}
         <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "conic-gradient(from 220deg at 50% -20%, transparent 0deg, rgba(255,210,74,0.06) 25deg, transparent 50deg, rgba(255,45,111,0.07) 75deg, transparent 100deg, rgba(124,58,237,0.07) 125deg, transparent 150deg, rgba(255,94,58,0.06) 175deg, transparent 200deg, rgba(255,210,74,0.05) 225deg, transparent 360deg)",
-            animation: "fifaRays 60s linear infinite",
-          }}
-        />
-        {/* Subtle magenta grid */}
-        <div
-          className="absolute inset-0 opacity-[0.06]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(255,45,111,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,45,111,0.4) 1px, transparent 1px)",
-            backgroundSize: "56px 56px",
-            maskImage:
-              "radial-gradient(ellipse 100% 70% at 50% 50%, black 30%, transparent 80%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 100% 70% at 50% 50%, black 30%, transparent 80%)",
+              "url(\"data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Crect x='0' y='0' width='100' height='100' fill='%233CAC3B'/%3E%3Ccircle cx='150' cy='50' r='40' fill='%23E61D25'/%3E%3Cpath d='M200 0 L300 0 L300 100 Z' fill='%232A398D'/%3E%3Crect x='0' y='200' width='80' height='80' fill='%23E61D25'/%3E%3Ccircle cx='320' cy='320' r='50' fill='%233CAC3B'/%3E%3Cpath d='M200 200 L300 300 L200 300 Z' fill='%232A398D'/%3E%3C/g%3E%3C/svg%3E\")",
+            backgroundSize: "400px",
+            maskImage: "radial-gradient(ellipse 100% 80% at 50% 50%, black 0%, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse 100% 80% at 50% 50%, black 0%, transparent 80%)",
           }}
         />
-        {/* Magenta / violet / coral orbs */}
+        {/* Subtle Mexican-green grid */}
         <div
-          className="absolute -top-[8%] -right-[10%] w-[520px] h-[520px] rounded-full opacity-55"
-          style={{ background: "#FF2D6F", filter: "blur(110px)", animation: "fifaOrbA 22s ease-in-out infinite" }}
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(60,172,59,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(60,172,59,0.4) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+            maskImage: "radial-gradient(ellipse 100% 70% at 50% 50%, black 30%, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse 100% 70% at 50% 50%, black 30%, transparent 80%)",
+          }}
+        />
+        {/* Mexican tricolor orbs: green / blue / red */}
+        <div
+          className="absolute -top-[8%] -right-[10%] w-[540px] h-[540px] rounded-full opacity-[0.36]"
+          style={{ background: "#3CAC3B", filter: "blur(110px)", animation: "fifaOrbA 24s ease-in-out infinite" }}
         />
         <div
-          className="absolute bottom-[10%] -left-[8%] w-[460px] h-[460px] rounded-full opacity-45"
-          style={{ background: "#7C3AED", filter: "blur(110px)", animation: "fifaOrbB 26s ease-in-out infinite" }}
+          className="absolute bottom-[8%] -left-[10%] w-[480px] h-[480px] rounded-full opacity-[0.44]"
+          style={{ background: "#2A398D", filter: "blur(110px)", animation: "fifaOrbB 28s ease-in-out infinite" }}
         />
         <div
-          className="absolute top-1/2 left-[45%] w-[380px] h-[380px] rounded-full opacity-30"
-          style={{ background: "#FF5E3A", filter: "blur(110px)", animation: "fifaOrbC 30s ease-in-out infinite" }}
+          className="absolute top-1/2 left-[45%] w-[380px] h-[380px] rounded-full opacity-[0.20]"
+          style={{ background: "#E61D25", filter: "blur(110px)", animation: "fifaOrbC 30s ease-in-out infinite" }}
         />
         {/* Noise */}
         <div
@@ -348,6 +418,16 @@ export default function FIFA2026PackagesPage() {
         />
       </div>
 
+      {/* Mexican tricolor stripe — green | red | blue (under the sticky header) */}
+      <div
+        className="relative z-[1] h-1 w-full"
+        style={{
+          background:
+            "linear-gradient(90deg, #3CAC3B 0% 33.33%, #E61D25 33.33% 66.66%, #2A398D 66.66% 100%)",
+        }}
+        aria-hidden
+      />
+
       {/* Hero */}
       <section className="relative pt-12 md:pt-16 pb-20 md:pb-28 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
@@ -357,44 +437,47 @@ export default function FIFA2026PackagesPage() {
               <CountdownPill />
 
               <div
-                className="inline-flex items-center gap-2 px-3 py-1.5 mb-5 rounded-full backdrop-blur-md text-[11px] font-bold tracking-[0.16em] uppercase text-[#FF8FAA]"
+                className="inline-flex items-center gap-2 px-3 py-1.5 mb-5 rounded-full backdrop-blur-md text-[11px] font-bold tracking-[0.16em] uppercase"
                 style={{
-                  background: "rgba(255,45,111,0.14)",
-                  border: "1px solid rgba(255,45,111,0.32)",
+                  background: "rgba(60,172,59,0.14)",
+                  border: "1px solid rgba(60,172,59,0.30)",
+                  color: "#7ED77D",
                 }}
               >
                 <span
-                  className="w-1.5 h-1.5 rounded-full bg-[#FF2D6F] animate-pulse-ds"
-                  style={{ boxShadow: "0 0 10px #FF2D6F" }}
+                  className="w-1.5 h-1.5 rounded-full bg-[#5BC25A] animate-pulse-ds"
+                  style={{ boxShadow: "0 0 10px #5BC25A" }}
                 />
-                FIFA World Cup 2026
+                FIFA World Cup 2026 · USA · MEX · CAN
               </div>
 
-              <h1 className="text-[44px] sm:text-[60px] lg:text-[80px] font-black tracking-[-0.035em] leading-[0.95] uppercase text-white mb-6">
+              <h1 className="text-[48px] sm:text-[64px] lg:text-[88px] font-black tracking-[-0.035em] leading-[0.96] uppercase text-white mb-6">
                 <span
-                  className="inline-block px-3 py-1 mr-1 rounded-md text-[#050310] font-black text-[14px] sm:text-[16px] tracking-[0.12em]"
-                  style={{ background: "#FFD24A", transform: "skewX(-6deg)" }}
-                >
-                  USA · MEX · CAN
-                </span>
-                <br />
-                Bring the World
-                <br />
-                Cup{" "}
-                <span
-                  className="italic"
+                  className="block"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #FF2D6F 0%, #FFD24A 50%, #FF5E3A 100%)",
-                    backgroundSize: "200% 200%",
+                    background: "linear-gradient(135deg, #5BC25A 0%, #3CAC3B 100%)",
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
                     WebkitTextFillColor: "transparent",
-                    animation: "gradientShift 4s ease-in-out infinite",
+                  }}
+                >
+                  World Cup
+                </span>
+                <span className="block text-white">Watch Parties.</span>
+                <span
+                  className="block italic"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #FF3941 0%, #E61D25 60%, #3F4FB8 100%)",
+                    backgroundSize: "220% 220%",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    animation: "gradientShift 6s ease-in-out infinite",
                     paddingRight: "0.18em",
                   }}
                 >
-                  Home.
+                  Done Right.
                 </span>
               </h1>
 
@@ -408,7 +491,7 @@ export default function FIFA2026PackagesPage() {
                   onClick={openQuote}
                   className="inline-flex items-center gap-2 px-7 py-4 rounded-xl text-white font-extrabold text-[14px] tracking-[0.04em] uppercase transition-all hover:-translate-y-0.5"
                   style={{
-                    background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                    background: "linear-gradient(135deg, #E61D25 0%, #BF1119 100%)",
                     boxShadow:
                       "0 12px 36px -8px rgba(255,45,111,0.6), inset 0 1px 0 rgba(255,255,255,0.30)",
                   }}
@@ -432,7 +515,7 @@ export default function FIFA2026PackagesPage() {
                       key={tag}
                       className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.10] text-white/60 text-[12px] font-semibold"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#FFD24A]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#5BC25A]" />
                       {tag}
                     </span>
                   ),
@@ -513,7 +596,7 @@ export default function FIFA2026PackagesPage() {
                       />
                       USA
                     </span>
-                    <span className="text-[16px] text-[#FFD24A] tracking-[0.05em]">2 - 1</span>
+                    <span className="text-[16px] text-[#5BC25A] tracking-[0.05em]">2 - 1</span>
                     <span className="flex items-center gap-1.5 text-[10px] text-white">
                       MEX
                       <span
@@ -525,7 +608,7 @@ export default function FIFA2026PackagesPage() {
                       />
                     </span>
                     <span
-                      className="text-[9px] px-1.5 py-0.5 rounded-[3px] text-[#FF2D6F]"
+                      className="text-[9px] px-1.5 py-0.5 rounded-[3px] text-[#E61D25]"
                       style={{ background: "rgba(255,45,111,0.15)" }}
                     >
                       72&apos;
@@ -549,7 +632,7 @@ export default function FIFA2026PackagesPage() {
                 {(["tl", "tr", "bl", "br"] as const).map((p) => (
                   <span
                     key={p}
-                    className={`absolute w-7 h-7 z-[3] opacity-60 border-2 border-[#FF2D6F] ${
+                    className={`absolute w-7 h-7 z-[3] opacity-60 border-2 border-[#E61D25] ${
                       p === "tl"
                         ? "top-3.5 left-3.5 border-r-0 border-b-0"
                         : p === "tr"
@@ -587,15 +670,15 @@ export default function FIFA2026PackagesPage() {
                 >
                   <div className="flex flex-col gap-1">
                     <span className="text-[9px] text-white/40 tracking-[0.12em] uppercase">Pixels</span>
-                    <b className="text-[12px] text-[#FFD24A] font-bold">4K UHD</b>
+                    <b className="text-[12px] text-[#5BC25A] font-bold">4K UHD</b>
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-[9px] text-white/40 tracking-[0.12em] uppercase">Bright</span>
-                    <b className="text-[12px] text-[#FFD24A] font-bold">5000 nit</b>
+                    <b className="text-[12px] text-[#5BC25A] font-bold">5000 nit</b>
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="text-[9px] text-white/40 tracking-[0.12em] uppercase">Pitch</span>
-                    <b className="text-[12px] text-[#FFD24A] font-bold">P2.6</b>
+                    <b className="text-[12px] text-[#5BC25A] font-bold">P2.6</b>
                   </div>
                 </div>
               </div>
@@ -610,7 +693,7 @@ export default function FIFA2026PackagesPage() {
                 }}
               >
                 <div
-                  className="w-9 h-9 rounded-[10px] grid place-items-center text-[#FF2D6F]"
+                  className="w-9 h-9 rounded-[10px] grid place-items-center text-[#E61D25]"
                   style={{ background: "rgba(255,45,111,0.18)" }}
                 >
                   <Trophy className="w-[18px] h-[18px]" />
@@ -630,7 +713,7 @@ export default function FIFA2026PackagesPage() {
                 }}
               >
                 <div
-                  className="w-9 h-9 rounded-[10px] grid place-items-center text-[#FF2D6F]"
+                  className="w-9 h-9 rounded-[10px] grid place-items-center text-[#E61D25]"
                   style={{ background: "rgba(255,45,111,0.18)" }}
                 >
                   <Award className="w-[18px] h-[18px]" />
@@ -649,10 +732,10 @@ export default function FIFA2026PackagesPage() {
             style={{ background: "rgba(255,255,255,0.04)" }}
           >
             {[
-              { num: "104", lbl: "Matches" },
-              { num: "16", lbl: "Host Cities" },
-              { num: "48", lbl: "Teams" },
-              { num: "1986+", lbl: "Events Produced" },
+              { end: 104, suffix: "", lbl: "Matches" },
+              { end: 16, suffix: "", lbl: "Host Cities" },
+              { end: 48, suffix: "", lbl: "Teams" },
+              { end: 1986, suffix: "+", lbl: "Events Produced" },
             ].map((s, i, arr) => (
               <div
                 key={s.lbl}
@@ -663,13 +746,13 @@ export default function FIFA2026PackagesPage() {
                 <div
                   className="text-[36px] font-black tracking-[-0.03em] leading-none"
                   style={{
-                    background: "linear-gradient(135deg, #FFD24A 0%, #FF2D6F 100%)",
+                    background: "linear-gradient(135deg, #5BC25A 0%, #E61D25 100%)",
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  {s.num}
+                  <CountUp end={s.end} suffix={s.suffix} />
                 </div>
                 <div className="mt-2 text-[11px] tracking-[0.10em] uppercase text-white/45 font-semibold">{s.lbl}</div>
               </div>
@@ -700,7 +783,7 @@ export default function FIFA2026PackagesPage() {
                   key={pkg.title}
                   className={`relative p-7 rounded-[22px] border backdrop-blur-2xl transition-all hover:-translate-y-1 ${
                     featured
-                      ? "border-[#FF2D6F]/40"
+                      ? "border-[#E61D25]/40"
                       : "border-white/[0.10]"
                   }`}
                   style={
@@ -722,7 +805,7 @@ export default function FIFA2026PackagesPage() {
                   {featured && (
                     <span
                       className="absolute top-4 right-4 px-2.5 py-1 rounded-md text-[10px] font-black tracking-[0.10em] text-[#050310]"
-                      style={{ background: "#FFD24A" }}
+                      style={{ background: "#5BC25A" }}
                     >
                       MOST POPULAR
                     </span>
@@ -732,9 +815,9 @@ export default function FIFA2026PackagesPage() {
                     className="w-12 h-12 rounded-[12px] flex items-center justify-center mb-5"
                     style={{
                       background: featured
-                        ? "linear-gradient(135deg, #FF2D6F, #FF5E3A)"
+                        ? "linear-gradient(135deg, #E61D25, #BF1119)"
                         : "rgba(255,45,111,0.14)",
-                      color: featured ? "#fff" : "#FF2D6F",
+                      color: featured ? "#fff" : "#E61D25",
                       border: featured ? "none" : "1px solid rgba(255,45,111,0.24)",
                     }}
                   >
@@ -742,7 +825,7 @@ export default function FIFA2026PackagesPage() {
                   </div>
 
                   <div className="pb-5 mb-5 border-b border-dashed border-white/[0.10]">
-                    <div className="text-[11px] font-extrabold tracking-[0.16em] uppercase text-[#FFD24A] mb-2">
+                    <div className="text-[11px] font-extrabold tracking-[0.16em] uppercase text-[#5BC25A] mb-2">
                       {pkg.title}
                     </div>
                     <p className="text-white/60 text-[13px]">{pkg.description}</p>
@@ -751,7 +834,7 @@ export default function FIFA2026PackagesPage() {
                   <ul className="space-y-2.5 mb-6">
                     {pkg.features.map((f) => (
                       <li key={f} className="flex items-start gap-2.5 text-[13px] text-white/85">
-                        <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#FF2D6F]" strokeWidth={2.4} />
+                        <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#E61D25]" strokeWidth={2.4} />
                         <span>{f}</span>
                       </li>
                     ))}
@@ -761,7 +844,7 @@ export default function FIFA2026PackagesPage() {
                   <div
                     className="text-[28px] font-extrabold tracking-[-0.02em] mb-4"
                     style={{
-                      background: "linear-gradient(135deg, #FFD24A 0%, #FF2D6F 100%)",
+                      background: "linear-gradient(135deg, #5BC25A 0%, #E61D25 100%)",
                       WebkitBackgroundClip: "text",
                       backgroundClip: "text",
                       WebkitTextFillColor: "transparent",
@@ -779,7 +862,7 @@ export default function FIFA2026PackagesPage() {
                     style={
                       featured
                         ? {
-                            background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                            background: "linear-gradient(135deg, #E61D25 0%, #BF1119 100%)",
                             boxShadow:
                               "0 10px 28px -6px rgba(255,45,111,0.5), inset 0 1px 0 rgba(255,255,255,0.30)",
                           }
@@ -817,28 +900,34 @@ export default function FIFA2026PackagesPage() {
               <div
                 key={i}
                 className={`grid items-center gap-5 px-5 md:px-6 py-5 rounded-[16px] border backdrop-blur-md transition-all hover:-translate-y-0.5 ${
-                  m.featured ? "" : "hover:border-[#FF2D6F]/22 hover:bg-[#FF2D6F]/[0.05]"
+                  m.featured ? "" : "hover:border-[#E61D25]/22 hover:bg-[#E61D25]/[0.05]"
                 }`}
                 style={{
                   background: m.featured
-                    ? "linear-gradient(90deg, rgba(255,45,111,0.10), rgba(255,210,74,0.04))"
+                    ? "linear-gradient(90deg, rgba(60,172,59,0.08), rgba(230,29,37,0.06), rgba(42,57,141,0.08))"
                     : "rgba(255,255,255,0.04)",
                   border: m.featured
-                    ? "1px solid rgba(255,45,111,0.30)"
+                    ? "1px solid rgba(230,29,37,0.30)"
                     : "1px solid rgba(255,255,255,0.08)",
                   gridTemplateColumns:
-                    "minmax(120px, 140px) 1fr auto 1fr minmax(0, auto)",
+                    "minmax(140px, 160px) 1fr auto 1fr minmax(0, auto)",
                 }}
               >
-                {/* Date */}
-                <div className="font-mono text-[#FFD24A] font-bold text-[13px] tracking-[0.04em] leading-tight">
+                {/* Date + round + venue */}
+                <div className="font-mono text-[#5BC25A] font-bold text-[12px] tracking-[0.04em] leading-tight">
                   {m.date}
                   <b
-                    className="block text-white text-[16px] md:text-[18px] tracking-[-0.01em] font-extrabold mt-1"
+                    className="block text-white text-[15px] md:text-[16px] tracking-[-0.01em] font-extrabold mt-1"
                     style={{ fontFamily: "Manrope, system-ui, sans-serif" }}
                   >
                     {m.round}
                   </b>
+                  <span
+                    className="block text-white/45 text-[10px] mt-1 leading-tight"
+                    style={{ fontFamily: "Manrope, system-ui, sans-serif" }}
+                  >
+                    {m.venue}
+                  </span>
                 </div>
 
                 {/* Home team */}
@@ -870,8 +959,10 @@ export default function FIFA2026PackagesPage() {
                   onClick={openQuote}
                   className="hidden md:inline-flex items-center justify-center px-4 py-2.5 rounded-[10px] text-white text-[11px] font-extrabold tracking-[0.10em] uppercase transition-all hover:scale-105"
                   style={{
-                    background: "linear-gradient(135deg, #FF2D6F, #FF5E3A)",
-                    boxShadow: "0 8px 20px -6px rgba(255,45,111,0.45)",
+                    background: m.final
+                      ? "linear-gradient(135deg, #E61D25, #2A398D)"
+                      : "linear-gradient(135deg, #E61D25, #BF1119)",
+                    boxShadow: "0 8px 20px -6px rgba(230,29,37,0.45)",
                   }}
                 >
                   {m.final ? "Book Final" : "Reserve"}
@@ -886,7 +977,7 @@ export default function FIFA2026PackagesPage() {
               onClick={openQuote}
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-white font-extrabold text-[13px] tracking-[0.04em] uppercase transition-all hover:-translate-y-0.5"
               style={{
-                background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                background: "linear-gradient(135deg, #E61D25 0%, #BF1119 100%)",
                 boxShadow:
                   "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
               }}
@@ -916,7 +1007,7 @@ export default function FIFA2026PackagesPage() {
                 style={{ background: "rgba(255,255,255,0.04)" }}
               >
                 <div
-                  className="w-12 h-12 rounded-[12px] flex items-center justify-center mb-4 text-[#FF2D6F]"
+                  className="w-12 h-12 rounded-[12px] flex items-center justify-center mb-4 text-[#E61D25]"
                   style={{
                     background: "rgba(255,45,111,0.14)",
                     border: "1px solid rgba(255,45,111,0.24)",
@@ -960,7 +1051,7 @@ export default function FIFA2026PackagesPage() {
                     isLA
                       ? {
                           background:
-                            "linear-gradient(135deg, #FFD24A 0%, #FF5E3A 100%)",
+                            "linear-gradient(135deg, #5BC25A 0%, #BF1119 100%)",
                           boxShadow:
                             "0 8px 22px -6px rgba(255,210,74,0.45), inset 0 1px 0 rgba(255,255,255,0.30)",
                         }
@@ -996,7 +1087,7 @@ export default function FIFA2026PackagesPage() {
                 <div
                   className="font-mono text-[56px] font-extrabold leading-none mb-5"
                   style={{
-                    background: "linear-gradient(135deg, #FF2D6F 0%, #FFD24A 100%)",
+                    background: "linear-gradient(135deg, #E61D25 0%, #5BC25A 100%)",
                     WebkitBackgroundClip: "text",
                     backgroundClip: "text",
                     WebkitTextFillColor: "transparent",
@@ -1009,7 +1100,7 @@ export default function FIFA2026PackagesPage() {
                 {idx < howSteps.length - 1 && (
                   <div
                     className="hidden lg:block absolute top-1/2 -right-2.5 w-5 h-0.5 opacity-40"
-                    style={{ background: "#FF2D6F" }}
+                    style={{ background: "#E61D25" }}
                     aria-hidden
                   />
                 )}
@@ -1036,7 +1127,7 @@ export default function FIFA2026PackagesPage() {
                 <div
                   key={i}
                   className={`rounded-[14px] border backdrop-blur-md overflow-hidden transition-all ${
-                    open ? "border-[#FF2D6F]/30" : "border-white/[0.08]"
+                    open ? "border-[#E61D25]/30" : "border-white/[0.08]"
                   }`}
                   style={{
                     background: open ? "rgba(255,45,111,0.04)" : "rgba(255,255,255,0.04)",
@@ -1053,8 +1144,8 @@ export default function FIFA2026PackagesPage() {
                         open ? "rotate-45" : ""
                       }`}
                       style={{
-                        background: open ? "#FF2D6F" : "rgba(255,45,111,0.14)",
-                        color: open ? "#fff" : "#FF2D6F",
+                        background: open ? "#E61D25" : "rgba(255,45,111,0.14)",
+                        color: open ? "#fff" : "#E61D25",
                       }}
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -1102,7 +1193,7 @@ export default function FIFA2026PackagesPage() {
               <Trophy
                 className="w-14 h-14 mx-auto mb-5"
                 style={{
-                  color: "#FFD24A",
+                  color: "#5BC25A",
                   filter: "drop-shadow(0 0 24px rgba(255,210,74,0.55))",
                 }}
               />
@@ -1117,7 +1208,7 @@ export default function FIFA2026PackagesPage() {
                   onClick={openQuote}
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-white font-extrabold text-[14px] tracking-[0.04em] uppercase transition-all hover:-translate-y-0.5"
                   style={{
-                    background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                    background: "linear-gradient(135deg, #E61D25 0%, #BF1119 100%)",
                     boxShadow:
                       "0 12px 36px -8px rgba(255,45,111,0.6), inset 0 1px 0 rgba(255,255,255,0.30)",
                   }}
@@ -1171,15 +1262,15 @@ export default function FIFA2026PackagesPage() {
 function FifaPill({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md text-[11px] font-bold tracking-[0.16em] uppercase text-[#FF8FAA]"
+      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md text-[11px] font-bold tracking-[0.16em] uppercase text-[#FF6B71]"
       style={{
         background: "rgba(255,45,111,0.14)",
         border: "1px solid rgba(255,45,111,0.32)",
       }}
     >
       <span
-        className="w-1.5 h-1.5 rounded-full bg-[#FF2D6F] animate-pulse-ds"
-        style={{ boxShadow: "0 0 10px #FF2D6F" }}
+        className="w-1.5 h-1.5 rounded-full bg-[#E61D25] animate-pulse-ds"
+        style={{ boxShadow: "0 0 10px #E61D25" }}
       />
       {children}
     </span>
@@ -1191,7 +1282,7 @@ function FifaAccent({ children }: { children: React.ReactNode }) {
     <span
       className="italic inline-block"
       style={{
-        background: "linear-gradient(135deg, #FF2D6F 0%, #FFD24A 100%)",
+        background: "linear-gradient(135deg, #E61D25 0%, #5BC25A 100%)",
         WebkitBackgroundClip: "text",
         backgroundClip: "text",
         WebkitTextFillColor: "transparent",

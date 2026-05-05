@@ -2,7 +2,6 @@
 
 import { useState, useRef } from "react"
 import { Play, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
-import Link from "next/link"
 
 const caseStudies = [
   {
@@ -89,14 +88,14 @@ export function CaseStudiesSection() {
           <div className="flex gap-2">
             <button
               onClick={handlePrev}
-              className="w-11 h-11 rounded-[12px] border border-white/[0.10] bg-white/[0.04] flex items-center justify-center text-white/65 hover:border-[#4ADE80]/30 hover:bg-[#4ADE80]/10 hover:text-white transition-all backdrop-blur-md"
+              className="w-11 h-11 rounded-[12px] border border-white/[0.10] bg-white/[0.04] flex items-center justify-center text-white/65 hover:border-[#FF2D6F]/30 hover:bg-[#FF2D6F]/10 hover:text-white transition-all backdrop-blur-md"
               aria-label="Previous"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
-              className="w-11 h-11 rounded-[12px] border border-white/[0.10] bg-white/[0.04] flex items-center justify-center text-white/65 hover:border-[#4ADE80]/30 hover:bg-[#4ADE80]/10 hover:text-white transition-all backdrop-blur-md"
+              className="w-11 h-11 rounded-[12px] border border-white/[0.10] bg-white/[0.04] flex items-center justify-center text-white/65 hover:border-[#FF2D6F]/30 hover:bg-[#FF2D6F]/10 hover:text-white transition-all backdrop-blur-md"
               aria-label="Next"
             >
               <ChevronRight className="w-5 h-5" />
@@ -169,13 +168,26 @@ export function CaseStudiesSection() {
 
             <p className="text-gray-300 leading-relaxed">{activeStudy.description}</p>
 
-            <Link
-              href={`/case-studies/${activeStudy.id}`}
-              className="inline-flex items-center gap-2 text-emerald-400 font-medium hover:text-emerald-300 transition-colors"
-            >
-              View Full Case Study
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="flex flex-wrap gap-3 pt-1">
+              <button
+                type="button"
+                onClick={() => document.dispatchEvent(new CustomEvent("openQuoteForm"))}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white font-extrabold text-[13px] tracking-[0.02em] transition-all hover:-translate-y-0.5"
+                style={{
+                  boxShadow:
+                    "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
+                }}
+              >
+                Get a Similar Quote
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <a
+                href="tel:7869338488"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-semibold text-[13px] backdrop-blur-md hover:bg-white/[0.10] transition-all"
+              >
+                Talk to an Expert
+              </a>
+            </div>
 
             {/* Thumbnails */}
             <div className="flex gap-3 pt-4">
@@ -188,7 +200,7 @@ export function CaseStudiesSection() {
                   }}
                   className={`relative w-24 h-16 rounded-lg overflow-hidden transition-all ${
                     index === activeIndex
-                      ? "ring-2 ring-emerald-400 ring-offset-2 ring-offset-gray-900"
+                      ? "ring-2 ring-[#FF2D6F] ring-offset-2 ring-offset-gray-900"
                       : "opacity-50 hover:opacity-100"
                   }`}
                 >

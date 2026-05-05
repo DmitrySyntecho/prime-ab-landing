@@ -47,7 +47,7 @@ export function ResourcesSection() {
       <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-[#4ADE80] font-semibold text-sm uppercase tracking-wider mb-3">Resources</p>
+          <p className="text-[#FF2D6F] font-semibold text-sm uppercase tracking-wider mb-3">Resources</p>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Event Production Resources</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Insights, tips, and educational guides for event planners, producers, and marketing teams.
@@ -60,7 +60,7 @@ export function ResourcesSection() {
             <Link
               key={resource.slug}
               href={`/resources/${resource.slug}`}
-              className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-[#4ADE80] hover:shadow-lg transition-all duration-300"
+              className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-[#FF2D6F] hover:shadow-lg transition-all duration-300"
             >
               <div className="relative h-48 overflow-hidden">
                 <Image
@@ -71,11 +71,11 @@ export function ResourcesSection() {
                 />
               </div>
               <div className="p-5">
-                <h3 className="font-bold text-gray-900 mb-2 group-hover:text-[#16A34A] transition-colors line-clamp-2">
+                <h3 className="font-bold text-gray-900 mb-2 group-hover:text-[#FF5E3A] transition-colors line-clamp-2">
                   {resource.title}
                 </h3>
                 <p className="text-gray-600 text-sm mb-3 line-clamp-2">{resource.description}</p>
-                <span className="inline-flex items-center text-[#16A34A] text-sm font-medium group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center text-[#FF5E3A] text-sm font-medium group-hover:gap-2 transition-all">
                   Read More
                   <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                 </span>

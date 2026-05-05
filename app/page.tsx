@@ -14,6 +14,7 @@ import { PromoBannersSection } from "@/components/promo-banners-section"
 import { PortfolioSection } from "@/components/portfolio-section"
 import { ServicesGridSection } from "@/components/services-grid-section"
 import { FAQSection } from "@/components/faq-section"
+import { FIFAPromoBanner } from "@/components/fifa-promo-banner"
 
 export default function Home() {
   const handleStartQuote = () => {
@@ -28,6 +29,7 @@ export default function Home() {
       <WhyChooseUsSection />
       <ServicesGridSection />
       <RentalCategoriesSection />
+      <FIFAPromoBanner />
       <AboutUsSection />
       <PromoBannersSection />
       <EventTypesSection />

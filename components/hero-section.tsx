@@ -104,10 +104,10 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
             <div className="flex flex-col sm:flex-row gap-3 mb-6 md:mb-12">
               <button
                 onClick={onStartQuote}
-                className="group inline-flex items-center justify-center gap-2.5 px-6 md:px-7 py-3.5 md:py-4 rounded-xl bg-gradient-to-br from-[#4ADE80] to-[#16A34A] text-[#03070a] font-extrabold text-[14px] md:text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2.5 px-6 md:px-7 py-3.5 md:py-4 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-[#03070a] font-extrabold text-[14px] md:text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
                 style={{
                   boxShadow:
-                    "0 12px 36px -8px rgba(74,222,128,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",
+                    "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",
                 }}
               >
                 {t("hero.cta.quote")}
@@ -156,7 +156,7 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
             <div
               className="relative rounded-[24px] overflow-hidden border border-white/10 backdrop-blur-2xl"
               style={{
-                background: "linear-gradient(135deg, rgba(74,222,128,0.10), rgba(45,212,191,0.05))",
+                background: "linear-gradient(135deg, rgba(255, 45, 111,0.10), rgba(255, 210, 74,0.05))",
                 boxShadow: "0 40px 80px -20px rgba(0,0,0,0.7)",
               }}
             >
@@ -176,14 +176,14 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
 
             {/* Floating glass cards */}
             <div
-              className="hidden md:flex absolute top-[12%] -left-6 z-20 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#4ADE80]/20 backdrop-blur-2xl animate-float-y"
+              className="hidden md:flex absolute top-[12%] -left-6 z-20 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#FF2D6F]/20 backdrop-blur-2xl animate-float-y"
               style={{
                 background: "rgba(8,18,26,0.7)",
                 boxShadow:
                   "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
               }}
             >
-              <div className="w-9 h-9 rounded-[10px] bg-[#4ADE80]/16 grid place-items-center text-[#4ADE80]">
+              <div className="w-9 h-9 rounded-[10px] bg-[#FF2D6F]/16 grid place-items-center text-[#FF2D6F]">
                 <CheckCircle2 className="w-[18px] h-[18px]" />
               </div>
               <div>
@@ -193,7 +193,7 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
             </div>
 
             <div
-              className="hidden md:flex absolute bottom-[14%] -right-6 z-20 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#4ADE80]/20 backdrop-blur-2xl animate-float-y"
+              className="hidden md:flex absolute bottom-[14%] -right-6 z-20 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#FF2D6F]/20 backdrop-blur-2xl animate-float-y"
               style={{
                 animationDelay: "-2.5s",
                 background: "rgba(8,18,26,0.7)",
@@ -201,7 +201,7 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
                   "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
               }}
             >
-              <div className="w-9 h-9 rounded-[10px] bg-[#4ADE80]/16 grid place-items-center text-[#4ADE80]">
+              <div className="w-9 h-9 rounded-[10px] bg-[#FF2D6F]/16 grid place-items-center text-[#FF2D6F]">
                 <Clock className="w-[18px] h-[18px]" />
               </div>
               <div>

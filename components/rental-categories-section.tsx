@@ -66,19 +66,19 @@ export function RentalCategoriesSection() {
                 key={category.slug}
                 type="button"
                 onClick={openQuote}
-                className="group relative flex items-center justify-between gap-3 p-5 rounded-[14px] border border-white/[0.08] bg-white/[0.03] backdrop-blur-md hover:border-[#4ADE80]/30 hover:bg-[#4ADE80]/[0.04] transition-all duration-300 cursor-pointer overflow-hidden text-left w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] xl:w-[calc(25%-0.75rem)]"
+                className="group relative flex items-center justify-between gap-3 p-5 rounded-[14px] border border-white/[0.08] bg-white/[0.03] backdrop-blur-md hover:border-[#FF2D6F]/30 hover:bg-[#FF2D6F]/[0.04] transition-all duration-300 cursor-pointer overflow-hidden text-left w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] xl:w-[calc(25%-0.75rem)]"
               >
                 <div className="relative flex items-center gap-3.5 min-w-0">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-[12px] bg-[#4ADE80]/12 border border-[#4ADE80]/20 flex items-center justify-center group-hover:bg-[#4ADE80] transition-all duration-300">
-                    <IconComponent className="w-5 h-5 text-[#4ADE80] group-hover:text-[#03070a] transition-colors duration-300" />
+                  <div className="flex-shrink-0 w-11 h-11 rounded-[12px] bg-[#FF2D6F]/12 border border-[#FF2D6F]/20 flex items-center justify-center group-hover:bg-[#FF2D6F] transition-all duration-300">
+                    <IconComponent className="w-5 h-5 text-[#FF2D6F] group-hover:text-[#03070a] transition-colors duration-300" />
                   </div>
                   <span className="text-[13px] font-semibold text-white/85 group-hover:text-white transition-colors leading-tight">
                     {category.name}
                   </span>
                 </div>
 
-                <div className="relative flex-shrink-0 w-8 h-8 rounded-[10px] bg-white/[0.04] border border-white/[0.06] flex items-center justify-center group-hover:bg-[#4ADE80]/15 group-hover:border-[#4ADE80]/30 transition-all duration-300">
-                  <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-[#4ADE80] group-hover:translate-x-0.5 transition-all duration-300" />
+                <div className="relative flex-shrink-0 w-8 h-8 rounded-[10px] bg-white/[0.04] border border-white/[0.06] flex items-center justify-center group-hover:bg-[#FF2D6F]/15 group-hover:border-[#FF2D6F]/30 transition-all duration-300">
+                  <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-[#FF2D6F] group-hover:translate-x-0.5 transition-all duration-300" />
                 </div>
               </button>
             )

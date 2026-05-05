@@ -75,7 +75,7 @@ export function ServicesGridSection() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="relative p-7 md:p-8 min-h-[280px] rounded-[22px] border border-[#4ADE80]/20 overflow-hidden"
+              className="relative p-7 md:p-8 min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden"
               style={{
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
@@ -105,13 +105,13 @@ export function ServicesGridSection() {
                 className="absolute inset-0 pointer-events-none"
                 style={{
                   background:
-                    "radial-gradient(ellipse 80% 70% at 50% 0%, rgba(74,222,128,0.18) 0%, transparent 70%)",
+                    "radial-gradient(ellipse 80% 70% at 50% 0%, rgba(255, 45, 111,0.18) 0%, transparent 70%)",
                 }}
                 aria-hidden
               />
 
               <div className="relative z-10">
-                <div className="w-14 h-14 rounded-[14px] bg-[#4ADE80]/22 border border-[#4ADE80]/35 flex items-center justify-center text-[#4ADE80] mb-5 backdrop-blur-md">
+                <div className="w-14 h-14 rounded-[14px] bg-[#FF2D6F]/22 border border-[#FF2D6F]/35 flex items-center justify-center text-[#FF2D6F] mb-5 backdrop-blur-md">
                   <service.icon className="w-6 h-6" strokeWidth={1.7} />
                 </div>
 

@@ -18,12 +18,12 @@ export function Footer() {
   const pathname = usePathname()
   const isFifa = pathname?.startsWith("/fifa-2026-packages")
 
-  const accent = isFifa ? "#FF2D6F" : "#4ADE80"
-  const accentDeep = isFifa ? "#FF5E3A" : "#16A34A"
-  const accentText = isFifa ? "text-[#FF2D6F]" : "text-[#4ADE80]"
-  const accentBorder = isFifa ? "border-[#FF2D6F]/10" : "border-[#4ADE80]/10"
-  const accentBg = isFifa ? "bg-[#FF2D6F]/15" : "bg-[#4ADE80]/15"
-  const accentHover = isFifa ? "hover:text-[#FF2D6F]" : "hover:text-[#4ADE80]"
+  const accent = isFifa ? "#E61D25" : "#FF2D6F"
+  const accentDeep = isFifa ? "#BF1119" : "#FF5E3A"
+  const accentText = isFifa ? "text-[#E61D25]" : "text-[#FF2D6F]"
+  const accentBorder = isFifa ? "border-[#E61D25]/10" : "border-[#FF2D6F]/10"
+  const accentBg = isFifa ? "bg-[#E61D25]/15" : "bg-[#FF2D6F]/15"
+  const accentHover = isFifa ? "hover:text-[#E61D25]" : "hover:text-[#FF2D6F]"
 
   const openQuote = () => {
     document.dispatchEvent(new CustomEvent("openQuoteForm"))
@@ -75,10 +75,10 @@ export function Footer() {
             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[13px] font-extrabold tracking-[0.02em] transition-all hover:-translate-y-0.5"
             style={{
               background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
-              color: isFifa ? "#fff" : "#03070a",
+              color: "#fff",
               boxShadow: isFifa
-                ? "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)"
-                : "0 12px 36px -8px rgba(74,222,128,0.45), inset 0 1px 0 rgba(255,255,255,0.30)",
+                ? "0 12px 36px -8px rgba(230,29,37,0.55), inset 0 1px 0 rgba(255,255,255,0.25)"
+                : "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
             }}
           >
             Get a Quote

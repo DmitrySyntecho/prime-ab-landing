@@ -218,7 +218,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ id: 
               </div>
 
               {/* CTA */}
-              <div className="bg-emerald-500 rounded-xl p-6 text-center">
+              <div className="bg-[#FF2D6F] rounded-xl p-6 text-center">
                 <h3 className="font-bold text-white text-xl mb-2">Ready to create your event?</h3>
                 <p className="text-white/90 text-sm mb-4">Let's discuss your vision and bring it to life.</p>
                 <Link

@@ -2,6 +2,7 @@
 
 import { CheckCircle, Clock, Users, Truck } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
+import { CountUp } from "./count-up"
 
 export function WhyChooseUsSection() {
   const { t } = useLanguage()
@@ -48,9 +49,9 @@ export function WhyChooseUsSection() {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex gap-3.5 p-4 rounded-[14px] border border-white/[0.07] bg-white/[0.03] backdrop-blur-xl transition-all hover:bg-[#4ADE80]/[0.05] hover:border-[#4ADE80]/[0.18]"
+                  className="flex gap-3.5 p-4 rounded-[14px] border border-white/[0.07] bg-white/[0.03] backdrop-blur-xl transition-all hover:bg-[#FF2D6F]/[0.05] hover:border-[#FF2D6F]/[0.18]"
                 >
-                  <div className="w-[38px] h-[38px] rounded-[10px] bg-[#4ADE80]/14 flex items-center justify-center flex-shrink-0 text-[#4ADE80]">
+                  <div className="w-[38px] h-[38px] rounded-[10px] bg-[#FF2D6F]/14 flex items-center justify-center flex-shrink-0 text-[#FF2D6F]">
                     <feature.icon className="w-[18px] h-[18px]" strokeWidth={2.4} />
                   </div>
                   <div>
@@ -64,10 +65,10 @@ export function WhyChooseUsSection() {
 
           {/* Right - equalizer visual (no image, no overflow) */}
           <div
-            className="relative aspect-[1/1.05] rounded-[24px] overflow-hidden border border-[#4ADE80]/[0.18] backdrop-blur-2xl flex flex-col p-7"
+            className="relative aspect-[1/1.05] rounded-[24px] overflow-hidden border border-[#FF2D6F]/[0.18] backdrop-blur-2xl flex flex-col p-7"
             style={{
               background:
-                "linear-gradient(135deg, rgba(74,222,128,0.08) 0%, rgba(45,212,191,0.03) 100%)",
+                "linear-gradient(135deg, rgba(255, 45, 111,0.08) 0%, rgba(255, 210, 74,0.03) 100%)",
               boxShadow:
                 "inset 0 1px 0 rgba(255,255,255,0.08), 0 30px 60px -20px rgba(0,0,0,0.6)",
             }}
@@ -75,7 +76,7 @@ export function WhyChooseUsSection() {
             {/* Top text */}
             <div className="flex flex-col gap-3">
               <span
-                className="self-start px-3 py-1.5 rounded-full backdrop-blur-md border border-[#4ADE80]/30 text-[11px] tracking-[0.14em] uppercase font-bold text-[#4ADE80]"
+                className="self-start px-3 py-1.5 rounded-full backdrop-blur-md border border-[#FF2D6F]/30 text-[11px] tracking-[0.14em] uppercase font-bold text-[#FF2D6F]"
                 style={{ background: "rgba(8,18,26,0.7)" }}
               >
                 Since 2018
@@ -83,7 +84,7 @@ export function WhyChooseUsSection() {
               <div
                 className="text-[72px] md:text-[100px] font-black tracking-[-0.04em] leading-none"
                 style={{
-                  background: "linear-gradient(135deg, #e6f4ee 0%, #4ADE80 100%)",
+                  background: "linear-gradient(135deg, #e6f4ee 0%, #FF2D6F 100%)",
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
                   WebkitTextFillColor: "transparent",
@@ -106,8 +107,8 @@ export function WhyChooseUsSection() {
                     className="flex-1 rounded-t-sm animate-eq"
                     style={{
                       animationDelay: `${delays[i]}s`,
-                      background: "linear-gradient(to top, #16A34A, #4ADE80, #2dd4bf)",
-                      boxShadow: "0 0 8px rgba(74,222,128,0.35)",
+                      background: "linear-gradient(to top, #FF5E3A, #FF2D6F, #FFD24A)",
+                      boxShadow: "0 0 8px rgba(255, 45, 111,0.35)",
                     }}
                   />
                 )
@@ -120,21 +121,27 @@ export function WhyChooseUsSection() {
                 className="flex-1 px-4 py-3 rounded-[12px] border border-white/[0.10] backdrop-blur-md"
                 style={{ background: "rgba(8,18,26,0.85)" }}
               >
-                <b className="block text-[20px] font-extrabold text-[#4ADE80] tracking-[-0.02em]">1,986+</b>
+                <b className="block text-[20px] font-extrabold text-[#FF2D6F] tracking-[-0.02em]">
+                  <CountUp end={1986} suffix="+" />
+                </b>
                 <span className="text-[10px] tracking-[0.08em] uppercase text-white/45">Events</span>
               </div>
               <div
                 className="flex-1 px-4 py-3 rounded-[12px] border border-white/[0.10] backdrop-blur-md"
                 style={{ background: "rgba(8,18,26,0.85)" }}
               >
-                <b className="block text-[20px] font-extrabold text-[#4ADE80] tracking-[-0.02em]">4.9★</b>
+                <b className="block text-[20px] font-extrabold text-[#FF2D6F] tracking-[-0.02em]">
+                  <CountUp end={49} duration={1800} format={(n) => (n / 10).toFixed(1)} suffix="★" />
+                </b>
                 <span className="text-[10px] tracking-[0.08em] uppercase text-white/45">Rating</span>
               </div>
               <div
                 className="flex-1 px-4 py-3 rounded-[12px] border border-white/[0.10] backdrop-blur-md"
                 style={{ background: "rgba(8,18,26,0.85)" }}
               >
-                <b className="block text-[20px] font-extrabold text-[#4ADE80] tracking-[-0.02em]">500+</b>
+                <b className="block text-[20px] font-extrabold text-[#FF2D6F] tracking-[-0.02em]">
+                  <CountUp end={500} suffix="+" />
+                </b>
                 <span className="text-[10px] tracking-[0.08em] uppercase text-white/45">Brands</span>
               </div>
             </div>

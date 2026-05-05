@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Phone, Menu, X, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -17,19 +17,60 @@ const navLinks = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const lastY = useRef(0)
+  const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pathname = usePathname()
   const isFifa = pathname?.startsWith("/fifa-2026-packages")
 
-  // Theme tokens swap based on route — keeps the same structure, different palette.
-  const accent = isFifa ? "#FF2D6F" : "#4ADE80"
-  const accentDeep = isFifa ? "#FF5E3A" : "#16A34A"
-  const accentText = isFifa ? "text-[#FF2D6F]" : "text-[#4ADE80]"
-  const accentHoverBg = isFifa ? "hover:bg-[#FF2D6F]/10" : "hover:bg-[#4ADE80]/10"
+  // Hide ONLY when actively scrolling down. Show on scroll-up. After scroll-up,
+  // stay visible while idle (don't auto-hide). Always visible near the top.
+  useEffect(() => {
+    let raf = 0
+    let pending = false
+    const handle = () => {
+      pending = false
+      const y = window.scrollY
+      const delta = y - lastY.current
+
+      if (y < 80) {
+        setHidden(false)
+      } else if (delta > 4) {
+        // scrolling down → hide
+        setHidden(true)
+        if (mobileMenuOpen) setMobileMenuOpen(false)
+      } else if (delta < -4) {
+        // scrolling up → show
+        setHidden(false)
+      }
+      // delta within ±4 = essentially idle/jitter → keep current state
+
+      lastY.current = y
+    }
+    const onScroll = () => {
+      if (!pending) {
+        pending = true
+        raf = requestAnimationFrame(handle)
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      if (raf) cancelAnimationFrame(raf)
+      if (idleTimer.current) clearTimeout(idleTimer.current)
+    }
+  }, [mobileMenuOpen])
+
+  // Theme tokens swap based on route. Main = magenta/coral, FIFA = Mexican tricolor (red CTA).
+  const accent = isFifa ? "#E61D25" : "#FF2D6F"
+  const accentDeep = isFifa ? "#BF1119" : "#FF5E3A"
+  const accentText = isFifa ? "text-[#E61D25]" : "text-[#FF2D6F]"
+  const accentHoverBg = isFifa ? "hover:bg-[#E61D25]/10" : "hover:bg-[#FF2D6F]/10"
   const ctaShadow = isFifa
-    ? "0 8px 22px -6px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)"
-    : "0 8px 22px -6px rgba(74,222,128,0.45), inset 0 1px 0 rgba(255,255,255,0.30)"
-  const ctaTextColor = isFifa ? "text-white" : "text-[#03070a]"
-  const headerBg = isFifa ? "rgba(10, 8, 32, 0.65)" : "rgba(6, 16, 24, 0.55)"
+    ? "0 8px 22px -6px rgba(230,29,37,0.55), inset 0 1px 0 rgba(255,255,255,0.25)"
+    : "0 8px 22px -6px rgba(255,45,111,0.45), inset 0 1px 0 rgba(255,255,255,0.30)"
+  const ctaTextColor = "text-white"
+  const headerBg = isFifa ? "rgba(10, 15, 31, 0.62)" : "rgba(10, 8, 24, 0.62)"
 
   const openQuote = () => {
     setMobileMenuOpen(false)
@@ -37,7 +78,10 @@ export function Header() {
   }
 
   return (
-    <div className="sticky top-0 z-50">
+    <div
+      className="sticky top-0 z-50 transition-transform duration-500 ease-out will-change-transform"
+      style={{ transform: hidden ? "translateY(-110%)" : "translateY(0)" }}
+    >
       <PromoTopBanner />
 
       <header className="py-3">

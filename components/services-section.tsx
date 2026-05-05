@@ -87,7 +87,7 @@ export function ServicesSection() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-start justify-between mb-10">
           <div>
-            <p className="text-[#4ADE80] text-sm font-semibold tracking-widest uppercase mb-3">WHAT WE DO</p>
+            <p className="text-[#FF2D6F] text-sm font-semibold tracking-widest uppercase mb-3">WHAT WE DO</p>
             <h2 className="text-4xl md:text-5xl font-bold text-[#0B1217]">Our Services</h2>
           </div>
 
@@ -144,7 +144,7 @@ export function ServicesSection() {
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <h3 className="text-white font-bold text-xl md:text-2xl mb-2">{service.title}</h3>
                   <p className="text-gray-300 text-sm mb-4">{service.description}</p>
-                  <span className="inline-flex items-center gap-2 text-[#4ADE80] text-sm font-medium group-hover:gap-3 transition-all">
+                  <span className="inline-flex items-center gap-2 text-[#FF2D6F] text-sm font-medium group-hover:gap-3 transition-all">
                     Learn more <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>

@@ -13,42 +13,42 @@ export function ServicesGridSection() {
       title: t("services.fullAV"),
       description: t("services.fullAV.desc"),
       image:
-        "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1200&q=80",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/End-to-end%20audio-visual%20production%20for%20conferences%2C%20galas%2C%20and%20corporate%20events-mW3a3SJfR4RBrNF8FfxQOsTmKjJRna.png",
     },
     {
       icon: Volume2,
       title: t("services.audio"),
       description: t("services.audio.desc"),
       image:
-        "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&w=1200&q=80",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Crystal-clear%20sound%20design%20and%20live%20mixing%20for%20any%20venue%20size-VxEs87OVOPDR8ffKKx4YEap1r5eafg.png",
     },
     {
       icon: Monitor,
       title: t("services.visual"),
       description: t("services.visual.desc"),
       image:
-        "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Stunning%20LED%20walls%2C%20projection%20mapping%2C%20and%20video%20content-EqFDBAJFSHPNab8rqV3kDn3SBrjqOL.png",
     },
     {
       icon: Lightbulb,
       title: t("services.lighting"),
       description: t("services.lighting.desc"),
       image:
-        "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1200&q=80",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Atmospheric%20lighting%20that%20transforms%20spaces%20and%20sets%20the%20mood-Ag1RKC62g6FtPXUhwoU8mO2PVsgxpa.png",
     },
     {
       icon: Box,
       title: t("services.staging"),
       description: t("services.staging.desc"),
       image:
-        "https://images.unsplash.com/photo-1574391884720-bbc049ec09ad?auto=format&fit=crop&w=1200&q=80",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Custom%20stage%20builds%20and%20professional%20rigging%20solutions-fdIO7htYCqrYAeiASkRu923nbsrKuc.png",
     },
     {
       icon: Building2,
       title: t("services.installation"),
       description: t("services.installation.desc"),
       image:
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80",
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Long-term%20AV%20solutions%20for%20venues%20and%20corporate%20spaces-eLJk0gWrVrRI88yRBJKNqj7X9H8rmV.png",
     },
   ]
 

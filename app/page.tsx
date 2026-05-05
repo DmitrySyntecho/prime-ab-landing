@@ -11,7 +11,6 @@ import { CTABanner } from "@/components/cta-banner"
 import { CharitySection } from "@/components/charity-section"
 import { RentalCategoriesSection } from "@/components/rental-categories-section"
 import { PromoBannersSection } from "@/components/promo-banners-section"
-import { PortfolioSection } from "@/components/portfolio-section"
 import { ServicesGridSection } from "@/components/services-grid-section"
 import { FAQSection } from "@/components/faq-section"
 import { FIFAPromoBanner } from "@/components/fifa-promo-banner"
@@ -35,7 +34,6 @@ export default function Home() {
       <EventTypesSection />
       <CaseStudiesSection />
       <CharitySection />
-      <PortfolioSection />
       <FAQSection />
       <CTABanner onStartQuote={handleStartQuote} />
     </div>

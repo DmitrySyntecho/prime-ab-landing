@@ -67,18 +67,23 @@ export function AboutUsSection() {
           </div>
 
           <div className="relative h-[420px] md:h-[520px]">
-            {/* Top right image */}
-            <div className="absolute top-0 right-0 w-[65%] h-[55%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-10">
+            {/* Main top image - full width, positioned to overlap */}
+            <div 
+              className="absolute top-0 left-[5%] w-[90%] h-[55%] rounded-2xl overflow-hidden border border-white/10 z-10 transition-transform duration-500 hover:scale-[1.02]"
+              style={{
+                boxShadow: "0 25px 50px -15px rgba(0,0,0,0.5), 0 10px 20px -10px rgba(0,0,0,0.3)",
+              }}
+            >
               <img
-                src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&w=1400&q=80"
-                alt="Corporate event with LED video wall in elegant ballroom"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/The%20AV%20Partner%20Brands%20Trust%202-zsOWcEKnWKWh4eSqty1bgdiZZ7nIHx.png"
+                alt="Large-scale professional conference with blue lighting and LED screen"
                 className="w-full h-full object-cover"
               />
             </div>
 
-            {/* Stats glass card */}
+            {/* Stats glass card - floating above collage */}
             <div
-              className="absolute top-4 right-[-10px] md:right-[-20px] px-5 py-4 rounded-[14px] border border-[#FF2D6F]/25 backdrop-blur-2xl z-20"
+              className="absolute top-4 right-[-10px] md:right-[-20px] px-5 py-4 rounded-[14px] border border-[#FF2D6F]/25 backdrop-blur-2xl z-40"
               style={{
                 background: "rgba(8,18,26,0.85)",
                 boxShadow:
@@ -91,17 +96,29 @@ export function AboutUsSection() {
               <p className="text-white/55 text-[12px] tracking-[0.04em] uppercase font-semibold">Successful Events</p>
             </div>
 
-            {/* Bottom left image */}
-            <div className="absolute bottom-0 left-0 w-[60%] h-[55%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-20">
+            {/* Bottom left image - rotated, overlaps top image */}
+            <div 
+              className="absolute bottom-[5%] left-[-3%] w-[55%] h-[48%] rounded-2xl overflow-hidden border-2 border-white/15 z-20 transition-transform duration-500 hover:scale-[1.03] hover:z-30"
+              style={{
+                transform: "rotate(-3deg)",
+                boxShadow: "0 30px 60px -15px rgba(0,0,0,0.6), 0 15px 30px -10px rgba(0,0,0,0.4)",
+              }}
+            >
               <img
-                src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&w=1200&q=80"
-                alt="AV technician at control console monitoring live event"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/The%20AV%20Partner%20Brands%20Trust%201-doTDHV8ggH5F5ukDVOXkqByRtJ1DZJ.png"
+                alt="Event production team managing stage with warm lighting and camera operators"
                 className="w-full h-full object-cover"
               />
             </div>
 
-            {/* Bottom right image */}
-            <div className="absolute bottom-8 right-0 w-[45%] h-[40%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-10">
+            {/* Bottom right image - rotated opposite, overlaps both */}
+            <div 
+              className="absolute bottom-[8%] right-[-5%] w-[52%] h-[45%] rounded-2xl overflow-hidden border-2 border-white/15 z-30 transition-transform duration-500 hover:scale-[1.03]"
+              style={{
+                transform: "rotate(2.5deg)",
+                boxShadow: "0 35px 70px -20px rgba(0,0,0,0.65), 0 18px 36px -12px rgba(0,0,0,0.45)",
+              }}
+            >
               <img
                 src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1200&q=80"
                 alt="Professional lighting and video control software"

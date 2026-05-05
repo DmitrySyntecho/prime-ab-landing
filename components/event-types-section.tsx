@@ -6,88 +6,54 @@ const openQuote = () => document.dispatchEvent(new CustomEvent("openQuoteForm"))
 
 const eventTypes = [
   {
-    title: "Corporate Event",
-    tag: "Corporate",
-    image:
-      "https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&w=900&q=80",
-    href: "/events/corporate-events",
-  },
-  {
     title: "Experiential Marketing",
     tag: "Experiential",
-    image:
-      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=80",
-    href: "/events/experiential-marketing",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Experiential%20marketing-vYAUbwiPig45lAJzfarEXdIKAbjTZe.jpg",
   },
   {
-    title: "Brand Activation",
-    tag: "Activation",
-    image:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80",
-    href: "/events/activations",
+    title: "Corporate",
+    tag: "Corporate",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Corporate-E3tKS0MABTofZcmhdoHVVEyhkAh5Kl.jpg",
   },
   {
-    title: "Fashion Show",
+    title: "Fashion Shows",
     tag: "Fashion",
-    image:
-      "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=900&q=80",
-    href: "/events/fashion-shows",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Fashion%20Shows-aIbZ3y807gno7xMk1JZJYcLg5xBkWm.jpg",
   },
   {
-    title: "Trade Show / Expo",
+    title: "Trade Shows",
     tag: "Trade Show",
-    image:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=900&q=80",
-    href: "/events/trade-shows",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Trade%20Shows-Sscp4foYRjBW3kAjCZ0TRt0edYsKLU.jpg",
   },
   {
-    title: "Conference",
-    tag: "Conference",
-    image:
-      "https://images.unsplash.com/photo-1559223607-a43c990c692c?auto=format&fit=crop&w=900&q=80",
-    href: "/events/conferences",
+    title: "Weddings",
+    tag: "Wedding",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Weddings-gK3394JnqcOGlRtZXtWDVYqw99FquJ.jpg",
   },
   {
-    title: "Festival",
+    title: "Festivals",
     tag: "Festival",
-    image:
-      "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=900&q=80",
-    href: "/events/festivals",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Festivals-HAcI2BOMxummPcEsFesmsmH4Yd7FN6.jpg",
   },
   {
-    title: "Private / Social Event",
+    title: "Virtual/Hybrid Events",
+    tag: "Hybrid",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hybrid%20Events-qBsLQwfuMjSaNohtGgKqJ4upGvoE7n.jpg",
+  },
+  {
+    title: "Private",
     tag: "Private",
-    image:
-      "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=900&q=80",
-    href: "/events/weddings",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Private-85iBaxC1bVnIyPk6F10NUoenClOBWB.jpg",
   },
   {
-    title: "Product Launch",
-    tag: "Launch",
-    image:
-      "https://images.unsplash.com/photo-1560439514-4e9645039924?auto=format&fit=crop&w=900&q=80",
-    href: "/events/activations",
-  },
-  {
-    title: "Sports Event",
-    tag: "Sports",
-    image:
-      "https://images.unsplash.com/photo-1574391884720-bbc049ec09ad?auto=format&fit=crop&w=900&q=80",
-    href: "/events/festivals",
-  },
-  {
-    title: "Studio / Film Production",
+    title: "Film Production",
     tag: "Production",
-    image:
-      "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&w=900&q=80",
-    href: "/events/film-production",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Film%20Production-x2ksHfPGsNvxkWcEbn30TgQGTGKAlA.jpg",
   },
   {
-    title: "Award Show / Gala",
-    tag: "Gala",
-    image:
-      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=900&q=80",
-    href: "/events/galas",
+    title: "Grand Opening",
+    tag: "Grand Opening",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Grand%20Opening-ftl0W1QPoIvvYBEhx0N71Ziozx2mru.jpg",
   },
 ]
 
@@ -109,14 +75,14 @@ export function EventTypesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
           {eventTypes.map((event) => (
             <button
               key={event.title}
               type="button"
               onClick={openQuote}
               aria-label={`Get a quote for ${event.title}`}
-              className="group relative aspect-[4/5] rounded-[18px] overflow-hidden border border-white/[0.08] cursor-pointer transition-all duration-500 hover:-translate-y-1 hover:border-[#FF2D6F]/30 text-left"
+              className="group relative aspect-[3/4] rounded-[16px] overflow-hidden border border-white/[0.08] cursor-pointer transition-all duration-500 hover:-translate-y-1 hover:border-[#FF2D6F]/30 text-left"
             >
               <img
                 src={event.image || "/placeholder.svg"}
@@ -139,11 +105,11 @@ export function EventTypesSection() {
                 </span>
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <span className="inline-block px-2.5 py-1 rounded-md bg-[#FF2D6F] text-white text-[10px] font-extrabold tracking-[0.08em] uppercase mb-2.5">
+              <div className="absolute bottom-0 left-0 right-0 p-3">
+                <span className="inline-block px-2 py-0.5 rounded-md bg-[#FF2D6F] text-white text-[9px] font-extrabold tracking-[0.08em] uppercase mb-2">
                   {event.tag}
                 </span>
-                <h3 className="text-white text-[15px] md:text-[16px] font-bold leading-tight">{event.title}</h3>
+                <h3 className="text-white text-[13px] md:text-[14px] font-bold leading-tight">{event.title}</h3>
               </div>
             </button>
           ))}

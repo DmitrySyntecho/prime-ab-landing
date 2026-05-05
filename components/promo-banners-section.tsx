@@ -50,7 +50,7 @@ const promoBanners = [
     cta: "Request a Quote",
     ctaLink: "/services/av-installation",
     image:
-      "https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&w=1800&q=80",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Permanent%20AV%20Installation%20for%20Your%20Facilit-ZibG9OyLaAwFSPKANf2yhyVIxeHZ2G.png",
   },
 ]
 

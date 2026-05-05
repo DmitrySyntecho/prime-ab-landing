@@ -70,8 +70,8 @@ export function AboutUsSection() {
             {/* Top right image */}
             <div className="absolute top-0 right-0 w-[65%] h-[55%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-10">
               <img
-                src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&w=1400&q=80"
-                alt="Corporate event with LED video wall in elegant ballroom"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/The%20AV%20Partner%20Brands%20Trust%202-zsOWcEKnWKWh4eSqty1bgdiZZ7nIHx.png"
+                alt="Large-scale professional conference with blue lighting and LED screen"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -94,8 +94,8 @@ export function AboutUsSection() {
             {/* Bottom left image */}
             <div className="absolute bottom-0 left-0 w-[60%] h-[55%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-20">
               <img
-                src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&w=1200&q=80"
-                alt="AV technician at control console monitoring live event"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/The%20AV%20Partner%20Brands%20Trust%201-doTDHV8ggH5F5ukDVOXkqByRtJ1DZJ.png"
+                alt="Event production team managing stage with warm lighting and camera operators"
                 className="w-full h-full object-cover"
               />
             </div>

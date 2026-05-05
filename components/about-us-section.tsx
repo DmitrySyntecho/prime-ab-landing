@@ -67,8 +67,8 @@ export function AboutUsSection() {
           </div>
 
           <div className="relative h-[420px] md:h-[520px]">
-            {/* Top right image */}
-            <div className="absolute top-0 right-0 w-[65%] h-[55%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-10">
+            {/* Top image - stretched to be larger than bottom two combined */}
+            <div className="absolute top-0 left-0 right-0 w-full h-[58%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-10">
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/The%20AV%20Partner%20Brands%20Trust%202-zsOWcEKnWKWh4eSqty1bgdiZZ7nIHx.png"
                 alt="Large-scale professional conference with blue lighting and LED screen"
@@ -92,7 +92,7 @@ export function AboutUsSection() {
             </div>
 
             {/* Bottom left image */}
-            <div className="absolute bottom-0 left-0 w-[60%] h-[55%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-20">
+            <div className="absolute bottom-0 left-0 w-[50%] h-[42%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-20">
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/The%20AV%20Partner%20Brands%20Trust%201-doTDHV8ggH5F5ukDVOXkqByRtJ1DZJ.png"
                 alt="Event production team managing stage with warm lighting and camera operators"
@@ -101,7 +101,7 @@ export function AboutUsSection() {
             </div>
 
             {/* Bottom right image */}
-            <div className="absolute bottom-8 right-0 w-[45%] h-[40%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-10">
+            <div className="absolute bottom-0 right-0 w-[48%] h-[42%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)] z-10">
               <img
                 src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1200&q=80"
                 alt="Professional lighting and video control software"

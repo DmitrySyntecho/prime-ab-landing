@@ -95,7 +95,7 @@ export function ServicesGridSection() {
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(3,7,10,0.55) 0%, rgba(3,7,10,0.85) 60%, rgba(3,7,10,0.95) 100%)",
+                    "linear-gradient(180deg, rgba(3,7,10,0.25) 0%, rgba(3,7,10,0.45) 60%, rgba(3,7,10,0.65) 100%)",
                 }}
                 aria-hidden
               />

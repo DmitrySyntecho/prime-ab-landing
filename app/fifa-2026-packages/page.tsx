@@ -464,7 +464,7 @@ export default function FIFA2026PackagesPage() {
                 >
                   World Cup
                 </span>
-                <span className="block text-white">Watch Parties.</span>
+                <span className="block text-white whitespace-nowrap">Watch Parties.</span>
                 <span
                   className="block italic"
                   style={{
@@ -524,7 +524,7 @@ export default function FIFA2026PackagesPage() {
               </div>
             </div>
 
-            {/* RIGHT — Stadium / LED visual */}
+            {/* RIGHT — Premium fan-zone hero photo */}
             <div className="relative">
               <div
                 className="relative rounded-[24px] overflow-hidden border border-white/[0.10]"
@@ -532,119 +532,24 @@ export default function FIFA2026PackagesPage() {
                   aspectRatio: "4/4.4",
                   background: "linear-gradient(180deg, #0a0820 0%, #050310 100%)",
                   boxShadow:
-                    "0 40px 80px -20px rgba(0,0,0,0.7), 0 0 80px -20px rgba(255,45,111,0.25)",
+                    "0 40px 80px -20px rgba(0,0,0,0.7), 0 0 80px -20px rgba(230,29,37,0.25)",
                 }}
               >
-                {/* Stadium tiers — soft violet wash above the LED screen */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dont%20watch%20the%20match%20throw%20the%20match-N5nhDK5GHKm8KLjMZZB9dEfuNCzHrS.png"
+                  alt="Premium fan zone with audience watching a live football match on a massive LED wall"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+
+                {/* Subtle bottom gradient for legibility */}
                 <div
-                  className="absolute left-0 right-0 top-0 h-[30%]"
+                  className="absolute inset-0 pointer-events-none"
                   style={{
-                    background:
-                      "linear-gradient(180deg, rgba(124,58,237,0.18) 0%, rgba(255,45,111,0.06) 60%, transparent 100%)",
+                    background: "linear-gradient(180deg, transparent 45%, rgba(6,10,24,0.55) 100%)",
                   }}
                   aria-hidden
                 />
-
-                {/* LED screen — vertically centered in the parent */}
-                <div
-                  className="absolute left-[8%] right-[8%] top-1/2 -translate-y-1/2 rounded-md overflow-hidden bg-black"
-                  style={{
-                    aspectRatio: "16/9",
-                    border: "4px solid #1a1530",
-                    boxShadow:
-                      "0 0 60px rgba(255,45,111,0.3), 0 0 120px rgba(255,210,74,0.15), inset 0 0 0 1px rgba(255,255,255,0.05)",
-                  }}
-                >
-                  {/* pitch */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at 30% 50%, #00C853 0%, transparent 55%), linear-gradient(180deg, #064e3b 0%, #022c22 50%, #064e3b 100%)",
-                    }}
-                  >
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        backgroundImage:
-                          "repeating-linear-gradient(90deg, transparent 0px, transparent 22px, rgba(255,255,255,0.08) 22px, rgba(255,255,255,0.08) 23px)",
-                      }}
-                    />
-                    <div
-                      className="absolute inset-0 mix-blend-multiply"
-                      style={{
-                        backgroundImage:
-                          "linear-gradient(to right, rgba(0,0,0,0.18) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.18) 1px, transparent 1px)",
-                        backgroundSize: "4px 4px",
-                      }}
-                    />
-                  </div>
-                  {/* scoreboard */}
-                  <div
-                    className="absolute top-2 left-1/2 -translate-x-1/2 z-[2] inline-flex items-center gap-2 px-3 py-1 rounded-md font-mono font-extrabold backdrop-blur-md"
-                    style={{
-                      background: "rgba(0,0,0,0.55)",
-                      border: "1px solid rgba(255,255,255,0.18)",
-                    }}
-                  >
-                    <span className="flex items-center gap-1.5 text-[10px] text-white">
-                      <span
-                        className="w-3 h-2 rounded-[2px]"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, #ef4444 0%, #ef4444 33%, #fff 33%, #fff 66%, #1e3a8a 66%, #1e3a8a 100%)",
-                        }}
-                      />
-                      USA
-                    </span>
-                    <span className="text-[16px] text-[#5BC25A] tracking-[0.05em]">2 - 1</span>
-                    <span className="flex items-center gap-1.5 text-[10px] text-white">
-                      MEX
-                      <span
-                        className="w-3 h-2 rounded-[2px]"
-                        style={{
-                          background:
-                            "linear-gradient(90deg, #16a34a 0%, #16a34a 33%, #fff 33%, #fff 66%, #ef4444 66%, #ef4444 100%)",
-                        }}
-                      />
-                    </span>
-                    <span
-                      className="text-[9px] px-1.5 py-0.5 rounded-[3px] text-[#E61D25]"
-                      style={{ background: "rgba(255,45,111,0.15)" }}
-                    >
-                      72&apos;
-                    </span>
-                  </div>
-
-                  {/* Ball */}
-                  <div
-                    className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 w-[22%] aspect-square rounded-full"
-                    style={{
-                      background:
-                        "radial-gradient(circle at 35% 35%, #fff 0%, #e5e7eb 30%, #6b7280 100%)",
-                      boxShadow:
-                        "0 10px 30px rgba(0,0,0,0.5), inset -5px -8px 14px rgba(0,0,0,0.3)",
-                      animation: "ballSpin 4s ease-in-out infinite",
-                    }}
-                  />
-                </div>
-
-                {/* corners */}
-                {(["tl", "tr", "bl", "br"] as const).map((p) => (
-                  <span
-                    key={p}
-                    className={`absolute w-7 h-7 z-[3] opacity-60 border-2 border-[#E61D25] ${
-                      p === "tl"
-                        ? "top-3.5 left-3.5 border-r-0 border-b-0"
-                        : p === "tr"
-                        ? "top-3.5 right-3.5 border-l-0 border-b-0"
-                        : p === "bl"
-                        ? "bottom-3.5 left-3.5 border-r-0 border-t-0"
-                        : "bottom-3.5 right-3.5 border-l-0 border-t-0"
-                    }`}
-                    aria-hidden
-                  />
-                ))}
 
                 {/* live tag */}
                 <div
@@ -659,28 +564,6 @@ export default function FIFA2026PackagesPage() {
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
                   </span>
                   Live · LED Wall
-                </div>
-
-                {/* readout */}
-                <div
-                  className="absolute bottom-5 left-5 right-5 z-[4] grid grid-cols-3 gap-2 px-4 py-3 rounded-[10px] backdrop-blur-md font-mono"
-                  style={{
-                    background: "rgba(0,0,0,0.55)",
-                    border: "1px solid rgba(255,255,255,0.14)",
-                  }}
-                >
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[9px] text-white/40 tracking-[0.12em] uppercase">Pixels</span>
-                    <b className="text-[12px] text-[#5BC25A] font-bold">4K UHD</b>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[9px] text-white/40 tracking-[0.12em] uppercase">Bright</span>
-                    <b className="text-[12px] text-[#5BC25A] font-bold">5000 nit</b>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[9px] text-white/40 tracking-[0.12em] uppercase">Pitch</span>
-                    <b className="text-[12px] text-[#5BC25A] font-bold">P2.6</b>
-                  </div>
                 </div>
               </div>
 

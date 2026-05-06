@@ -117,17 +117,22 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
               </div>
 
               {/* Headline */}
-              <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-black tracking-[-0.02em] leading-[1.15] mb-5">
+              <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-black tracking-[-0.02em] leading-[1.22] mb-5 pb-1">
                 {isFifa ? (
                   <>
                     <span className="text-white">Not sure which package </span>
                     <span
-                      className="italic"
+                      className="italic inline-block align-baseline"
                       style={{
                         background: `linear-gradient(90deg, ${accent1} 0%, ${accent2} 100%)`,
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         backgroundClip: "text",
+                        paddingRight: "0.22em",
+                        marginRight: "-0.06em",
+                        paddingBottom: "0.12em",
+                        marginBottom: "-0.12em",
+                        lineHeight: 1.22,
                       }}
                     >
                       fits your event?
@@ -137,12 +142,17 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
                   <>
                     <span className="text-white">Not sure which service </span>
                     <span
-                      className="italic"
+                      className="italic inline-block align-baseline"
                       style={{
                         background: `linear-gradient(90deg, ${accent1} 0%, ${accent2} 100%)`,
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         backgroundClip: "text",
+                        paddingRight: "0.22em",
+                        marginRight: "-0.06em",
+                        paddingBottom: "0.12em",
+                        marginBottom: "-0.12em",
+                        lineHeight: 1.22,
                       }}
                     >
                       fits your event?

@@ -36,6 +36,23 @@
 }
 .ios-picker::-webkit-calendar-picker-indicator:hover { opacity: 1; }
 
+/* ============ iOS NO-ZOOM ON INPUT FOCUS ============ */
+/* iOS Safari zooms in whenever a text-input's font-size is < 16px. Force every
+   text-input control to a minimum of 16px ON MOBILE so focus never triggers zoom.
+   Buttons / nav items are NOT included — they don't trigger zoom. */
+@media (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="image"]),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+/* Disable zoom side-effects globally — pinch-zoom is killed via viewport meta */
+html, body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 
 @custom-variant dark (&:is(.dark *));
 

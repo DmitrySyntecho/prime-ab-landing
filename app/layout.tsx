@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
@@ -25,17 +25,22 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 })
 
+// Viewport must be its own export in Next 14+ (was deprecated inside metadata).
+// maximumScale: 1 + userScalable: false disable pinch-zoom AND iOS focus auto-zoom.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+  themeColor: "#03070a",
+}
+
 export const metadata: Metadata = {
   title: "Prime Line AV | When Everything Is Just Perfect",
   description:
     "The AV partner brands trust for corporate events, brand activations, experiential marketing, and studio work. Full-service audio, video, lighting, and staging production.",
   generator: "v0.app",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },

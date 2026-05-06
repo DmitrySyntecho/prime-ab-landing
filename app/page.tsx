@@ -7,7 +7,6 @@ import { AboutUsSection } from "@/components/about-us-section"
 import { EventTypesSection } from "@/components/event-types-section"
 import { CaseStudiesSection } from "@/components/case-studies-section"
 import { WhyChooseUsSection } from "@/components/why-choose-us-section"
-import { CTABanner } from "@/components/cta-banner"
 import { CharitySection } from "@/components/charity-section"
 import { RentalCategoriesSection } from "@/components/rental-categories-section"
 import { PromoBannersSection } from "@/components/promo-banners-section"
@@ -37,7 +36,6 @@ export default function Home() {
       <CharitySection />
       <FAQSection />
       <ContactSpecialistBanner onStartQuote={handleStartQuote} />
-      <CTABanner onStartQuote={handleStartQuote} />
     </div>
   )
 }

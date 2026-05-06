@@ -9,17 +9,31 @@ const EMAIL = "info@primelineav.com"
 
 interface ContactSpecialistBannerProps {
   onStartQuote?: () => void
+  variant?: "default" | "fifa"
 }
 
-export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBannerProps) {
+export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: ContactSpecialistBannerProps) {
+  const isFifa = variant === "fifa"
+
+  // Color tokens per variant
+  const accent1 = isFifa ? "#E61D25" : "#FF2D6F"
+  const accent2 = isFifa ? "#5BC25A" : "#FF5E3A"
+  const borderColor = isFifa ? "rgba(230,29,37,0.25)" : "rgba(255,255,255,0.08)"
+  const tagBorder = isFifa ? "rgba(230,29,37,0.35)" : "rgba(255,45,111,0.30)"
+  const tagBg = isFifa ? "rgba(230,29,37,0.10)" : "rgba(255,45,111,0.08)"
+  const tagText = isFifa ? "#FF6B71" : "#FF2D6F"
+  const pillDot = isFifa ? "#E61D25" : "#FF2D6F"
+
   return (
     <section className="py-10 md:py-14 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <div
-          className="relative rounded-[24px] border border-white/[0.08] overflow-hidden"
+          className="relative rounded-[24px] overflow-hidden"
           style={{
-            background:
-              "linear-gradient(120deg, rgba(10,8,24,0.98) 0%, rgba(20,10,30,0.97) 55%, rgba(30,10,20,0.96) 100%)",
+            border: `1px solid ${borderColor}`,
+            background: isFifa
+              ? "linear-gradient(120deg, rgba(8,16,8,0.98) 0%, rgba(14,20,10,0.97) 55%, rgba(20,8,8,0.96) 100%)"
+              : "linear-gradient(120deg, rgba(10,8,24,0.98) 0%, rgba(20,10,30,0.97) 55%, rgba(30,10,20,0.96) 100%)",
             boxShadow:
               "0 30px 80px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06)",
           }}
@@ -28,8 +42,9 @@ export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBanne
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
-              background:
-                "radial-gradient(ellipse 50% 80% at 100% 50%, rgba(255,45,111,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 0% 50%, rgba(255,94,58,0.05) 0%, transparent 70%)",
+              background: isFifa
+                ? "radial-gradient(ellipse 50% 80% at 100% 50%, rgba(91,194,90,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 0% 50%, rgba(230,29,37,0.07) 0%, transparent 70%)"
+                : "radial-gradient(ellipse 50% 80% at 100% 50%, rgba(255,45,111,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 0% 50%, rgba(255,94,58,0.05) 0%, transparent 70%)",
             }}
             aria-hidden
           />
@@ -52,17 +67,20 @@ export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBanne
                 {/* Outer glow layer */}
                 <div
                   className="absolute -inset-6 md:-inset-8 rounded-full blur-2xl"
-                  style={{ background: "radial-gradient(circle, rgba(255,45,111,0.25) 0%, transparent 70%)" }}
+                  style={{ background: `radial-gradient(circle, ${accent1}40 0%, transparent 70%)` }}
                   aria-hidden
                 />
                 {/* Inner subtle glow */}
                 <div
                   className="absolute -inset-3 md:-inset-4 rounded-full blur-xl"
-                  style={{ background: "radial-gradient(circle, rgba(255,94,58,0.15) 0%, transparent 60%)" }}
+                  style={{ background: `radial-gradient(circle, ${accent2}26 0%, transparent 60%)` }}
                   aria-hidden
                 />
                 {/* Image container — perfectly circular */}
-                <div className="relative w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-2 md:border-4 border-[#FF2D6F]/40 shadow-[inset_0_0_30px_rgba(255,45,111,0.2)]">
+                <div
+                  className="relative w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-2 md:border-4"
+                  style={{ borderColor: `${accent1}66`, boxShadow: `inset 0 0 30px ${accent1}33` }}
+                >
                   <Image
                     src="/egor.png"
                     alt="Egor — AV Production Specialist"
@@ -85,26 +103,23 @@ export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBanne
             <div className="flex-1 px-6 md:px-10 py-8 md:py-12 text-center md:text-left">
 
               {/* Tag */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#FF2D6F]/30 bg-[#FF2D6F]/08 mb-4">
-                <Sparkles className="w-3 h-3 text-[#FF2D6F]" />
-                <span className="text-[10px] font-bold tracking-[0.08em] uppercase text-[#FF2D6F]">
-                  AV Production Specialist
+              <div
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border mb-4"
+                style={{ borderColor: tagBorder, background: tagBg }}
+              >
+                <Sparkles className="w-3 h-3" style={{ color: tagText }} />
+                <span className="text-[10px] font-bold tracking-[0.08em] uppercase" style={{ color: tagText }}>
+                  {isFifa ? "FIFA 2026 AV Specialist" : "AV Production Specialist"}
                 </span>
               </div>
 
-              {/* Headline — better text wrapping */}
+              {/* Headline */}
               <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-black tracking-[-0.02em] leading-[1.15] text-white mb-5">
-                Not sure which service{" "}
-                <span
-                  className="italic"
-                  style={{
-                    background: "linear-gradient(90deg, #FF2D6F 0%, #FF5E3A 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  fits your event?
-                </span>
+                {isFifa ? (
+                  <>Not sure which package{" "}<span className="italic" style={{ background: `linear-gradient(90deg, ${accent1} 0%, ${accent2} 100%)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>fits your event?</span></>
+                ) : (
+                  <>Not sure which service{" "}<span className="italic" style={{ background: `linear-gradient(90deg, ${accent1} 0%, ${accent2} 100%)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>fits your event?</span></>
+                )}
               </h2>
 
               {/* Sub */}
@@ -118,8 +133,8 @@ export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBanne
                   href={`tel:${PHONE.replace(/\D/g, "")}`}
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm text-white transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center sm:justify-start"
                   style={{
-                    background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
-                    boxShadow: "0 8px 24px -6px rgba(255,45,111,0.5)",
+                    background: `linear-gradient(135deg, ${accent1} 0%, ${accent2} 100%)`,
+                    boxShadow: `0 8px 24px -6px ${accent1}80`,
                   }}
                 >
                   <Phone className="w-4 h-4" />
@@ -146,9 +161,12 @@ export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBanne
 
               {/* Topic pills */}
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-1.5">
-                {["LED Wall & Staging", "Audio & Lighting", "Permanent Installs", "Event Packages"].map((topic) => (
+                {(isFifa
+                  ? ["Watch Party Packages", "LED Wall Rental", "Sound & Lighting", "Full Crew Setup"]
+                  : ["LED Wall & Staging", "Audio & Lighting", "Permanent Installs", "Event Packages"]
+                ).map((topic) => (
                   <span key={topic} className="flex items-center gap-1.5 text-[11px] text-white/35 tracking-[0.06em] uppercase font-semibold">
-                    <span className="w-1 h-1 rounded-full bg-[#FF2D6F]/50 inline-block" />
+                    <span className="w-1 h-1 rounded-full inline-block" style={{ background: `${pillDot}80` }} />
                     {topic}
                   </span>
                 ))}

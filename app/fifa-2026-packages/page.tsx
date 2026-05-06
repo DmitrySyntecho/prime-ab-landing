@@ -4,6 +4,7 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { CountUp } from "@/components/count-up"
+import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
 import {
   ArrowRight,
   CheckCircle2,
@@ -1235,6 +1236,11 @@ export default function FIFA2026PackagesPage() {
           </div>
         </div>
       </section>
+
+      <ContactSpecialistBanner
+        variant="fifa"
+        onStartQuote={() => document.dispatchEvent(new CustomEvent("openQuoteForm"))}
+      />
 
       <style jsx global>{`
         @keyframes ballSpin {

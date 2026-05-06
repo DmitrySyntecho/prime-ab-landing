@@ -44,7 +44,7 @@ export function TrustedBySection() {
           className={`flex w-max items-center ${
             direction === "left" ? "animate-scroll-left" : "animate-scroll-right"
           }`}
-          style={{ animationDuration: direction === "left" ? "60s" : "70s" }}
+          style={{ animationDuration: direction === "left" ? "120s" : "140s" }}
         >
           {repeated.map((logo, i) => (
             <div

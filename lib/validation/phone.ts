@@ -17,8 +17,8 @@ const FICTIONAL_PATTERNS = {
   // Pattern repeats: 1231231234, 5555555555, 1112223333, 1234512345
   REPEATING_PATTERN: /^(.{3})(.{3})\1\2/,
   // Fictional 555 range (555-0100 to 555-0199, reserved by FCC)
-  // Pattern: 555-01xx where xx can be any digits (5550100-5550199)
-  FICTIONAL_555: /^5550[01]\d{2}$/,
+  // Pattern: 5550[01]xxxxxx where xxxxxx can be any 6 digits
+  FICTIONAL_555: /^5550[01]\d{6}$/,
 };
 
 // NANP area codes that are invalid (start with 0 or 1)

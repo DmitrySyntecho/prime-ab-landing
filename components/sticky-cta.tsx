@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Phone, Sparkles, X, Plus } from "lucide-react"
+import { Phone, Sparkles, MessageCircle } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 interface StickyCTAProps {
@@ -136,8 +136,8 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
           const delay = `${i * 40}ms`
           const inner = (
             <span
-              className="flex items-center gap-2.5 px-4 py-2.5 rounded-full text-[13px] font-bold whitespace-nowrap backdrop-blur-xl transition-all duration-200 hover:scale-105 active:scale-95"
-              style={action.style}
+              className="flex items-center gap-2.5 px-5 py-3 rounded-full text-[13px] font-bold whitespace-nowrap backdrop-blur-xl transition-all duration-200 hover:scale-105 active:scale-95"
+              style={{ ...action.style, width: "200px", justifyContent: "flex-start" }}
             >
               {action.icon}
               {action.label}
@@ -159,26 +159,39 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
         })}
       </div>
 
-      {/* Main FAB button */}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Close menu" : "Contact options"}
-        className="w-14 h-14 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none"
-        style={{
-          background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
-          boxShadow: open
-            ? "0 8px 32px -6px rgba(255,45,111,0.7), 0 0 0 4px rgba(255,45,111,0.15)"
-            : "0 8px 32px -6px rgba(255,45,111,0.55)",
-        }}
-      >
-        <span
-          className="transition-all duration-300"
-          style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
+      {/* Main FAB button — chat bubble with pulse */}
+      <div className="relative">
+        {/* Pulse rings */}
+        {!open && (
+          <>
+            <span
+              className="absolute inset-0 rounded-full animate-ping"
+              style={{ background: "rgba(255,45,111,0.35)", animationDuration: "1.8s" }}
+            />
+            <span
+              className="absolute inset-0 rounded-full animate-ping"
+              style={{ background: "rgba(255,45,111,0.2)", animationDuration: "1.8s", animationDelay: "0.6s" }}
+            />
+          </>
+        )}
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close menu" : "Contact us"}
+          className="relative w-14 h-14 rounded-full flex flex-col items-center justify-center gap-0.5 text-white transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none"
+          style={{
+            background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+            boxShadow: open
+              ? "0 8px 32px -6px rgba(255,45,111,0.7), 0 0 0 4px rgba(255,45,111,0.15)"
+              : "0 8px 32px -6px rgba(255,45,111,0.55)",
+          }}
         >
-          {open ? <X className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
-        </span>
-      </button>
+          <MessageCircle className="w-6 h-6" />
+          <span className="text-[9px] font-bold leading-none tracking-wide uppercase">
+            {open ? "Close" : "Contact"}
+          </span>
+        </button>
+      </div>
     </div>
   )
 }

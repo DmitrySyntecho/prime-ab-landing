@@ -2,6 +2,9 @@
 
 import type React from "react"
 import { useEffect, useMemo, useRef, useState } from "react"
+import { validateEmail } from "@/lib/validation/email"
+import { validateUSPhoneNumber, formatPhoneNumber } from "@/lib/validation/phone"
+import { performAntiSpamCheck, checkSubmissionTiming } from "@/lib/validation/anti-spam"
 import {
   X,
   ArrowRight,
@@ -218,9 +221,17 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
   const [step, setStep] = useState(1)
   const [data, setData] = useState<FormData>(empty)
   const [submitted, setSubmitted] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null)
+  const [phoneSuggestion, setPhoneSuggestion] = useState<string | null>(null)
+  const formStartTime = useRef<number | null>(null)
 
   useEffect(() => {
     if (!isOpen) return
+    // Track form start time for anti-spam check
+    if (!formStartTime.current) {
+      formStartTime.current = Date.now()
+    }
     document.body.style.overflow = "hidden"
     return () => {
       document.body.style.overflow = ""
@@ -254,11 +265,15 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
     if (step === 2) return data.services.length > 0
     if (step === 3) return data.firstName.trim().length >= 2 && data.lastName.trim().length >= 2
     if (step === 4) {
-      const okPhone = data.phone.replace(/\D/g, "").length >= 7
-      const okWa = !data.hasWhatsapp || data.waPhone.replace(/\D/g, "").length >= 7
+      const phoneValidation = validateUSPhoneNumber(data.phone)
+      const okPhone = phoneValidation.isValid
+      const okWa = !data.hasWhatsapp || validateUSPhoneNumber(data.waPhone).isValid
       return okPhone && okWa
     }
-    if (step === 5) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)
+    if (step === 5) {
+      const emailValidation = validateEmail(data.email)
+      return emailValidation.isValid
+    }
     if (step === 6) return !!data.dropoffDate && !!data.dropoffTime && !!data.pickupDate && !!data.pickupTime
     if (step === 7) return data.address.trim().length >= 5 && data.city.trim() && data.state && data.zip.trim().length >= 4
     if (step === 8) return true
@@ -267,8 +282,39 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
   }
 
   const handleSubmit = () => {
-    // Honeypot — bots fill this hidden field
+    // Anti-spam: Honeypot check
     if (data.honeypot) return
+
+    // Anti-spam: Timing check (min 3 seconds)
+    if (formStartTime.current) {
+      const timingCheck = checkSubmissionTiming(formStartTime.current, 3)
+      if (timingCheck.isSpam) {
+        setErrors({ submit: timingCheck.reason || "Submission too fast" })
+        return
+      }
+    }
+
+    // Validate phone number
+    const phoneValidation = validateUSPhoneNumber(data.phone)
+    if (!phoneValidation.isValid) {
+      setErrors((e) => ({ ...e, phone: phoneValidation.error || "Invalid phone" }))
+      return
+    }
+
+    // Validate email
+    const emailValidation = validateEmail(data.email)
+    if (!emailValidation.isValid) {
+      setErrors((e) => ({ ...e, email: emailValidation.error || "Invalid email" }))
+      if (emailValidation.suggestion) {
+        setEmailSuggestion(emailValidation.suggestion)
+      }
+      return
+    }
+
+    // Clear errors and submit
+    setErrors({})
+    setEmailSuggestion(null)
+    setPhoneSuggestion(null)
     setSubmitted(true)
   }
 
@@ -355,8 +401,8 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
                 {step === 1 && <Step1 data={data} update={update} goNext={goNext} />}
                 {step === 2 && <Step2 data={data} toggleService={toggleService} />}
                 {step === 3 && <Step3 data={data} update={update} />}
-                {step === 4 && <Step4 data={data} update={update} />}
-                {step === 5 && <Step5 data={data} update={update} />}
+              {step === 4 && <Step4 data={data} update={update} errors={errors} phoneSuggestion={phoneSuggestion} />}
+              {step === 5 && <Step5 data={data} update={update} errors={errors} emailSuggestion={emailSuggestion} />}
                 {step === 6 && <Step6 data={data} update={update} />}
                 {step === 7 && <Step7 data={data} update={update} />}
                 {step === 8 && <Step8 data={data} update={update} />}
@@ -597,9 +643,13 @@ function Step3({
 function Step4({
   data,
   update,
+  errors,
+  phoneSuggestion,
 }: {
   data: FormData
   update: <K extends keyof FormData>(k: K, v: FormData[K]) => void
+  errors: Record<string, string>
+  phoneSuggestion: string | null
 }) {
   return (
     <div className="space-y-4">
@@ -611,6 +661,7 @@ function Step4({
         onChange={(v) => update("phone", v)}
         autoComplete="tel"
         secured
+        error={errors.phone}
       />
 
       {/* WhatsApp toggle — OFF by default */}
@@ -660,6 +711,7 @@ function Step4({
           accentColor="#25D366"
           hint="Same as phone? Just retype it here so we know it's confirmed for WhatsApp."
           secured
+          error={errors.waPhone}
         />
       )}
 
@@ -671,23 +723,42 @@ function Step4({
 function Step5({
   data,
   update,
+  errors,
+  emailSuggestion,
 }: {
   data: FormData
   update: <K extends keyof FormData>(k: K, v: FormData[K]) => void
+  errors: Record<string, string>
+  emailSuggestion: string | null
 }) {
   return (
     <div className="space-y-4">
-      <Field
-        icon={Mail}
-        label="Email Address"
-        type="email"
-        value={data.email}
-        onChange={(v) => update("email", v.trim().slice(0, 100))}
-        placeholder="jane@brand.com"
-        autoComplete="email"
-        autoFocus
-        secured
-      />
+      <div>
+        <Field
+          icon={Mail}
+          label="Email Address"
+          type="email"
+          value={data.email}
+          onChange={(v) => update("email", v.trim().slice(0, 100))}
+          placeholder="jane@brand.com"
+          autoComplete="email"
+          autoFocus
+          secured
+          error={errors.email}
+        />
+        {emailSuggestion && (
+          <div className="mt-2 p-3 rounded-[12px] bg-blue-500/10 border border-blue-500/30 text-sm">
+            <p className="text-blue-100 mb-2">Did you mean?</p>
+            <button
+              type="button"
+              onClick={() => update("email", emailSuggestion)}
+              className="text-blue-300 hover:text-blue-200 font-semibold underline text-left"
+            >
+              {emailSuggestion}
+            </button>
+          </div>
+        )}
+      </div>
       <LegalNote />
     </div>
   )
@@ -1090,6 +1161,7 @@ function Field({
   autoComplete,
   autoFocus,
   secured,
+  error,
 }: {
   label: string
   value: string
@@ -1100,6 +1172,7 @@ function Field({
   autoComplete?: string
   autoFocus?: boolean
   secured?: boolean
+  error?: string
 }) {
   return (
     <div>
@@ -1121,8 +1194,13 @@ function Field({
         autoComplete={autoComplete}
         autoFocus={autoFocus}
         spellCheck={false}
-        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.10] text-white text-[14px] placeholder-white/35 focus:outline-none focus:border-[#FF2D6F]/50 transition-colors"
+        className={`w-full px-4 py-3 rounded-xl bg-white/[0.04] border text-white text-[14px] placeholder-white/35 focus:outline-none transition-colors ${
+          error
+            ? "border-red-500/50 focus:border-red-500/70"
+            : "border-white/[0.10] focus:border-[#FF2D6F]/50"
+        }`}
       />
+      {error && <p className="text-red-400 text-xs mt-2">{error}</p>}
     </div>
   )
 }
@@ -1292,6 +1370,7 @@ function PhoneInput({
   accentColor = "#FF2D6F",
   hint,
   secured,
+  error,
 }: {
   label: string
   countryCode: string
@@ -1303,6 +1382,7 @@ function PhoneInput({
   accentColor?: string
   hint?: string
   secured?: boolean
+  error?: string
 }) {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState("")
@@ -1364,9 +1444,11 @@ function PhoneInput({
           onChange={(e) => handlePhone(e.target.value)}
           placeholder={country.format ? country.format.replace(/#/g, "•") : "Phone number"}
           autoComplete={autoComplete}
-          className="flex-1 min-w-0 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.10] text-white text-[14px] placeholder-white/35 focus:outline-none transition-colors font-mono"
-          onFocus={(e) => (e.currentTarget.style.borderColor = focusBorder)}
-          onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)")}
+          className={`flex-1 min-w-0 px-4 py-3 rounded-xl bg-white/[0.04] border text-white text-[14px] placeholder-white/35 focus:outline-none transition-colors font-mono ${
+            error ? "border-red-500/50" : "border-white/[0.10]"
+          }`}
+          onFocus={(e) => (e.currentTarget.style.borderColor = error ? "rgba(239, 68, 68, 0.7)" : focusBorder)}
+          onBlur={(e) => (e.currentTarget.style.borderColor = error ? "rgba(239, 68, 68, 0.5)" : "rgba(255,255,255,0.10)")}
         />
 
         {/* Country dropdown */}
@@ -1418,7 +1500,11 @@ function PhoneInput({
           </div>
         )}
       </div>
-      {hint && <p className="text-white/40 text-[11px] mt-1.5 leading-snug">{hint}</p>}
+      {error ? (
+        <p className="text-red-400 text-[11px] mt-1.5">{error}</p>
+      ) : (
+        hint && <p className="text-white/40 text-[11px] mt-1.5 leading-snug">{hint}</p>
+      )}
     </div>
   )
 }

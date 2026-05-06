@@ -76,21 +76,26 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
                   style={{ background: `radial-gradient(circle, ${accent2}26 0%, transparent 60%)` }}
                   aria-hidden
                 />
-                {/* Image container — perfectly circular */}
+                {/* Image container — perfectly circular, gradient ring matching the CTA button */}
                 <div
-                  className="relative w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-2 md:border-[3px]"
+                  className="relative w-56 h-56 md:w-80 md:h-80 rounded-full p-[2px] md:p-[3px]"
                   style={{
-                    borderColor: accent1,
-                    boxShadow: `0 0 0 4px ${accent1}30, inset 0 0 30px ${accent1}22`,
+                    background: `linear-gradient(135deg, ${accent1} 0%, ${accent2} 100%)`,
+                    boxShadow: `0 0 0 4px ${accent1}30`,
                   }}
                 >
-                  <Image
-                    src="/egor.png"
-                    alt="Egor — AV Production Specialist"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+                  <div
+                    className="relative w-full h-full rounded-full overflow-hidden"
+                    style={{ boxShadow: `inset 0 0 30px ${accent1}22` }}
+                  >
+                    <Image
+                      src="/egor.png"
+                      alt="Egor — AV Production Specialist"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
                 </div>
               </div>
             </div>

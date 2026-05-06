@@ -472,6 +472,16 @@ html, body {
   .bg-orb.c { display: none; }
 }
 
+/* Pause heavy background animations while a modal is open — eliminates form lag */
+body.modal-open .bg-stage,
+body.modal-open .bg-rays,
+body.modal-open .bg-bauhaus,
+body.modal-open .bg-orb,
+body.modal-open .particles,
+body.modal-open .particle {
+  animation-play-state: paused !important;
+}
+
 .bg-noise {
   position: fixed;
   inset: 0;

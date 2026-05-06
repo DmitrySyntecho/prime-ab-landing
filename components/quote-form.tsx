@@ -235,8 +235,10 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
       formStartTime.current = Date.now()
     }
     document.body.style.overflow = "hidden"
+    document.body.classList.add("modal-open")
     return () => {
       document.body.style.overflow = ""
+      document.body.classList.remove("modal-open")
     }
   }, [isOpen])
 
@@ -336,13 +338,11 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
         left: 0,
         width: "100%",
         height: "100dvh",
-        background: "rgba(3,7,10,0.85)",
-        backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
+        background: "rgba(3,7,10,0.92)",
       }}
     >
       <div
-        className="relative w-full max-w-2xl overflow-y-auto rounded-2xl sm:rounded-[24px] border border-[#FF2D6F]/22 backdrop-blur-2xl"
+        className="relative w-full max-w-2xl overflow-y-auto rounded-2xl sm:rounded-[24px] border border-[#FF2D6F]/22"
         style={{
           maxHeight: "calc(100dvh - 32px)",
           background:

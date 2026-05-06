@@ -1,11 +1,14 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { X, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import { validateEmail } from "@/lib/validation/email"
+import { validateUSPhoneNumber } from "@/lib/validation/phone"
+import { checkSubmissionTiming, performAntiSpamCheck } from "@/lib/validation/anti-spam"
 
 export interface QuestionStep {
   id: string
@@ -66,6 +69,8 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
 
   const [currentStep, setCurrentStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({})
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const formStartTime = useRef<number | null>(null)
 
   const currentQuestion = allQuestions[currentStep]
   const progress = ((currentStep + 1) / totalSteps) * 100
@@ -120,7 +125,40 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
   }
 
   const handleSubmit = () => {
-    // Here you would submit the form data
+    // Initialize form start time on first form interaction
+    if (!formStartTime.current) {
+      formStartTime.current = Date.now()
+    }
+
+    // Anti-spam: Timing check
+    const timingCheck = checkSubmissionTiming(formStartTime.current, 3)
+    if (timingCheck.isSpam) {
+      setErrors({ submit: timingCheck.reason || "Submission too fast" })
+      return
+    }
+
+    // Validate phone if present
+    const phone = answers.phone as string
+    if (phone) {
+      const phoneValidation = validateUSPhoneNumber(phone)
+      if (!phoneValidation.isValid) {
+        setErrors((e) => ({ ...e, phone: phoneValidation.error || "Invalid phone" }))
+        return
+      }
+    }
+
+    // Validate email if present
+    const email = answers.email as string
+    if (email) {
+      const emailValidation = validateEmail(email)
+      if (!emailValidation.isValid) {
+        setErrors((e) => ({ ...e, email: emailValidation.error || "Invalid email" }))
+        return
+      }
+    }
+
+    // Clear errors and submit
+    setErrors({})
     console.log("Form submitted:", { service: serviceName, answers })
     router.push("/thank-you")
     onClose()
@@ -129,6 +167,8 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
   const handleClose = () => {
     setCurrentStep(0)
     setAnswers({})
+    setErrors({})
+    formStartTime.current = null
     onClose()
   }
 
@@ -136,7 +176,7 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={handleClose} />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
       <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl mx-4">
         {/* Header */}
@@ -276,13 +316,22 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
               {/* Text Input */}
               {currentQuestion.type === "text" && (
                 <div className="space-y-4 mt-8">
-                  <input
-                    type="text"
-                    value={(answers[currentQuestion.id] as string) || ""}
-                    onChange={(e) => handleTextInput(e.target.value)}
-                    placeholder={currentQuestion.placeholder}
-                    className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-[#FF5E3A] focus:outline-none text-lg"
-                  />
+                  <div>
+                    <input
+                      type="text"
+                      value={(answers[currentQuestion.id] as string) || ""}
+                      onChange={(e) => handleTextInput(e.target.value)}
+                      placeholder={currentQuestion.placeholder}
+                      className={`w-full p-4 border-2 rounded-xl focus:outline-none text-lg transition-colors ${
+                        errors[currentQuestion.id]
+                          ? "border-red-500 focus:border-red-600"
+                          : "border-gray-200 focus:border-[#FF5E3A]"
+                      }`}
+                    />
+                    {errors[currentQuestion.id] && (
+                      <p className="text-red-500 text-sm mt-2">{errors[currentQuestion.id]}</p>
+                    )}
+                  </div>
                   <Button
                     onClick={handleNext}
                     disabled={currentQuestion.required && !answers[currentQuestion.id]}

@@ -107,9 +107,9 @@
 }
 
 .animate-fadeIn { animation: fadeIn 0.3s ease-out forwards; }
-.animate-scroll-left { animation: scroll-left 38s linear infinite; }
+.animate-scroll-left { animation: scroll-left 76s linear infinite; }
 .animate-scroll-left:hover { animation-play-state: paused; }
-.animate-scroll-right { animation: scroll-right 42s linear infinite; }
+.animate-scroll-right { animation: scroll-right 84s linear infinite; }
 .animate-scroll-right:hover { animation-play-state: paused; }
 .animate-pulse-ds { animation: pulse-ds 2s ease-in-out infinite; }
 .animate-gradient-shift { animation: gradientShift 6s ease-in-out infinite; }

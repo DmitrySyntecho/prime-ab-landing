@@ -18,33 +18,6 @@ const promoBanners = [
   },
   {
     id: 2,
-    headline: "Permanent LED Wall Installation",
-    subheadline: "Upgrade your venue with a high-performance LED wall designed and installed by our team.",
-    cta: "Learn More",
-    ctaLink: "/services/led-installation",
-    image:
-      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1800&q=80",
-  },
-  {
-    id: 3,
-    headline: "Looking for an In-House AV Production Partner?",
-    subheadline: "We operate AV for hotels, venues, churches, and entertainment spaces.",
-    cta: "Talk to an Expert",
-    ctaLink: "/services/in-house-av",
-    image:
-      "https://images.unsplash.com/photo-1559223607-a43c990c692c?auto=format&fit=crop&w=1800&q=80",
-  },
-  {
-    id: 4,
-    headline: "Need AV Consulting for Your Space?",
-    subheadline: "We design permanent AV systems and help companies build reliable production workflows.",
-    cta: "Get Consulting",
-    ctaLink: "/services/av-consulting",
-    image:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1800&q=80",
-  },
-  {
-    id: 5,
     headline: "Permanent AV Installation for Your Facility",
     subheadline: "From conference rooms to large venues — we design and install complete AV systems.",
     cta: "Request a Quote",

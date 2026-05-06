@@ -305,6 +305,40 @@
     font-feature-settings: 'ss01', 'cv11';
     overflow-x: hidden;
   }
+
+  /* ============ iOS SAFARI ZOOM FIX ============ */
+  /* Prevent iOS Safari from zooming on input focus (font-size < 16px triggers zoom) */
+  @media (max-width: 768px) {
+    input,
+    textarea,
+    select,
+    input[type="date"],
+    input[type="time"],
+    input[type="datetime-local"],
+    input[type="number"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="search"],
+    input[type="url"],
+    input[type="password"] {
+      font-size: 16px !important;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      touch-action: manipulation;
+    }
+    
+    button,
+    a,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    input[type="checkbox"],
+    input[type="radio"],
+    [role="button"] {
+      touch-action: manipulation;
+    }
+  }
 }
 
 /* ============ ANIMATED BACKGROUND ============ */

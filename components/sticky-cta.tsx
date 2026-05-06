@@ -119,10 +119,7 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
     // Only shown on desktop (hidden on mobile — mobile uses bottom nav)
     <div
       data-fab
-      className={`hidden md:flex fixed bottom-6 right-6 z-50 flex-col items-end gap-3 transition-all duration-500 ${
-        show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6 pointer-events-none"
-      }`}
-      aria-hidden={!show}
+      className="hidden md:flex fixed bottom-6 right-6 z-50 flex-col items-end gap-3"
     >
       {/* Action items — slide up when open */}
       <div
@@ -178,7 +175,7 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Contact us"}
-          className="relative w-14 h-14 rounded-full flex flex-col items-center justify-center gap-0.5 text-white transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none"
+          className="relative w-14 h-14 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none"
           style={{
             background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
             boxShadow: open
@@ -187,9 +184,6 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
           }}
         >
           <MessageCircle className="w-6 h-6" />
-          <span className="text-[9px] font-bold leading-none tracking-wide uppercase">
-            {open ? "Close" : "Contact"}
-          </span>
         </button>
       </div>
     </div>

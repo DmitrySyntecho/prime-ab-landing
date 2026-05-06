@@ -329,13 +329,22 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start sm:items-center justify-center p-2 pt-4 sm:p-4 md:p-6"
-      style={{ background: "rgba(3,7,10,0.85)", backdropFilter: "blur(8px)", height: "100dvh" }}
+      className="z-[100] flex items-start sm:items-center justify-center p-2 pt-4 sm:p-4 md:p-6"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100dvh",
+        background: "rgba(3,7,10,0.85)",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+      }}
     >
       <div
         className="relative w-full max-w-2xl overflow-y-auto rounded-2xl sm:rounded-[24px] border border-[#FF2D6F]/22 backdrop-blur-2xl"
-        style={{ maxHeight: "min(92vh, 92dvh)" }}
         style={{
+          maxHeight: "calc(100dvh - 32px)",
           background:
             "linear-gradient(135deg, rgba(10,8,24,0.96) 0%, rgba(20,12,30,0.96) 100%)",
           boxShadow:

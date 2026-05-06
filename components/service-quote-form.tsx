@@ -175,10 +175,22 @@ export function ServiceQuoteForm({ isOpen, onClose, serviceName, serviceQuestion
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div
+      className="z-50 flex items-start sm:items-center justify-center p-4"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100dvh",
+      }}
+    >
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
-      <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl mx-4">
+      <div
+        className="relative bg-white w-full max-w-2xl overflow-y-auto rounded-2xl shadow-2xl"
+        style={{ maxHeight: "calc(100dvh - 32px)" }}
+      >
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 z-10">
           <div className="flex items-center justify-between mb-4">

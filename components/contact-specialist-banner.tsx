@@ -78,8 +78,11 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
                 />
                 {/* Image container — perfectly circular */}
                 <div
-                  className="relative w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-2 md:border-4"
-                  style={{ borderColor: `${accent1}66`, boxShadow: `inset 0 0 30px ${accent1}33` }}
+                  className="relative w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-2 md:border-[3px]"
+                  style={{
+                    borderColor: accent1,
+                    boxShadow: `0 0 0 4px ${accent1}30, inset 0 0 30px ${accent1}22`,
+                  }}
                 >
                   <Image
                     src="/egor.png"

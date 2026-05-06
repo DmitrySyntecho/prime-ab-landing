@@ -164,6 +164,7 @@ export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBanne
                 <p className="text-white/40 text-xs">Mon–Fri · 9am–7pm EST</p>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </section>

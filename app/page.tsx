@@ -14,6 +14,7 @@ import { PromoBannersSection } from "@/components/promo-banners-section"
 import { ServicesGridSection } from "@/components/services-grid-section"
 import { FAQSection } from "@/components/faq-section"
 import { FIFAPromoBanner } from "@/components/fifa-promo-banner"
+import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
 
 export default function Home() {
   const handleStartQuote = () => {
@@ -35,6 +36,7 @@ export default function Home() {
       <CaseStudiesSection />
       <CharitySection />
       <FAQSection />
+      <ContactSpecialistBanner onStartQuote={handleStartQuote} />
       <CTABanner onStartQuote={handleStartQuote} />
     </div>
   )

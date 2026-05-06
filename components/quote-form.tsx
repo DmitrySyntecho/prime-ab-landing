@@ -221,16 +221,11 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
 
   useEffect(() => {
     if (!isOpen) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose()
-    }
     document.body.style.overflow = "hidden"
-    document.addEventListener("keydown", onKey)
     return () => {
       document.body.style.overflow = ""
-      document.removeEventListener("keydown", onKey)
     }
-  }, [isOpen, onClose])
+  }, [isOpen])
 
   if (!isOpen) return null
 
@@ -288,9 +283,6 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6"
       style={{ background: "rgba(3,7,10,0.85)", backdropFilter: "blur(8px)" }}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose()
-      }}
     >
       <div
         className="relative w-full max-w-2xl max-h-[96vh] sm:max-h-[92vh] overflow-y-auto rounded-2xl sm:rounded-[24px] border border-[#FF2D6F]/22 backdrop-blur-2xl"

@@ -5,6 +5,7 @@ import { StickyCTA } from "@/components/sticky-cta"
 import { QuoteForm } from "@/components/quote-form"
 import { ArrowRight, Users, Award, MapPin, Clock } from "lucide-react"
 import Image from "next/image"
+import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
 
 const stats = [
   { icon: Users, value: "500+", label: "Events Produced" },
@@ -139,6 +140,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <ContactSpecialistBanner onStartQuote={() => setQuoteFormOpen(true)} />
 
       {/* CTA */}
       <section className="py-20 bg-gradient-to-r from-[#16A34A] to-[#4ADE80]">

@@ -1,5 +1,5 @@
 "use client"
-
+// Banner v2 - no divider, fixed layout
 import Image from "next/image"
 import { Phone, CalendarDays, Mail, Sparkles } from "lucide-react"
 

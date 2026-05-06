@@ -157,6 +157,7 @@ interface FormData {
   pickupDate: string
   pickupTime: string
   address: string
+  address2: string
   city: string
   state: string
   zip: string
@@ -182,6 +183,7 @@ const empty: FormData = {
   pickupDate: "",
   pickupTime: "",
   address: "",
+  address2: "",
   city: "",
   state: "",
   zip: "",
@@ -275,7 +277,7 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
       return emailValidation.isValid
     }
     if (step === 6) return !!data.dropoffDate && !!data.dropoffTime && !!data.pickupDate && !!data.pickupTime
-    if (step === 7) return data.address.trim().length >= 5 && data.city.trim() && data.state && data.zip.trim().length >= 4
+    if (step === 7) return data.address.trim().length >= 5 && data.city.trim().length >= 2 && !!data.state && data.zip.trim().length === 5
     if (step === 8) return true
     if (step === 9) return data.agreeTerms
     return false
@@ -327,11 +329,12 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6"
-      style={{ background: "rgba(3,7,10,0.85)", backdropFilter: "blur(8px)" }}
+      className="fixed inset-0 z-[100] flex items-start sm:items-center justify-center p-2 pt-4 sm:p-4 md:p-6"
+      style={{ background: "rgba(3,7,10,0.85)", backdropFilter: "blur(8px)", height: "100dvh" }}
     >
       <div
-        className="relative w-full max-w-2xl max-h-[96vh] sm:max-h-[92vh] overflow-y-auto rounded-2xl sm:rounded-[24px] border border-[#FF2D6F]/22 backdrop-blur-2xl"
+        className="relative w-full max-w-2xl overflow-y-auto rounded-2xl sm:rounded-[24px] border border-[#FF2D6F]/22 backdrop-blur-2xl"
+        style={{ maxHeight: "min(92vh, 92dvh)" }}
         style={{
           background:
             "linear-gradient(135deg, rgba(10,8,24,0.96) 0%, rgba(20,12,30,0.96) 100%)",
@@ -857,32 +860,44 @@ function Step7({
   }, [data.zip])
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
+      {/* Row 1: Street Address */}
       <Field
         icon={Home}
-        label="Street Address (incl. Apt / Suite)"
+        label="Street Address"
         value={data.address}
         onChange={(v) => update("address", v.slice(0, 120))}
-        placeholder="123 Main St, Suite 200"
-        autoComplete="street-address"
+        placeholder="123 Main Street"
+        autoComplete="address-line1"
         autoFocus
         secured
       />
-      <div className="grid grid-cols-1 sm:grid-cols-[1fr_120px_140px] gap-3">
-        <Field
-          label="City"
-          value={data.city}
-          onChange={(v) => update("city", v.replace(/[^\p{L}\s.'-]/gu, "").slice(0, 60))}
-          placeholder="Los Angeles"
-          autoComplete="address-level2"
-          secured
-        />
+      {/* Row 2: Apt / Suite / Unit (optional) */}
+      <Field
+        label="Apt, Suite, Unit (optional)"
+        value={data.address2}
+        onChange={(v) => update("address2", v.slice(0, 60))}
+        placeholder="Apt 4B"
+        autoComplete="address-line2"
+        secured
+      />
+      {/* Row 3: City full-width */}
+      <Field
+        label="City"
+        value={data.city}
+        onChange={(v) => update("city", v.replace(/[^\p{L}\s.'-]/gu, "").slice(0, 60))}
+        placeholder="Miami"
+        autoComplete="address-level2"
+        secured
+      />
+      {/* Row 4: State + ZIP side by side */}
+      <div className="grid grid-cols-2 gap-3">
         <SelectField
           label="State"
           value={data.state}
           onChange={(v) => update("state", v)}
           options={usStates}
-          placeholder="—"
+          placeholder="Select state"
         />
         <ZipField
           value={data.zip}
@@ -891,7 +906,7 @@ function Step7({
         />
       </div>
       {zipLookup === "fail" && (
-        <p className="text-amber-300/80 text-[11px] -mt-1.5 ml-1">
+        <p className="text-amber-300/80 text-[11px] ml-1">
           Couldn&apos;t find that ZIP — please fill city &amp; state manually.
         </p>
       )}
@@ -1012,7 +1027,7 @@ function Step9({
         {summaryRow("Pick-Up", `${formatDate(data.pickupDate)} · ${formatTime(data.pickupTime)}`)}
         {summaryRow(
           "Address",
-          `${data.address}, ${data.city}, ${data.state} ${data.zip}`.replace(/(^,\s|,\s$)/g, ""),
+          [data.address, data.address2, `${data.city}, ${data.state} ${data.zip}`].filter(Boolean).join(", "),
         )}
         {data.message && summaryRow("Notes", data.message)}
         {data.promoCode && summaryRow("Promo", data.promoCode)}

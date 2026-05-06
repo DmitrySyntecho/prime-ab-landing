@@ -11,13 +11,17 @@ import { parsePhoneNumber, isValidPhoneNumber, isPossiblePhoneNumber } from "lib
 // Fake/fictional phone number patterns to block
 const FICTIONAL_PATTERNS = {
   // Consecutive digits: 0123456789, 1234567890, 9876543210
-  SEQUENCE: /^([0-9])\1{9}$|^0123456789$|^1234567890$|^9876543210$/,
+  SEQUENCE: /^0123456789$|^1234567890$|^9876543210$/,
   // All same digit: 1111111111, 5555555555, etc.
   SAME_DIGIT: /^([0-9])\1{9}$/,
   // Pattern repeats: 1231231234, 5555555555, 1112223333, 1234512345
   REPEATING_PATTERN: /^(.{3})(.{3})\1\2/,
-  // Fictional 555 range (555-0100 to 555-0199, reserved by FCC)
-  FICTIONAL_555: /^555[0-1]\d{5}$/,
+  // Fictional 555-555-XXXX (area 555, exchange 555) — used in movies/TV
+  // Example: 555-555-0100, 555-555-0199
+  FICTIONAL_555_555: /^555555\d{4}$/,
+  // Fictional 555-01XX pattern (area 555, exchange 01XX — reserved by FCC)
+  // Example: 555-0100 to 555-0199
+  FICTIONAL_555_01: /^55501\d{5}$/,
 };
 
 // NANP area codes that are invalid (start with 0 or 1)
@@ -63,7 +67,8 @@ export function validateUSPhoneNumber(phone: string): PhoneValidationResult {
     FICTIONAL_PATTERNS.SAME_DIGIT.test(cleanDigits) ||
     FICTIONAL_PATTERNS.SEQUENCE.test(cleanDigits) ||
     FICTIONAL_PATTERNS.REPEATING_PATTERN.test(cleanDigits) ||
-    FICTIONAL_PATTERNS.FICTIONAL_555.test(cleanDigits)
+    FICTIONAL_PATTERNS.FICTIONAL_555_555.test(cleanDigits) ||
+    FICTIONAL_PATTERNS.FICTIONAL_555_01.test(cleanDigits)
   ) {
     return {
       isValid: false,

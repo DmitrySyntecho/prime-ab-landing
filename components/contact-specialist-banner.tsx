@@ -59,10 +59,10 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
             aria-hidden
           />
 
-          <div className="relative z-10 grid md:grid-cols-[320px_1fr] lg:grid-cols-[400px_1fr] gap-8 items-start md:items-center">
+          <div className="relative z-10 grid md:grid-cols-[320px_1fr] lg:grid-cols-[400px_1fr] gap-0 md:gap-8 items-start md:items-center">
 
             {/* Photo — left side, larger and more prominent */}
-            <div className="relative w-full px-6 md:px-0 py-8 md:py-12 flex justify-center md:justify-start md:pl-8">
+            <div className="relative w-full px-6 md:px-0 pt-8 pb-3 md:py-12 flex justify-center md:justify-start md:pl-8">
               <div className="relative">
                 {/* Outer glow layer */}
                 <div
@@ -108,7 +108,7 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
             />
 
             {/* Content — right side, expanded */}
-            <div className="flex-1 px-6 md:px-10 py-8 md:py-12 text-center md:text-left">
+            <div className="flex-1 px-6 md:px-10 pt-3 pb-8 md:py-12 text-center md:text-left">
 
               {/* Tag */}
               <div

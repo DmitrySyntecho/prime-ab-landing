@@ -44,41 +44,39 @@ export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBanne
             aria-hidden
           />
 
-          <div className="relative z-10 grid md:grid-cols-[280px_1fr] lg:grid-cols-[340px_1fr] gap-0 items-center">
+          <div className="relative z-10 grid md:grid-cols-[320px_1fr] lg:grid-cols-[400px_1fr] gap-8 items-start md:items-center">
 
             {/* Photo — left side, larger and more prominent */}
             <div className="relative w-full px-6 md:px-0 py-8 md:py-12 flex justify-center md:justify-start md:pl-8">
-              <div className="relative w-56 h-72 md:w-72 md:h-96">
-                {/* Circular glow behind photo */}
+              <div className="relative">
+                {/* Outer glow layer */}
                 <div
-                  className="absolute -inset-4 rounded-full blur-3xl"
-                  style={{ background: "radial-gradient(circle, rgba(255,45,111,0.3) 0%, transparent 65%)" }}
+                  className="absolute -inset-6 md:-inset-8 rounded-full blur-2xl"
+                  style={{ background: "radial-gradient(circle, rgba(255,45,111,0.25) 0%, transparent 70%)" }}
                   aria-hidden
                 />
-                {/* Circular border frame */}
+                {/* Inner subtle glow */}
                 <div
-                  className="absolute inset-0 rounded-full border-2 md:border-4"
-                  style={{ borderColor: "rgba(255,45,111,0.4)" }}
+                  className="absolute -inset-3 md:-inset-4 rounded-full blur-xl"
+                  style={{ background: "radial-gradient(circle, rgba(255,94,58,0.15) 0%, transparent 60%)" }}
                   aria-hidden
                 />
-                <Image
-                  src="/egor.png"
-                  alt="Egor — AV Production Specialist"
-                  fill
-                  className="object-cover rounded-full"
-                  priority
-                />
-              </div>
-              {/* Name plate below photo on mobile/tablet */}
-              <div className="md:hidden absolute bottom-4 left-0 right-0 text-center">
-                <p className="text-white text-[13px] font-bold">Egor · AV Lead</p>
-                <p className="text-white/40 text-[11px]">Mon–Fri · 9am–7pm EST</p>
+                {/* Image container — perfectly circular */}
+                <div className="relative w-56 h-56 md:w-80 md:h-80 rounded-full overflow-hidden border-2 md:border-4 border-[#FF2D6F]/40 shadow-[inset_0_0_30px_rgba(255,45,111,0.2)]">
+                  <Image
+                    src="/egor.png"
+                    alt="Egor — AV Production Specialist"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
               </div>
             </div>
 
             {/* Divider on desktop */}
             <div
-              className="hidden md:block absolute left-[calc(280px-16px)] lg:left-[calc(340px-16px)] top-1/4 bottom-1/4 w-px"
+              className="hidden md:block absolute left-[calc(320px)] lg:left-[calc(400px)] top-1/4 bottom-1/4 w-px"
               style={{ background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 70%, transparent)" }}
               aria-hidden
             />
@@ -95,7 +93,7 @@ export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBanne
               </div>
 
               {/* Headline — better text wrapping */}
-              <h2 className="text-[28px] md:text-[36px] lg:text-[42px] font-black tracking-[-0.02em] leading-[1.2] text-white mb-4">
+              <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-black tracking-[-0.02em] leading-[1.15] text-white mb-5">
                 Not sure which service{" "}
                 <span
                   className="italic"
@@ -154,14 +152,6 @@ export function ContactSpecialistBanner({ onStartQuote }: ContactSpecialistBanne
                     {topic}
                   </span>
                 ))}
-              </div>
-            </div>
-
-            {/* Name plate — desktop only, below photo on left */}
-            <div className="hidden md:flex items-center justify-center md:justify-start px-8 pb-6">
-              <div>
-                <p className="text-white text-sm font-bold leading-tight">Egor · AV Lead</p>
-                <p className="text-white/40 text-xs">Mon–Fri · 9am–7pm EST</p>
               </div>
             </div>
           </div>

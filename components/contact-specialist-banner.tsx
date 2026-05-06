@@ -114,11 +114,37 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
               </div>
 
               {/* Headline */}
-              <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-black tracking-[-0.02em] leading-[1.15] text-white mb-5">
+              <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-black tracking-[-0.02em] leading-[1.15] mb-5">
                 {isFifa ? (
-                  <>Not sure which package{" "}<span className="italic" style={{ background: `linear-gradient(90deg, ${accent1} 0%, ${accent2} 100%)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>fits your event?</span></>
+                  <>
+                    <span className="text-white">Not sure which package </span>
+                    <span
+                      className="italic"
+                      style={{
+                        background: `linear-gradient(90deg, ${accent1} 0%, ${accent2} 100%)`,
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                      }}
+                    >
+                      fits your event?
+                    </span>
+                  </>
                 ) : (
-                  <>Not sure which service{" "}<span className="italic" style={{ background: `linear-gradient(90deg, ${accent1} 0%, ${accent2} 100%)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>fits your event?</span></>
+                  <>
+                    <span className="text-white">Not sure which service </span>
+                    <span
+                      className="italic"
+                      style={{
+                        background: `linear-gradient(90deg, ${accent1} 0%, ${accent2} 100%)`,
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                      }}
+                    >
+                      fits your event?
+                    </span>
+                  </>
                 )}
               </h2>
 

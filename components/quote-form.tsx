@@ -677,8 +677,8 @@ function Step4({
         <span
           className="w-10 h-10 rounded-[10px] flex items-center justify-center flex-shrink-0"
           style={{
-            background: data.hasWhatsapp ? "rgba(37,211,102,0.20)" : "rgba(255,255,255,0.05)",
-            color: data.hasWhatsapp ? "#25D366" : "rgba(255,255,255,0.45)",
+            background: data.hasWhatsapp ? "rgba(37,211,102,0.20)" : "rgba(37,211,102,0.08)",
+            color: "#25D366",
             transition: "all 0.25s",
           }}
         >

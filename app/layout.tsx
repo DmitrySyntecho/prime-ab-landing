@@ -37,21 +37,49 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://primelineav.com"),
   title: "Prime Line AV | When Everything Is Just Perfect",
   description:
     "The AV partner brands trust for corporate events, brand activations, experiential marketing, and studio work. Full-service audio, video, lighting, and staging production.",
   generator: "v0.app",
+  manifest: "/site.webmanifest",
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico"],
   },
   openGraph: {
+    type: "website",
+    siteName: "Prime Line AV",
     title: "Prime Line AV | When Everything Is Just Perfect",
-    description: "Full AV production for corporate events, brand activations, experiential marketing, and studio work.",
-    images: [{ url: "/images/prime-line-av-social-1200x630.png", width: 1200, height: 630 }],
+    description:
+      "Full AV production for corporate events, brand activations, experiential marketing, and studio work.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Prime Line AV — Full-service audio, video, lighting & staging",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prime Line AV | When Everything Is Just Perfect",
+    description:
+      "Full AV production for corporate events, brand activations, experiential marketing, and studio work.",
+    images: ["/og-image.jpg"],
   },
 }
 

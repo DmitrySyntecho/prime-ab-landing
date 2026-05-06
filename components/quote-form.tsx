@@ -331,7 +331,7 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
 
   return (
     <div
-      className="z-[100] flex items-start sm:items-center justify-center p-2 pt-4 sm:p-4 md:p-6"
+      className="z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6"
       style={{
         position: "fixed",
         top: 0,

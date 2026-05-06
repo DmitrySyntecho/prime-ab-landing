@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useRef } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -29,6 +29,8 @@ const promoBanners = [
 
 export function PromoBannersSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const touchStartX = useRef<number | null>(null)
+  const touchStartY = useRef<number | null>(null)
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % promoBanners.length)
@@ -38,13 +40,34 @@ export function PromoBannersSection() {
     setCurrentIndex((prev) => (prev - 1 + promoBanners.length) % promoBanners.length)
   }, [])
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+  }
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current == null || touchStartY.current == null) return
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    const dy = e.changedTouches[0].clientY - touchStartY.current
+    touchStartX.current = null
+    touchStartY.current = null
+    // require horizontal intent (more X than Y) and a 40px threshold
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return
+    if (dx < 0) nextSlide()
+    else prevSlide()
+  }
+
   return (
     <section className="py-16 md:py-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         {/* Single Banner Carousel */}
         <div className="relative">
           {/* Main Banner */}
-          <div className="relative overflow-hidden rounded-[22px] border border-white/[0.08] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] aspect-[2/1] sm:aspect-[2.5/1] md:aspect-[4/1]">
+          <div
+            className="relative overflow-hidden rounded-[22px] border border-white/[0.08] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] aspect-[2/1] sm:aspect-[2.5/1] md:aspect-[4/1] touch-pan-y"
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+          >
             {promoBanners.map((banner, index) => (
               <div
                 key={banner.id}
@@ -89,14 +112,14 @@ export function PromoBannersSection() {
 
           <button
             onClick={prevSlide}
-            className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 bg-white/[0.05] hover:bg-[#FF2D6F]/15 hover:border-[#FF2D6F]/30 border border-white/[0.10] backdrop-blur-md text-white rounded-[12px] flex items-center justify-center transition-all"
+            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white/[0.05] hover:bg-[#FF2D6F]/15 hover:border-[#FF2D6F]/30 border border-white/[0.10] backdrop-blur-md text-white rounded-[12px] items-center justify-center transition-all"
             aria-label="Previous banner"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 bg-white/[0.05] hover:bg-[#FF2D6F]/15 hover:border-[#FF2D6F]/30 border border-white/[0.10] backdrop-blur-md text-white rounded-[12px] flex items-center justify-center transition-all"
+            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white/[0.05] hover:bg-[#FF2D6F]/15 hover:border-[#FF2D6F]/30 border border-white/[0.10] backdrop-blur-md text-white rounded-[12px] items-center justify-center transition-all"
             aria-label="Next banner"
           >
             <ChevronRight className="w-5 h-5" />

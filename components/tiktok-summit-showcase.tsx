@@ -5,11 +5,6 @@ import { Sparkles } from "lucide-react"
 
 // Images with Next.js Image optimization (quality + sizes for responsive loading)
 const images = {
-  // Large video area (top left) — now shows disco ball photo
-  video: {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000304-zVHYI5hdU5q1T4kg9ZZv3EHDhihlcA.png",
-    alt: "Summit stage setup with disco ball and lighting",
-  },
   // Top right row
   topRight1: {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-07%20235523.png-tyMpiIJhCpfgFVGlaMwFegZT7MJEOg.jpeg",
@@ -27,11 +22,6 @@ const images = {
   midRight2: {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000215-3olUV1CLz6o4o885yq3nTPneeOvCCX.png",
     alt: "L-Acoustics speaker array setup",
-  },
-  // Bottom row — only 1 image now
-  bottom1: {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000243-fzo4HgYcDqbH1M89hPoMvVMP37QaUn.png",
-    alt: "LED wall installation with crew",
   },
 }
 
@@ -119,13 +109,19 @@ export function TikTokSummitShowcase() {
         >
           {/* Desktop: Complex bento grid */}
           <div className="hidden md:grid grid-cols-4 grid-rows-3 gap-2 md:gap-3" style={{ height: "600px" }}>
-            {/* Large image left (spans 2 cols, 2 rows) - disco ball photo */}
-            <GalleryImage
-              src={images.video.src}
-              alt={images.video.alt}
-              className="col-span-2 row-span-2"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+            {/* Video player left (spans 2 cols, 2 rows) */}
+            <div
+              className="col-span-2 row-span-2 relative overflow-hidden rounded-xl border border-white/[0.08]"
+              style={{ boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
+            >
+              <iframe
+                src="https://player.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU?metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
+                className="absolute inset-0 w-full h-full"
+                style={{ border: "none" }}
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
 
             {/* Top right images (2 images) */}
             <GalleryImage
@@ -150,27 +146,30 @@ export function TikTokSummitShowcase() {
               alt={images.midRight2.alt}
               className="col-span-1 row-span-1"
             />
-
-            {/* Bottom row — only 1 image now (spans 2 cols) */}
-            <GalleryImage
-              src={images.bottom1.src}
-              alt={images.bottom1.alt}
-              className="col-span-2 row-span-1"
-            />
           </div>
 
           {/* Mobile: Simplified stacked layout */}
           <div className="md:hidden flex flex-col gap-2">
-            {/* Large image */}
-            <GalleryImage src={images.video.src} alt={images.video.alt} className="aspect-[4/3]" />
+            {/* Video player */}
+            <div
+              className="relative overflow-hidden rounded-xl border border-white/[0.08] aspect-video"
+              style={{ boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
+            >
+              <iframe
+                src="https://player.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU?metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
+                className="absolute inset-0 w-full h-full"
+                style={{ border: "none" }}
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
 
-            {/* Images grid 2x2 (removed bottom2 image) */}
+            {/* Images grid 2x2 */}
             <div className="grid grid-cols-2 gap-2">
               <GalleryImage src={images.topRight1.src} alt={images.topRight1.alt} className="aspect-[4/3]" />
               <GalleryImage src={images.topRight2.src} alt={images.topRight2.alt} className="aspect-[4/3]" />
               <GalleryImage src={images.midRight1.src} alt={images.midRight1.alt} className="aspect-[4/3]" />
               <GalleryImage src={images.midRight2.src} alt={images.midRight2.alt} className="aspect-[4/3]" />
-              <GalleryImage src={images.bottom1.src} alt={images.bottom1.alt} className="aspect-[4/3]" />
             </div>
           </div>
         </div>

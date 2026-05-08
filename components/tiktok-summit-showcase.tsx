@@ -114,45 +114,47 @@ export function TikTokSummitShowcase() {
           <div className="hidden md:flex gap-2 md:gap-3">
             {/* Video player left — fixed aspect ratio with custom thumbnail */}
             <div
-              className="relative overflow-hidden rounded-xl border border-white/[0.08] flex-shrink-0"
+              className="relative overflow-hidden rounded-xl border border-white/[0.08] flex-shrink-0 bg-black"
               style={{ width: "50%", aspectRatio: "16/9", boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
             >
               {videoPlaying ? (
-                <iframe
-                  src="https://player.mux.com/KfJ00XD74CFG01AI5ecIQ58q439V3U004sBcuSENC2A9IU?autoplay=1&metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
-                  className="absolute inset-0 w-full h-full"
-                  style={{ border: "none" }}
-                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                  allowFullScreen
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  src="https://stream.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU.m3u8"
+                  autoPlay
+                  controls
+                  playsInline
                 />
               ) : (
                 <>
-                  {/* Thumbnail */}
                   <Image
-                    src="https://image.mux.com/KfJ00XD74CFG01AI5ecIQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=30&width=800"
+                    src="https://image.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=30&width=800"
                     alt="TikTok Summit BTS video thumbnail"
                     fill
                     className="object-cover"
                     sizes="50vw"
                     quality={80}
                   />
-                  {/* Dark gradient overlay */}
                   <div
                     className="absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 100%)",
+                        "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)",
                     }}
                   />
-                  {/* Play button */}
                   <button
                     onClick={() => setVideoPlaying(true)}
                     className="absolute inset-0 flex items-center justify-center group"
                     aria-label="Play video"
                   >
                     <div
-                      className="relative flex items-center justify-center w-16 h-16 rounded-full border-2 border-white/80 bg-black/40 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-black/60 group-hover:border-white"
+                      className="relative flex items-center justify-center w-16 h-16 rounded-full transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                        boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
+                      }}
                     >
+                      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: "rgba(255,45,111,0.25)" }} />
                       <Play className="w-6 h-6 fill-white text-white ml-0.5" />
                     </div>
                   </button>
@@ -177,17 +179,17 @@ export function TikTokSummitShowcase() {
               style={{ boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
             >
               {videoPlaying ? (
-                <iframe
-                  src="https://player.mux.com/KfJ00XD74CFG01AI5ecIQ58q439V3U004sBcuSENC2A9IU?autoplay=1&metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
-                  className="absolute inset-0 w-full h-full"
-                  style={{ border: "none" }}
-                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                  allowFullScreen
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  src="https://stream.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU.m3u8"
+                  autoPlay
+                  controls
+                  playsInline
                 />
               ) : (
                 <>
                   <Image
-                    src="https://image.mux.com/KfJ00XD74CFG01AI5ecIQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=30&width=640"
+                    src="https://image.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=30&width=640"
                     alt="TikTok Summit BTS video thumbnail"
                     fill
                     className="object-cover"
@@ -198,7 +200,7 @@ export function TikTokSummitShowcase() {
                     className="absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 100%)",
+                        "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)",
                     }}
                   />
                   <button
@@ -206,7 +208,14 @@ export function TikTokSummitShowcase() {
                     className="absolute inset-0 flex items-center justify-center group"
                     aria-label="Play video"
                   >
-                    <div className="relative flex items-center justify-center w-14 h-14 rounded-full border-2 border-white/80 bg-black/40 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-black/60 group-hover:border-white">
+                    <div
+                      className="relative flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                        boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
+                      }}
+                    >
+                      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: "rgba(255,45,111,0.25)" }} />
                       <Play className="w-5 h-5 fill-white text-white ml-0.5" />
                     </div>
                   </button>

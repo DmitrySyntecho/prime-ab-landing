@@ -107,12 +107,12 @@ export function TikTokSummitShowcase() {
             boxShadow: "0 40px 80px -20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)",
           }}
         >
-          {/* Desktop: Complex bento grid */}
-          <div className="hidden md:grid grid-cols-4 grid-rows-3 gap-2 md:gap-3" style={{ height: "600px" }}>
-            {/* Video player left (spans 2 cols, 2 rows) */}
+          {/* Desktop: Bento grid — 2 cols video left, 2 cols images right */}
+          <div className="hidden md:flex gap-2 md:gap-3">
+            {/* Video player left — fixed aspect ratio */}
             <div
-              className="col-span-2 row-span-2 relative overflow-hidden rounded-xl border border-white/[0.08]"
-              style={{ boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
+              className="relative overflow-hidden rounded-xl border border-white/[0.08] flex-shrink-0"
+              style={{ width: "50%", aspectRatio: "16/9", boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
             >
               <iframe
                 src="https://player.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU?metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
@@ -123,29 +123,13 @@ export function TikTokSummitShowcase() {
               />
             </div>
 
-            {/* Top right images (2 images) */}
-            <GalleryImage
-              src={images.topRight1.src}
-              alt={images.topRight1.alt}
-              className="col-span-1 row-span-1"
-            />
-            <GalleryImage
-              src={images.topRight2.src}
-              alt={images.topRight2.alt}
-              className="col-span-1 row-span-1"
-            />
-
-            {/* Middle right images (2 images) */}
-            <GalleryImage
-              src={images.midRight1.src}
-              alt={images.midRight1.alt}
-              className="col-span-1 row-span-1"
-            />
-            <GalleryImage
-              src={images.midRight2.src}
-              alt={images.midRight2.alt}
-              className="col-span-1 row-span-1"
-            />
+            {/* Right side — 2x2 image grid matching video height */}
+            <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-2 md:gap-3">
+              <GalleryImage src={images.topRight1.src} alt={images.topRight1.alt} className="min-h-0" />
+              <GalleryImage src={images.topRight2.src} alt={images.topRight2.alt} className="min-h-0" />
+              <GalleryImage src={images.midRight1.src} alt={images.midRight1.alt} className="min-h-0" />
+              <GalleryImage src={images.midRight2.src} alt={images.midRight2.alt} className="min-h-0" />
+            </div>
           </div>
 
           {/* Mobile: Simplified stacked layout */}

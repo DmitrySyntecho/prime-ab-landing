@@ -120,7 +120,7 @@ export function TikTokSummitShowcase() {
               {/* iframe always mounted for instant playback */}
               <iframe
                 id="tiktok-showcase-player"
-                src="https://player.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU?metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
+                src="https://player.mux.com/KfJ00XD74CFG01AI5ecIQ58q439V3U004sBcuSENC2A9IU?metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
                 className="absolute inset-0 w-full h-full"
                 style={{ border: "none", opacity: videoPlaying ? 1 : 0, pointerEvents: videoPlaying ? "auto" : "none" }}
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
@@ -131,7 +131,7 @@ export function TikTokSummitShowcase() {
               {!videoPlaying && (
                 <>
                   <Image
-                    src="https://image.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=2&width=800"
+                    src="https://image.mux.com/KfJ00XD74CFG01AI5ecIQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=2&width=800"
                     alt="TikTok Summit BTS video thumbnail"
                     fill
                     className="object-cover"
@@ -183,7 +183,7 @@ export function TikTokSummitShowcase() {
             >
               <iframe
                 id="tiktok-showcase-player-mobile"
-                src="https://player.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU?metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
+                src="https://player.mux.com/KfJ00XD74CFG01AI5ecIQ58q439V3U004sBcuSENC2A9IU?metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
                 className="absolute inset-0 w-full h-full"
                 style={{ border: "none", opacity: videoPlaying ? 1 : 0, pointerEvents: videoPlaying ? "auto" : "none" }}
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
@@ -193,7 +193,7 @@ export function TikTokSummitShowcase() {
               {!videoPlaying && (
                 <>
                   <Image
-                    src="https://image.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=2&width=640"
+                    src="https://image.mux.com/KfJ00XD74CFG01AI5ecIQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=2&width=640"
                     alt="TikTok Summit BTS video thumbnail"
                     fill
                     className="object-cover"

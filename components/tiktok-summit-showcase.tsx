@@ -1,7 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
-import { Sparkles } from "lucide-react"
+import { Sparkles, Play } from "lucide-react"
 
 // Images with Next.js Image optimization (quality + sizes for responsive loading)
 const images = {
@@ -58,6 +59,8 @@ function GalleryImage({
 }
 
 export function TikTokSummitShowcase() {
+  const [videoPlaying, setVideoPlaying] = useState(false)
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       {/* Background accents */}
@@ -109,18 +112,57 @@ export function TikTokSummitShowcase() {
         >
           {/* Desktop: Bento grid — 2 cols video left, 2 cols images right */}
           <div className="hidden md:flex gap-2 md:gap-3">
-            {/* Video player left — fixed aspect ratio */}
+            {/* Video player left — fixed aspect ratio with custom thumbnail */}
             <div
               className="relative overflow-hidden rounded-xl border border-white/[0.08] flex-shrink-0"
               style={{ width: "50%", aspectRatio: "16/9", boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
             >
+              {/* iframe always mounted for instant playback */}
               <iframe
+                id="tiktok-showcase-player"
                 src="https://player.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU?metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
                 className="absolute inset-0 w-full h-full"
-                style={{ border: "none" }}
+                style={{ border: "none", opacity: videoPlaying ? 1 : 0, pointerEvents: videoPlaying ? "auto" : "none" }}
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
               />
+
+              {/* Thumbnail overlay */}
+              {!videoPlaying && (
+                <>
+                  <Image
+                    src="https://image.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=2&width=800"
+                    alt="TikTok Summit BTS video thumbnail"
+                    fill
+                    className="object-cover"
+                    sizes="50vw"
+                    quality={80}
+                  />
+                  <div className="absolute inset-0 bg-black/20" />
+                  <button
+                    onClick={() => {
+                      setVideoPlaying(true)
+                      const frame = document.getElementById("tiktok-showcase-player") as HTMLIFrameElement | null
+                      if (frame?.contentWindow) {
+                        frame.contentWindow.postMessage(JSON.stringify({ type: "play" }), "*")
+                      }
+                    }}
+                    className="absolute inset-0 flex items-center justify-center group"
+                    aria-label="Play video"
+                  >
+                    <div
+                      className="relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                        boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
+                      }}
+                    >
+                      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: "rgba(255,45,111,0.25)" }} />
+                      <Play className="w-5 h-5 md:w-6 md:h-6 fill-white text-white ml-0.5" />
+                    </div>
+                  </button>
+                </>
+              )}
             </div>
 
             {/* Right side — 2x2 image grid matching video height */}
@@ -134,18 +176,55 @@ export function TikTokSummitShowcase() {
 
           {/* Mobile: Simplified stacked layout */}
           <div className="md:hidden flex flex-col gap-2">
-            {/* Video player */}
+            {/* Video player with custom thumbnail */}
             <div
               className="relative overflow-hidden rounded-xl border border-white/[0.08] aspect-video"
               style={{ boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
             >
               <iframe
+                id="tiktok-showcase-player-mobile"
                 src="https://player.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU?metadata-video-title=1+TikTok+BTS&video-title=1+TikTok+BTS"
                 className="absolute inset-0 w-full h-full"
-                style={{ border: "none" }}
+                style={{ border: "none", opacity: videoPlaying ? 1 : 0, pointerEvents: videoPlaying ? "auto" : "none" }}
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
               />
+
+              {!videoPlaying && (
+                <>
+                  <Image
+                    src="https://image.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=2&width=640"
+                    alt="TikTok Summit BTS video thumbnail"
+                    fill
+                    className="object-cover"
+                    sizes="100vw"
+                    quality={75}
+                  />
+                  <div className="absolute inset-0 bg-black/20" />
+                  <button
+                    onClick={() => {
+                      setVideoPlaying(true)
+                      const frame = document.getElementById("tiktok-showcase-player-mobile") as HTMLIFrameElement | null
+                      if (frame?.contentWindow) {
+                        frame.contentWindow.postMessage(JSON.stringify({ type: "play" }), "*")
+                      }
+                    }}
+                    className="absolute inset-0 flex items-center justify-center group"
+                    aria-label="Play video"
+                  >
+                    <div
+                      className="relative flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                        boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
+                      }}
+                    >
+                      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: "rgba(255,45,111,0.25)" }} />
+                      <Play className="w-5 h-5 fill-white text-white ml-0.5" />
+                    </div>
+                  </button>
+                </>
+              )}
             </div>
 
             {/* Images grid 2x2 */}

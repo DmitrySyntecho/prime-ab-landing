@@ -138,19 +138,34 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
             >
               <div className="m-3 md:m-5 rounded-[14px] md:rounded-[18px] overflow-hidden bg-black border border-white/[0.08]">
                 <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-                  {!videoPlaying ? (
+                  {/* iframe always mounted so it's ready to play instantly */}
+                  <iframe
+                    ref={(el) => { if (el) (el as any).__muxFrame = true }}
+                    id="hero-mux-player"
+                    src="https://player.mux.com/jAJRQcO5mGsuhpGE01tMMiFUn70067j423fE5Er4gIJqk?metadata-video-title=About+us+%281%29&video-title=About+us+%281%29"
+                    className="absolute inset-0 w-full h-full"
+                    style={{ border: "none", opacity: videoPlaying ? 1 : 0, pointerEvents: videoPlaying ? "auto" : "none" }}
+                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                    allowFullScreen
+                  />
+
+                  {/* Overlay with GIF preview — hidden once playing */}
+                  {!videoPlaying && (
                     <>
-                      {/* Animated GIF preview */}
                       <img
                         src="https://image.mux.com/jAJRQcO5mGsuhpGE01tMMiFUn70067j423fE5Er4gIJqk/animated.gif?width=320"
                         alt="Video preview"
                         className="absolute inset-0 w-full h-full object-cover"
                       />
-                      {/* Dark overlay */}
                       <div className="absolute inset-0 bg-black/30" />
-                      {/* Play button */}
                       <button
-                        onClick={() => setVideoPlaying(true)}
+                        onClick={() => {
+                          setVideoPlaying(true)
+                          const frame = document.getElementById("hero-mux-player") as HTMLIFrameElement | null
+                          if (frame?.contentWindow) {
+                            frame.contentWindow.postMessage(JSON.stringify({ type: "play" }), "*")
+                          }
+                        }}
                         className="absolute inset-0 flex items-center justify-center group"
                         aria-label="Play video"
                       >
@@ -158,26 +173,14 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
                           className="relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full transition-all duration-300 group-hover:scale-110"
                           style={{
                             background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
-                            boxShadow: "0 0 0 0 rgba(255,45,111,0.4), 0 16px 48px -8px rgba(255,45,111,0.6)",
+                            boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
                           }}
                         >
-                          {/* Pulse ring */}
-                          <span
-                            className="absolute inset-0 rounded-full animate-ping"
-                            style={{ background: "rgba(255,45,111,0.25)" }}
-                          />
+                          <span className="absolute inset-0 rounded-full animate-ping" style={{ background: "rgba(255,45,111,0.25)" }} />
                           <Play className="w-6 h-6 md:w-8 md:h-8 fill-white text-white ml-1" />
                         </div>
                       </button>
                     </>
-                  ) : (
-                    <iframe
-                      src="https://player.mux.com/jAJRQcO5mGsuhpGE01tMMiFUn70067j423fE5Er4gIJqk?autoplay=1&metadata-video-title=About+us+%281%29&video-title=About+us+%281%29"
-                      className="absolute inset-0 w-full h-full"
-                      style={{ border: "none" }}
-                      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                      allowFullScreen
-                    />
                   )}
                 </div>
               </div>

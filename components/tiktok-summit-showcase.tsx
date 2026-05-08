@@ -147,7 +147,14 @@ export function TikTokSummitShowcase() {
                     className="absolute inset-0 flex items-center justify-center group"
                     aria-label="Play video"
                   >
-                    <div className="relative flex items-center justify-center w-16 h-16 rounded-full border-2 border-white/80 bg-black/40 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-black/60 group-hover:border-white">
+                    <div
+                      className="relative flex items-center justify-center w-16 h-16 rounded-full transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                        boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
+                      }}
+                    >
+                      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: "rgba(255,45,111,0.25)" }} />
                       <Play className="w-6 h-6 fill-white text-white ml-0.5" />
                     </div>
                   </button>
@@ -201,7 +208,14 @@ export function TikTokSummitShowcase() {
                     className="absolute inset-0 flex items-center justify-center group"
                     aria-label="Play video"
                   >
-                    <div className="relative flex items-center justify-center w-14 h-14 rounded-full border-2 border-white/80 bg-black/40 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-black/60 group-hover:border-white">
+                    <div
+                      className="relative flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                        boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
+                      }}
+                    >
+                      <span className="absolute inset-0 rounded-full animate-ping" style={{ background: "rgba(255,45,111,0.25)" }} />
                       <Play className="w-5 h-5 fill-white text-white ml-0.5" />
                     </div>
                   </button>

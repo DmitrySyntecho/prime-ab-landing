@@ -52,33 +52,9 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
   const eventsCounter = useCountUp(1986, 2500)
   const ratingCounter = useCountUp(49, 2000, false)
   const { t } = useLanguage()
+  const [videoPlaying, setVideoPlaying] = useState(false)
 
-  useEffect(() => {
-    const container = document.getElementById("vidalytics-container")
-    if (!container || container.hasChildNodes()) return
 
-    const embedDiv = document.createElement("div")
-    embedDiv.id = "vidalytics_embed_M1gJkHNjodX8sVP6"
-    embedDiv.style.cssText = "width: 100%; position: relative; padding-top: 56.25%;"
-    container.appendChild(embedDiv)
-
-    const script = document.createElement("script")
-    script.type = "text/javascript"
-    script.innerHTML = `
-      (function (v, i, d, a, l, y, t, c, s) {
-        y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}
-        var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
-        if (!vsl){vsl=function(u,cb){
-          if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
-          if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}
-          else{s.onload=function(){vlf=1;cb();};}
-          i.getElementsByTagName("head")[0].appendChild(s);
-        };}
-        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
-      })(window, document, 'Vidalytics', 'vidalytics_embed_M1gJkHNjodX8sVP6', 'https://fast.vidalytics.com/embeds/o5ZPHiF7/M1gJkHNjodX8sVP6/');
-    `
-    container.appendChild(script)
-  }, [])
 
   return (
     <section className="relative pt-6 pb-12 md:pt-16 md:pb-24 lg:pt-20 lg:pb-28 overflow-hidden">
@@ -161,7 +137,52 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
               }}
             >
               <div className="m-3 md:m-5 rounded-[14px] md:rounded-[18px] overflow-hidden bg-black border border-white/[0.08]">
-                <div id="vidalytics-container" className="relative" />
+                <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+                  {/* iframe always mounted so it's ready to play instantly */}
+                  <iframe
+                    ref={(el) => { if (el) (el as any).__muxFrame = true }}
+                    id="hero-mux-player"
+                    src="https://player.mux.com/jAJRQcO5mGsuhpGE01tMMiFUn70067j423fE5Er4gIJqk?metadata-video-title=About+us+%281%29&video-title=About+us+%281%29"
+                    className="absolute inset-0 w-full h-full"
+                    style={{ border: "none", opacity: videoPlaying ? 1 : 0, pointerEvents: videoPlaying ? "auto" : "none" }}
+                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                    allowFullScreen
+                  />
+
+                  {/* Overlay with GIF preview — hidden once playing */}
+                  {!videoPlaying && (
+                    <>
+                      <img
+                        src="https://image.mux.com/jAJRQcO5mGsuhpGE01tMMiFUn70067j423fE5Er4gIJqk/animated.gif?width=320"
+                        alt="Video preview"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30" />
+                      <button
+                        onClick={() => {
+                          setVideoPlaying(true)
+                          const frame = document.getElementById("hero-mux-player") as HTMLIFrameElement | null
+                          if (frame?.contentWindow) {
+                            frame.contentWindow.postMessage(JSON.stringify({ type: "play" }), "*")
+                          }
+                        }}
+                        className="absolute inset-0 flex items-center justify-center group"
+                        aria-label="Play video"
+                      >
+                        <div
+                          className="relative flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full transition-all duration-300 group-hover:scale-110"
+                          style={{
+                            background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                            boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
+                          }}
+                        >
+                          <span className="absolute inset-0 rounded-full animate-ping" style={{ background: "rgba(255,45,111,0.25)" }} />
+                          <Play className="w-6 h-6 md:w-8 md:h-8 fill-white text-white ml-1" />
+                        </div>
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
 
               {/* Top tag */}

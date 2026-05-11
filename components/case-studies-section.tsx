@@ -1,9 +1,21 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
+import Image from "next/image"
 import { Play, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 
+const MUX_TIKTOK_ID = "KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU"
+
 const caseStudies = [
+  {
+    id: "tiktok-shop-summit-2026",
+    title: "TikTok Shop Summit 2026",
+    location: "Los Angeles Convention Center",
+    description:
+      "Full-scale AV production for TikTok's flagship creator summit — main stage, exhibition floor, LED walls, lighting design, and live streaming for 5,000+ attendees.",
+    muxId: MUX_TIKTOK_ID,
+    thumbnail: `https://image.mux.com/${MUX_TIKTOK_ID}/thumbnail.jpg?time=30&width=800`,
+  },
   {
     id: "cardone-ventures-conference",
     title: "Cardone Ventures Conference",
@@ -42,10 +54,56 @@ const caseStudies = [
   },
 ]
 
+const galleryPhotos = [
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000137-oGibzHwtWkf6CLMeeWszssTOlWjkYo.png",
+    alt: "TikTok Shop Summit main stage presentation",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000304-zVHYI5hdU5q1T4kg9ZZv3EHDhihlcA.png",
+    alt: "Summit stage setup with disco ball and lighting",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-07%20235523.png-tyMpiIJhCpfgFVGlaMwFegZT7MJEOg.jpeg",
+    alt: "TikTok Shop Summit exhibition floor",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000316-YGlJ1GaRhOEySjxu5xVqv8CEip6bc5.png",
+    alt: "Speaker presenting TikTok Shop ecosystem milestones",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000215-3olUV1CLz6o4o885yq3nTPneeOvCCX.png",
+    alt: "L-Acoustics speaker array setup",
+  },
+  {
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000231-ubLtmx4KjStNvWRYhyBW4CIxid6IfD.png",
+    alt: "Lighting console operator at work",
+  },
+]
+
+function PlayButton({ size = "lg" }: { size?: "lg" | "md" }) {
+  const dim = size === "lg" ? "w-20 h-20" : "w-14 h-14"
+  const icon = size === "lg" ? "w-8 h-8" : "w-6 h-6"
+  return (
+    <div
+      className={`relative flex items-center justify-center ${dim} rounded-full transition-all duration-300 group-hover:scale-110`}
+      style={{
+        background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+        boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
+      }}
+    >
+      <span
+        className="absolute inset-0 rounded-full animate-ping"
+        style={{ background: "rgba(255,45,111,0.25)" }}
+      />
+      <Play className={`${icon} fill-white text-white ml-0.5`} />
+    </div>
+  )
+}
+
 export function CaseStudiesSection() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
 
   const activeStudy = caseStudies[activeIndex]
 
@@ -59,16 +117,10 @@ export function CaseStudiesSection() {
     setActiveIndex((prev) => (prev === caseStudies.length - 1 ? 0 : prev + 1))
   }
 
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play()
-      setIsPlaying(true)
-    }
-  }
-
   return (
     <section className="py-20 md:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
+
         {/* Header */}
         <div className="flex items-end justify-between gap-6 mb-12 flex-wrap">
           <div className="max-w-3xl">
@@ -105,11 +157,19 @@ export function CaseStudiesSection() {
 
         {/* Main Content */}
         <div className="grid md:grid-cols-2 gap-8 items-center">
+
           {/* Video Player */}
-          <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800">
-            {activeStudy.youtubeId ? (
-              // YouTube embed
-              isPlaying ? (
+          <div className="relative aspect-video rounded-xl overflow-hidden bg-black">
+            {isPlaying ? (
+              activeStudy.muxId ? (
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  src={`https://stream.mux.com/${activeStudy.muxId}.m3u8`}
+                  autoPlay
+                  controls
+                  playsInline
+                />
+              ) : (
                 <iframe
                   src={`https://www.youtube.com/embed/${activeStudy.youtubeId}?autoplay=1&rel=0`}
                   title={activeStudy.title}
@@ -117,44 +177,28 @@ export function CaseStudiesSection() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
-              ) : (
-                <>
-                  <img
-                    src={activeStudy.thumbnail || "/placeholder.svg"}
-                    alt={activeStudy.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <button
-                      onClick={() => setIsPlaying(true)}
-                      className="w-20 h-20 bg-white/90 backdrop-blur-sm rounded-md flex items-center justify-center hover:bg-white transition-colors shadow-xl group"
-                    >
-                      <Play className="w-8 h-8 text-gray-900 fill-gray-900 ml-1 group-hover:scale-110 transition-transform" />
-                    </button>
-                  </div>
-                </>
               )
             ) : (
-              // Local video
               <>
-                <video
-                  ref={videoRef}
-                  src={activeStudy.videoUrl}
-                  poster={activeStudy.thumbnail}
+                <img
+                  src={activeStudy.thumbnail}
+                  alt={activeStudy.title}
                   className="w-full h-full object-cover"
-                  controls={isPlaying}
-                  onEnded={() => setIsPlaying(false)}
                 />
-                {!isPlaying && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <button
-                      onClick={handlePlay}
-                      className="w-20 h-20 bg-white/90 backdrop-blur-sm rounded-md flex items-center justify-center hover:bg-white transition-colors shadow-xl group"
-                    >
-                      <Play className="w-8 h-8 text-gray-900 fill-gray-900 ml-1 group-hover:scale-110 transition-transform" />
-                    </button>
-                  </div>
-                )}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)",
+                  }}
+                />
+                <button
+                  onClick={() => setIsPlaying(true)}
+                  className="absolute inset-0 flex items-center justify-center group"
+                  aria-label="Play video"
+                >
+                  <PlayButton size="lg" />
+                </button>
               </>
             )}
           </div>
@@ -163,19 +207,19 @@ export function CaseStudiesSection() {
           <div className="space-y-6">
             <div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{activeStudy.title}</h3>
-              <p className="text-gray-400">{activeStudy.location}</p>
+              <p className="text-white/45">{activeStudy.location}</p>
             </div>
 
-            <p className="text-gray-300 leading-relaxed">{activeStudy.description}</p>
+            <p className="text-white/65 leading-relaxed">{activeStudy.description}</p>
 
             <div className="flex flex-wrap gap-3 pt-1">
               <button
                 type="button"
                 onClick={() => document.dispatchEvent(new CustomEvent("openQuoteForm"))}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white font-extrabold text-[13px] tracking-[0.02em] transition-all hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-white font-extrabold text-[13px] tracking-[0.02em] transition-all hover:-translate-y-0.5"
                 style={{
-                  boxShadow:
-                    "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
+                  background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                  boxShadow: "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
                 }}
               >
                 Get a Similar Quote
@@ -190,7 +234,7 @@ export function CaseStudiesSection() {
             </div>
 
             {/* Thumbnails */}
-            <div className="flex gap-3 pt-4">
+            <div className="flex gap-3 pt-4 flex-wrap">
               {caseStudies.map((study, index) => (
                 <button
                   key={study.id}
@@ -198,14 +242,14 @@ export function CaseStudiesSection() {
                     setActiveIndex(index)
                     setIsPlaying(false)
                   }}
-                  className={`relative w-24 h-16 rounded-lg overflow-hidden transition-all ${
+                  className={`relative w-24 h-16 rounded-lg overflow-hidden transition-all flex-shrink-0 ${
                     index === activeIndex
-                      ? "ring-2 ring-[#FF2D6F] ring-offset-2 ring-offset-gray-900"
+                      ? "ring-2 ring-[#FF2D6F] ring-offset-2 ring-offset-[#0a0a12]"
                       : "opacity-50 hover:opacity-100"
                   }`}
                 >
                   <img
-                    src={study.thumbnail || "/placeholder.svg"}
+                    src={study.thumbnail}
                     alt={study.title}
                     className="w-full h-full object-cover"
                   />
@@ -214,6 +258,33 @@ export function CaseStudiesSection() {
             </div>
           </div>
         </div>
+
+        {/* Photo Gallery */}
+        <div className="mt-8 md:mt-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3">
+            {galleryPhotos.map((photo, i) => (
+              <div
+                key={i}
+                className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.07] group"
+                style={{ boxShadow: "0 8px 24px -6px rgba(0,0,0,0.4)" }}
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                  quality={70}
+                />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)" }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   )

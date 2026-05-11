@@ -6,6 +6,7 @@ import { Play, ChevronLeft, ChevronRight, ArrowRight, X } from "lucide-react"
 
 const MUX_TIKTOK_ID = "KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU"
 const MUX_MIAMI_ID = "a1VM513vYaAw3u8rBfLB8bG4MMma2FbIFN2YGepuxiA"
+const MUX_LCA_ID = "02w1uQtRVTaeIYfYMvYnHvIFZbFF19lAyoDYU00M00fGHk"
 
 const caseStudies = [
   {
@@ -75,6 +76,41 @@ const caseStudies = [
       {
         src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230009-wh5PZFGYur7OJIaQvQN8A7RGRh4rDp.png",
         alt: "Moving head lights preparation",
+      },
+    ],
+  },
+  {
+    id: "last-chance-for-animals-gala",
+    title: "Last Chance for Animals 40th Anniversary Gala",
+    location: "Los Angeles",
+    description:
+      "Full-scale AV production for Last Chance for Animals' 40th anniversary gala featuring main stage with truss rigging, moving head lighting with red and green accent lights, outdoor LED video walls, live band performance, and elegant table setup for 300+ guests.",
+    muxId: MUX_LCA_ID,
+    thumbnail: `https://image.mux.com/${MUX_LCA_ID}/thumbnail.jpg?time=5&width=800`,
+    gallery: [
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233012-JPPe7ocBfExqIK35PMroPI6ONSbzMP.png",
+        alt: "LCA gala live performance with colorful stage lighting",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233240-eolEYmitFpl10gusLoGo8s08SRCcmQ.png",
+        alt: "Crew installing LED video screen on truss structure",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233005-6Ztgx3qmShidGtyi8P6VZKLkiLsYaF.png",
+        alt: "Outdoor gala dinner event with band on stage",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233324-lqURk7LfsW2IUVvHWQJ2JzNlbjie01.png",
+        alt: "Main stage with large video display during presentation",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233037-06cETsun7apvToPDuirK2P0XUzBOuZ.png",
+        alt: "Gala crowd watching outdoor LED video content",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20232001-ZupXZh83YEQW6AnF5MEgWptVgOsfRw.png",
+        alt: "Main stage facade at night with LCA branding and truss lighting",
       },
     ],
   },

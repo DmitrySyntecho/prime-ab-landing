@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Play, ChevronLeft, ChevronRight, ArrowRight, X } from "lucide-react"
 
 const MUX_TIKTOK_ID = "KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU"
+const MUX_MIAMI_ID = "a1VM513vYaAw3u8rBfLB8bG4MMma2FbIFN2YGepuxiA"
 
 const caseStudies = [
   {
@@ -15,43 +16,67 @@ const caseStudies = [
       "Full-scale AV production for TikTok's flagship creator summit — main stage, exhibition floor, LED walls, lighting design, and live streaming for 5,000+ attendees.",
     muxId: MUX_TIKTOK_ID,
     thumbnail: `https://image.mux.com/${MUX_TIKTOK_ID}/thumbnail.jpg?time=30&width=800`,
-  },
-  // TODO: Add more case studies here
-  // {
-  //   id: "cardone-ventures-conference",
-  //   title: "Cardone Ventures Conference",
-  //   location: "Las Vegas Convention Center",
-  //   description:
-  //     "Full AV production for Cardone Ventures featuring massive LED video walls, professional stage design, dynamic lighting, and complete audio-visual support for their high-energy business conference.",
-  //   youtubeId: "Mx3ONczWWHM",
-  //   thumbnail: "https://img.youtube.com/vi/Mx3ONczWWHM/maxresdefault.jpg",
-  // },
-]
-
-const galleryPhotos = [
-  {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000137-oGibzHwtWkf6CLMeeWszssTOlWjkYo.png",
-    alt: "TikTok Shop Summit main stage presentation",
-  },
-  {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000304-zVHYI5hdU5q1T4kg9ZZv3EHDhihlcA.png",
-    alt: "Summit stage setup with disco ball and lighting",
-  },
-  {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-07%20235523.png-tyMpiIJhCpfgFVGlaMwFegZT7MJEOg.jpeg",
-    alt: "TikTok Shop Summit exhibition floor",
-  },
-  {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000316-YGlJ1GaRhOEySjxu5xVqv8CEip6bc5.png",
-    alt: "Speaker presenting TikTok Shop ecosystem milestones",
+    gallery: [
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000137-oGibzHwtWkf6CLMeeWszssTOlWjkYo.png",
+        alt: "TikTok Shop Summit main stage presentation",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000304-zVHYI5hdU5q1T4kg9ZZv3EHDhihlcA.png",
+        alt: "Summit stage setup with disco ball and lighting",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-07%20235523.png-tyMpiIJhCpfgFVGlaMwFegZT7MJEOg.jpeg",
+        alt: "TikTok Shop Summit exhibition floor",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000316-YGlJ1GaRhOEySjxu5xVqv8CEip6bc5.png",
+        alt: "Speaker presenting TikTok Shop ecosystem milestones",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000215-3olUV1CLz6o4o885yq3nTPneeOvCCX.png",
+        alt: "L-Acoustics speaker array setup",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000231-ubLtmx4KjStNvWRYhyBW4CIxid6IfD.png",
+        alt: "Lighting console operator at work",
+      },
+    ],
   },
   {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000215-3olUV1CLz6o4o885yq3nTPneeOvCCX.png",
-    alt: "L-Acoustics speaker array setup",
-  },
-  {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000231-ubLtmx4KjStNvWRYhyBW4CIxid6IfD.png",
-    alt: "Lighting console operator at work",
+    id: "miami-hotel-corporate-summit",
+    title: "IDB Group Corporate Summit",
+    location: "Intercontinental Miami",
+    description:
+      "Full AV production for an international corporate summit featuring LED video walls, professional staging with truss rigging, dynamic blue and magenta lighting design, and complete audio-visual support for executive panel discussions.",
+    muxId: MUX_MIAMI_ID,
+    thumbnail: `https://image.mux.com/${MUX_MIAMI_ID}/thumbnail.jpg?time=5&width=800`,
+    gallery: [
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230051-DD4GSbBdZaP6BDRrqau5XGpy0NeD9f.png",
+        alt: "IDB Group main stage with LED wall",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230058-q7VLRq8JfhjHGhFboOLl0h3eVjX8HY.png",
+        alt: "Conference session with blue lighting",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230113-wWo9Ytb62pUwFztNC66uqUHJhSdkQK.png",
+        alt: "Panel discussion on stage",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230029-XDiglrRKuyghMgAVAJrYtVZGcKDDIL.png",
+        alt: "LED wall testing with crew",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230035-em7XF6vy2QIgYdTIhqUDPJxzNWo1Jz.png",
+        alt: "Truss rigging and lighting setup",
+      },
+      {
+        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230009-wh5PZFGYur7OJIaQvQN8A7RGRh4rDp.png",
+        alt: "Moving head lights preparation",
+      },
+    ],
   },
 ]
 
@@ -82,11 +107,13 @@ export function CaseStudiesSection() {
 
   const activeStudy = caseStudies[activeIndex]
 
+  const galleryPhotos = activeStudy.gallery || []
+
   const closeLightbox = useCallback(() => setLightboxIndex(null), [])
   const prevPhoto = useCallback(() =>
-    setLightboxIndex((i) => (i === null ? null : (i - 1 + galleryPhotos.length) % galleryPhotos.length)), [])
+    setLightboxIndex((i) => (i === null ? null : (i - 1 + galleryPhotos.length) % galleryPhotos.length)), [galleryPhotos.length])
   const nextPhoto = useCallback(() =>
-    setLightboxIndex((i) => (i === null ? null : (i + 1) % galleryPhotos.length)), [])
+    setLightboxIndex((i) => (i === null ? null : (i + 1) % galleryPhotos.length)), [galleryPhotos.length])
 
   useEffect(() => {
     if (lightboxIndex === null) return
@@ -101,11 +128,13 @@ export function CaseStudiesSection() {
 
   const handlePrev = () => {
     setIsPlaying(false)
+    setLightboxIndex(null)
     setActiveIndex((prev) => (prev === 0 ? caseStudies.length - 1 : prev - 1))
   }
 
   const handleNext = () => {
     setIsPlaying(false)
+    setLightboxIndex(null)
     setActiveIndex((prev) => (prev === caseStudies.length - 1 ? 0 : prev + 1))
   }
 

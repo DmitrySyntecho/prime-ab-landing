@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
-import { Play, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import { Play, ChevronLeft, ChevronRight, ArrowRight, X } from "lucide-react"
 
 const MUX_TIKTOK_ID = "KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU"
 
@@ -104,8 +104,26 @@ function PlayButton({ size = "lg" }: { size?: "lg" | "md" }) {
 export function CaseStudiesSection() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const activeStudy = caseStudies[activeIndex]
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), [])
+  const prevPhoto = useCallback(() =>
+    setLightboxIndex((i) => (i === null ? null : (i - 1 + galleryPhotos.length) % galleryPhotos.length)), [])
+  const nextPhoto = useCallback(() =>
+    setLightboxIndex((i) => (i === null ? null : (i + 1) % galleryPhotos.length)), [])
+
+  useEffect(() => {
+    if (lightboxIndex === null) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox()
+      if (e.key === "ArrowLeft") prevPhoto()
+      if (e.key === "ArrowRight") nextPhoto()
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [lightboxIndex, closeLightbox, prevPhoto, nextPhoto])
 
   const handlePrev = () => {
     setIsPlaying(false)
@@ -263,10 +281,12 @@ export function CaseStudiesSection() {
         <div className="mt-8 md:mt-10">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3">
             {galleryPhotos.map((photo, i) => (
-              <div
+              <button
                 key={i}
-                className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.07] group"
+                onClick={() => setLightboxIndex(i)}
+                className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.07] group cursor-zoom-in"
                 style={{ boxShadow: "0 8px 24px -6px rgba(0,0,0,0.4)" }}
+                aria-label={`View photo: ${photo.alt}`}
               >
                 <Image
                   src={photo.src}
@@ -277,15 +297,72 @@ export function CaseStudiesSection() {
                   quality={70}
                 />
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)" }}
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)" }}
                 />
-              </div>
+              </button>
             ))}
           </div>
         </div>
-
       </div>
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ background: "rgba(0,0,0,0.92)" }}
+          onClick={closeLightbox}
+        >
+          {/* Close button */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          {/* Counter */}
+          <span className="absolute top-5 left-1/2 -translate-x-1/2 text-white/50 text-sm tabular-nums">
+            {lightboxIndex + 1} / {galleryPhotos.length}
+          </span>
+
+          {/* Prev arrow */}
+          <button
+            onClick={(e) => { e.stopPropagation(); prevPhoto() }}
+            className="absolute left-3 md:left-6 z-10 w-11 h-11 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all"
+            aria-label="Previous photo"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          {/* Image */}
+          <div
+            className="relative w-full max-w-5xl mx-12 md:mx-24"
+            style={{ aspectRatio: "16/9" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={galleryPhotos[lightboxIndex].src}
+              alt={galleryPhotos[lightboxIndex].alt}
+              fill
+              className="object-contain rounded-xl"
+              sizes="100vw"
+              quality={90}
+              priority
+            />
+          </div>
+
+          {/* Next arrow */}
+          <button
+            onClick={(e) => { e.stopPropagation(); nextPhoto() }}
+            className="absolute right-3 md:right-6 z-10 w-11 h-11 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all"
+            aria-label="Next photo"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      )}
     </section>
   )
 }

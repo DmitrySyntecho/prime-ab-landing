@@ -1,113 +1,121 @@
 "use client"
 
-import { useRef, useEffect } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useRef, useState } from "react"
+import { ChevronLeft, ChevronRight, Play } from "lucide-react"
+import Image from "next/image"
 
 interface Testimonial {
   name: string
   role: string
   event: string
-  vidalyticsId: string
-  vidalyticsAccount: string
+  muxPlaybackId: string
 }
 
 const testimonials: Testimonial[] = [
   {
     name: "Lauren Selman",
     role: "Client",
-    event: "Client Testimonial",
-    vidalyticsId: "iYZ2jDUGcHU7suUw",
-    vidalyticsAccount: "o5ZPHiF7",
+    event: "LCFA Testimonial",
+    muxPlaybackId: "r9kWCyYADL4UiiS24LHr7WhsFKCU35NaRoGBE9KKjfw",
   },
   {
-    name: "Yesmin Asmar",
-    role: "Event Producer",
-    event: "Corporate Event",
-    vidalyticsId: "Pl8oekG0aGdwKo45",
-    vidalyticsAccount: "o5ZPHiF7",
-  },
-  {
-    name: "Brandon Dawson",
-    role: "Business Owner, Thought Leader",
-    event: "Cardone Ventures",
-    vidalyticsId: "vH_ak_WsV9NzETN2",
-    vidalyticsAccount: "o5ZPHiF7",
-  },
-  {
-    name: "Robert Renaud",
-    role: "Event Coordinator",
-    event: "Mine Expo",
-    vidalyticsId: "vAK2Q7ZmlPoDkGe_",
-    vidalyticsAccount: "o5ZPHiF7",
-  },
-  {
-    name: "World Korean Business Forum",
-    role: "Business Forum Attendee",
-    event: "World Korean Business Forum",
-    vidalyticsId: "M1JSB8Bh5GAAXUx2",
-    vidalyticsAccount: "o5ZPHiF7",
-  },
-  {
-    name: "Betina",
-    role: "Representative",
-    event: "Amagi",
-    vidalyticsId: "erHmSiTCBsYN2WD0",
-    vidalyticsAccount: "o5ZPHiF7",
+    name: "Anaheim Korean",
+    role: "Business Forum",
+    event: "Korean Business Forum",
+    muxPlaybackId: "k02JdrX3uUL3vaLWVwQgwKKAr3zzs02UjfS024lZegwTUs",
   },
   {
     name: "Akansha",
     role: "Fashion Event Organizer",
     event: "Fashion Show Event",
-    vidalyticsId: "OtQKmhqMWWT0bJZk",
-    vidalyticsAccount: "o5ZPHiF7",
+    muxPlaybackId: "V5ohVqK8gSzpZVQVoBZNaBWdBZh7KS3MH902G36B00nPc",
   },
   {
-    name: "Miles",
-    role: "Event Organizer",
-    event: "Food Festival",
-    vidalyticsId: "Ka21kFYWXcmUrpl_",
-    vidalyticsAccount: "o5ZPHiF7",
+    name: "Brandon Dawson",
+    role: "Business Owner, Thought Leader",
+    event: "Cardone Ventures",
+    muxPlaybackId: "iC1cjBbxH3u016nHxWxl4D9jNSGAsClT00D01ZakHWstgI",
+  },
+  {
+    name: "Miles Canares",
+    role: "Co-founder",
+    event: "Family Style Fest 2024",
+    muxPlaybackId: "w028pMIX89Uq1sxto1b3u8Nxc8dVXFAMFTxUXSHnvUBA",
   },
   {
     name: "Gaby",
     role: "Event Producer",
-    event: "Event Production",
-    vidalyticsId: "3pptkh7gKz9yyJgJ",
-    vidalyticsAccount: "o5ZPHiF7",
+    event: "McRib Campaign",
+    muxPlaybackId: "SHzN01QG01Onqnn741ATcD02sbFFJCj7dE715EAYQjBg500",
   },
 ]
 
-function VidalyticsEmbed({ id, account }: { id: string; account: string }) {
-  const containerRef = useRef<HTMLDivElement>(null)
+function MuxVideoCard({ testimonial }: { testimonial: Testimonial }) {
+  const [isPlaying, setIsPlaying] = useState(false)
 
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container || container.querySelector(`#vidalytics_embed_${id}`)) return
-
-    const embedDiv = document.createElement("div")
-    embedDiv.id = `vidalytics_embed_${id}`
-    embedDiv.style.cssText = "width: 100%; height: 100%; position: relative;"
-    container.appendChild(embedDiv)
-
-    const script = document.createElement("script")
-    script.type = "text/javascript"
-    script.innerHTML = `
-      (function (v, i, d, a, l, y, t, c, s) {
-        y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}
-        var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
-        if (!vsl){vsl=function(u,cb){
-          if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
-          if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}
-          else{s.onload=function(){vlf=1;cb();};}
-          i.getElementsByTagName("head")[0].appendChild(s);
-        };}
-        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
-      })(window, document, 'Vidalytics', 'vidalytics_embed_${id}', 'https://fast.vidalytics.com/embeds/${account}/${id}/');
-    `
-    container.appendChild(script)
-  }, [id, account])
-
-  return <div ref={containerRef} className="absolute inset-0" />
+  return (
+    <div className="flex-shrink-0 w-[260px] md:w-[280px] relative">
+      <div
+        className="relative w-full overflow-hidden rounded-[18px] border border-white/[0.08] bg-black"
+        style={{
+          aspectRatio: "9 / 16",
+          boxShadow: "0 20px 40px -12px rgba(0,0,0,0.5)",
+        }}
+      >
+        {isPlaying ? (
+          <iframe
+            src={`https://player.mux.com/${testimonial.muxPlaybackId}?autoplay=1`}
+            className="absolute inset-0 w-full h-full"
+            style={{ border: "none" }}
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <>
+            <Image
+              src={`https://image.mux.com/${testimonial.muxPlaybackId}/thumbnail.jpg?time=1&width=400`}
+              alt={`${testimonial.name} testimonial thumbnail`}
+              fill
+              className="object-cover"
+              sizes="280px"
+              quality={80}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 40%, transparent 100%)",
+              }}
+            />
+            <button
+              onClick={() => setIsPlaying(true)}
+              className="absolute inset-0 flex items-center justify-center group"
+              aria-label="Play video"
+            >
+              <div
+                className="relative flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 group-hover:scale-110"
+                style={{
+                  background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                  boxShadow: "0 16px 48px -8px rgba(255,45,111,0.6)",
+                }}
+              >
+                <span
+                  className="absolute inset-0 rounded-full animate-ping"
+                  style={{ background: "rgba(255,45,111,0.25)" }}
+                />
+                <Play className="w-5 h-5 fill-white text-white ml-0.5" />
+              </div>
+            </button>
+          </>
+        )}
+      </div>
+      <div className="mt-3 px-1">
+        <h3 className="text-white font-semibold text-[14px]">{testimonial.event}</h3>
+        <p className="text-[#FF2D6F] text-[13px] font-medium">{testimonial.name}</p>
+        <p className="text-white/45 text-[11px]">{testimonial.role}</p>
+      </div>
+    </div>
+  )
 }
 
 export function TestimonialsCarousel() {
@@ -152,22 +160,7 @@ export function TestimonialsCarousel() {
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="flex-shrink-0 w-[260px] md:w-[280px] relative">
-                <div
-                  className="relative w-full overflow-hidden rounded-[18px] border border-white/[0.08] bg-black"
-                  style={{
-                    aspectRatio: "9 / 16",
-                    boxShadow: "0 20px 40px -12px rgba(0,0,0,0.5)",
-                  }}
-                >
-                  <VidalyticsEmbed id={testimonial.vidalyticsId} account={testimonial.vidalyticsAccount} />
-                </div>
-                <div className="mt-3 px-1">
-                  <h3 className="text-white font-semibold text-[14px]">{testimonial.event}</h3>
-                  <p className="text-[#FF2D6F] text-[13px] font-medium">{testimonial.name}</p>
-                  <p className="text-white/45 text-[11px]">{testimonial.role}</p>
-                </div>
-              </div>
+              <MuxVideoCard key={index} testimonial={testimonial} />
             ))}
           </div>
 

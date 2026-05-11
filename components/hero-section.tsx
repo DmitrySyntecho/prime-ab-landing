@@ -89,13 +89,7 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
                 {t("hero.cta.quote")}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
-              <a
-                href="#work"
-                className="inline-flex items-center justify-center gap-2.5 px-6 md:px-7 py-3.5 md:py-4 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-bold text-[13px] md:text-[14px] backdrop-blur-xl transition-all hover:bg-white/[0.10] hover:border-white/[0.22]"
-              >
-                <Play className="w-3.5 h-3.5 fill-current" />
-                Watch Reel
-              </a>
+
             </div>
 
             <div ref={eventsCounter.ref} className="flex gap-x-7 sm:gap-x-12 gap-y-4 flex-wrap">

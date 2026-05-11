@@ -16,42 +16,16 @@ const caseStudies = [
     muxId: MUX_TIKTOK_ID,
     thumbnail: `https://image.mux.com/${MUX_TIKTOK_ID}/thumbnail.jpg?time=30&width=800`,
   },
-  {
-    id: "cardone-ventures-conference",
-    title: "Cardone Ventures Conference",
-    location: "Las Vegas Convention Center",
-    description:
-      "Full AV production for Cardone Ventures featuring massive LED video walls, professional stage design, dynamic lighting, and complete audio-visual support for their high-energy business conference.",
-    youtubeId: "Mx3ONczWWHM",
-    thumbnail: "https://img.youtube.com/vi/Mx3ONczWWHM/maxresdefault.jpg",
-  },
-  {
-    id: "miami-intercontinental-corporate",
-    title: "International Corporate Summit",
-    location: "Intercontinental Miami",
-    description:
-      "Full AV production for an international company from Spain featuring 3 breakout rooms, live translation services, professional staging, and complete audio-visual support across multiple conference spaces.",
-    youtubeId: "sn4o09JgfLE",
-    thumbnail: "https://img.youtube.com/vi/sn4o09JgfLE/maxresdefault.jpg",
-  },
-  {
-    id: "wwd-style-awards",
-    title: "WWD Style Awards",
-    location: "Four Seasons Hotel, Los Angeles",
-    description:
-      "Full AV production for the prestigious WWD Style Awards featuring 4 LED video walls, premium sound system, and sophisticated lighting design. A high-end event with an elite crowd where flawless execution was essential.",
-    youtubeId: "TC_aLg8XNuE",
-    thumbnail: "https://img.youtube.com/vi/TC_aLg8XNuE/maxresdefault.jpg",
-  },
-  {
-    id: "saudi-us-water-summit",
-    title: "Saudi-US Water Summit 2025",
-    location: "Conference Center",
-    description:
-      "Full AV production for the Saudi-US Water Summit 2025, an international diplomatic and industry event bringing together leaders from both nations to discuss water sustainability and technology partnerships.",
-    youtubeId: "97O2dOi2ek0",
-    thumbnail: "https://img.youtube.com/vi/97O2dOi2ek0/maxresdefault.jpg",
-  },
+  // TODO: Add more case studies here
+  // {
+  //   id: "cardone-ventures-conference",
+  //   title: "Cardone Ventures Conference",
+  //   location: "Las Vegas Convention Center",
+  //   description:
+  //     "Full AV production for Cardone Ventures featuring massive LED video walls, professional stage design, dynamic lighting, and complete audio-visual support for their high-energy business conference.",
+  //   youtubeId: "Mx3ONczWWHM",
+  //   thumbnail: "https://img.youtube.com/vi/Mx3ONczWWHM/maxresdefault.jpg",
+  // },
 ]
 
 const galleryPhotos = [

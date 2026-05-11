@@ -81,7 +81,7 @@ const caseStudies = [
   },
   {
     id: "last-chance-for-animals-gala",
-    title: "Last Chance for Animals 40th Anniversary Gala",
+    title: "Last Chance for Animals Gala",
     location: "Los Angeles",
     description:
       "Full-scale AV production for Last Chance for Animals' 40th anniversary gala featuring main stage with truss rigging, moving head lighting with red and green accent lights, outdoor LED video walls, live band performance, and elegant table setup for 300+ guests.",

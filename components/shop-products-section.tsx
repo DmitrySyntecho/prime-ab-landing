@@ -19,6 +19,11 @@ import {
   Eye,
 } from "lucide-react"
 
+// Consistent number formatting to avoid hydration mismatch
+function formatPrice(num: number): string {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
 function DiscountRibbon({ discount }: { discount: number }) {
   return (
     <div className="absolute -right-[2px] top-4 z-20">
@@ -152,17 +157,17 @@ function ProductCard({ product }: { product: Product }) {
           <div>
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-black text-white">
-                ${product.price.toLocaleString()}
+                ${formatPrice(product.price)}
               </span>
               <span className="text-[13px] text-white/40">/ 24h</span>
             </div>
             {product.discount > 0 && (
               <div className="flex items-center gap-2 mt-0.5">
                 <span className="text-[13px] text-white/40 line-through">
-                  ${product.originalPrice.toLocaleString()}
+                  ${formatPrice(product.originalPrice)}
                 </span>
                 <span className="text-[11px] font-bold text-[#5BC25A]">
-                  Save ${savings.toLocaleString()}
+                  Save ${formatPrice(savings)}
                 </span>
               </div>
             )}

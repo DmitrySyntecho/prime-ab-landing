@@ -26,6 +26,11 @@ import {
   Zap,
 } from "lucide-react"
 
+// Consistent number formatting to avoid hydration mismatch
+function formatPrice(num: number): string {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
 type CheckoutStep = "cart" | "details" | "payment" | "confirmation"
 
 export default function ShopCartPage() {
@@ -332,10 +337,10 @@ export default function ShopCartPage() {
 
                           <div className="ml-auto text-right">
                             <div className="text-lg font-bold text-white">
-                              ${(item.product.price * item.quantity * item.rentalDays).toLocaleString()}
+                              ${formatPrice(item.product.price * item.quantity * item.rentalDays)}
                             </div>
                             <div className="text-[11px] text-white/40">
-                              ${item.product.price.toLocaleString()} x {item.quantity} x {item.rentalDays}d
+                              ${formatPrice(item.product.price)} x {item.quantity} x {item.rentalDays}d
                             </div>
                           </div>
                         </div>
@@ -546,7 +551,7 @@ export default function ShopCartPage() {
                           <div className="text-[12px] text-white/50">{item.quantity} x {item.rentalDays} days</div>
                         </div>
                         <div className="text-right font-bold text-white">
-                          ${(item.product.price * item.quantity * item.rentalDays).toLocaleString()}
+                          ${formatPrice(item.product.price * item.quantity * item.rentalDays)}
                         </div>
                       </div>
                     ))}
@@ -640,25 +645,25 @@ export default function ShopCartPage() {
               <div className="space-y-3 text-[14px] mb-6">
                 <div className="flex justify-between">
                   <span className="text-white/60">Subtotal ({items.length} items)</span>
-                  <span className="text-white">${getSubtotal().toLocaleString()}</span>
+                  <span className="text-white">${formatPrice(getSubtotal())}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-white/60">Delivery</span>
-                  <span className="text-white">${getDeliveryTotal().toLocaleString()}</span>
+                  <span className="text-white">${formatPrice(getDeliveryTotal())}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-white/60">Installation</span>
-                  <span className="text-white">${getInstallationTotal().toLocaleString()}</span>
+                  <span className="text-white">${formatPrice(getInstallationTotal())}</span>
                 </div>
                 {getSavings() > 0 && (
                   <div className="flex justify-between text-[#5BC25A]">
                     <span>You Save</span>
-                    <span className="font-bold">-${getSavings().toLocaleString()}</span>
+                    <span className="font-bold">-${formatPrice(getSavings())}</span>
                   </div>
                 )}
                 <div className="pt-3 border-t border-white/10 flex justify-between">
                   <span className="text-lg font-bold text-white">Total</span>
-                  <span className="text-lg font-bold text-white">${getTotal().toLocaleString()}</span>
+                  <span className="text-lg font-bold text-white">${formatPrice(getTotal())}</span>
                 </div>
               </div>
 

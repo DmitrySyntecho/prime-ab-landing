@@ -28,6 +28,11 @@ import {
   Timer,
 } from "lucide-react"
 
+// Consistent number formatting to avoid hydration mismatch
+function formatPrice(num: number): string {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
 export default function ShopProductDetailPage(props: { params: Promise<{ slug: string }> }) {
   const params = use(props.params)
   const product = getProductBySlug(params.slug)
@@ -222,16 +227,16 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
                 <div>
                   <div className="text-[13px] text-white/50 mb-1">Rental Price</div>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-black text-white">${product.price.toLocaleString()}</span>
+                    <span className="text-4xl font-black text-white">${formatPrice(product.price)}</span>
                     <span className="text-white/40">/ 24h</span>
                   </div>
                   {product.discount > 0 && (
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-[14px] text-white/40 line-through">
-                        ${product.originalPrice.toLocaleString()}
+                        ${formatPrice(product.originalPrice)}
                       </span>
                       <span className="text-[12px] font-bold text-[#5BC25A]">
-                        Save ${(product.originalPrice - product.price).toLocaleString()}/day
+                        Save ${formatPrice(product.originalPrice - product.price)}/day
                       </span>
                     </div>
                   )}
@@ -288,25 +293,25 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
               <div className="space-y-2 pt-4 border-t border-white/10">
                 <div className="flex justify-between text-[13px]">
                   <span className="text-white/50">Rental ({quantity} x {rentalDays} days)</span>
-                  <span className="text-white">${subtotal.toLocaleString()}</span>
+                  <span className="text-white">${formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-[13px]">
                   <span className="text-white/50">Delivery ({quantity} unit)</span>
-                  <span className="text-white">${deliveryTotal.toLocaleString()}</span>
+                  <span className="text-white">${formatPrice(deliveryTotal)}</span>
                 </div>
                 <div className="flex justify-between text-[13px]">
                   <span className="text-white/50">Setup & Installation</span>
-                  <span className="text-white">${installationTotal.toLocaleString()}</span>
+                  <span className="text-white">${formatPrice(installationTotal)}</span>
                 </div>
                 {savings > 0 && (
                   <div className="flex justify-between text-[13px]">
                     <span className="text-[#5BC25A]">You Save</span>
-                    <span className="text-[#5BC25A] font-bold">-${savings.toLocaleString()}</span>
+                    <span className="text-[#5BC25A] font-bold">-${formatPrice(savings)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-lg font-bold pt-3 border-t border-white/10">
                   <span className="text-white">Total</span>
-                  <span className="text-white">${total.toLocaleString()}</span>
+                  <span className="text-white">${formatPrice(total)}</span>
                 </div>
               </div>
             </div>
@@ -447,7 +452,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
                       {p.name}
                     </h4>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-lg font-bold text-white">${p.price.toLocaleString()}</span>
+                      <span className="text-lg font-bold text-white">${formatPrice(p.price)}</span>
                       <span className="text-[12px] text-white/40">/ 24h</span>
                     </div>
                   </div>

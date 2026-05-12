@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { CountUp } from "@/components/count-up"
 import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
-import { FifaProductsSection } from "@/components/fifa-products-section"
+
 import {
   ArrowRight,
   CheckCircle2,
@@ -1120,11 +1120,6 @@ export default function FIFA2026PackagesPage() {
           </div>
         </div>
       </section>
-
-      {/* LED Wall Products Section */}
-      <div id="products">
-        <FifaProductsSection />
-      </div>
 
       <ContactSpecialistBanner
         variant="fifa"

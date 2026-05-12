@@ -473,9 +473,6 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
             Back to Shop
           </Link>
         </div>
-        </div>
-        </div>
-        </div>
       </div>
       <CartPanel />
     </>

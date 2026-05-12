@@ -6,6 +6,7 @@ import "./globals.css"
 
 import { Manrope, JetBrains_Mono } from "next/font/google"
 import { LanguageProvider } from "@/lib/i18n/language-context"
+import { CartProvider } from "@/lib/cart-context"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { BackgroundFX } from "@/components/background-fx"
@@ -94,10 +95,12 @@ export default function RootLayout({
         <BackgroundFX />
         <div className="page-content">
           <LanguageProvider>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-            <GlobalCTA />
+            <CartProvider>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+              <GlobalCTA />
+            </CartProvider>
           </LanguageProvider>
         </div>
         <Analytics />

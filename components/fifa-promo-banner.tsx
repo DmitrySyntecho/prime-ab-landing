@@ -201,7 +201,7 @@ export function FIFAPromoBanner() {
               {/* Main image */}
               <div className="relative rounded-[24px] overflow-hidden" style={{ boxShadow: "0 24px 60px -16px rgba(0,0,0,0.7)" }}>
                 <img
-                  src="/images/banners/fifa-watch-match.png"
+                  src="/images/banners/fifa-watch-match.webp"
                   alt="Premium sports lounge with audience watching a live football match on a massive LED screen"
                   className="w-full h-[340px] object-cover"
                 />

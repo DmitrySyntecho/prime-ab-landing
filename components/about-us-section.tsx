@@ -75,7 +75,7 @@ export function AboutUsSection() {
               }}
             >
               <img
-                src="/images/about/brands-trust-2.png"
+                src="/images/about/brands-trust-2.webp"
                 alt="Large-scale professional conference with blue lighting and LED screen"
                 className="w-full h-full object-cover"
               />
@@ -105,7 +105,7 @@ export function AboutUsSection() {
               }}
             >
               <img
-                src="/images/about/brands-trust-1.png"
+                src="/images/about/brands-trust-1.webp"
                 alt="Event production team managing stage with warm lighting and camera operators"
                 className="w-full h-full object-cover"
               />

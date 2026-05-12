@@ -13,7 +13,7 @@ const promoBanners = [
     subheadline: "From conference rooms to large venues — we design and install complete AV systems.",
     cta: "Request a Quote",
     ctaLink: "/services/av-installation",
-    image: "/images/banners/permanent-av-banner.png",
+    image: "/images/banners/permanent-av-banner.webp",
   },
   {
     id: 2,

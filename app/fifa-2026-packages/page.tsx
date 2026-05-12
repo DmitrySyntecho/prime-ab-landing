@@ -537,7 +537,7 @@ export default function FIFA2026PackagesPage() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/banners/fifa-watch-match.png"
+                  src="/images/banners/fifa-watch-match.webp"
                   alt="Premium fan zone with audience watching a live football match on a massive LED wall"
                   className="absolute inset-0 w-full h-full object-cover"
                 />

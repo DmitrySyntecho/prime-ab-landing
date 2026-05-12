@@ -8,12 +8,12 @@ export function ServicesGridSection() {
   const { t } = useLanguage()
 
   const services = [
-    { icon: Layers, title: t("services.fullAV"), description: t("services.fullAV.desc"), image: "/images/services/event-production.png" },
-    { icon: Volume2, title: t("services.audio"), description: t("services.audio.desc"), image: "/images/services/sound-audio.png" },
-    { icon: Monitor, title: t("services.visual"), description: t("services.visual.desc"), image: "/images/services/video-led.png" },
-    { icon: Lightbulb, title: t("services.lighting"), description: t("services.lighting.desc"), image: "/images/services/lighting.png" },
-    { icon: Box, title: t("services.staging"), description: t("services.staging.desc"), image: "/images/services/staging-rigging.png" },
-    { icon: Building2, title: t("services.installation"), description: t("services.installation.desc"), image: "/images/services/permanent-av.png" },
+    { icon: Layers, title: t("services.fullAV"), description: t("services.fullAV.desc"), image: "/images/services/event-production.webp" },
+    { icon: Volume2, title: t("services.audio"), description: t("services.audio.desc"), image: "/images/services/sound-audio.webp" },
+    { icon: Monitor, title: t("services.visual"), description: t("services.visual.desc"), image: "/images/services/video-led.webp" },
+    { icon: Lightbulb, title: t("services.lighting"), description: t("services.lighting.desc"), image: "/images/services/lighting.webp" },
+    { icon: Box, title: t("services.staging"), description: t("services.staging.desc"), image: "/images/services/staging-rigging.webp" },
+    { icon: Building2, title: t("services.installation"), description: t("services.installation.desc"), image: "/images/services/permanent-av.webp" },
   ]
 
   return (

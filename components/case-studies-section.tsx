@@ -70,12 +70,12 @@ const caseStudies = [
     muxId: MUX_AMAGI_ID,
     thumbnail: `https://image.mux.com/${MUX_AMAGI_ID}/thumbnail.jpg?time=5&width=800`,
     gallery: [
-      { src: "/images/case-studies/amagi-1.png", alt: "Amagi breakout room setup with podium and displays" },
-      { src: "/images/case-studies/amagi-2.png", alt: "Keynote speaker on main stage with IMAG screens" },
-      { src: "/images/case-studies/amagi-3.png", alt: "Crew installing LED panels on truss" },
-      { src: "/images/case-studies/amagi-4.png", alt: "Live camera operation with multi-cam monitors" },
-      { src: "/images/case-studies/amagi-5.png", alt: "Main stage LED wall with gradient FAST branding" },
-      { src: "/images/case-studies/amagi-6.png", alt: "Allen & Heath audio mixing console during session" },
+      { src: "/images/case-studies/amagi-1.webp", alt: "Amagi breakout room setup with podium and displays" },
+      { src: "/images/case-studies/amagi-2.webp", alt: "Keynote speaker on main stage with IMAG screens" },
+      { src: "/images/case-studies/amagi-3.webp", alt: "Crew installing LED panels on truss" },
+      { src: "/images/case-studies/amagi-4.webp", alt: "Live camera operation with multi-cam monitors" },
+      { src: "/images/case-studies/amagi-5.webp", alt: "Main stage LED wall with gradient FAST branding" },
+      { src: "/images/case-studies/amagi-6.webp", alt: "Allen & Heath audio mixing console during session" },
     ],
   },
 ]
@@ -285,9 +285,12 @@ export function CaseStudiesSection() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3">
             {galleryPhotos.map((photo, i) => (
               <button
-                key={i}
+                /* key includes the study id so React fully remounts each Image
+                   when the active project changes — prevents the previous
+                   project's photos from lingering while the new ones load. */
+                key={`${activeStudy.id}-${photo.src}`}
                 onClick={() => setLightboxIndex(i)}
-                className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.07] group cursor-zoom-in"
+                className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.07] group cursor-zoom-in bg-white/[0.04]"
                 style={{ boxShadow: "0 8px 24px -6px rgba(0,0,0,0.4)" }}
                 aria-label={`View photo: ${photo.alt}`}
               >

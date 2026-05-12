@@ -75,7 +75,7 @@ export function AboutUsSection() {
               }}
             >
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/The%20AV%20Partner%20Brands%20Trust%202-zsOWcEKnWKWh4eSqty1bgdiZZ7nIHx.png"
+                src="/images/about/brands-trust-2.png"
                 alt="Large-scale professional conference with blue lighting and LED screen"
                 className="w-full h-full object-cover"
               />
@@ -105,7 +105,7 @@ export function AboutUsSection() {
               }}
             >
               <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/The%20AV%20Partner%20Brands%20Trust%201-doTDHV8ggH5F5ukDVOXkqByRtJ1DZJ.png"
+                src="/images/about/brands-trust-1.png"
                 alt="Event production team managing stage with warm lighting and camera operators"
                 className="w-full h-full object-cover"
               />

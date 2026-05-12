@@ -7,18 +7,9 @@ import Link from "next/link"
 import { Heart, ArrowRight, Sparkles, HandHeart, Users2, CalendarHeart } from "lucide-react"
 
 const photos = [
-  {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%20203-QoWFphzNyfwrxuEGh75AMhfUIOKHDG.jpg",
-    alt: "Young girl with walker giving thumbs up",
-  },
-  {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hp-pic-24-e1628612380252%202-Bp5ksTNrx681fiU1vt9cTNJ9ctDwUm.jpg",
-    alt: "Girl with leg braces in front of flower wall",
-  },
-  {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hp-pic-24-e1628612380252%204-XDUV1CjRfltBumjAfO9P6rVRuHCigM.jpg",
-    alt: "Girl smiling with her dog",
-  },
+  { src: "/images/charity/charity-1.jpg", alt: "Young girl with walker giving thumbs up" },
+  { src: "/images/charity/charity-2.jpg", alt: "Girl with leg braces in front of flower wall" },
+  { src: "/images/charity/charity-3.jpg", alt: "Girl smiling with her dog" },
 ]
 
 function useCount(end: number, duration = 2200) {

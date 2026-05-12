@@ -5,56 +5,16 @@ import { ArrowUpRight, Sparkles } from "lucide-react"
 const openQuote = () => document.dispatchEvent(new CustomEvent("openQuoteForm"))
 
 const eventTypes = [
-  {
-    title: "Experiential Marketing",
-    tag: "Experiential",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Experiential%20marketing-vYAUbwiPig45lAJzfarEXdIKAbjTZe.jpg",
-  },
-  {
-    title: "Corporate",
-    tag: "Corporate",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Corporate-E3tKS0MABTofZcmhdoHVVEyhkAh5Kl.jpg",
-  },
-  {
-    title: "Fashion Shows",
-    tag: "Fashion",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Fashion%20Shows-aIbZ3y807gno7xMk1JZJYcLg5xBkWm.jpg",
-  },
-  {
-    title: "Trade Shows",
-    tag: "Trade Show",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Trade%20Shows-Sscp4foYRjBW3kAjCZ0TRt0edYsKLU.jpg",
-  },
-  {
-    title: "Weddings",
-    tag: "Wedding",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Weddings-gK3394JnqcOGlRtZXtWDVYqw99FquJ.jpg",
-  },
-  {
-    title: "Festivals",
-    tag: "Festival",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Festivals-HAcI2BOMxummPcEsFesmsmH4Yd7FN6.jpg",
-  },
-  {
-    title: "Virtual/Hybrid Events",
-    tag: "Hybrid",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Hybrid%20Events-qBsLQwfuMjSaNohtGgKqJ4upGvoE7n.jpg",
-  },
-  {
-    title: "Private",
-    tag: "Private",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Private-85iBaxC1bVnIyPk6F10NUoenClOBWB.jpg",
-  },
-  {
-    title: "Film Production",
-    tag: "Production",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Film%20Production-x2ksHfPGsNvxkWcEbn30TgQGTGKAlA.jpg",
-  },
-  {
-    title: "Grand Opening",
-    tag: "Grand Opening",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Grand%20Opening-ftl0W1QPoIvvYBEhx0N71Ziozx2mru.jpg",
-  },
+  { title: "Experiential Marketing", tag: "Experiential", image: "/images/events/experiential-marketing.jpg" },
+  { title: "Corporate", tag: "Corporate", image: "/images/events/corporate.jpg" },
+  { title: "Fashion Shows", tag: "Fashion", image: "/images/events/fashion-shows.jpg" },
+  { title: "Trade Shows", tag: "Trade Show", image: "/images/events/trade-shows.jpg" },
+  { title: "Weddings", tag: "Wedding", image: "/images/events/weddings.jpg" },
+  { title: "Festivals", tag: "Festival", image: "/images/events/festivals.jpg" },
+  { title: "Virtual/Hybrid Events", tag: "Hybrid", image: "/images/events/hybrid-events.jpg" },
+  { title: "Private", tag: "Private", image: "/images/events/private.jpg" },
+  { title: "Film Production", tag: "Production", image: "/images/events/film-production.jpg" },
+  { title: "Grand Opening", tag: "Grand Opening", image: "/images/events/grand-opening.jpg" },
 ]
 
 export function EventTypesSection() {

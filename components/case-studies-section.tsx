@@ -18,30 +18,12 @@ const caseStudies = [
     muxId: MUX_TIKTOK_ID,
     thumbnail: `https://image.mux.com/${MUX_TIKTOK_ID}/thumbnail.jpg?time=30&width=800`,
     gallery: [
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000137-oGibzHwtWkf6CLMeeWszssTOlWjkYo.png",
-        alt: "TikTok Shop Summit main stage presentation",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000304-zVHYI5hdU5q1T4kg9ZZv3EHDhihlcA.png",
-        alt: "Summit stage setup with disco ball and lighting",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-07%20235523.png-tyMpiIJhCpfgFVGlaMwFegZT7MJEOg.jpeg",
-        alt: "TikTok Shop Summit exhibition floor",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000316-YGlJ1GaRhOEySjxu5xVqv8CEip6bc5.png",
-        alt: "Speaker presenting TikTok Shop ecosystem milestones",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000215-3olUV1CLz6o4o885yq3nTPneeOvCCX.png",
-        alt: "L-Acoustics speaker array setup",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000231-ubLtmx4KjStNvWRYhyBW4CIxid6IfD.png",
-        alt: "Lighting console operator at work",
-      },
+      { src: "/images/case-studies/tiktok-1.png", alt: "TikTok Shop Summit main stage presentation" },
+      { src: "/images/case-studies/tiktok-2.png", alt: "Summit stage setup with disco ball and lighting" },
+      { src: "/images/case-studies/tiktok-3.jpg", alt: "TikTok Shop Summit exhibition floor" },
+      { src: "/images/case-studies/tiktok-4.png", alt: "Speaker presenting TikTok Shop ecosystem milestones" },
+      { src: "/images/case-studies/tiktok-5.png", alt: "L-Acoustics speaker array setup" },
+      { src: "/images/case-studies/tiktok-6.png", alt: "Lighting console operator at work" },
     ],
   },
   {
@@ -53,30 +35,12 @@ const caseStudies = [
     muxId: MUX_MIAMI_ID,
     thumbnail: `https://image.mux.com/${MUX_MIAMI_ID}/thumbnail.jpg?time=5&width=800`,
     gallery: [
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230051-DD4GSbBdZaP6BDRrqau5XGpy0NeD9f.png",
-        alt: "IDB Group main stage with LED wall",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230058-q7VLRq8JfhjHGhFboOLl0h3eVjX8HY.png",
-        alt: "Conference session with blue lighting",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230113-wWo9Ytb62pUwFztNC66uqUHJhSdkQK.png",
-        alt: "Panel discussion on stage",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230029-XDiglrRKuyghMgAVAJrYtVZGcKDDIL.png",
-        alt: "LED wall testing with crew",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230035-em7XF6vy2QIgYdTIhqUDPJxzNWo1Jz.png",
-        alt: "Truss rigging and lighting setup",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20230009-wh5PZFGYur7OJIaQvQN8A7RGRh4rDp.png",
-        alt: "Moving head lights preparation",
-      },
+      { src: "/images/case-studies/miami-1.png", alt: "IDB Group main stage with LED wall" },
+      { src: "/images/case-studies/miami-2.png", alt: "Conference session with blue lighting" },
+      { src: "/images/case-studies/miami-3.png", alt: "Panel discussion on stage" },
+      { src: "/images/case-studies/miami-4.png", alt: "LED wall testing with crew" },
+      { src: "/images/case-studies/miami-5.png", alt: "Truss rigging and lighting setup" },
+      { src: "/images/case-studies/miami-6.png", alt: "Moving head lights preparation" },
     ],
   },
   {
@@ -88,30 +52,12 @@ const caseStudies = [
     muxId: MUX_LCA_ID,
     thumbnail: `https://image.mux.com/${MUX_LCA_ID}/thumbnail.jpg?time=5&width=800`,
     gallery: [
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233012-JPPe7ocBfExqIK35PMroPI6ONSbzMP.png",
-        alt: "LCA gala live performance with colorful stage lighting",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233240-eolEYmitFpl10gusLoGo8s08SRCcmQ.png",
-        alt: "Crew installing LED video screen on truss structure",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233005-6Ztgx3qmShidGtyi8P6VZKLkiLsYaF.png",
-        alt: "Outdoor gala dinner event with band on stage",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233324-lqURk7LfsW2IUVvHWQJ2JzNlbjie01.png",
-        alt: "Main stage with large video display during presentation",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20233037-06cETsun7apvToPDuirK2P0XUzBOuZ.png",
-        alt: "Gala crowd watching outdoor LED video content",
-      },
-      {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-11%20232001-ZupXZh83YEQW6AnF5MEgWptVgOsfRw.png",
-        alt: "Main stage facade at night with LCA branding and truss lighting",
-      },
+      { src: "/images/case-studies/lca-1.png", alt: "LCA gala live performance with colorful stage lighting" },
+      { src: "/images/case-studies/lca-2.png", alt: "Crew installing LED video screen on truss structure" },
+      { src: "/images/case-studies/lca-3.png", alt: "Outdoor gala dinner event with band on stage" },
+      { src: "/images/case-studies/lca-4.png", alt: "Main stage with large video display during presentation" },
+      { src: "/images/case-studies/lca-5.png", alt: "Gala crowd watching outdoor LED video content" },
+      { src: "/images/case-studies/lca-6.png", alt: "Main stage facade at night with LCA branding and truss lighting" },
     ],
   },
 ]

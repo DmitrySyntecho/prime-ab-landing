@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { CountUp } from "@/components/count-up"
 import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
+
 import {
   ArrowRight,
   CheckCircle2,

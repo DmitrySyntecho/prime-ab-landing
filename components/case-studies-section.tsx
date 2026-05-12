@@ -7,6 +7,7 @@ import { Play, ChevronLeft, ChevronRight, ArrowRight, X } from "lucide-react"
 const MUX_TIKTOK_ID = "KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU"
 const MUX_MIAMI_ID = "a1VM513vYaAw3u8rBfLB8bG4MMma2FbIFN2YGepuxiA"
 const MUX_LCA_ID = "02w1uQtRVTaeIYfYMvYnHvIFZbFF19lAyoDYU00M00fGHk"
+const MUX_AMAGI_ID = "BrD9vKSat02duCjNodPZ00a02ZRc5QfKAno007TIKGF5vOU"
 
 const caseStudies = [
   {
@@ -58,6 +59,23 @@ const caseStudies = [
       { src: "/images/case-studies/lca-4.png", alt: "Main stage with large video display during presentation" },
       { src: "/images/case-studies/lca-5.png", alt: "Gala crowd watching outdoor LED video content" },
       { src: "/images/case-studies/lca-6.png", alt: "Main stage facade at night with LCA branding and truss lighting" },
+    ],
+  },
+  {
+    id: "amagi-fast-conference",
+    title: "Amagi FAST Conference",
+    location: "Los Angeles",
+    description:
+      "Full AV production for Amagi's FAST Conference 2024 featuring massive LED video wall with gradient branding, 3D stage letters, multi-camera live production, Allen & Heath audio mixing, breakout room setups, and professional lighting design.",
+    muxId: MUX_AMAGI_ID,
+    thumbnail: `https://image.mux.com/${MUX_AMAGI_ID}/thumbnail.jpg?time=5&width=800`,
+    gallery: [
+      { src: "/images/case-studies/amagi-1.png", alt: "Amagi breakout room setup with podium and displays" },
+      { src: "/images/case-studies/amagi-2.png", alt: "Keynote speaker on main stage with IMAG screens" },
+      { src: "/images/case-studies/amagi-3.png", alt: "Crew installing LED panels on truss" },
+      { src: "/images/case-studies/amagi-4.png", alt: "Live camera operation with multi-cam monitors" },
+      { src: "/images/case-studies/amagi-5.png", alt: "Main stage LED wall with gradient FAST branding" },
+      { src: "/images/case-studies/amagi-6.png", alt: "Allen & Heath audio mixing console during session" },
     ],
   },
 ]

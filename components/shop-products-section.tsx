@@ -31,9 +31,9 @@ function DiscountRibbon({ discount }: { discount: number }) {
       <div
         className="relative px-3 py-1.5 text-[11px] font-black tracking-wide text-white uppercase"
         style={{
-          background: "linear-gradient(135deg, #E61D25 0%, #BF1119 100%)",
+          background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%, 8px 50%)",
-          boxShadow: "0 4px 12px rgba(230, 29, 37, 0.5)",
+          boxShadow: "0 4px 12px rgba(255,45,111,0.5)",
         }}
       >
         -{discount}% OFF
@@ -42,7 +42,7 @@ function DiscountRibbon({ discount }: { discount: number }) {
         className="absolute -bottom-1 right-0 w-0 h-0"
         style={{
           borderLeft: "6px solid transparent",
-          borderTop: "4px solid #8B0000",
+          borderTop: "4px solid #C41F55",
         }}
       />
     </div>
@@ -151,7 +151,7 @@ function ProductCard({ product }: { product: Product }) {
               className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium text-white/70"
               style={{ background: "rgba(255,255,255,0.06)" }}
             >
-              <CheckCircle2 className="w-2.5 h-2.5 text-[#5BC25A]" />
+              <CheckCircle2 className="w-2.5 h-2.5 text-[#FF5E3A]" />
               {feature}
             </span>
           ))}
@@ -173,7 +173,7 @@ function ProductCard({ product }: { product: Product }) {
                   <span className="text-[13px] text-white/40 line-through">
                     ${formatPrice(product.originalPrice)}
                   </span>
-                  <span className="text-[11px] font-bold text-[#5BC25A]">
+                  <span className="text-[11px] font-bold text-[#FF5E3A]">
                     Save ${formatPrice(savings)}
                   </span>
                 </div>
@@ -184,17 +184,21 @@ function ProductCard({ product }: { product: Product }) {
           <div
             className="flex items-center gap-3 p-3 rounded-xl mb-4"
             style={{
-              background: "rgba(91,194,90,0.08)",
-              border: "1px solid rgba(91,194,90,0.15)",
+              background: "rgba(255,94,58,0.08)",
+              border: "1px solid rgba(255,94,58,0.18)",
             }}
           >
-            <div className="flex items-center gap-1.5 text-[11px] text-white/70">
-              <Truck className="w-3.5 h-3.5 text-[#5BC25A]" />
+            <div className="flex items-center gap-1.5 text-[11px] font-semibold"
+              style={{ color: "#FF8A5E" }}
+            >
+              <Truck className="w-3.5 h-3.5" style={{ color: "#FF5E3A" }} />
               <span>Delivery: ${product.deliveryFee}</span>
             </div>
             <div className="w-px h-3 bg-white/10" />
-            <div className="flex items-center gap-1.5 text-[11px] text-white/70">
-              <Wrench className="w-3.5 h-3.5 text-[#5BC25A]" />
+            <div className="flex items-center gap-1.5 text-[11px] font-semibold"
+              style={{ color: "#FF8A5E" }}
+            >
+              <Wrench className="w-3.5 h-3.5" style={{ color: "#FF5E3A" }} />
               <span>Setup: ${product.installationFee}</span>
             </div>
           </div>
@@ -205,13 +209,10 @@ function ProductCard({ product }: { product: Product }) {
               disabled={isAdding}
               className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-bold transition-all disabled:opacity-70"
               style={{
-                background: isInCart
-                  ? "linear-gradient(135deg, #5BC25A 0%, #3CAC3B 100%)"
-                  : "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
                 color: "#fff",
-                boxShadow: isInCart
-                  ? "0 8px 20px -4px rgba(91,194,90,0.5)"
-                  : "0 8px 20px -4px rgba(255,45,111,0.5)",
+                boxShadow: "0 8px 20px -4px rgba(255,45,111,0.5)",
+                opacity: isInCart ? 0.8 : 1,
               }}
             >
               {isAdding ? (
@@ -257,19 +258,19 @@ export function ShopProductsSection() {
           <span
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[11px] font-bold tracking-[0.16em] uppercase"
             style={{
-              background: "rgba(91,194,90,0.12)",
-              border: "1px solid rgba(91,194,90,0.25)",
-              color: "#7ED77D",
+              background: "rgba(255,45,111,0.10)",
+              border: "1px solid rgba(255,45,111,0.22)",
+              color: "#FF7A9A",
             }}
           >
             <Package className="w-3.5 h-3.5" />
             LED Wall Rentals
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 text-balance">
             Professional{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #5BC25A 0%, #3CAC3B 100%)",
+                background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -278,7 +279,7 @@ export function ShopProductsSection() {
               LED Screens
             </span>
           </h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto">
+          <p className="text-white/50 text-lg max-w-2xl mx-auto leading-relaxed">
             Premium LED video walls available for rental. Perfect for FIFA World Cup watch parties,
             corporate events, and outdoor festivals.
           </p>
@@ -292,7 +293,7 @@ export function ShopProductsSection() {
             { icon: Zap, text: "24/7 Technical Support" },
           ].map(({ icon: Icon, text }) => (
             <div key={text} className="flex items-center gap-2 text-[13px] text-white/60">
-              <Icon className="w-4 h-4 text-[#5BC25A]" />
+              <Icon className="w-4 h-4 text-[#FF5E3A]" />
               <span>{text}</span>
             </div>
           ))}

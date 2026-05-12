@@ -8,6 +8,7 @@ const MUX_TIKTOK_ID = "KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU"
 const MUX_MIAMI_ID = "a1VM513vYaAw3u8rBfLB8bG4MMma2FbIFN2YGepuxiA"
 const MUX_LCA_ID = "02w1uQtRVTaeIYfYMvYnHvIFZbFF19lAyoDYU00M00fGHk"
 const MUX_AMAGI_ID = "BrD9vKSat02duCjNodPZ00a02ZRc5QfKAno007TIKGF5vOU"
+const MUX_RAMP_ID = "xIFaCY1GdKzQxjtm01L87JqoPAKob3YBscDUzSiSF1300"
 
 const caseStudies = [
   {
@@ -76,6 +77,23 @@ const caseStudies = [
       { src: "/images/case-studies/amagi-4.webp", alt: "Live camera operation with multi-cam monitors" },
       { src: "/images/case-studies/amagi-5.webp", alt: "Main stage LED wall with gradient FAST branding" },
       { src: "/images/case-studies/amagi-6.webp", alt: "Allen & Heath audio mixing console during session" },
+    ],
+  },
+  {
+    id: "ramp-tailgate-bts",
+    title: "Ramp Tailgate BTS",
+    location: "Los Angeles",
+    description:
+      "Behind-the-scenes production for Ramp's branded tailgate activation — full staging, lighting design, sound reinforcement, and on-site camera coverage capturing every moment of the outdoor fan experience.",
+    muxId: MUX_RAMP_ID,
+    thumbnail: `https://image.mux.com/${MUX_RAMP_ID}/thumbnail.jpg?time=5&width=800`,
+    gallery: [
+      { src: "/images/case-studies/ramp-1.webp", alt: "Ramp Tailgate activation behind-the-scenes setup" },
+      { src: "/images/case-studies/ramp-2.webp", alt: "Outdoor staging and rigging during build" },
+      { src: "/images/case-studies/ramp-3.webp", alt: "Branded production area with Ramp signage" },
+      { src: "/images/case-studies/ramp-4.webp", alt: "Lighting and audio gear positioned around the event" },
+      { src: "/images/case-studies/ramp-5.webp", alt: "Crew capturing live footage during the activation" },
+      { src: "/images/case-studies/ramp-6.webp", alt: "Tailgate brand experience in full production" },
     ],
   },
 ]

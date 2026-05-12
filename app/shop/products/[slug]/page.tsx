@@ -42,7 +42,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
     notFound()
   }
 
-  const { addItem, items } = useCart()
+  const { addItem, items, openCart } = useCart()
   const [quantity, setQuantity] = useState(1)
   const [rentalDays, setRentalDays] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
@@ -51,7 +51,10 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
   const handleAddToCart = () => {
     setIsAdding(true)
     addItem(product, quantity, rentalDays)
-    setTimeout(() => setIsAdding(false), 1500)
+    setTimeout(() => {
+      setIsAdding(false)
+      openCart()
+    }, 400)
   }
 
   const subtotal = product.price * quantity * rentalDays

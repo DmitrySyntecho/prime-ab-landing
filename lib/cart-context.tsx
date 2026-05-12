@@ -48,12 +48,19 @@ interface CartContextType {
   getSavings: () => number
   getTotal: () => number
   itemCount: number
+  isCartOpen: boolean
+  openCart: () => void
+  closeCart: () => void
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
+  const [isCartOpen, setIsCartOpen] = useState(false)
+
+  const openCart = useCallback(() => setIsCartOpen(true), [])
+  const closeCart = useCallback(() => setIsCartOpen(false), [])
 
   const addItem = useCallback((product: Product, quantity = 1, rentalDays = 1) => {
     setItems((prev) => {
@@ -135,6 +142,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
         getSavings,
         getTotal,
         itemCount,
+        isCartOpen,
+        openCart,
+        closeCart,
       }}
     >
       {children}

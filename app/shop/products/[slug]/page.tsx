@@ -26,7 +26,7 @@ import {
   RefreshCw,
   Activity,
   Timer,
-} from "lucide-react"
+import { CartPanel } from "@/components/cart-panel"
 
 // Consistent number formatting to avoid hydration mismatch
 function formatPrice(num: number): string {
@@ -78,13 +78,14 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
   }
 
   return (
-    <div className="relative min-h-screen">
+    <>
+      <div className="relative min-h-screen">
       <div className="fixed inset-0 -z-10 pointer-events-none" aria-hidden>
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 85% 0%, rgba(60,172,59,0.20) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 0% 25%, rgba(42,57,141,0.28) 0%, transparent 60%), radial-gradient(ellipse 80% 60% at 50% 110%, rgba(230,29,37,0.12) 0%, transparent 60%), linear-gradient(180deg, #060A18 0%, #0A0F1F 50%, #060A18 100%)",
+              "radial-gradient(ellipse 70% 50% at 85% 0%, rgba(255,45,111,0.15) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 0% 25%, rgba(255,94,58,0.12) 0%, transparent 60%), radial-gradient(ellipse 80% 60% at 50% 110%, rgba(255,45,111,0.08) 0%, transparent 60%), linear-gradient(180deg, #060A18 0%, #0A0F1F 50%, #060A18 100%)",
           }}
         />
       </div>
@@ -92,7 +93,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
       <div
         className="h-1 w-full"
         style={{
-          background: "linear-gradient(90deg, #3CAC3B 0% 33.33%, #E61D25 33.33% 66.66%, #2A398D 66.66% 100%)",
+          background: "linear-gradient(90deg, #FF2D6F 0%, #FF5E3A 100%)",
         }}
       />
 
@@ -125,9 +126,9 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
                   <div
                     className="relative px-4 py-2 text-[13px] font-black tracking-wide text-white uppercase"
                     style={{
-                      background: "linear-gradient(135deg, #E61D25 0%, #BF1119 100%)",
+                      background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
                       clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%, 10px 50%)",
-                      boxShadow: "0 6px 20px rgba(230, 29, 37, 0.6)",
+                      boxShadow: "0 6px 20px rgba(255, 45, 111, 0.6)",
                     }}
                   >
                     -{product.discount}% OFF
@@ -179,9 +180,9 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
                 >
                   <div
                     className="w-10 h-10 rounded-lg flex items-center justify-center"
-                    style={{ background: "rgba(91,194,90,0.15)" }}
+                    style={{ background: "rgba(255,45,111,0.15)" }}
                   >
-                    <Icon className="w-5 h-5 text-[#5BC25A]" />
+                    <Icon className="w-5 h-5 text-[#FF5E3A]" />
                   </div>
                   <div>
                     <div className="text-[12px] font-bold text-white">{title}</div>
@@ -198,14 +199,14 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
               <div className="flex items-center gap-2 mb-2">
                 <span
                   className="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider"
-                  style={{ background: "rgba(91,194,90,0.15)", color: "#7ED77D" }}
+                  style={{ background: "rgba(255,45,111,0.15)", color: "#FF5E3A" }}
                 >
                   {product.dimensions}
                 </span>
                 {product.inStock && (
                   <span
                     className="px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider"
-                    style={{ background: "rgba(91,194,90,0.15)", color: "#5BC25A" }}
+                    style={{ background: "rgba(255,45,111,0.15)", color: "#FF5E3A" }}
                   >
                     In Stock
                   </span>
@@ -219,8 +220,8 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
             <div
               className="p-5 rounded-2xl mb-6"
               style={{
-                background: "linear-gradient(135deg, rgba(91,194,90,0.10) 0%, rgba(60,172,59,0.05) 100%)",
-                border: "1px solid rgba(91,194,90,0.20)",
+                background: "linear-gradient(135deg, rgba(255,45,111,0.10) 0%, rgba(255,94,58,0.05) 100%)",
+                border: "1px solid rgba(255,45,111,0.20)",
               }}
             >
               <div className="flex items-end justify-between mb-4">
@@ -235,7 +236,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
                       <span className="text-[14px] text-white/40 line-through">
                         ${formatPrice(product.originalPrice)}
                       </span>
-                      <span className="text-[12px] font-bold text-[#5BC25A]">
+                      <span className="text-[12px] font-bold text-[#FF5E3A]">
                         Save ${formatPrice(product.originalPrice - product.price)}/day
                       </span>
                     </div>
@@ -305,8 +306,8 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
                 </div>
                 {savings > 0 && (
                   <div className="flex justify-between text-[13px]">
-                    <span className="text-[#5BC25A]">You Save</span>
-                    <span className="text-[#5BC25A] font-bold">-${formatPrice(savings)}</span>
+                    <span className="text-[#FF5E3A]">You Save</span>
+                    <span className="text-[#FF5E3A] font-bold">-${formatPrice(savings)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-lg font-bold pt-3 border-t border-white/10">
@@ -324,12 +325,12 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
                 className="flex-1 flex items-center justify-center gap-3 py-4 rounded-xl text-[15px] font-bold transition-all hover:-translate-y-0.5 disabled:opacity-70"
                 style={{
                   background: isInCart
-                    ? "linear-gradient(135deg, #5BC25A 0%, #3CAC3B 100%)"
-                    : "linear-gradient(135deg, #E61D25 0%, #BF1119 100%)",
+                    ? "linear-gradient(135deg, #FF5E3A 0%, #FF2D6F 100%)"
+                    : "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
                   color: "#fff",
                   boxShadow: isInCart
-                    ? "0 12px 32px -8px rgba(91,194,90,0.6)"
-                    : "0 12px 32px -8px rgba(230,29,37,0.6)",
+                    ? "0 12px 32px -8px rgba(255,94,58,0.6)"
+                    : "0 12px 32px -8px rgba(255,45,111,0.6)",
                 }}
               >
                 {isAdding ? (
@@ -395,7 +396,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
                       }}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <Icon className="w-4 h-4 text-[#5BC25A]" />
+                        <Icon className="w-4 h-4 text-[#FF5E3A]" />
                         <span className="text-[11px] text-white/50 uppercase tracking-wider">
                           {specLabels[key]}
                         </span>
@@ -413,7 +414,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
               <div className="grid grid-cols-2 gap-2">
                 {product.includes.map((item) => (
                   <div key={item} className="flex items-center gap-2 text-[13px] text-white/70">
-                    <CheckCircle2 className="w-4 h-4 text-[#5BC25A] flex-shrink-0" />
+                        <CheckCircle2 className="w-4 h-4 text-[#FF5E3A] flex-shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -472,6 +473,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
           </Link>
         </div>
       </div>
-    </div>
+      <CartPanel />
+    </>
   )
 }

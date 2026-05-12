@@ -89,7 +89,7 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
                     style={{ boxShadow: `inset 0 0 30px ${accent1}22` }}
                   >
                     <Image
-                      src="/egor.png"
+                      src="/egor.webp"
                       alt="Egor — AV Production Specialist"
                       fill
                       className="object-cover"

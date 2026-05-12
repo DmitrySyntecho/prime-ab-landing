@@ -266,14 +266,13 @@ export function ShopProductsSection() {
             <Package className="w-3.5 h-3.5" />
             LED Wall Rentals
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 text-balance">
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 text-balance leading-tight">
             Professional{" "}
             <span
+              className="inline-block px-3 py-1 rounded-sm"
               style={{
-                background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                background: "linear-gradient(90deg, #FF2D6F 0%, #FF5E3A 100%)",
+                color: "#fff",
               }}
             >
               LED Screens

@@ -258,9 +258,9 @@ export function ShopProductsSection() {
           <span
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[11px] font-bold tracking-[0.16em] uppercase"
             style={{
-              background: "rgba(255,45,111,0.10)",
-              border: "1px solid rgba(255,45,111,0.22)",
-              color: "#FF7A9A",
+              background: "linear-gradient(90deg, rgba(255,45,111,0.15) 0%, rgba(255,94,58,0.12) 100%)",
+              border: "1px solid rgba(255,94,58,0.25)",
+              color: "#FFB366",
             }}
           >
             <Package className="w-3.5 h-3.5" />

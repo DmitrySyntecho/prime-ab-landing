@@ -63,7 +63,7 @@ function ProductCard({ product }: { product: Product }) {
 
   return (
     <div
-      className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+      className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
       style={{
         background: "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
         border: "1px solid rgba(255,255,255,0.10)",
@@ -129,7 +129,7 @@ function ProductCard({ product }: { product: Product }) {
         </div>
       </Link>
 
-      <div className="p-5">
+      <div className="p-5 flex flex-col flex-1">
         <Link href={`/shop/products/${product.slug}`}>
           <h3 className="text-lg font-bold text-white mb-1 line-clamp-1 group-hover:text-[#FF2D6F] transition-colors">
             {product.name}
@@ -140,7 +140,7 @@ function ProductCard({ product }: { product: Product }) {
           {product.description.substring(0, 80)}...
         </p>
 
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className="flex flex-wrap gap-1.5 mb-4 min-h-[28px]">
           {product.features.slice(0, 3).map((feature) => (
             <span
               key={feature}
@@ -153,87 +153,91 @@ function ProductCard({ product }: { product: Product }) {
           ))}
         </div>
 
-        <div className="flex items-end justify-between mb-4">
-          <div>
+        {/* Price + actions pinned to bottom */}
+        <div className="mt-auto">
+          <div className="mb-4">
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-black text-white">
                 ${formatPrice(product.price)}
               </span>
               <span className="text-[13px] text-white/40">/ 24h</span>
             </div>
-            {product.discount > 0 && (
-              <div className="flex items-center gap-2 mt-0.5">
-                <span className="text-[13px] text-white/40 line-through">
-                  ${formatPrice(product.originalPrice)}
-                </span>
-                <span className="text-[11px] font-bold text-[#5BC25A]">
-                  Save ${formatPrice(savings)}
-                </span>
-              </div>
-            )}
+            {/* Reserve space so cards without discount stay the same height */}
+            <div className="h-5 mt-0.5">
+              {product.discount > 0 && (
+                <div className="flex items-center gap-2">
+                  <span className="text-[13px] text-white/40 line-through">
+                    ${formatPrice(product.originalPrice)}
+                  </span>
+                  <span className="text-[11px] font-bold text-[#5BC25A]">
+                    Save ${formatPrice(savings)}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
 
-        <div
-          className="flex items-center gap-3 p-3 rounded-xl mb-4"
-          style={{
-            background: "rgba(91,194,90,0.08)",
-            border: "1px solid rgba(91,194,90,0.15)",
-          }}
-        >
-          <div className="flex items-center gap-1.5 text-[11px] text-white/70">
-            <Truck className="w-3.5 h-3.5 text-[#5BC25A]" />
-            <span>Delivery: ${product.deliveryFee}</span>
-          </div>
-          <div className="w-px h-3 bg-white/10" />
-          <div className="flex items-center gap-1.5 text-[11px] text-white/70">
-            <Wrench className="w-3.5 h-3.5 text-[#5BC25A]" />
-            <span>Setup: ${product.installationFee}</span>
-          </div>
-        </div>
-
-        <div className="flex gap-2">
-          <button
-            onClick={handleAddToCart}
-            disabled={isAdding}
-            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-bold transition-all disabled:opacity-70"
+          <div
+            className="flex items-center gap-3 p-3 rounded-xl mb-4"
             style={{
-              background: isInCart
-                ? "linear-gradient(135deg, #5BC25A 0%, #3CAC3B 100%)"
-                : "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
-              color: "#fff",
-              boxShadow: isInCart
-                ? "0 8px 20px -4px rgba(91,194,90,0.5)"
-                : "0 8px 20px -4px rgba(255,45,111,0.5)",
+              background: "rgba(91,194,90,0.08)",
+              border: "1px solid rgba(91,194,90,0.15)",
             }}
           >
-            {isAdding ? (
-              <>
-                <CheckCircle2 className="w-4 h-4 animate-bounce" />
-                Added!
-              </>
-            ) : isInCart ? (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                In Cart
-              </>
-            ) : (
-              <>
-                <ShoppingCart className="w-4 h-4" />
-                Add to Cart
-              </>
-            )}
-          </button>
-          <Link
-            href={`/shop/products/${product.slug}`}
-            className="flex items-center justify-center w-12 rounded-xl transition-all hover:bg-white/10"
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.10)",
-            }}
-          >
-            <ArrowRight className="w-4 h-4 text-white/70" />
-          </Link>
+            <div className="flex items-center gap-1.5 text-[11px] text-white/70">
+              <Truck className="w-3.5 h-3.5 text-[#5BC25A]" />
+              <span>Delivery: ${product.deliveryFee}</span>
+            </div>
+            <div className="w-px h-3 bg-white/10" />
+            <div className="flex items-center gap-1.5 text-[11px] text-white/70">
+              <Wrench className="w-3.5 h-3.5 text-[#5BC25A]" />
+              <span>Setup: ${product.installationFee}</span>
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            <button
+              onClick={handleAddToCart}
+              disabled={isAdding}
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-bold transition-all disabled:opacity-70"
+              style={{
+                background: isInCart
+                  ? "linear-gradient(135deg, #5BC25A 0%, #3CAC3B 100%)"
+                  : "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                color: "#fff",
+                boxShadow: isInCart
+                  ? "0 8px 20px -4px rgba(91,194,90,0.5)"
+                  : "0 8px 20px -4px rgba(255,45,111,0.5)",
+              }}
+            >
+              {isAdding ? (
+                <>
+                  <CheckCircle2 className="w-4 h-4 animate-bounce" />
+                  Added!
+                </>
+              ) : isInCart ? (
+                <>
+                  <CheckCircle2 className="w-4 h-4" />
+                  In Cart
+                </>
+              ) : (
+                <>
+                  <ShoppingCart className="w-4 h-4" />
+                  Add to Cart
+                </>
+              )}
+            </button>
+            <Link
+              href={`/shop/products/${product.slug}`}
+              className="flex items-center justify-center w-12 rounded-xl transition-all hover:bg-white/10"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.10)",
+              }}
+            >
+              <ArrowRight className="w-4 h-4 text-white/70" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>

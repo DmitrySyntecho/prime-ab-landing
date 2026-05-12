@@ -537,7 +537,7 @@ export default function FIFA2026PackagesPage() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dont%20watch%20the%20match%20throw%20the%20match-N5nhDK5GHKm8KLjMZZB9dEfuNCzHrS.png"
+                  src="/images/banners/fifa-watch-match.png"
                   alt="Premium fan zone with audience watching a live football match on a massive LED wall"
                   className="absolute inset-0 w-full h-full object-cover"
                 />

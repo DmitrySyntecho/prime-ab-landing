@@ -8,48 +8,12 @@ export function ServicesGridSection() {
   const { t } = useLanguage()
 
   const services = [
-    {
-      icon: Layers,
-      title: t("services.fullAV"),
-      description: t("services.fullAV.desc"),
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/End-to-end%20audio-visual%20production%20for%20conferences%2C%20galas%2C%20and%20corporate%20events-mW3a3SJfR4RBrNF8FfxQOsTmKjJRna.png",
-    },
-    {
-      icon: Volume2,
-      title: t("services.audio"),
-      description: t("services.audio.desc"),
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Crystal-clear%20sound%20design%20and%20live%20mixing%20for%20any%20venue%20size-VxEs87OVOPDR8ffKKx4YEap1r5eafg.png",
-    },
-    {
-      icon: Monitor,
-      title: t("services.visual"),
-      description: t("services.visual.desc"),
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Stunning%20LED%20walls%2C%20projection%20mapping%2C%20and%20video%20content-EqFDBAJFSHPNab8rqV3kDn3SBrjqOL.png",
-    },
-    {
-      icon: Lightbulb,
-      title: t("services.lighting"),
-      description: t("services.lighting.desc"),
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Atmospheric%20lighting%20that%20transforms%20spaces%20and%20sets%20the%20mood-Ag1RKC62g6FtPXUhwoU8mO2PVsgxpa.png",
-    },
-    {
-      icon: Box,
-      title: t("services.staging"),
-      description: t("services.staging.desc"),
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Custom%20stage%20builds%20and%20professional%20rigging%20solutions-fdIO7htYCqrYAeiASkRu923nbsrKuc.png",
-    },
-    {
-      icon: Building2,
-      title: t("services.installation"),
-      description: t("services.installation.desc"),
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Long-term%20AV%20solutions%20for%20venues%20and%20corporate%20spaces-eLJk0gWrVrRI88yRBJKNqj7X9H8rmV.png",
-    },
+    { icon: Layers, title: t("services.fullAV"), description: t("services.fullAV.desc"), image: "/images/services/event-production.png" },
+    { icon: Volume2, title: t("services.audio"), description: t("services.audio.desc"), image: "/images/services/sound-audio.png" },
+    { icon: Monitor, title: t("services.visual"), description: t("services.visual.desc"), image: "/images/services/video-led.png" },
+    { icon: Lightbulb, title: t("services.lighting"), description: t("services.lighting.desc"), image: "/images/services/lighting.png" },
+    { icon: Box, title: t("services.staging"), description: t("services.staging.desc"), image: "/images/services/staging-rigging.png" },
+    { icon: Building2, title: t("services.installation"), description: t("services.installation.desc"), image: "/images/services/permanent-av.png" },
   ]
 
   return (

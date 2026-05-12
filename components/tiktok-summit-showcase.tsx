@@ -4,26 +4,12 @@ import { useState } from "react"
 import Image from "next/image"
 import { Sparkles, Play } from "lucide-react"
 
-// Images with Next.js Image optimization (quality + sizes for responsive loading)
+// Images with Next.js Image optimization
 const images = {
-  // Top right row
-  topRight1: {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-07%20235523.png-tyMpiIJhCpfgFVGlaMwFegZT7MJEOg.jpeg",
-    alt: "TikTok Shop Summit exhibition floor",
-  },
-  topRight2: {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000231-ubLtmx4KjStNvWRYhyBW4CIxid6IfD.png",
-    alt: "Lighting console operator at work",
-  },
-  // Middle right row
-  midRight1: {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000316-YGlJ1GaRhOEySjxu5xVqv8CEip6bc5.png",
-    alt: "Speaker presenting TikTok Shop ecosystem milestones",
-  },
-  midRight2: {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-05-08%20000215-3olUV1CLz6o4o885yq3nTPneeOvCCX.png",
-    alt: "L-Acoustics speaker array setup",
-  },
+  topRight1: { src: "/images/case-studies/tiktok-3.jpg", alt: "TikTok Shop Summit exhibition floor" },
+  topRight2: { src: "/images/case-studies/tiktok-6.png", alt: "Lighting console operator at work" },
+  midRight1: { src: "/images/case-studies/tiktok-4.png", alt: "Speaker presenting TikTok Shop ecosystem milestones" },
+  midRight2: { src: "/images/case-studies/tiktok-5.png", alt: "L-Acoustics speaker array setup" },
 }
 
 function GalleryImage({

@@ -26,6 +26,7 @@ import {
   RefreshCw,
   Activity,
   Timer,
+} from "lucide-react"
 import { CartPanel } from "@/components/cart-panel"
 
 // Consistent number formatting to avoid hydration mismatch

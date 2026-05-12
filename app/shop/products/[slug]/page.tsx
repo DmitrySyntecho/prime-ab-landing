@@ -81,7 +81,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
   return (
     <>
       <div className="relative min-h-screen">
-      <div className="fixed inset-0 -z-10 pointer-events-none" aria-hidden>
+        <div className="fixed inset-0 -z-10 pointer-events-none" aria-hidden>
         <div
           className="absolute inset-0"
           style={{
@@ -472,6 +472,9 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
             <ArrowLeft className="w-4 h-4" />
             Back to Shop
           </Link>
+        </div>
+        </div>
+        </div>
         </div>
       </div>
       <CartPanel />

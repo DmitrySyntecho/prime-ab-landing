@@ -12,10 +12,7 @@ export const metadata: Metadata = {
 
 export default function ShopPage() {
   return (
-    <div
-      className="min-h-screen"
-      style={{ background: "var(--color-background, #0A0A0F)" }}
-    >
+    <div className="min-h-screen">
       <ShopProductsSection />
     </div>
   )

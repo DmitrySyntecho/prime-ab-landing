@@ -55,6 +55,7 @@ function ProductCard({ product }: { product: Product }) {
   const savings = product.originalPrice - product.price
 
   return (
+    <>
     <div
       className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
       style={{
@@ -224,6 +225,7 @@ function ProductCard({ product }: { product: Product }) {
       onClose={() => setQuoteOpen(false)}
       serviceName={product.name}
     />
+    </>
   )
 }
 

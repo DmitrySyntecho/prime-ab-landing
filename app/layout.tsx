@@ -1,0 +1,110 @@
+import type React from "react"
+import type { Metadata, Viewport } from "next"
+
+import { Analytics } from "@vercel/analytics/next"
+import "./globals.css"
+
+import { Manrope, JetBrains_Mono } from "next/font/google"
+import { LanguageProvider } from "@/lib/i18n/language-context"
+import { CartProvider } from "@/lib/cart-context"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
+import { BackgroundFX } from "@/components/background-fx"
+import { GlobalCTA } from "@/components/global-cta"
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-manrope",
+  display: "swap",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+})
+
+// Viewport must be its own export in Next 14+ (was deprecated inside metadata).
+// maximumScale: 1 + userScalable: false disable pinch-zoom AND iOS focus auto-zoom.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+  themeColor: "#03070a",
+}
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://primelineav.com"),
+  title: "Prime Line AV | When Everything Is Just Perfect",
+  description:
+    "The AV partner brands trust for corporate events, brand activations, experiential marketing, and studio work. Full-service audio, video, lighting, and staging production.",
+  generator: "v0.app",
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico"],
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Prime Line AV",
+    title: "Prime Line AV | When Everything Is Just Perfect",
+    description:
+      "Full AV production for corporate events, brand activations, experiential marketing, and studio work.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Prime Line AV — Full-service audio, video, lighting & staging",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prime Line AV | When Everything Is Just Perfect",
+    description:
+      "Full AV production for corporate events, brand activations, experiential marketing, and studio work.",
+    images: ["/og-image.jpg"],
+  },
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en" className={`${manrope.variable} ${jetbrainsMono.variable}`}>
+      <body className="font-sans antialiased text-[#e6f4ee]">
+        <BackgroundFX />
+        <div className="page-content">
+          <LanguageProvider>
+            <CartProvider>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+              <GlobalCTA />
+            </CartProvider>
+          </LanguageProvider>
+        </div>
+        <Analytics />
+      </body>
+    </html>
+  )
+}

@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { TestimonialsCarousel } from "@/components/testimonials-carousel"
 import { TrustedBySection } from "@/components/trusted-by-section"
-import { CheckCircle2, Phone, Mail, ArrowRight } from "lucide-react"
+import { CheckCircle2, Phone, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export default function ThankYouPage() {
@@ -96,13 +96,6 @@ export default function ThankYouPage() {
                 >
                   <Phone className="w-5 h-5" />
                   Call Us Now
-                </a>
-                <a
-                  href="mailto:info@primelineav.com"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
-                >
-                  <Mail className="w-5 h-5" />
-                  Email Us
                 </a>
               </div>
             </div>

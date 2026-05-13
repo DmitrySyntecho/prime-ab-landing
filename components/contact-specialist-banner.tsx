@@ -1,11 +1,10 @@
 "use client"
 
 import Image from "next/image"
-import { Phone, CalendarDays, Mail, Sparkles } from "lucide-react"
+import { Phone, CalendarDays, Sparkles } from "lucide-react"
 
 const PHONE = "(786) 933-8488"
 const WHATSAPP_LINK = `https://wa.me/17869338488`
-const EMAIL = "info@primelineav.com"
 
 interface ContactSpecialistBannerProps {
   onStartQuote?: () => void
@@ -193,14 +192,6 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
                   <CalendarDays className="w-4 h-4" />
                   Request a Quote
                 </button>
-
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm text-white/70 border border-white/10 bg-white/03 hover:text-white hover:border-white/20 transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center"
-                >
-                  <Mail className="w-4 h-4" />
-                  Email Us
-                </a>
               </div>
 
               {/* Topic pills */}

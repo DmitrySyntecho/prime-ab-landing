@@ -38,7 +38,10 @@ export default function ServicePage() {
         onStartQuote={handleStartQuote}
       />
 
-      <TrustedBySection />
+      {/* Pull logos up into the transparent tail of the hero image */}
+      <div className="relative z-10 -mt-[180px] md:-mt-[240px] lg:-mt-[280px]">
+        <TrustedBySection />
+      </div>
 
       <ServiceDescriptionSection
         heading={service.descriptionHeading}

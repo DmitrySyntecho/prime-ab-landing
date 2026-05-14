@@ -13,37 +13,49 @@ interface ServiceHeroProps {
 
 const PHONE = "(786) 933-8488"
 
+// Real alpha-fade at the bottom: a CSS mask is applied to the wrapper holding
+// the photo + the left-side dim layer, so the actual pixels become transparent
+// (revealing the page background) — instead of being painted over by a dark
+// gradient block.
+const BOTTOM_FADE_MASK =
+  "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0) 100%)"
+
 export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: ServiceHeroProps) {
-  // The hero spans the full viewport height. We pull it up with a negative top
-  // margin so the background image extends behind the sticky header (which is
-  // semi-transparent + blurred, so the photo shows through). Extra height is
-  // added back via min-h so the bottom edge still lines up with the viewport.
   return (
     <section
       className="relative isolate overflow-hidden flex items-center
                  -mt-[100px] md:-mt-[120px] lg:-mt-[140px]
                  min-h-[calc(100svh+100px)] md:min-h-[calc(100vh+120px)] lg:min-h-[calc(100vh+140px)]"
     >
-      {/* Full-bleed background image */}
-      <Image
-        src={image}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover -z-10"
-        aria-hidden
-      />
-
-      {/* Darken left side (text area), fade out toward the right */}
+      {/* Masked wrapper — photo + left dim layer fade to transparent at the bottom */}
       <div
         className="absolute inset-0 -z-10"
         style={{
-          background:
-            "linear-gradient(90deg, rgba(3,7,10,0.92) 0%, rgba(3,7,10,0.85) 30%, rgba(3,7,10,0.55) 55%, rgba(3,7,10,0.25) 78%, rgba(3,7,10,0.05) 100%)",
+          WebkitMaskImage: BOTTOM_FADE_MASK,
+          maskImage: BOTTOM_FADE_MASK,
         }}
         aria-hidden
-      />
+      >
+        <Image
+          src={image}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          aria-hidden
+        />
+
+        {/* Darken left side (text area), fade out toward the right */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(3,7,10,0.92) 0%, rgba(3,7,10,0.85) 30%, rgba(3,7,10,0.55) 55%, rgba(3,7,10,0.25) 78%, rgba(3,7,10,0.05) 100%)",
+          }}
+          aria-hidden
+        />
+      </div>
 
       {/* Subtle top fade so the header sits over a slightly darker area */}
       <div
@@ -51,16 +63,6 @@ export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: S
         style={{
           background:
             "linear-gradient(180deg, rgba(3,7,10,0.55) 0%, rgba(3,7,10,0.25) 60%, rgba(3,7,10,0) 100%)",
-        }}
-        aria-hidden
-      />
-
-      {/* Smooth bottom fade into the page background — picture dissolves into bg */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-[65%] -z-10"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(3,7,10,0) 0%, rgba(3,7,10,0.30) 30%, rgba(3,7,10,0.70) 60%, rgba(3,7,10,0.95) 85%, #03070a 100%)",
         }}
         aria-hidden
       />

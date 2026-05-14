@@ -25,7 +25,7 @@ export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: S
     <section
       className="relative isolate overflow-hidden flex items-center
                  -mt-[100px] md:-mt-[120px] lg:-mt-[140px]
-                 min-h-[calc(100svh+100px)] md:min-h-[calc(100vh+120px)] lg:min-h-[calc(100vh+140px)]"
+                 min-h-[100svh] md:min-h-screen"
     >
       {/* Masked wrapper — photo + left dim layer fade to transparent at the bottom */}
       <div
@@ -67,7 +67,7 @@ export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: S
         aria-hidden
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 w-full pt-[100px] md:pt-[120px] lg:pt-[140px]">
+      <div className="relative max-w-7xl mx-auto px-4 w-full">
         <div className="max-w-[640px]">
           <span className="ds-pill mb-5 md:mb-7 text-[10px] md:text-[12px]">
             <span className="dot" />

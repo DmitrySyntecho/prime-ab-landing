@@ -38,6 +38,8 @@ export default function ServicePage() {
         onStartQuote={handleStartQuote}
       />
 
+      <TrustedBySection />
+
       <ServiceDescriptionSection
         heading={service.descriptionHeading}
         description={service.description}
@@ -48,7 +50,6 @@ export default function ServicePage() {
         onStartQuote={handleStartQuote}
       />
 
-      <TrustedBySection />
       <TestimonialsCarousel />
       <WhyChooseUsSection />
       <CaseStudiesSection />

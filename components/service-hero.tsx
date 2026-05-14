@@ -55,12 +55,12 @@ export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: S
         aria-hidden
       />
 
-      {/* Smooth bottom fade into the page background */}
+      {/* Smooth bottom fade into the page background — picture dissolves into bg */}
       <div
-        className="absolute inset-x-0 bottom-0 h-[45%] -z-10"
+        className="absolute inset-x-0 bottom-0 h-[65%] -z-10"
         style={{
           background:
-            "linear-gradient(180deg, rgba(3,7,10,0) 0%, rgba(3,7,10,0.55) 45%, rgba(3,7,10,0.9) 80%, #03070a 100%)",
+            "linear-gradient(180deg, rgba(3,7,10,0) 0%, rgba(3,7,10,0.30) 30%, rgba(3,7,10,0.70) 60%, rgba(3,7,10,0.95) 85%, #03070a 100%)",
         }}
         aria-hidden
       />

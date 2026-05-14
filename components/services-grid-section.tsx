@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { Layers, Volume2, Monitor, Lightbulb, Box, Building2 } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 
@@ -8,12 +9,12 @@ export function ServicesGridSection() {
   const { t } = useLanguage()
 
   const services = [
-    { icon: Layers, title: t("services.fullAV"), description: t("services.fullAV.desc"), image: "/images/services/event-production.webp" },
-    { icon: Volume2, title: t("services.audio"), description: t("services.audio.desc"), image: "/images/services/sound-audio.webp" },
-    { icon: Monitor, title: t("services.visual"), description: t("services.visual.desc"), image: "/images/services/video-led.webp" },
-    { icon: Lightbulb, title: t("services.lighting"), description: t("services.lighting.desc"), image: "/images/services/lighting.webp" },
-    { icon: Box, title: t("services.staging"), description: t("services.staging.desc"), image: "/images/services/staging-rigging.webp" },
-    { icon: Building2, title: t("services.installation"), description: t("services.installation.desc"), image: "/images/services/permanent-av.webp" },
+    { icon: Layers, title: t("services.fullAV"), description: t("services.fullAV.desc"), image: "/images/services/event-production.webp", href: "/services/full-av-production" },
+    { icon: Volume2, title: t("services.audio"), description: t("services.audio.desc"), image: "/images/services/sound-audio.webp", href: "/services/audio-engineering" },
+    { icon: Monitor, title: t("services.visual"), description: t("services.visual.desc"), image: "/images/services/video-led.webp", href: "/services/visual-led-production" },
+    { icon: Lightbulb, title: t("services.lighting"), description: t("services.lighting.desc"), image: "/images/services/lighting.webp", href: "/services/lighting-design" },
+    { icon: Box, title: t("services.staging"), description: t("services.staging.desc"), image: "/images/services/staging-rigging.webp", href: "/services/staging-rigging" },
+    { icon: Building2, title: t("services.installation"), description: t("services.installation.desc"), image: "/images/services/permanent-av.webp", href: "/services/permanent-installation" },
   ]
 
   return (
@@ -37,9 +38,10 @@ export function ServicesGridSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {services.map((service, index) => (
-            <div
+            <Link
               key={index}
-              className="relative p-7 md:p-8 min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden"
+              href={service.href}
+              className="group relative p-7 md:p-8 min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden block transition-transform hover:-translate-y-0.5 hover:border-[#FF2D6F]/45"
               style={{
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
@@ -83,7 +85,7 @@ export function ServicesGridSection() {
 
                 <p className="text-white/70 text-[14px] leading-[1.6]">{service.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

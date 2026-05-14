@@ -20,6 +20,10 @@ export interface ServicePage {
   highlights: string[]
   /** CTA button label */
   ctaLabel: string
+  /** 4 photos shown as a collage on the right side of the second block */
+  collage: string[]
+  /** Two floating stat chips overlaid on the collage */
+  collageStats: { value: string; label: string }[]
 }
 
 export const SERVICE_PAGES: ServicePage[] = [
@@ -40,6 +44,16 @@ export const SERVICE_PAGES: ServicePage[] = [
       "24/7 on-call crew with redundant gear ready to deploy",
     ],
     ctaLabel: "Plan My Production",
+    collage: [
+      "/images/case-studies/amagi-1.webp",
+      "/images/case-studies/miami-2.webp",
+      "/images/case-studies/ramp-3.webp",
+      "/images/case-studies/lca-4.webp",
+    ],
+    collageStats: [
+      { value: "1,986+", label: "Events Delivered" },
+      { value: "24/7", label: "Crew On-Call" },
+    ],
   },
   {
     slug: "audio-engineering",
@@ -58,6 +72,16 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Backup channels and redundant transmitters on every show",
     ],
     ctaLabel: "Get an Audio Quote",
+    collage: [
+      "/images/case-studies/ramp-1.webp",
+      "/images/case-studies/lca-2.webp",
+      "/images/case-studies/miami-4.webp",
+      "/images/case-studies/amagi-3.webp",
+    ],
+    collageStats: [
+      { value: "120+", label: "Live Mix Engineers" },
+      { value: "0 dropouts", label: "RF Coordinated" },
+    ],
   },
   {
     slug: "visual-led-production",
@@ -76,6 +100,16 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Content creation, motion graphics and pre-show animation",
     ],
     ctaLabel: "Request LED Pricing",
+    collage: [
+      "/images/case-studies/tiktok-1.webp",
+      "/images/case-studies/amagi-2.webp",
+      "/images/case-studies/tiktok-4.webp",
+      "/images/case-studies/miami-1.webp",
+    ],
+    collageStats: [
+      { value: "P2.6 → P10", label: "LED Pitch Range" },
+      { value: "4K HDR", label: "Live Switching" },
+    ],
   },
   {
     slug: "lighting-design",
@@ -94,6 +128,16 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Designer + on-site lighting director included",
     ],
     ctaLabel: "Design My Lighting",
+    collage: [
+      "/images/case-studies/lca-1.webp",
+      "/images/case-studies/ramp-2.webp",
+      "/images/case-studies/lca-5.webp",
+      "/images/case-studies/tiktok-2.webp",
+    ],
+    collageStats: [
+      { value: "GrandMA3", label: "Programmed Live" },
+      { value: "500+", label: "Fixtures In Stock" },
+    ],
   },
   {
     slug: "staging-rigging",
@@ -112,6 +156,16 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Truss systems, ground support and chain motors",
     ],
     ctaLabel: "Quote My Stage Build",
+    collage: [
+      "/images/case-studies/miami-3.webp",
+      "/images/case-studies/amagi-4.webp",
+      "/images/case-studies/ramp-5.webp",
+      "/images/case-studies/lca-3.webp",
+    ],
+    collageStats: [
+      { value: "ETCP", label: "Certified Riggers" },
+      { value: "Custom CAD", label: "Engineered Builds" },
+    ],
   },
   {
     slug: "permanent-installation",
@@ -130,6 +184,16 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Service contracts, remote monitoring and on-call support",
     ],
     ctaLabel: "Scope My Install",
+    collage: [
+      "/images/case-studies/amagi-5.webp",
+      "/images/case-studies/lca-6.webp",
+      "/images/about/brands-trust-1.webp",
+      "/images/about/brands-trust-2.webp",
+    ],
+    collageStats: [
+      { value: "Crestron", label: "Certified Integrator" },
+      { value: "10-Year", label: "Service Contracts" },
+    ],
   },
 ]
 

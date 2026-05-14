@@ -43,6 +43,8 @@ export default function ServicePage() {
         description={service.description}
         highlights={service.highlights}
         ctaLabel={service.ctaLabel}
+        collage={service.collage}
+        collageStats={service.collageStats}
         onStartQuote={handleStartQuote}
       />
 

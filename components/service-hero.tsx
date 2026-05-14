@@ -14,8 +14,16 @@ interface ServiceHeroProps {
 const PHONE = "(786) 933-8488"
 
 export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: ServiceHeroProps) {
+  // The hero spans the full viewport height. We pull it up with a negative top
+  // margin so the background image extends behind the sticky header (which is
+  // semi-transparent + blurred, so the photo shows through). Extra height is
+  // added back via min-h so the bottom edge still lines up with the viewport.
   return (
-    <section className="relative isolate overflow-hidden min-h-[640px] md:min-h-[720px] lg:min-h-[760px] flex items-center">
+    <section
+      className="relative isolate overflow-hidden flex items-center
+                 -mt-[100px] md:-mt-[120px] lg:-mt-[140px]
+                 min-h-[calc(100svh+100px)] md:min-h-[calc(100vh+120px)] lg:min-h-[calc(100vh+140px)]"
+    >
       {/* Full-bleed background image */}
       <Image
         src={image}
@@ -27,27 +35,37 @@ export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: S
         aria-hidden
       />
 
-      {/* Darken left side where the text sits, fade out to the right */}
+      {/* Darken left side (text area), fade out toward the right */}
       <div
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(90deg, rgba(3,7,10,0.92) 0%, rgba(3,7,10,0.85) 35%, rgba(3,7,10,0.55) 60%, rgba(3,7,10,0.25) 80%, rgba(3,7,10,0.10) 100%)",
+            "linear-gradient(90deg, rgba(3,7,10,0.92) 0%, rgba(3,7,10,0.85) 30%, rgba(3,7,10,0.55) 55%, rgba(3,7,10,0.25) 78%, rgba(3,7,10,0.05) 100%)",
         }}
         aria-hidden
       />
 
-      {/* Bottom vignette so the next section blends cleanly */}
+      {/* Subtle top fade so the header sits over a slightly darker area */}
       <div
-        className="absolute inset-x-0 bottom-0 h-40 -z-10"
+        className="absolute inset-x-0 top-0 h-40 -z-10"
         style={{
           background:
-            "linear-gradient(180deg, rgba(3,7,10,0) 0%, rgba(3,7,10,0.85) 70%, #03070a 100%)",
+            "linear-gradient(180deg, rgba(3,7,10,0.55) 0%, rgba(3,7,10,0.25) 60%, rgba(3,7,10,0) 100%)",
         }}
         aria-hidden
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28 lg:py-32 w-full">
+      {/* Smooth bottom fade into the page background */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-[45%] -z-10"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(3,7,10,0) 0%, rgba(3,7,10,0.55) 45%, rgba(3,7,10,0.9) 80%, #03070a 100%)",
+        }}
+        aria-hidden
+      />
+
+      <div className="relative max-w-7xl mx-auto px-4 w-full pt-[100px] md:pt-[120px] lg:pt-[140px]">
         <div className="max-w-[640px]">
           <span className="ds-pill mb-5 md:mb-7 text-[10px] md:text-[12px]">
             <span className="dot" />
@@ -65,7 +83,7 @@ export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: S
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={onStartQuote}
-              className="group inline-flex items-center justify-center gap-2.5 px-6 md:px-7 py-3.5 md:py-4 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-[#03070a] font-extrabold text-[14px] md:text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center gap-2.5 px-6 md:px-7 py-3.5 md:py-4 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white font-extrabold text-[14px] md:text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
               style={{
                 boxShadow:
                   "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",

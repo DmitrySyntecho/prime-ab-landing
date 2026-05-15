@@ -10,6 +10,8 @@ export interface ServicePage {
   eyebrow: string
   /** Sub-heading rendered under H1 */
   subheadline: string
+  /** Primary CTA label shown on the hero button */
+  heroCta: string
   /** Background image — same asset shown on the homepage card */
   image: string
   /** Long-form description rendered in the second block */
@@ -18,7 +20,7 @@ export interface ServicePage {
   descriptionHeading: string
   /** 3–5 bullet points highlighting what's included */
   highlights: string[]
-  /** CTA button label */
+  /** CTA button label in the description block */
   ctaLabel: string
   /** 4 photos shown as a collage on the right side of the second block */
   collage: string[]
@@ -33,6 +35,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Stage Rental",
     subheadline:
       "Portable, truss-built, or mobile — engineered, certified, and crewed.",
+    heroCta: "Get a Quote in 24 Hours",
     image: "/images/services/stage-rental.jpg",
     descriptionHeading: "Stages built for the show — not borrowed from a warehouse",
     description:
@@ -62,6 +65,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Sound System Rental",
     subheadline:
       "L-Acoustics and d&b, tuned to your room. Same-day quote.",
+    heroCta: "Get a Same-Day Quote",
     image: "/images/services/sound-system.jpg",
     descriptionHeading: "Premium sound, sized to your room.",
     description:
@@ -91,6 +95,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Lighting Equipment Rental",
     subheadline:
       "Designed, pre-vis'd, and programmed. Senior LD on every event.",
+    heroCta: "Get a Quote in 24 Hours",
     image: "/images/services/lighting-rental.jpg",
     descriptionHeading: "Lighting designed for your show — not pulled off a shelf.",
     description:
@@ -120,6 +125,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Full AV Production",
     subheadline:
       "One team. One contract. One producer. From pre-vis to strike.",
+    heroCta: "Talk to a Producer",
     image: "/images/services/full-av-production.jpg",
     descriptionHeading: "A production partner, not a rental house.",
     description:
@@ -149,6 +155,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "TV Rental",
     subheadline:
       "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor.",
+    heroCta: "Get a Quote in 24 Hours",
     image: "/images/services/tv-rental.jpg",
     descriptionHeading: "TVs for every event — from a single confidence monitor to a multi-screen wall.",
     description:
@@ -179,6 +186,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Projector & Screen Rental",
     subheadline:
       "Boardroom to ballroom — plus projection mapping when the room is the canvas.",
+    heroCta: "Get a Quote in 24 Hours",
     image: "/images/services/projector-screen.jpg",
     descriptionHeading: "Projection sized to your room — and your idea.",
     description:
@@ -209,6 +217,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Pipe & Drape Rental",
     subheadline:
       "IFR-certified drape, any height and color, installed by our crew.",
+    heroCta: "Get a Quote in 24 Hours",
     image: "/images/services/pipe-drape.jpg",
     descriptionHeading: "Pipe and drape, supplied and installed across LA.",
     description:
@@ -238,6 +247,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "LED Screen Rental",
     subheadline:
       "Indoor, outdoor, mobile — same-day quote, senior crew on every job.",
+    heroCta: "Get a Quote in 24 Hours",
     image: "/images/services/led-screen.jpg",
     descriptionHeading: "Indoor and outdoor LED walls for any event in Los Angeles",
     description:

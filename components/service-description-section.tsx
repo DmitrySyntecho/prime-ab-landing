@@ -42,9 +42,11 @@ export function ServiceDescriptionSection({
               {heading}
             </h2>
 
-            <p className="text-white/65 text-[16px] md:text-[17px] leading-relaxed mb-7">
-              {description}
-            </p>
+            <div className="text-white/65 text-[16px] md:text-[17px] leading-relaxed mb-7 space-y-4">
+              {description.split("\n\n").map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+            </div>
 
             <ul className="space-y-3 mb-9">
               {highlights.map((item, idx) => (

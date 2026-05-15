@@ -22,8 +22,8 @@ export function ServiceDescriptionSection({
   collageStats,
   onStartQuote,
 }: ServiceDescriptionSectionProps) {
-  // Always render exactly 4 cells, padding with placeholders if needed.
-  const photos = [collage[0], collage[1], collage[2], collage[3]].filter(Boolean)
+  // Render all provided photos, up to 6, always in a 2-column grid
+  const photos = collage.slice(0, 6).filter(Boolean)
   const stat0 = collageStats[0]
   const stat1 = collageStats[1]
 

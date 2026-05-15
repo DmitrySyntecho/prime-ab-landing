@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getProductBySlug, products } from "@/lib/products-data"
+import { useCart } from "@/lib/cart-context"
 import {
   ArrowLeft,
   ArrowRight,
@@ -26,7 +27,7 @@ import {
   Activity,
   Timer,
 } from "lucide-react"
-import { QuoteForm } from "@/components/quote-form"
+import { CartPanel } from "@/components/cart-panel"
 
 // Consistent number formatting to avoid hydration mismatch
 function formatPrice(num: number): string {
@@ -41,9 +42,20 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
     notFound()
   }
 
+  const { addItem, items, openCart } = useCart()
   const [quantity, setQuantity] = useState(1)
   const [rentalDays, setRentalDays] = useState(1)
-  const [quoteOpen, setQuoteOpen] = useState(false)
+  const [isAdding, setIsAdding] = useState(false)
+  const isInCart = items.some((item) => item.product.id === product.id)
+
+  const handleAddToCart = () => {
+    setIsAdding(true)
+    addItem(product, quantity, rentalDays)
+    setTimeout(() => {
+      setIsAdding(false)
+      openCart()
+    }, 400)
+  }
 
   const subtotal = product.price * quantity * rentalDays
   const savings = (product.originalPrice - product.price) * quantity * rentalDays
@@ -312,17 +324,47 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
             {/* Action buttons */}
             <div className="flex gap-3 mb-8">
               <button
-                onClick={() => setQuoteOpen(true)}
-                className="flex-1 flex items-center justify-center gap-3 py-4 rounded-xl text-[15px] font-bold transition-all hover:-translate-y-0.5"
+                onClick={handleAddToCart}
+                disabled={isAdding}
+                className="flex-1 flex items-center justify-center gap-3 py-4 rounded-xl text-[15px] font-bold transition-all hover:-translate-y-0.5 disabled:opacity-70"
                 style={{
-                  background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                  background: isInCart
+                    ? "linear-gradient(135deg, #FF5E3A 0%, #FF2D6F 100%)"
+                    : "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
                   color: "#fff",
-                  boxShadow: "0 12px 32px -8px rgba(255,45,111,0.6)",
+                  boxShadow: isInCart
+                    ? "0 12px 32px -8px rgba(255,94,58,0.6)"
+                    : "0 12px 32px -8px rgba(255,45,111,0.6)",
                 }}
               >
-                <ShoppingCart className="w-5 h-5" />
-                Add to Quote
+                {isAdding ? (
+                  <>
+                    <CheckCircle2 className="w-5 h-5 animate-bounce" />
+                    Added to Cart!
+                  </>
+                ) : isInCart ? (
+                  <>
+                    <CheckCircle2 className="w-5 h-5" />
+                    Update Cart
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="w-5 h-5" />
+                    Add to Cart
+                  </>
+                )}
               </button>
+              <Link
+                href="/shop/cart"
+                className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-[14px] font-bold text-white transition-all hover:bg-white/10"
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                }}
+              >
+                <ArrowRight className="w-5 h-5" />
+                Checkout
+              </Link>
             </div>
 
             {/* Contact */}
@@ -436,7 +478,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
         </div>
       </div>
       </div>
-      <QuoteForm isOpen={quoteOpen} onClose={() => setQuoteOpen(false)} serviceName={product.name} />
+      <CartPanel />
     </>
   )
 }

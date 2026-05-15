@@ -4,8 +4,8 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { products } from "@/lib/products-data"
-import type { Product } from "@/lib/cart-context"
-import { QuoteForm } from "@/components/quote-form"
+import { useCart, type Product } from "@/lib/cart-context"
+import { CartPanel } from "@/components/cart-panel"
 import {
   Truck,
   Shield,
@@ -50,12 +50,22 @@ function DiscountRibbon({ discount }: { discount: number }) {
 }
 
 function ProductCard({ product }: { product: Product }) {
-  const [quoteOpen, setQuoteOpen] = useState(false)
+  const { addItem, items, openCart } = useCart()
+  const [isAdding, setIsAdding] = useState(false)
+  const isInCart = items.some((item) => item.product.id === product.id)
+
+  const handleAddToCart = () => {
+    setIsAdding(true)
+    addItem(product, 1, 1)
+    setTimeout(() => {
+      setIsAdding(false)
+      openCart()
+    }, 400)
+  }
 
   const savings = product.originalPrice - product.price
 
   return (
-    <>
     <div
       className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
       style={{
@@ -195,16 +205,32 @@ function ProductCard({ product }: { product: Product }) {
 
           <div className="flex gap-2">
             <button
-              onClick={() => setQuoteOpen(true)}
-              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-bold transition-all hover:opacity-90"
+              onClick={handleAddToCart}
+              disabled={isAdding}
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-[13px] font-bold transition-all disabled:opacity-70"
               style={{
                 background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
                 color: "#fff",
                 boxShadow: "0 8px 20px -4px rgba(255,45,111,0.5)",
+                opacity: isInCart ? 0.8 : 1,
               }}
             >
-              <ShoppingCart className="w-4 h-4" />
-              Add to Quote
+              {isAdding ? (
+                <>
+                  <CheckCircle2 className="w-4 h-4 animate-bounce" />
+                  Added!
+                </>
+              ) : isInCart ? (
+                <>
+                  <CheckCircle2 className="w-4 h-4" />
+                  In Cart
+                </>
+              ) : (
+                <>
+                  <ShoppingCart className="w-4 h-4" />
+                  Add to Cart
+                </>
+              )}
             </button>
             <Link
               href={`/shop/products/${product.slug}`}
@@ -220,17 +246,12 @@ function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
     </div>
-    <QuoteForm
-      isOpen={quoteOpen}
-      onClose={() => setQuoteOpen(false)}
-      serviceName={product.name}
-    />
-    </>
   )
 }
 
 export function ShopProductsSection() {
   return (
+    <>
     <section className="py-20 relative">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
@@ -300,5 +321,7 @@ export function ShopProductsSection() {
         </div>
       </div>
     </section>
+    <CartPanel />
+    </>
   )
 }

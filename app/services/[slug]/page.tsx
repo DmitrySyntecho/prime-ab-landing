@@ -34,6 +34,7 @@ export default function ServicePage() {
         eyebrow={service.eyebrow}
         h1={service.h1}
         subheadline={service.subheadline}
+        heroCta={service.heroCta}
         image={service.image}
         onStartQuote={handleStartQuote}
       />

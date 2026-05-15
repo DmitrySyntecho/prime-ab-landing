@@ -7,6 +7,7 @@ interface ServiceHeroProps {
   eyebrow: string
   h1: string
   subheadline: string
+  heroCta: string
   image: string
   onStartQuote: () => void
 }
@@ -20,7 +21,7 @@ const PHONE = "(786) 933-8488"
 const BOTTOM_FADE_MASK =
   "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0) 100%)"
 
-export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: ServiceHeroProps) {
+export function ServiceHero({ eyebrow, h1, subheadline, heroCta, image, onStartQuote }: ServiceHeroProps) {
   return (
     <section
       className="relative isolate overflow-hidden flex items-center
@@ -91,7 +92,7 @@ export function ServiceHero({ eyebrow, h1, subheadline, image, onStartQuote }: S
                   "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",
               }}
             >
-              Start Your Quote
+              {heroCta}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </button>
 

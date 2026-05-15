@@ -66,7 +66,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     subheadline:
       "L-Acoustics and d&b, tuned to your room. Same-day quote.",
     heroCta: "Get a Same-Day Quote",
-    image: "/images/services/sound-system.jpg",
+    image: "/images/services/sound-system-hero.jpg",
     descriptionHeading: "Premium sound, sized to your room.",
     description:
       "Primeline provides L-Acoustics and d&b audio systems for events across Los Angeles — corporate keynotes, conferences, concerts, festivals, fashion shows, and brand activations. Every package is designed for the actual room (or field) you're in, with an A1 engineer at front of house and an A2 at monitor world.\n\nWe don't ship generic gear. We send the brand, configuration, and crew the spec sheet calls for.",

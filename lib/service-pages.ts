@@ -79,10 +79,12 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     ctaLabel: "Get a Same-Day Quote",
     collage: [
-      "/images/case-studies/ramp-1.webp",
-      "/images/case-studies/lca-2.webp",
-      "/images/case-studies/miami-4.webp",
-      "/images/case-studies/amagi-3.webp",
+      "/images/services/sound06.jpg",
+      "/images/services/sound05.jpg",
+      "/images/services/sound04.jpg",
+      "/images/services/sound03.jpg",
+      "/images/services/sound07.jpg",
+      "/images/services/sound02.jpg",
     ],
     collageStats: [
       { value: "L-Acoustics", label: "In Stock" },

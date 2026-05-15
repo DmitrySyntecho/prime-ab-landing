@@ -125,9 +125,16 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="pt-7 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-2 text-white/40 text-[12px]">
+        <div className="pt-7 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3 text-white/40 text-[12px]">
           <p>© {new Date().getFullYear()} Prime Line AV. All rights reserved.</p>
-          <p>When everything is just perfect.</p>
+          <div className="flex items-center gap-5">
+            <Link href="/terms-and-conditions" className="hover:text-white/70 transition-colors">
+              Terms &amp; Conditions
+            </Link>
+            <Link href="/privacy-policy" className="hover:text-white/70 transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

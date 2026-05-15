@@ -49,10 +49,12 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     ctaLabel: "Get a Quote in 24 Hours",
     collage: [
-      "/images/case-studies/amagi-1.webp",
-      "/images/case-studies/miami-2.webp",
-      "/images/case-studies/ramp-3.webp",
-      "/images/case-studies/lca-4.webp",
+      "/images/services/stage02.jpg",
+      "/images/services/stage01.jpg",
+      "/images/services/stage03.jpg",
+      "/images/services/stage04.jpg",
+      "/images/services/stage07.jpg",
+      "/images/services/stage06.jpg",
     ],
     collageStats: [
       { value: "ETCP", label: "Certified Riggers" },

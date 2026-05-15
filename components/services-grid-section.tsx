@@ -2,19 +2,66 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Layers, Volume2, Monitor, Lightbulb, Box, Building2 } from "lucide-react"
-import { useLanguage } from "@/lib/i18n/language-context"
+import { Layers, Volume2, Monitor, Lightbulb, Box, Tv, Projector, Columns } from "lucide-react"
 
 export function ServicesGridSection() {
-  const { t } = useLanguage()
-
   const services = [
-    { icon: Layers, title: t("services.fullAV"), description: t("services.fullAV.desc"), image: "/images/services/event-production.webp", href: "/services/full-av-production" },
-    { icon: Volume2, title: t("services.audio"), description: t("services.audio.desc"), image: "/images/services/sound-audio.webp", href: "/services/audio-engineering" },
-    { icon: Monitor, title: t("services.visual"), description: t("services.visual.desc"), image: "/images/services/video-led.webp", href: "/services/visual-led-production" },
-    { icon: Lightbulb, title: t("services.lighting"), description: t("services.lighting.desc"), image: "/images/services/lighting.webp", href: "/services/lighting-design" },
-    { icon: Box, title: t("services.staging"), description: t("services.staging.desc"), image: "/images/services/staging-rigging.webp", href: "/services/staging-rigging" },
-    { icon: Building2, title: t("services.installation"), description: t("services.installation.desc"), image: "/images/services/permanent-av.webp", href: "/services/permanent-installation" },
+    {
+      icon: Box,
+      title: "Stage Rental",
+      description: "Portable, truss-built, or mobile stages — engineered, certified, and crewed for any event in LA.",
+      image: "/images/services/stage-rental.jpg",
+      href: "/services/stage-rental",
+    },
+    {
+      icon: Volume2,
+      title: "Sound System Rental",
+      description: "L-Acoustics and d&b audio systems, tuned to your room with A1 + A2 engineers on every show.",
+      image: "/images/services/sound-system.jpg",
+      href: "/services/sound-system-rental",
+    },
+    {
+      icon: Lightbulb,
+      title: "Lighting Equipment Rental",
+      description: "Designed, pre-vis'd, and programmed by a senior LD — moving heads, washes, and GrandMA3 console.",
+      image: "/images/services/lighting-rental.jpg",
+      href: "/services/lighting-rental",
+    },
+    {
+      icon: Layers,
+      title: "Full AV Production",
+      description: "One team, one contract, one producer — sound, lighting, video, LED, and stage from pre-vis to strike.",
+      image: "/images/services/full-av-production.jpg",
+      href: "/services/full-av-production",
+    },
+    {
+      icon: Tv,
+      title: "TV Rental",
+      description: "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor, with on-site video tech.",
+      image: "/images/services/tv-rental.jpg",
+      href: "/services/tv-rental",
+    },
+    {
+      icon: Projector,
+      title: "Projector & Screen Rental",
+      description: "Boardroom to ballroom — 6 ft to 40+ ft screens, 4K laser projectors, and projection mapping.",
+      image: "/images/services/projector-screen.jpg",
+      href: "/services/projector-screen-rental",
+    },
+    {
+      icon: Columns,
+      title: "Pipe & Drape Rental",
+      description: "IFR-certified drape in any height and color, installed and struck by our crew across Los Angeles.",
+      image: "/images/services/pipe-drape.jpg",
+      href: "/services/pipe-drape-rental",
+    },
+    {
+      icon: Monitor,
+      title: "LED Screen Rental",
+      description: "Indoor, outdoor, and curved LED walls — same-day quote, senior LED tech and rigger on every job.",
+      image: "/images/services/led-screen.jpg",
+      href: "/services/led-screen-rental",
+    },
   ]
 
   return (
@@ -36,7 +83,7 @@ export function ServicesGridSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {services.map((service, index) => (
             <Link
               key={index}
@@ -52,7 +99,7 @@ export function ServicesGridSection() {
                 src={service.image}
                 alt={service.title}
                 fill
-                sizes="(max-width: 1024px) 100vw, 33vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="object-cover"
               />
 

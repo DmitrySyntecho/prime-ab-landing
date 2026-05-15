@@ -1,4 +1,4 @@
-// Data for the 6 service detail pages linked from the homepage
+// Data for the 8 service detail pages linked from the homepage
 // "End-to-End AV Production, Engineered for Impact" cards.
 // Each card on the homepage maps to one entry here by slug.
 
@@ -28,22 +28,23 @@ export interface ServicePage {
 
 export const SERVICE_PAGES: ServicePage[] = [
   {
-    slug: "full-av-production",
-    h1: "Full AV Production",
-    eyebrow: "End-to-End Service",
+    slug: "stage-rental",
+    h1: "Stage Rental in Los Angeles",
+    eyebrow: "Stage Rental",
     subheadline:
-      "Audio, video, lighting, staging — one accountable team from concept to strike.",
-    image: "/images/services/event-production.webp",
-    descriptionHeading: "End-to-end production handled under one roof",
+      "Portable, truss-built, or mobile — engineered, certified, and crewed.",
+    image: "/images/services/stage-rental.jpg",
+    descriptionHeading: "Stages built for the show — not borrowed from a warehouse",
     description:
-      "Prime Line AV delivers full-service event production for conferences, galas, brand activations, and corporate events. From the first technical walkthrough to final breakdown, we engineer audio, video, lighting, and staging as one integrated system — so nothing falls between vendors. Our crew handles design, equipment, installation, live operation, and on-site troubleshooting with the same team that planned the show.",
+      "Primeline designs and installs stages for corporate keynotes, concerts, fashion runways, and brand activations across Los Angeles. Every build is structurally engineered, ADA-compliant where required, and signed off before doors open.\n\nWe don't just drop platforms and leave. Our riggers and stagehands stay through rehearsal, show, and strike.",
     highlights: [
-      "Dedicated production manager and technical director on every event",
-      "Industry-leading equipment from L-Acoustics, Meyer, MA Lighting and more",
-      "Pre-show 3D rendering and CAD plots for full client visibility",
-      "24/7 on-call crew with redundant gear ready to deploy",
+      "Portable stage decks from 4×8 ft modules — any footprint",
+      "Truss-built stages with custom roofs, wings, and rigging points",
+      "Mobile / hydraulic stages for outdoor and multi-city events",
+      "Engineering drawings + certified rigging on request",
+      "Senior stagehand and rigger on every install",
     ],
-    ctaLabel: "Plan My Production",
+    ctaLabel: "Get a Quote in 24 Hours",
     collage: [
       "/images/case-studies/amagi-1.webp",
       "/images/case-studies/miami-2.webp",
@@ -51,27 +52,28 @@ export const SERVICE_PAGES: ServicePage[] = [
       "/images/case-studies/lca-4.webp",
     ],
     collageStats: [
-      { value: "1,986+", label: "Events Delivered" },
-      { value: "24/7", label: "Crew On-Call" },
+      { value: "ETCP", label: "Certified Riggers" },
+      { value: "ADA", label: "Compliant Builds" },
     ],
   },
   {
-    slug: "audio-engineering",
-    h1: "Audio Engineering",
-    eyebrow: "Sound Design & Live Mix",
+    slug: "sound-system-rental",
+    h1: "Sound System Rental in Los Angeles",
+    eyebrow: "Sound System Rental",
     subheadline:
-      "Crystal-clear sound design and live mixing for any venue, any audience size.",
-    image: "/images/services/sound-audio.webp",
-    descriptionHeading: "Pristine audio, tuned to every room",
+      "L-Acoustics and d&b, tuned to your room. Same-day quote.",
+    image: "/images/services/sound-system.jpg",
+    descriptionHeading: "Premium sound, sized to your room.",
     description:
-      "Sound is the one thing your audience will never forgive if it's wrong. Our audio team designs, deploys, and mixes line-array PA, in-ear monitoring, wireless microphone, and broadcast-feed systems for events of every scale. Each system is acoustically modeled to the venue, time-aligned, and mixed live by a certified engineer — so speakers cut through, music sits right, and not a single moment gets lost.",
+      "Primeline provides L-Acoustics and d&b audio systems for events across Los Angeles — corporate keynotes, conferences, concerts, festivals, fashion shows, and brand activations. Every package is designed for the actual room (or field) you're in, with an A1 engineer at front of house and an A2 at monitor world.\n\nWe don't ship generic gear. We send the brand, configuration, and crew the spec sheet calls for.",
     highlights: [
-      "L-Acoustics, Meyer Sound, d&b audiotechnik, QSC inventory",
-      "Wireless RF coordination and on-site spectrum management",
-      "Live mixing engineers with broadcast and corporate experience",
-      "Backup channels and redundant transmitters on every show",
+      "L-Acoustics K2 / Kara / Kiva line arrays in stock",
+      "d&b audiotechnik systems available",
+      "Wireless mic systems (Shure Axient, Sennheiser) for keynotes and panels",
+      "DiGiCo and Yamaha consoles, A1 + A2 on every show",
+      "Rider-compliant. Backup gear standard.",
     ],
-    ctaLabel: "Get an Audio Quote",
+    ctaLabel: "Get a Same-Day Quote",
     collage: [
       "/images/case-studies/ramp-1.webp",
       "/images/case-studies/lca-2.webp",
@@ -79,55 +81,28 @@ export const SERVICE_PAGES: ServicePage[] = [
       "/images/case-studies/amagi-3.webp",
     ],
     collageStats: [
-      { value: "120+", label: "Live Mix Engineers" },
-      { value: "0 dropouts", label: "RF Coordinated" },
+      { value: "L-Acoustics", label: "In Stock" },
+      { value: "A1 + A2", label: "Every Show" },
     ],
   },
   {
-    slug: "visual-led-production",
-    h1: "Visual & LED Production",
-    eyebrow: "LED Walls & Video Content",
+    slug: "lighting-rental",
+    h1: "Lighting Equipment Rental in Los Angeles",
+    eyebrow: "Lighting Equipment Rental",
     subheadline:
-      "Stunning LED walls, projection mapping, and broadcast-grade video production.",
-    image: "/images/services/video-led.webp",
-    descriptionHeading: "Big-screen impact with broadcast quality",
+      "Designed, pre-vis'd, and programmed. Senior LD on every event.",
+    image: "/images/services/lighting-rental.jpg",
+    descriptionHeading: "Lighting designed for your show — not pulled off a shelf.",
     description:
-      "Whether it's a 30-foot LED wall behind a keynote, a curved immersive backdrop, or multi-camera live switching for a hybrid audience, our video team brings cinema-grade visuals to corporate stages. We supply fine-pitch indoor and IP-rated outdoor panels, full media servers, switching gear, and the operators who run them — so the picture stays sharp, in sync, and on-brand.",
+      "Primeline supplies and programs lighting for corporate events, weddings, concerts, and festivals across Los Angeles. Every job starts with our in-house lighting designer building the look — color palette, fixture plot, cue list, and pre-vis — before a single truss hits the deck.\n\nWe use top-tier fixtures and consoles the industry actually runs on, with a senior LD at the board from rehearsal through show.",
     highlights: [
-      "Fine-pitch P2.6 / P3.9 indoor and IP65-rated outdoor LED panels",
-      "Disguise, Resolume and Pixera media-server workflows",
-      "Multi-cam ATEM and TriCaster live switching",
-      "Content creation, motion graphics and pre-show animation",
+      "In-house LD designs the look — pre-vis renderings before you commit",
+      "Moving heads, washes, spots, beams — Robe, Martin, Clay Paky in stock",
+      "GrandMA3 and Hog 4 consoles, programmed by senior LDs",
+      "Haze, atmospherics, follow spots, and dimmer racks available",
+      "Show file delivered, backup gear standard, senior LD on-site",
     ],
-    ctaLabel: "Request LED Pricing",
-    collage: [
-      "/images/case-studies/tiktok-1.webp",
-      "/images/case-studies/amagi-2.webp",
-      "/images/case-studies/tiktok-4.webp",
-      "/images/case-studies/miami-1.webp",
-    ],
-    collageStats: [
-      { value: "P2.6 → P10", label: "LED Pitch Range" },
-      { value: "4K HDR", label: "Live Switching" },
-    ],
-  },
-  {
-    slug: "lighting-design",
-    h1: "Lighting Design",
-    eyebrow: "Atmosphere & Visual Mood",
-    subheadline:
-      "Atmospheric lighting that transforms spaces and sets the emotional tone.",
-    image: "/images/services/lighting.webp",
-    descriptionHeading: "Lighting that shapes the room",
-    description:
-      "Great lighting is the difference between a venue that looks like a venue and one that feels like an experience. Our designers build cue-by-cue lighting programs for galas, conferences, brand activations and concerts — combining intelligent moving heads, LED wash, theatrical fixtures, and pixel-mapped effects programmed in MA Lighting and Hog consoles. Every show gets a dedicated lighting director on-site.",
-    highlights: [
-      "GrandMA3 and Hog 4 console programming",
-      "Moving heads, LED wash, beams, pixel mapping, atmospheric haze",
-      "Custom gobos and pre-programmed cue stacks",
-      "Designer + on-site lighting director included",
-    ],
-    ctaLabel: "Design My Lighting",
+    ctaLabel: "Get a Quote in 24 Hours",
     collage: [
       "/images/case-studies/lca-1.webp",
       "/images/case-studies/ramp-2.webp",
@@ -140,50 +115,112 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
   },
   {
-    slug: "staging-rigging",
-    h1: "Staging & Rigging",
-    eyebrow: "Stages, Truss & Rigging",
+    slug: "full-av-production",
+    h1: "Full AV Production in Los Angeles",
+    eyebrow: "Full AV Production",
     subheadline:
-      "Custom stage builds and certified rigging solutions, engineered for safety.",
-    image: "/images/services/staging-rigging.webp",
-    descriptionHeading: "Built to spec, rigged to code",
+      "One team. One contract. One producer. From pre-vis to strike.",
+    image: "/images/services/full-av-production.jpg",
+    descriptionHeading: "A production partner, not a rental house.",
     description:
-      "From a low-profile keynote stage to a multi-level concert build with motorized truss and overhead rigging, our staging team engineers every structure for the venue, the show, and the load. Every rig is plotted in CAD, signed off by a certified rigger, and assembled by our experienced crew. Modular Stageline, ProFlex and SkyDeck inventory lets us scale to any footprint.",
+      "Primeline produces full AV for corporate events, conferences, brand activations, speaking events, and experiential marketing across Los Angeles. Sound, lighting, video, LED, stage, crew, pre-vis, and on-site management — one team, one bill, one accountable producer from kickoff to strike.\n\nWhen the CEO walks on stage, the keynote runs clean, the brand colors match, and the room sounds like the brand sounds.",
     highlights: [
-      "Custom CAD design and structural load calcs",
-      "ETCP-certified riggers on every motorized rig",
-      "Modular stages, ramps, ADA-compliant builds",
-      "Truss systems, ground support and chain motors",
+      "End-to-end production — sound, lighting, video, LED, stage, crew",
+      "Pre-vis, run-of-show, and tech rehearsals before doors",
+      "Single point of contact — one producer owns the event",
+      "Brand-safe execution: color, logo, stage, and exec coaching",
+      "Transparent pricing, line-item quotes, no surprise fees",
     ],
-    ctaLabel: "Quote My Stage Build",
+    ctaLabel: "Talk to a Producer",
     collage: [
-      "/images/case-studies/miami-3.webp",
-      "/images/case-studies/amagi-4.webp",
-      "/images/case-studies/ramp-5.webp",
-      "/images/case-studies/lca-3.webp",
+      "/images/case-studies/amagi-1.webp",
+      "/images/case-studies/tiktok-1.webp",
+      "/images/case-studies/miami-1.webp",
+      "/images/case-studies/lca-4.webp",
     ],
     collageStats: [
-      { value: "ETCP", label: "Certified Riggers" },
-      { value: "Custom CAD", label: "Engineered Builds" },
+      { value: "1,986+", label: "Events Delivered" },
+      { value: "24/7", label: "Crew On-Call" },
     ],
   },
   {
-    slug: "permanent-installation",
-    h1: "Permanent Installation",
-    eyebrow: "Long-Term AV Systems",
+    slug: "tv-rental",
+    h1: "TV Rental in Los Angeles",
+    eyebrow: "TV Rental",
     subheadline:
-      "Long-term AV systems designed and installed for venues and corporate spaces.",
-    image: "/images/services/permanent-av.webp",
-    descriptionHeading: "AV systems engineered to last",
+      "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor.",
+    image: "/images/services/tv-rental.jpg",
+    descriptionHeading: "TVs for every event — from a single confidence monitor to a multi-screen wall.",
     description:
-      "When you need an AV system that's part of the building — boardrooms, training centers, houses of worship, retail, hospitality, broadcast studios — we design, integrate, program and commission it end-to-end. Our integration team handles low-voltage cabling, control programming (Crestron, Q-SYS, Extron), system tuning, and the user training that makes the system actually get used after we leave.",
+      "Primeline supplies commercial-grade TVs across Los Angeles for corporate events, conferences, trade shows, brand activations, broadcast sets, and outdoor events. Single screens or full video walls. Portrait or landscape. Same content across every screen — or independent feeds on each one.\n\nEvery TV ships with the right mount, the right cable run, and an on-site tech who actually understands signal flow.",
     highlights: [
-      "Crestron, Q-SYS, Extron and Dante system integration",
-      "Architectural cabling, in-wall and rack engineering",
-      "Programming, commissioning and full as-built documentation",
-      "Service contracts, remote monitoring and on-call support",
+      "32\" to 98\" commercial displays in stock",
+      "Indoor and outdoor (sunlight-readable) screens",
+      "Portrait or landscape mounting — floor stands, wall mounts, truss mounts",
+      "Multi-screen sync — same content or independent feeds per panel",
+      "HDMI, SDI, NDI inputs and live streaming supported",
+      "On-site video tech included",
     ],
-    ctaLabel: "Scope My Install",
+    ctaLabel: "Get a Quote in 24 Hours",
+    collage: [
+      "/images/case-studies/amagi-2.webp",
+      "/images/case-studies/lca-2.webp",
+      "/images/case-studies/tiktok-4.webp",
+      "/images/case-studies/miami-3.webp",
+    ],
+    collageStats: [
+      { value: "32\"–98\"", label: "Display Range" },
+      { value: "Indoor + Outdoor", label: "Screens Available" },
+    ],
+  },
+  {
+    slug: "projector-screen-rental",
+    h1: "Projector and Screen Rental in Los Angeles",
+    eyebrow: "Projector & Screen Rental",
+    subheadline:
+      "Boardroom to ballroom — plus projection mapping when the room is the canvas.",
+    image: "/images/services/projector-screen.jpg",
+    descriptionHeading: "Projection sized to your room — and your idea.",
+    description:
+      "Primeline supplies projectors and screens for corporate keynotes, conferences, brand activations, weddings, and outdoor events across Los Angeles — from a 6 ft conference-room screen to a 40 ft ballroom fast-fold, with the right projector brightness for the ambient light in the room.\n\nAnd when the room itself is the canvas — a wall, a façade, a stage build, a product — we design, produce, and program full projection mapping.",
+    highlights: [
+      "Fast-fold screens from 6 ft to 40+ ft, front or rear projection",
+      "Projectors from 5,000 to 30,000+ lumens — matched to your room",
+      "4K and laser projectors available",
+      "Edge blending and multi-projector setups",
+      "Projection mapping — design, content production, and programming",
+      "Senior video tech on every install",
+    ],
+    ctaLabel: "Get a Quote in 24 Hours",
+    collage: [
+      "/images/case-studies/ramp-1.webp",
+      "/images/case-studies/amagi-4.webp",
+      "/images/case-studies/lca-3.webp",
+      "/images/case-studies/miami-2.webp",
+    ],
+    collageStats: [
+      { value: "30,000+", label: "Lumens Available" },
+      { value: "4K Laser", label: "Projectors in Stock" },
+    ],
+  },
+  {
+    slug: "pipe-drape-rental",
+    h1: "Pipe and Drape Rental in Los Angeles",
+    eyebrow: "Pipe & Drape Rental",
+    subheadline:
+      "IFR-certified drape, any height and color, installed by our crew.",
+    image: "/images/services/pipe-drape.jpg",
+    descriptionHeading: "Pipe and drape, supplied and installed across LA.",
+    description:
+      "Primeline supplies pipe and drape for film studios, broadcast sets, trade show booths, AV builds, conferences, and live events across Los Angeles. Every drape kit is IFR-certified (inherently flame retardant) and code-compliant for the venues that ask — and they all should.\n\nWe don't drop pipe and walk. Our crew measures, installs, dresses, and strikes.",
+    highlights: [
+      "IFR-certified drape — all colors and weights",
+      "Heights from 3 ft up to 23+ ft for stage masking and full-room walls",
+      "Banjo, poly premier, and velour weights in stock",
+      "Black, white, ivory, navy, red, gold and custom colors on request",
+      "Engineered bases for high-traffic and outdoor builds",
+    ],
+    ctaLabel: "Get a Quote in 24 Hours",
     collage: [
       "/images/case-studies/amagi-5.webp",
       "/images/case-studies/lca-6.webp",
@@ -191,8 +228,37 @@ export const SERVICE_PAGES: ServicePage[] = [
       "/images/about/brands-trust-2.webp",
     ],
     collageStats: [
-      { value: "Crestron", label: "Certified Integrator" },
-      { value: "10-Year", label: "Service Contracts" },
+      { value: "IFR", label: "Certified Drape" },
+      { value: "3–23+ ft", label: "Height Range" },
+    ],
+  },
+  {
+    slug: "led-screen-rental",
+    h1: "LED Screen Rental in Los Angeles",
+    eyebrow: "LED Screen Rental",
+    subheadline:
+      "Indoor, outdoor, mobile — same-day quote, senior crew on every job.",
+    image: "/images/services/led-screen.jpg",
+    descriptionHeading: "Indoor and outdoor LED walls for any event in Los Angeles",
+    description:
+      "Primeline supplies and operates LED walls across LA — from intimate corporate stages to outdoor brand activations and festival main screens. We own the inventory, we send the crew, and we run the show file. No subletting, no day-laborers, no surprises on site.\n\nEvery install includes pre-vis, backup gear, and an on-site tech from load-in through strike.",
+    highlights: [
+      "High-resolution panels — P1.9, P2.6, P3.9 and P6.7 pixel pitches in stock",
+      "Indoor, outdoor (IP-rated), and curved / custom configurations",
+      "Processors, switchers, and signal redundancy included",
+      "Senior LED tech and rigger on every job",
+      "Same-day quote, transparent line-item pricing",
+    ],
+    ctaLabel: "Get a Quote in 24 Hours",
+    collage: [
+      "/images/case-studies/tiktok-1.webp",
+      "/images/case-studies/amagi-2.webp",
+      "/images/case-studies/tiktok-4.webp",
+      "/images/case-studies/miami-1.webp",
+    ],
+    collageStats: [
+      { value: "P1.9 → P6.7", label: "LED Pitch Range" },
+      { value: "Indoor + Outdoor", label: "IP-Rated Available" },
     ],
   },
 ]

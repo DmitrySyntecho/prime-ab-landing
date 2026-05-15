@@ -7,170 +7,220 @@
 // ─── SERVICES ────────────────────────────────────────────────
 export const SERVICES = [
   {
-    slug: "av-production",
-    name: "AV Production",
-    title: "AV Production Company | Full-Service Event AV",
+    slug: "stage-rental",
+    name: "Stage Rental",
+    title: "Stage Rental in Los Angeles | Portable, Truss-Built & Mobile Stages",
     metaDescription:
-      "Prime Line AV delivers full-service AV production for corporate events, conferences, brand activations, and live productions nationwide.",
-    primaryKeyword: "AV production company",
-    headline: "Full-Service AV Production for High-Stakes Events",
+      "Professional stage rental in Los Angeles. Portable, truss-built, and mobile stages — engineered, certified, and crewed for corporate events, concerts, and fashion shows.",
+    primaryKeyword: "stage rental Los Angeles",
+    headline: "Stage Rental in Los Angeles",
     subheadline:
-      "Audio, video, lighting, and staging — all under one roof. We handle every technical detail so your event performs flawlessly.",
+      "Portable, truss-built, or mobile — engineered, certified, and crewed.",
     intro:
-      "Prime Line AV is a full-service AV production company specializing in corporate events, conferences, brand activations, experiential marketing, and live productions. We provide end-to-end audio, video, lighting, and staging solutions with certified technicians and industry-leading equipment.",
-    // CLUSTER: AV Production Core Hub
+      "Primeline designs and installs stages for corporate keynotes, concerts, fashion runways, and brand activations across Los Angeles. Every build is structurally engineered, ADA-compliant where required, and signed off before doors open. We don't just drop platforms and leave. Our riggers and stagehands stay through rehearsal, show, and strike.",
+    bullets: [
+      "Portable stage decks from 4×8 ft modules — any footprint",
+      "Truss-built stages with custom roofs, wings, and rigging points",
+      "Mobile / hydraulic stages for outdoor and multi-city events",
+      "Engineering drawings + certified rigging on request",
+      "Senior stagehand and rigger on every install",
+    ],
     internalLinks: {
-      industries: ["corporate-events", "conferences", "brand-activations"],
-      resources: ["how-av-production-works", "event-av-planning-timeline", "corporate-event-av-checklist"],
-      comparisons: ["full-service-av-vs-equipment-rental"],
-      relatedServices: ["led-wall-rental", "sound-system-rental", "event-lighting"],
-      topCities: ["miami-av-production", "los-angeles-av-production", "new-york-av-production"],
-    },
-  },
-  {
-    slug: "led-wall-rental",
-    name: "LED Wall Rental",
-    title: "LED Wall Rental | Indoor & Outdoor LED Screens",
-    metaDescription:
-      "Rent LED walls for events nationwide. Indoor and outdoor LED screens in any size or configuration. Corporate events, concerts, brand activations.",
-    primaryKeyword: "LED wall rental",
-    headline: "LED Wall Rental for Any Event, Any Scale",
-    subheadline:
-      "High-resolution indoor and outdoor LED displays in any size or configuration. Delivered, installed, and operated by our certified team.",
-    intro:
-      "We supply and operate LED walls for corporate events, conferences, concerts, trade shows, and brand activations. Our inventory includes fine-pitch indoor panels, weather-resistant outdoor panels, and curved configurations — all with on-site technicians.",
-    // CLUSTER: LED Wall Hub
-    internalLinks: {
-      industries: ["conferences", "trade-shows", "fashion-shows", "product-launches"],
-      resources: ["led-wall-rental-cost", "how-big-should-led-wall-be"],
-      comparisons: ["led-wall-vs-projection"],
-      relatedServices: ["av-production", "video-production"],
-      topCities: ["miami-av-production", "los-angeles-av-production"],
+      industries: ["corporate-events", "fashion-shows", "brand-activations"],
+      resources: ["stage-setup-guide"],
+      comparisons: [],
+      relatedServices: ["full-av-production", "lighting-equipment-rental", "pipe-and-drape-rental"],
+      topCities: ["los-angeles-av-production"],
     },
   },
   {
     slug: "sound-system-rental",
     name: "Sound System Rental",
-    title: "Sound System Rental | Professional Event Audio",
+    title: "Sound System Rental in Los Angeles | L-Acoustics & d&b Audio",
     metaDescription:
-      "Professional sound system rental for events. Line arrays, PA systems, wireless microphones, and audio engineering nationwide.",
-    primaryKeyword: "sound system rental",
-    headline: "Professional Sound Systems for Every Venue",
+      "Professional sound system rental in Los Angeles. L-Acoustics and d&b audiotechnik systems, tuned to your room with A1 and A2 engineers on every show.",
+    primaryKeyword: "sound system rental Los Angeles",
+    headline: "Sound System Rental in Los Angeles",
     subheadline:
-      "Line arrays, PA systems, wireless microphones, and in-ear monitors — engineered and operated by certified audio professionals.",
+      "L-Acoustics and d&b, tuned to your room. Same-day quote.",
     intro:
-      "Our sound system rental service covers everything from intimate corporate meetings to large-scale outdoor concerts. We provide complete audio solutions including speakers, microphones, mixing consoles, and on-site audio engineers to ensure pristine sound quality at every event.",
-    // CLUSTER: Sound System Hub
+      "Primeline provides L-Acoustics and d&b audio systems for events across Los Angeles — corporate keynotes, conferences, concerts, festivals, fashion shows, and brand activations. Every package is designed for the actual room (or field) you're in, with an A1 engineer at front of house and an A2 at monitor world. We don't ship generic gear. We send the brand, configuration, and crew the spec sheet calls for.",
+    bullets: [
+      "L-Acoustics K2 / Kara / Kiva line arrays in stock",
+      "d&b audiotechnik systems available",
+      "Wireless mic systems (Shure Axient, Sennheiser) for keynotes and panels",
+      "DiGiCo and Yamaha consoles, A1 + A2 on every show",
+      "Rider-compliant. Backup gear standard.",
+    ],
     internalLinks: {
-      industries: ["corporate-events", "conferences", "trade-shows"],
+      industries: ["corporate-events", "conferences", "brand-activations"],
       resources: [],
       comparisons: [],
-      relatedServices: ["av-production", "event-lighting"],
-      topCities: ["miami-av-production", "los-angeles-av-production"],
+      relatedServices: ["full-av-production", "lighting-equipment-rental", "stage-rental"],
+      topCities: ["los-angeles-av-production"],
     },
   },
   {
-    slug: "event-lighting",
-    name: "Event Lighting",
-    title: "Event Lighting Production | Design & Programming",
+    slug: "lighting-equipment-rental",
+    name: "Lighting Equipment Rental",
+    title: "Lighting Equipment Rental in Los Angeles | Design & Programming",
     metaDescription:
-      "Professional event lighting design and production. Intelligent fixtures, LED uplighting, theatrical lighting, and DMX programming for events nationwide.",
-    primaryKeyword: "event lighting production",
-    headline: "Event Lighting That Transforms Any Space",
+      "Professional lighting equipment rental in Los Angeles. Designed, pre-vis'd, and programmed with a senior lighting designer on every event.",
+    primaryKeyword: "lighting equipment rental Los Angeles",
+    headline: "Lighting Equipment Rental in Los Angeles",
     subheadline:
-      "Dynamic lighting design, intelligent fixtures, and precise DMX programming that sets the mood and elevates your event.",
+      "Designed, pre-vis'd, and programmed. Senior LD on every event.",
     intro:
-      "Our event lighting team handles everything from simple uplighting to complex intelligent lighting rigs. We design, program, and operate custom lighting for corporate events, galas, brand activations, concerts, and theatrical productions — indoors and outdoors.",
-    // CLUSTER: Event Lighting Hub
+      "Primeline supplies and programs lighting for corporate events, weddings, concerts, and festivals across Los Angeles. Every job starts with our in-house lighting designer building the look — color palette, fixture plot, cue list, and pre-vis — before a single truss hits the deck. We use top-tier fixtures and consoles the industry actually runs on, with a senior LD at the board from rehearsal through show.",
+    bullets: [
+      "In-house LD designs the look — pre-vis renderings before you commit",
+      "Moving heads, washes, spots, beams — Robe, Martin, Clay Paky in stock",
+      "GrandMA3 and Hog 4 consoles, programmed by senior LDs",
+      "Haze, atmospherics, follow spots, and dimmer racks available",
+      "Show file delivered, backup gear standard, senior LD on-site",
+    ],
     internalLinks: {
-      industries: ["galas", "corporate-events", "brand-activations"],
+      industries: ["corporate-events", "brand-activations", "fashion-shows"],
       resources: ["lighting-design-for-events"],
       comparisons: [],
-      relatedServices: ["av-production", "staging-and-truss"],
-      topCities: ["los-angeles-av-production", "new-york-av-production"],
+      relatedServices: ["full-av-production", "stage-rental", "led-screen-rental"],
+      topCities: ["los-angeles-av-production"],
     },
   },
   {
-    slug: "staging-and-truss",
-    name: "Staging & Truss",
-    title: "Staging & Truss Rental | Custom Stages, Rigging & Truss Systems",
+    slug: "full-av-production",
+    name: "Full AV Production",
+    title: "Full AV Production in Los Angeles | End-to-End Event Production",
     metaDescription:
-      "Professional staging and truss rental for events. Custom stage builds, modular platforms, truss systems, and rigging for corporate events, concerts, and fashion shows.",
-    primaryKeyword: "staging and truss rental",
-    headline: "Staging & Truss — Built for Your Event",
+      "Full-service AV production in Los Angeles. One team, one contract, one producer — sound, lighting, video, LED, stage, and crew from pre-vis to strike.",
+    primaryKeyword: "full AV production Los Angeles",
+    headline: "Full AV Production in Los Angeles",
     subheadline:
-      "Custom stage builds, modular platforms, truss systems, and rigging — engineered for safety and assembled by our experienced crew.",
+      "One team. One contract. One producer. From pre-vis to strike.",
     intro:
-      "We design, build, and strike custom stages and truss systems for corporate events, concerts, fashion shows, product launches, and outdoor festivals. Our modular staging and truss inventory allows flexible configurations in any venue, and every build is engineered and certified for safety.",
-    // CLUSTER: Staging & Truss Hub
+      "Primeline produces full AV for corporate events, conferences, brand activations, speaking events, and experiential marketing across Los Angeles. Sound, lighting, video, LED, stage, crew, pre-vis, and on-site management — one team, one bill, one accountable producer from kickoff to strike. When the CEO walks on stage, the keynote runs clean, the brand colors match, and the room sounds like the brand sounds.",
+    bullets: [
+      "End-to-end production — sound, lighting, video, LED, stage, crew",
+      "Pre-vis, run-of-show, and tech rehearsals before doors",
+      "Single point of contact — one producer owns the event",
+      "Brand-safe execution: color, logo, stage, and exec coaching",
+      "Transparent pricing, line-item quotes, no surprise fees",
+    ],
     internalLinks: {
-      industries: ["fashion-shows", "product-launches", "corporate-events", "trade-shows"],
-      resources: ["stage-setup-guide"],
+      industries: ["corporate-events", "conferences", "brand-activations", "experiential-marketing"],
+      resources: ["how-av-production-works", "event-av-planning-timeline", "corporate-event-av-checklist"],
+      comparisons: ["full-service-av-vs-equipment-rental"],
+      relatedServices: ["sound-system-rental", "lighting-equipment-rental", "led-screen-rental", "stage-rental"],
+      topCities: ["los-angeles-av-production"],
+    },
+  },
+  {
+    slug: "tv-rental",
+    name: "TV Rental",
+    title: "TV Rental in Los Angeles | Confidence Monitors to Video Walls",
+    metaDescription:
+      "Professional TV rental in Los Angeles. 32\" to 98\" commercial displays, confidence monitors, and video walls for corporate events and trade shows.",
+    primaryKeyword: "TV rental Los Angeles",
+    headline: "TV Rental in Los Angeles",
+    subheadline:
+      "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor.",
+    intro:
+      "Primeline supplies commercial-grade TVs across Los Angeles for corporate events, conferences, trade shows, brand activations, broadcast sets, and outdoor events. Single screens or full video walls. Portrait or landscape. Same content across every screen — or independent feeds on each one. Every TV ships with the right mount, the right cable run, and an on-site tech who actually understands signal flow.",
+    bullets: [
+      "32\" to 98\" commercial displays in stock",
+      "Indoor and outdoor (sunlight-readable) screens",
+      "Portrait or landscape mounting — floor stands, wall mounts, truss mounts",
+      "Multi-screen sync — same content or independent feeds per panel",
+      "HDMI, SDI, NDI inputs and live streaming supported",
+      "On-site video tech included",
+    ],
+    internalLinks: {
+      industries: ["corporate-events", "trade-shows", "brand-activations"],
+      resources: [],
       comparisons: [],
-      relatedServices: ["av-production", "event-lighting", "pipe-and-drape-rental"],
-      topCities: ["miami-av-production", "los-angeles-av-production"],
+      relatedServices: ["full-av-production", "led-screen-rental", "projector-screen-rental"],
+      topCities: ["los-angeles-av-production"],
+    },
+  },
+  {
+    slug: "projector-screen-rental",
+    name: "Projector & Screen Rental",
+    title: "Projector and Screen Rental in Los Angeles | Projection Mapping",
+    metaDescription:
+      "Professional projector and screen rental in Los Angeles. From boardroom to ballroom, plus projection mapping when the room is the canvas.",
+    primaryKeyword: "projector rental Los Angeles",
+    headline: "Projector and Screen Rental in Los Angeles",
+    subheadline:
+      "Boardroom to ballroom — plus projection mapping when the room is the canvas.",
+    intro:
+      "Primeline supplies projectors and screens for corporate keynotes, conferences, brand activations, weddings, and outdoor events across Los Angeles — from a 6 ft conference-room screen to a 40 ft ballroom fast-fold, with the right projector brightness for the ambient light in the room. And when the room itself is the canvas — a wall, a façade, a stage build, a product — we design, produce, and program full projection mapping.",
+    bullets: [
+      "Fast-fold screens from 6 ft to 40+ ft, front or rear projection",
+      "Projectors from 5,000 to 30,000+ lumens — matched to your room",
+      "4K and laser projectors available",
+      "Edge blending and multi-projector setups",
+      "Projection mapping — design, content production, and programming",
+      "Senior video tech on every install",
+    ],
+    internalLinks: {
+      industries: ["corporate-events", "conferences", "brand-activations"],
+      resources: [],
+      comparisons: ["led-wall-vs-projection"],
+      relatedServices: ["full-av-production", "tv-rental", "led-screen-rental"],
+      topCities: ["los-angeles-av-production"],
     },
   },
   {
     slug: "pipe-and-drape-rental",
     name: "Pipe & Drape Rental",
-    title: "Pipe & Drape Rental | Event Backdrops & Room Dividers",
+    title: "Pipe and Drape Rental in Los Angeles | IFR-Certified Event Draping",
     metaDescription:
-      "Rent pipe and drape systems for events. Custom backdrops, room dividers, and event draping in any color or configuration.",
-    primaryKeyword: "pipe and drape rental",
-    headline: "Pipe & Drape Rental for Events",
+      "Professional pipe and drape rental in Los Angeles. IFR-certified drape in any height and color, installed by our crew for studios, trade shows, and events.",
+    primaryKeyword: "pipe and drape rental Los Angeles",
+    headline: "Pipe and Drape Rental in Los Angeles",
     subheadline:
-      "Custom backdrops, booth dividers, and room separation systems available in any color, height, or configuration.",
+      "IFR-certified drape, any height and color, installed by our crew.",
     intro:
-      "Our pipe and drape rental service provides professional event draping solutions for trade show booths, gala backdrops, room dividers, and conference separators. We carry a full inventory of fabrics in multiple colors and our team handles delivery, installation, and strike.",
-    // CLUSTER: Pipe & Drape Hub
+      "Primeline supplies pipe and drape for film studios, broadcast sets, trade show booths, AV builds, conferences, and live events across Los Angeles. Every drape kit is IFR-certified (inherently flame retardant) and code-compliant for the venues that ask — and they all should. We don't drop pipe and walk. Our crew measures, installs, dresses, and strikes.",
+    bullets: [
+      "IFR-certified drape — all colors and weights",
+      "Heights from 3 ft up to 23+ ft for stage masking and full-room walls",
+      "Banjo, poly premier, and velour weights in stock",
+      "Black, white, ivory, navy, red, gold and custom colors on request",
+      "Engineered bases for high-traffic and outdoor builds",
+    ],
     internalLinks: {
       industries: ["trade-shows", "fashion-shows", "brand-activations"],
       resources: ["pipe-drape-design-ideas"],
       comparisons: [],
-      relatedServices: ["av-production", "staging-and-truss"],
-      topCities: ["miami-av-production", "los-angeles-av-production"],
+      relatedServices: ["full-av-production", "stage-rental", "lighting-equipment-rental"],
+      topCities: ["los-angeles-av-production"],
     },
   },
   {
-    slug: "live-streaming",
-    name: "Live Streaming",
-    title: "Live Streaming Production | Hybrid Event Services",
+    slug: "led-screen-rental",
+    name: "LED Screen Rental",
+    title: "LED Screen Rental in Los Angeles | Indoor & Outdoor LED Walls",
     metaDescription:
-      "Professional live streaming production for events. Multi-camera live streams, hybrid events, and virtual event production nationwide.",
-    primaryKeyword: "live streaming production",
-    headline: "Live Streaming Production for Hybrid Events",
+      "Professional LED screen rental in Los Angeles. Indoor, outdoor, and mobile LED walls — same-day quote, senior crew on every job.",
+    primaryKeyword: "LED screen rental Los Angeles",
+    headline: "LED Screen Rental in Los Angeles",
     subheadline:
-      "Multi-camera live streams, virtual event platforms, and broadcast-quality production that reaches your audience anywhere.",
+      "Indoor, outdoor, mobile — same-day quote, senior crew on every job.",
     intro:
-      "Our live streaming production team delivers broadcast-quality streams for corporate events, conferences, product launches, and virtual events. We handle multi-camera production, encoding, platform integration, and real-time graphics so your remote audience gets the full experience.",
-    // CLUSTER: Live Streaming Hub
+      "Primeline supplies and operates LED walls across LA — from intimate corporate stages to outdoor brand activations and festival main screens. We own the inventory, we send the crew, and we run the show file. No subletting, no day-laborers, no surprises on site. Every install includes pre-vis, backup gear, and an on-site tech from load-in through strike.",
+    bullets: [
+      "High-resolution panels — P1.9, P2.6, P3.9 and P6.7 pixel pitches in stock",
+      "Indoor, outdoor (IP-rated), and curved / custom configurations",
+      "Processors, switchers, and signal redundancy included",
+      "Senior LED tech and rigger on every job",
+      "Same-day quote, transparent line-item pricing",
+    ],
     internalLinks: {
-      industries: ["conferences", "corporate-events", "product-launches"],
-      resources: ["live-streaming-best-practices"],
-      comparisons: ["live-streaming-vs-in-person"],
-      relatedServices: ["av-production", "video-production"],
-      topCities: ["new-york-av-production"],
-    },
-  },
-  {
-    slug: "video-production",
-    name: "Video Production",
-    title: "Video Production Services | Event Video & Content",
-    metaDescription:
-      "Professional video production services for events. Multi-camera recording, highlight reels, event coverage, and post-production nationwide.",
-    primaryKeyword: "video production services",
-    headline: "Event Video Production That Captures Every Moment",
-    subheadline:
-      "Multi-camera event coverage, highlight reels, and broadcast-quality post-production that turns your event into lasting content.",
-    intro:
-      "We provide end-to-end video production services for corporate events, brand activations, conferences, and product launches. Our team handles pre-production planning, multi-camera coverage on-site, and post-production delivery — giving you broadcast-quality content you can use across every channel.",
-    // CLUSTER: Video Production Hub
-    internalLinks: {
-      industries: ["brand-activations", "product-launches", "corporate-events"],
-      resources: ["video-production-workflow"],
-      comparisons: [],
-      relatedServices: ["av-production", "live-streaming"],
+      industries: ["corporate-events", "conferences", "trade-shows", "brand-activations"],
+      resources: ["led-wall-rental-cost", "how-big-should-led-wall-be"],
+      comparisons: ["led-wall-vs-projection"],
+      relatedServices: ["full-av-production", "sound-system-rental", "lighting-equipment-rental"],
       topCities: ["los-angeles-av-production"],
     },
   },

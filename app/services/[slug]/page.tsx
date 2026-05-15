@@ -58,7 +58,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/services/av-production" className="hover:text-white transition-colors">Services</Link>
+            <Link href="/services/full-av-production" className="hover:text-white transition-colors">Services</Link>
             <span>/</span>
             <span className="text-white">{service.name}</span>
           </nav>
@@ -99,11 +99,57 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <TrustedBySection />
       <TestimonialsCarousel />
 
-      {/* Intro */}
+      {/* About the Service - Two Column Layout */}
       <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">What This Service Covers</h2>
-          <p className="text-gray-600 text-lg leading-relaxed">{service.intro}</p>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Text Content - Left Side */}
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                {service.name === "Stage Rental" && "Stages built for the show — not borrowed from a warehouse"}
+                {service.name === "Sound System Rental" && "Premium sound, sized to your room."}
+                {service.name === "Lighting Equipment Rental" && "Lighting designed for your show — not pulled off a shelf."}
+                {service.name === "Full AV Production" && "A production partner, not a rental house."}
+                {service.name === "TV Rental" && "TVs for every event — from a single confidence monitor to a multi-screen wall."}
+                {service.name === "Projector & Screen Rental" && "Projection sized to your room — and your idea."}
+                {service.name === "Pipe & Drape Rental" && "Pipe and drape, supplied and installed across LA."}
+                {service.name === "LED Screen Rental" && "Indoor and outdoor LED walls for any event in Los Angeles"}
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8">{service.intro}</p>
+              
+              {/* Bullets */}
+              {service.bullets && service.bullets.length > 0 && (
+                <ul className="space-y-3">
+                  {service.bullets.map((bullet, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-[#4ADE80] flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            
+            {/* Image - Right Side */}
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+              <Image
+                src={
+                  service.slug === "stage-rental" ? "/images/services/staging-rigging.webp" :
+                  service.slug === "sound-system-rental" ? "/images/services/sound-audio.webp" :
+                  service.slug === "lighting-equipment-rental" ? "/images/services/lighting.webp" :
+                  service.slug === "full-av-production" ? "/images/services/event-production.webp" :
+                  service.slug === "tv-rental" ? "/images/services/video-led.webp" :
+                  service.slug === "projector-screen-rental" ? "/images/services/event-production.webp" :
+                  service.slug === "pipe-and-drape-rental" ? "/images/services/permanent-av.webp" :
+                  service.slug === "led-screen-rental" ? "/images/services/video-led.webp" :
+                  "/images/services/event-production.webp"
+                }
+                alt={service.name}
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

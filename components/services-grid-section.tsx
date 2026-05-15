@@ -1,19 +1,22 @@
 "use client"
 
 import Image from "next/image"
-import { Layers, Volume2, Monitor, Lightbulb, Box, Building2 } from "lucide-react"
+import Link from "next/link"
+import { Layers, Volume2, Monitor, Lightbulb, Box, Tv, Projector, GalleryVerticalEnd } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 
 export function ServicesGridSection() {
   const { t } = useLanguage()
 
   const services = [
-    { icon: Layers, title: t("services.fullAV"), description: t("services.fullAV.desc"), image: "/images/services/event-production.webp" },
-    { icon: Volume2, title: t("services.audio"), description: t("services.audio.desc"), image: "/images/services/sound-audio.webp" },
-    { icon: Monitor, title: t("services.visual"), description: t("services.visual.desc"), image: "/images/services/video-led.webp" },
-    { icon: Lightbulb, title: t("services.lighting"), description: t("services.lighting.desc"), image: "/images/services/lighting.webp" },
-    { icon: Box, title: t("services.staging"), description: t("services.staging.desc"), image: "/images/services/staging-rigging.webp" },
-    { icon: Building2, title: t("services.installation"), description: t("services.installation.desc"), image: "/images/services/permanent-av.webp" },
+    { icon: Box, slug: "stage-rental", title: t("services.stageRental"), description: t("services.stageRental.desc"), image: "/images/services/staging-rigging.webp" },
+    { icon: Volume2, slug: "sound-system-rental", title: t("services.soundRental"), description: t("services.soundRental.desc"), image: "/images/services/sound-audio.webp" },
+    { icon: Lightbulb, slug: "lighting-equipment-rental", title: t("services.lightingRental"), description: t("services.lightingRental.desc"), image: "/images/services/lighting.webp" },
+    { icon: Layers, slug: "full-av-production", title: t("services.fullAVProduction"), description: t("services.fullAVProduction.desc"), image: "/images/services/event-production.webp" },
+    { icon: Tv, slug: "tv-rental", title: t("services.tvRental"), description: t("services.tvRental.desc"), image: "/images/services/video-led.webp" },
+    { icon: Projector, slug: "projector-screen-rental", title: t("services.projectorRental"), description: t("services.projectorRental.desc"), image: "/images/services/event-production.webp" },
+    { icon: GalleryVerticalEnd, slug: "pipe-and-drape-rental", title: t("services.pipeDrapeRental"), description: t("services.pipeDrapeRental.desc"), image: "/images/services/permanent-av.webp" },
+    { icon: Monitor, slug: "led-screen-rental", title: t("services.ledRental"), description: t("services.ledRental.desc"), image: "/images/services/video-led.webp" },
   ]
 
   return (
@@ -35,11 +38,12 @@ export function ServicesGridSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {services.map((service, index) => (
-            <div
+            <Link
+              href={`/services/${service.slug}`}
               key={index}
-              className="relative p-7 md:p-8 min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden"
+              className="group relative p-7 md:p-8 min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden transition-all hover:border-[#FF2D6F]/40 hover:scale-[1.02]"
               style={{
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
@@ -50,8 +54,8 @@ export function ServicesGridSection() {
                 src={service.image}
                 alt={service.title}
                 fill
-                sizes="(max-width: 1024px) 100vw, 33vw"
-                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 25vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
               {/* Dark gradient overlay so text stays readable */}
@@ -83,7 +87,7 @@ export function ServicesGridSection() {
 
                 <p className="text-white/70 text-[14px] leading-[1.6]">{service.description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

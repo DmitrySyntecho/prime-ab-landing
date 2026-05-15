@@ -1098,7 +1098,25 @@ function Step9({
         <span className="text-white/55 text-[12px] leading-[1.6]">
           I agree that Prime Line AV may contact me regarding this request via phone, email, SMS or WhatsApp. My
           information is processed solely to prepare and execute the quote and will <b className="text-white/85">never
-          be shared with third parties</b>. By submitting I accept the Privacy Policy &amp; Terms.
+          be shared with third parties</b>. By submitting I accept the{" "}
+          <a
+            href="/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 text-white/75 hover:text-white transition-colors"
+          >
+            Privacy Policy
+          </a>
+          {" "}&amp;{" "}
+          <a
+            href="/terms-and-conditions"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 text-white/75 hover:text-white transition-colors"
+          >
+            Terms &amp; Conditions
+          </a>
+          .
         </span>
       </label>
     </div>

@@ -45,14 +45,14 @@ export function ServicesGridSection() {
       icon: Projector,
       title: "Projector & Screen Rental",
       description: "Boardroom to ballroom — 6 ft to 40+ ft screens, 4K laser projectors, and projection mapping.",
-      image: "/images/services/projector-screen.jpg",
+      image: "/images/services/projector-screen-card.jpg",
       href: "/services/projector-screen-rental",
     },
     {
       icon: Columns,
       title: "Pipe & Drape Rental",
       description: "IFR-certified drape in any height and color, installed and struck by our crew across Los Angeles.",
-      image: "/images/services/pipe-drape.jpg",
+      image: "/images/services/pipe-drape-card.jpg",
       href: "/services/pipe-drape-rental",
     },
     {

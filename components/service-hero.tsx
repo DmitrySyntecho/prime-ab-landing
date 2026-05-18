@@ -69,17 +69,20 @@ export function ServiceHero({ eyebrow, h1, subheadline, heroCta, image, onStartQ
       />
 
       <div className="relative max-w-7xl mx-auto px-4 w-full">
-        <div className="max-w-[640px]">
+        <div className="max-w-[820px]">
           <span className="ds-pill mb-5 md:mb-7 text-[10px] md:text-[12px]">
             <span className="dot" />
             {eyebrow}
           </span>
 
-          <h1 className="text-[36px] sm:text-[52px] lg:text-[72px] font-extrabold tracking-[-0.03em] leading-[1.02] text-white mb-5 md:mb-7">
+          <h1
+            className="font-extrabold tracking-[-0.03em] leading-[1.02] text-white mb-5 md:mb-7"
+            style={{ fontSize: "clamp(36px, 5.5vw, 80px)" }}
+          >
             {h1}
           </h1>
 
-          <p className="text-white/70 text-[15px] md:text-[18px] leading-relaxed max-w-[520px] mb-7 md:mb-10">
+          <p className="text-white/70 text-[15px] md:text-[18px] leading-relaxed max-w-[560px] mb-7 md:mb-10">
             {subheadline}
           </p>
 

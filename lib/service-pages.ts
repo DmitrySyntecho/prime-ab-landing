@@ -36,7 +36,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     subheadline:
       "Portable, truss-built, or mobile — engineered, certified, and crewed.",
     heroCta: "Get a Quote in 24 Hours",
-    image: "/images/services/stage-rental.jpg",
+    image: "/images/services/stage-rental-card.jpg",
     descriptionHeading: "Stages built for the show — not borrowed from a warehouse",
     description:
       "Primeline designs and installs stages for corporate keynotes, concerts, fashion runways, and brand activations across Los Angeles. Every build is structurally engineered, ADA-compliant where required, and signed off before doors open.\n\nWe don't just drop platforms and leave. Our riggers and stagehands stay through rehearsal, show, and strike.",
@@ -100,7 +100,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     subheadline:
       "Designed, pre-vis'd, and programmed. Senior LD on every event.",
     heroCta: "Get a Quote in 24 Hours",
-    image: "/images/services/lighting-rental.jpg",
+    image: "/images/services/lighting-rental-card.jpg",
     descriptionHeading: "Lighting designed for your show — not pulled off a shelf.",
     description:
       "Primeline supplies and programs lighting for corporate events, weddings, concerts, and festivals across Los Angeles. Every job starts with our in-house lighting designer building the look — color palette, fixture plot, cue list, and pre-vis — before a single truss hits the deck.\n\nWe use top-tier fixtures and consoles the industry actually runs on, with a senior LD at the board from rehearsal through show.",
@@ -130,7 +130,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     subheadline:
       "One team. One contract. One producer. From pre-vis to strike.",
     heroCta: "Talk to a Producer",
-    image: "/images/services/full-av-production.jpg",
+    image: "/images/services/full-av-card.jpg",
     descriptionHeading: "A production partner, not a rental house.",
     description:
       "Primeline produces full AV for corporate events, conferences, brand activations, speaking events, and experiential marketing across Los Angeles. Sound, lighting, video, LED, stage, crew, pre-vis, and on-site management — one team, one bill, one accountable producer from kickoff to strike.\n\nWhen the CEO walks on stage, the keynote runs clean, the brand colors match, and the room sounds like the brand sounds.",
@@ -160,7 +160,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     subheadline:
       "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor.",
     heroCta: "Get a Quote in 24 Hours",
-    image: "/images/services/tv-rental.jpg",
+    image: "/images/services/tv-rental-card.jpg",
     descriptionHeading: "TVs for every event — from a single confidence monitor to a multi-screen wall.",
     description:
       "Primeline supplies commercial-grade TVs across Los Angeles for corporate events, conferences, trade shows, brand activations, broadcast sets, and outdoor events. Single screens or full video walls. Portrait or landscape. Same content across every screen — or independent feeds on each one.\n\nEvery TV ships with the right mount, the right cable run, and an on-site tech who actually understands signal flow.",
@@ -191,7 +191,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     subheadline:
       "Boardroom to ballroom — plus projection mapping when the room is the canvas.",
     heroCta: "Get a Quote in 24 Hours",
-    image: "/images/services/projector-screen.jpg",
+    image: "/images/services/projector-screen-card.jpg",
     descriptionHeading: "Projection sized to your room — and your idea.",
     description:
       "Primeline supplies projectors and screens for corporate keynotes, conferences, brand activations, weddings, and outdoor events across Los Angeles — from a 6 ft conference-room screen to a 40 ft ballroom fast-fold, with the right projector brightness for the ambient light in the room.\n\nAnd when the room itself is the canvas — a wall, a façade, a stage build, a product — we design, produce, and program full projection mapping.",
@@ -222,7 +222,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     subheadline:
       "IFR-certified drape, any height and color, installed by our crew.",
     heroCta: "Get a Quote in 24 Hours",
-    image: "/images/services/pipe-drape.jpg",
+    image: "/images/services/pipe-drape-card.jpg",
     descriptionHeading: "Pipe and drape, supplied and installed across LA.",
     description:
       "Primeline supplies pipe and drape for film studios, broadcast sets, trade show booths, AV builds, conferences, and live events across Los Angeles. Every drape kit is IFR-certified (inherently flame retardant) and code-compliant for the venues that ask — and they all should.\n\nWe don't drop pipe and walk. Our crew measures, installs, dresses, and strikes.",
@@ -252,7 +252,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     subheadline:
       "Indoor, outdoor, mobile — same-day quote, senior crew on every job.",
     heroCta: "Get a Quote in 24 Hours",
-    image: "/images/services/led-screen.jpg",
+    image: "/images/services/led-screen-card.jpg",
     descriptionHeading: "Indoor and outdoor LED walls for any event in Los Angeles",
     description:
       "Primeline supplies and operates LED walls across LA — from intimate corporate stages to outdoor brand activations and festival main screens. We own the inventory, we send the crew, and we run the show file. No subletting, no day-laborers, no surprises on site.\n\nEvery install includes pre-vis, backup gear, and an on-site tech from load-in through strike.",

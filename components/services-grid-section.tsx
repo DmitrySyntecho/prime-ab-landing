@@ -10,56 +10,56 @@ export function ServicesGridSection() {
       icon: Box,
       title: "Stage Rental",
       description: "Portable, truss-built, or mobile stages — engineered, certified, and crewed for any event in LA.",
-      image: "/images/services/stage-rental.jpg",
+      image: "/images/services/stage-rental-card.jpg",
       href: "/services/stage-rental",
     },
     {
       icon: Volume2,
       title: "Sound System Rental",
       description: "L-Acoustics and d&b audio systems, tuned to your room with A1 + A2 engineers on every show.",
-      image: "/images/services/sound-system.jpg",
+      image: "/images/services/sound-system-card.jpg",
       href: "/services/sound-system-rental",
     },
     {
       icon: Lightbulb,
       title: "Lighting Equipment Rental",
       description: "Designed, pre-vis'd, and programmed by a senior LD — moving heads, washes, and GrandMA3 console.",
-      image: "/images/services/lighting-rental.jpg",
+      image: "/images/services/lighting-rental-card.jpg",
       href: "/services/lighting-rental",
     },
     {
       icon: Layers,
       title: "Full AV Production",
       description: "One team, one contract, one producer — sound, lighting, video, LED, and stage from pre-vis to strike.",
-      image: "/images/services/full-av-production.jpg",
+      image: "/images/services/full-av-card.jpg",
       href: "/services/full-av-production",
     },
     {
       icon: Tv,
       title: "TV Rental",
       description: "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor, with on-site video tech.",
-      image: "/images/services/tv-rental.jpg",
+      image: "/images/services/tv-rental-card.jpg",
       href: "/services/tv-rental",
     },
     {
       icon: Projector,
       title: "Projector & Screen Rental",
       description: "Boardroom to ballroom — 6 ft to 40+ ft screens, 4K laser projectors, and projection mapping.",
-      image: "/images/services/projector-screen.jpg",
+      image: "/images/services/projector-screen-card.jpg",
       href: "/services/projector-screen-rental",
     },
     {
       icon: Columns,
       title: "Pipe & Drape Rental",
       description: "IFR-certified drape in any height and color, installed and struck by our crew across Los Angeles.",
-      image: "/images/services/pipe-drape.jpg",
+      image: "/images/services/pipe-drape-card.jpg",
       href: "/services/pipe-drape-rental",
     },
     {
       icon: Monitor,
       title: "LED Screen Rental",
       description: "Indoor, outdoor, and curved LED walls — same-day quote, senior LED tech and rigger on every job.",
-      image: "/images/services/led-screen.jpg",
+      image: "/images/services/led-screen-card.jpg",
       href: "/services/led-screen-rental",
     },
   ]
@@ -88,19 +88,20 @@ export function ServicesGridSection() {
             <Link
               key={index}
               href={service.href}
-              className="group relative p-7 md:p-8 min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden block transition-transform hover:-translate-y-0.5 hover:border-[#FF2D6F]/45"
+              className="group relative min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden block transition-transform hover:-translate-y-0.5 hover:border-[#FF2D6F]/45 bg-[#0a0a0a]"
               style={{
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
               }}
             >
-              {/* Background image — always visible */}
+              {/* Background image — always visible, fills entire card */}
               <Image
                 src={service.image}
                 alt={service.title}
                 fill
+                priority={index < 4}
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-cover"
+                className="absolute inset-0 object-cover"
               />
 
               {/* Dark gradient overlay so text stays readable */}
@@ -123,7 +124,7 @@ export function ServicesGridSection() {
                 aria-hidden
               />
 
-              <div className="relative z-10">
+              <div className="relative z-10 p-7 md:p-8">
                 <div className="w-14 h-14 rounded-[14px] bg-[#FF2D6F]/22 border border-[#FF2D6F]/35 flex items-center justify-center text-[#FF2D6F] mb-5 backdrop-blur-md">
                   <service.icon className="w-6 h-6" strokeWidth={1.7} />
                 </div>

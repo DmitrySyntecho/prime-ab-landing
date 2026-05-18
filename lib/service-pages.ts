@@ -174,9 +174,11 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     ctaLabel: "Get a Quote in 24 Hours",
     collage: [
-      "/images/case-studies/amagi-2.webp",
-      "/images/case-studies/lca-2.webp",
-      "/images/case-studies/tiktok-4.webp",
+      "/images/services/tv-01.jpg",
+      "/images/services/tv-02.jpg",
+      "/images/services/tv-03.jpg",
+      "/images/services/tv-04.jpg",
+      "/images/services/tv-05.jpg",
       "/images/case-studies/miami-3.webp",
     ],
     collageStats: [

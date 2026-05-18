@@ -290,9 +290,9 @@ export function CaseStudiesSection() {
               </a>
             </div>
 
-            {/* Thumbnails */}
+            {/* Thumbnails — same grid as the photo gallery so they align */}
             <div className="pt-4">
-              <div className="flex gap-1.5 md:gap-2 items-end justify-center flex-wrap">
+              <div className="grid grid-cols-6 gap-2 md:gap-3">
                 {caseStudies.map((study, index) => (
                   <button
                     key={study.id}
@@ -300,7 +300,7 @@ export function CaseStudiesSection() {
                       setActiveIndex(index)
                       setIsPlaying(false)
                     }}
-                    className={`relative w-16 md:w-20 h-10 md:h-14 rounded-lg overflow-hidden transition-all ${
+                    className={`relative aspect-video w-full rounded-lg overflow-hidden transition-all ${
                       index === activeIndex
                         ? "ring-2 ring-[#FF2D6F] ring-offset-2 ring-offset-[#0a0a12]"
                         : "opacity-50 hover:opacity-100"

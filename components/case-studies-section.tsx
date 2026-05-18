@@ -9,6 +9,7 @@ const MUX_MIAMI_ID = "a1VM513vYaAw3u8rBfLB8bG4MMma2FbIFN2YGepuxiA"
 const MUX_LCA_ID = "02w1uQtRVTaeIYfYMvYnHvIFZbFF19lAyoDYU00M00fGHk"
 const MUX_AMAGI_ID = "BrD9vKSat02duCjNodPZ00a02ZRc5QfKAno007TIKGF5vOU"
 const MUX_RAMP_ID = "xIFaCY1GdKzQxjtm01L87JqoPAKob3YBscDUzSiSF1300"
+const MUX_ASIAN_FLAME_ID = "Io8Bi00jo3qftxjB01L1qWs7TPQuOhKBxfi02ecvwEl2X00"
 
 const caseStudies = [
   {
@@ -94,6 +95,23 @@ const caseStudies = [
       { src: "/images/case-studies/ramp-4.webp", alt: "Lighting and audio gear positioned around the event" },
       { src: "/images/case-studies/ramp-5.webp", alt: "Crew capturing live footage during the activation" },
       { src: "/images/case-studies/ramp-6.webp", alt: "Tailgate brand experience in full production" },
+    ],
+  },
+  {
+    id: "asian-flame-bts",
+    title: "Asian Flame BTS",
+    location: "Los Angeles",
+    description:
+      "Behind-the-scenes production for the Asian Hall of Fame 20th Anniversary Gala — full AV build including stage, truss rigging, LED video wall, lighting design with moving heads, live band support, and on-site crew coverage across the ornate ballroom.",
+    muxId: MUX_ASIAN_FLAME_ID,
+    thumbnail: `https://image.mux.com/${MUX_ASIAN_FLAME_ID}/thumbnail.jpg?time=5&width=800`,
+    gallery: [
+      { src: "/images/case-studies/asian-flame-1.jpg", alt: "Live band performance on stage with 20th anniversary branding" },
+      { src: "/images/case-studies/asian-flame-2.jpg", alt: "Ballroom wide shot with LED wall and feather centrepieces" },
+      { src: "/images/case-studies/asian-flame-3.jpg", alt: "Lighting technician operating follow-spot from the balcony" },
+      { src: "/images/case-studies/asian-flame-4.jpg", alt: "Empty grand ballroom during load-in" },
+      { src: "/images/case-studies/asian-flame-5.jpg", alt: "Crew rigging truss inside the ornate venue" },
+      { src: "/images/case-studies/asian-flame-6.jpg", alt: "Technician focusing follow-spot lights on the balcony rail" },
     ],
   },
 ]

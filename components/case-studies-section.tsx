@@ -291,27 +291,29 @@ export function CaseStudiesSection() {
             </div>
 
             {/* Thumbnails */}
-            <div className="flex gap-3 pt-4 flex-wrap">
-              {caseStudies.map((study, index) => (
-                <button
-                  key={study.id}
-                  onClick={() => {
-                    setActiveIndex(index)
-                    setIsPlaying(false)
-                  }}
-                  className={`relative w-24 h-16 rounded-lg overflow-hidden transition-all flex-shrink-0 ${
-                    index === activeIndex
-                      ? "ring-2 ring-[#FF2D6F] ring-offset-2 ring-offset-[#0a0a12]"
-                      : "opacity-50 hover:opacity-100"
-                  }`}
-                >
-                  <img
-                    src={study.thumbnail}
-                    alt={study.title}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
+            <div className="pt-4 -mx-4 px-4 overflow-x-auto">
+              <div className="flex gap-2 md:gap-3 flex-nowrap pb-2">
+                {caseStudies.map((study, index) => (
+                  <button
+                    key={study.id}
+                    onClick={() => {
+                      setActiveIndex(index)
+                      setIsPlaying(false)
+                    }}
+                    className={`relative w-20 md:w-24 h-12 md:h-16 rounded-lg overflow-hidden transition-all flex-shrink-0 ${
+                      index === activeIndex
+                        ? "ring-2 ring-[#FF2D6F] ring-offset-2 ring-offset-[#0a0a12]"
+                        : "opacity-50 hover:opacity-100"
+                    }`}
+                  >
+                    <img
+                      src={study.thumbnail}
+                      alt={study.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>

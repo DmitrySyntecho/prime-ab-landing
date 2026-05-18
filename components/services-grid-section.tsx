@@ -118,10 +118,10 @@ export function ServicesGridSection() {
                 style={{
                   background:
                     service.darkening === "heavy"
-                      ? "linear-gradient(180deg, rgba(3,7,10,0.5) 0%, rgba(3,7,10,0.75) 60%, rgba(3,7,10,0.85) 100%)"
+                      ? "linear-gradient(180deg, rgba(3,7,10,0.65) 0%, rgba(3,7,10,0.90) 60%, rgba(3,7,10,1) 100%)"
                       : service.darkening === "extra"
-                        ? "linear-gradient(180deg, rgba(3,7,10,0.35) 0%, rgba(3,7,10,0.6) 60%, rgba(3,7,10,0.75) 100%)"
-                        : "linear-gradient(180deg, rgba(3,7,10,0.25) 0%, rgba(3,7,10,0.45) 60%, rgba(3,7,10,0.65) 100%)",
+                        ? "linear-gradient(180deg, rgba(3,7,10,0.50) 0%, rgba(3,7,10,0.75) 60%, rgba(3,7,10,0.90) 100%)"
+                        : "linear-gradient(180deg, rgba(3,7,10,0.40) 0%, rgba(3,7,10,0.60) 60%, rgba(3,7,10,0.80) 100%)",
                 }}
                 aria-hidden
               />

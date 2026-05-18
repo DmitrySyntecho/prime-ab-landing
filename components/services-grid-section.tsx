@@ -12,6 +12,7 @@ export function ServicesGridSection() {
       description: "Portable, truss-built, or mobile stages — engineered, certified, and crewed for any event in LA.",
       image: "/images/services/stage-rental-card.jpg",
       href: "/services/stage-rental",
+      darkening: "heavy", // significant darkening
     },
     {
       icon: Volume2,
@@ -19,6 +20,7 @@ export function ServicesGridSection() {
       description: "L-Acoustics and d&b audio systems, tuned to your room with A1 + A2 engineers on every show.",
       image: "/images/services/sound-system-card.jpg",
       href: "/services/sound-system-rental",
+      darkening: "medium", // 15% more
     },
     {
       icon: Lightbulb,
@@ -26,6 +28,7 @@ export function ServicesGridSection() {
       description: "Designed, pre-vis'd, and programmed by a senior LD — moving heads, washes, and GrandMA3 console.",
       image: "/images/services/lighting-rental-card.jpg",
       href: "/services/lighting-rental",
+      darkening: "medium", // 15% more
     },
     {
       icon: Layers,
@@ -33,6 +36,7 @@ export function ServicesGridSection() {
       description: "One team, one contract, one producer — sound, lighting, video, LED, and stage from pre-vis to strike.",
       image: "/images/services/full-av-card.jpg",
       href: "/services/full-av-production",
+      darkening: "extra", // 30% more
     },
     {
       icon: Tv,
@@ -40,6 +44,7 @@ export function ServicesGridSection() {
       description: "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor, with on-site video tech.",
       image: "/images/services/tv-rental-card.jpg",
       href: "/services/tv-rental",
+      darkening: "medium", // 15% more
     },
     {
       icon: Projector,
@@ -47,6 +52,7 @@ export function ServicesGridSection() {
       description: "Boardroom to ballroom — 6 ft to 40+ ft screens, 4K laser projectors, and projection mapping.",
       image: "/images/services/projector-screen-card.jpg",
       href: "/services/projector-screen-rental",
+      darkening: "medium", // 15% more
     },
     {
       icon: Columns,
@@ -54,6 +60,7 @@ export function ServicesGridSection() {
       description: "IFR-certified drape in any height and color, installed and struck by our crew across Los Angeles.",
       image: "/images/services/pipe-drape-card.jpg",
       href: "/services/pipe-drape-rental",
+      darkening: "medium", // 15% more
     },
     {
       icon: Monitor,
@@ -61,6 +68,7 @@ export function ServicesGridSection() {
       description: "Indoor, outdoor, and curved LED walls — same-day quote, senior LED tech and rigger on every job.",
       image: "/images/services/led-screen-card.jpg",
       href: "/services/led-screen-rental",
+      darkening: "medium", // 15% more
     },
   ]
 
@@ -104,12 +112,16 @@ export function ServicesGridSection() {
                 className="absolute inset-0 object-cover"
               />
 
-              {/* Dark gradient overlay so text stays readable */}
+              {/* Dark gradient overlay — opacity varies by card */}
               <div
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(3,7,10,0.25) 0%, rgba(3,7,10,0.45) 60%, rgba(3,7,10,0.65) 100%)",
+                    service.darkening === "heavy"
+                      ? "linear-gradient(180deg, rgba(3,7,10,0.50) 0%, rgba(3,7,10,0.70) 60%, rgba(3,7,10,0.85) 100%)"
+                      : service.darkening === "extra"
+                        ? "linear-gradient(180deg, rgba(3,7,10,0.50) 0%, rgba(3,7,10,0.75) 60%, rgba(3,7,10,0.90) 100%)"
+                        : "linear-gradient(180deg, rgba(3,7,10,0.40) 0%, rgba(3,7,10,0.60) 60%, rgba(3,7,10,0.80) 100%)",
                 }}
                 aria-hidden
               />

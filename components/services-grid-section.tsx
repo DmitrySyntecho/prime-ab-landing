@@ -88,19 +88,20 @@ export function ServicesGridSection() {
             <Link
               key={index}
               href={service.href}
-              className="group relative p-7 md:p-8 min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden block transition-transform hover:-translate-y-0.5 hover:border-[#FF2D6F]/45 bg-[#0a0a0a]"
+              className="group relative min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden block transition-transform hover:-translate-y-0.5 hover:border-[#FF2D6F]/45 bg-[#0a0a0a]"
               style={{
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
               }}
             >
-              {/* Background image — always visible */}
+              {/* Background image — always visible, fills entire card */}
               <Image
                 src={service.image}
                 alt={service.title}
                 fill
+                priority={index < 4}
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="object-cover w-full h-full"
+                className="absolute inset-0 object-cover"
               />
 
               {/* Dark gradient overlay so text stays readable */}
@@ -123,7 +124,7 @@ export function ServicesGridSection() {
                 aria-hidden
               />
 
-              <div className="relative z-10">
+              <div className="relative z-10 p-7 md:p-8">
                 <div className="w-14 h-14 rounded-[14px] bg-[#FF2D6F]/22 border border-[#FF2D6F]/35 flex items-center justify-center text-[#FF2D6F] mb-5 backdrop-blur-md">
                   <service.icon className="w-6 h-6" strokeWidth={1.7} />
                 </div>

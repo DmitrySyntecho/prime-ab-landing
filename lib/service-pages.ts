@@ -143,10 +143,12 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     ctaLabel: "Talk to a Producer",
     collage: [
-      "/images/case-studies/amagi-1.webp",
-      "/images/case-studies/tiktok-1.webp",
-      "/images/case-studies/miami-1.webp",
-      "/images/case-studies/lca-4.webp",
+      "/images/services/av-01.jpg",
+      "/images/services/av-02.jpg",
+      "/images/services/av-03.jpg",
+      "/images/services/av-04.jpg",
+      "/images/services/av-05.jpg",
+      "/images/case-studies/amagi-3.webp",
     ],
     collageStats: [
       { value: "1,986+", label: "Events Delivered" },

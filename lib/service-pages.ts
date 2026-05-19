@@ -239,10 +239,12 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     ctaLabel: "Get a Quote in 24 Hours",
     collage: [
-      "/images/case-studies/amagi-5.webp",
-      "/images/case-studies/lca-6.webp",
+      "/images/services/drape-01.jpg",
+      "/images/services/drape-02.jpg",
+      "/images/services/drape-03.jpg",
+      "/images/services/drape-04.jpg",
+      "/images/services/drape-05.jpg",
       "/images/about/brands-trust-1.webp",
-      "/images/about/brands-trust-2.webp",
     ],
     collageStats: [
       { value: "IFR", label: "Certified Drape" },

@@ -146,9 +146,9 @@ export const SERVICE_PAGES: ServicePage[] = [
       "/images/services/av-01.jpg",
       "/images/services/av-02.jpg",
       "/images/services/av-03.jpg",
-      "/images/services/av-04.jpg",
+      "/images/services/av-06.jpg",
       "/images/services/av-05.jpg",
-      "/images/case-studies/amagi-3.webp",
+      "/images/services/av-07.jpg",
     ],
     collageStats: [
       { value: "1,986+", label: "Events Delivered" },

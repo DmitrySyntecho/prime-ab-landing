@@ -14,7 +14,7 @@ const STEPS = [
 ]
 
 const EVENT_TYPES = [
-  { name: "Corporate Event", image: "/corporate-event-conference-stage-lighting.jpg" },
+  { name: "Corporate Event", image: "/corporate-event-conference-stage-lighting.webp" },
   { name: "Experiential Marketing", image: "/experiential-marketing-brand-activation-booth.jpg" },
   { name: "Fashion Show", image: "/fashion-show-runway-lighting-models.jpg" },
   { name: "Trade Show", image: "/trade-show-exhibition-booth-display.jpg" },

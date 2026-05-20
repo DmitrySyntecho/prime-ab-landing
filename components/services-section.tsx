@@ -54,7 +54,7 @@ const services = [
     slug: "av-consulting",
     description:
       "Professional guidance for planning, improving, or optimizing AV systems, workflows, and in-house production operations.",
-    image: "/corporate-event-av-setup-stage-lighting.jpg",
+    image: "/corporate-event-av-setup-stage-lighting.webp",
   },
 ]
 

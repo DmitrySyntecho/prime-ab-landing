@@ -11,7 +11,7 @@ export const products: Product[] = [
     price: 8999,
     originalPrice: 9999,
     discount: 10,
-    image: "/images/products/led-wall-30x15.jpg",
+    image: "/images/products/led-wall-30x15.webp",
     features: [
       "4K Ultra HD Resolution",
       "HDR10+ Support",
@@ -51,7 +51,7 @@ export const products: Product[] = [
     price: 7499,
     originalPrice: 8299,
     discount: 10,
-    image: "/images/products/led-wall-25x15.jpg",
+    image: "/images/products/led-wall-25x15.webp",
     features: [
       "4K Ultra HD Resolution",
       "Seamless Panel Design",
@@ -90,7 +90,7 @@ export const products: Product[] = [
     price: 5999,
     originalPrice: 6599,
     discount: 9,
-    image: "/images/products/led-wall-25x12.jpg",
+    image: "/images/products/led-wall-25x12.webp",
     features: [
       "Broadcast Quality",
       "Easy Modular Setup",
@@ -128,7 +128,7 @@ export const products: Product[] = [
     price: 3499,
     originalPrice: 3899,
     discount: 10,
-    image: "/images/products/led-wall-15x8.jpg",
+    image: "/images/products/led-wall-15x8.webp",
     features: [
       "Crystal Clear Display",
       "Quick Setup (2hrs)",
@@ -167,7 +167,7 @@ export const products: Product[] = [
     price: 1599,
     originalPrice: 1799,
     discount: 11,
-    image: "/images/products/led-wall-8x5.jpg",
+    image: "/images/products/led-wall-8x5.webp",
     features: [
       "Portable Design",
       "Fast Setup (1hr)",
@@ -205,7 +205,7 @@ export const products: Product[] = [
     price: 1299,
     originalPrice: 1499,
     discount: 13,
-    image: "/images/products/led-wall-8x4.jpg",
+    image: "/images/products/led-wall-8x4.webp",
     features: [
       "Space Efficient",
       "Ultra Fast Setup",

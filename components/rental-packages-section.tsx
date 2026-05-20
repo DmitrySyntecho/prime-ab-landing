@@ -189,7 +189,7 @@ const packages: Record<string, Package[]> = {
     },
     {
       title: "Expo Lighting Kit",
-      image: "/expo-booth-lighting.jpg",
+      image: "/expo-booth-lighting.webp",
       features: ["Lighting", "Spotlights", "Ambient"],
       rentalPrice: 550,
     },
@@ -211,7 +211,7 @@ const packages: Record<string, Package[]> = {
     },
     {
       title: "Reception Lighting Package",
-      image: "/wedding-reception-uplighting.jpg",
+      image: "/wedding-reception-uplighting.webp",
       features: ["Lighting", "Uplights", "Wireless"],
       rentalPrice: 800,
     },
@@ -237,7 +237,7 @@ const packages: Record<string, Package[]> = {
   fashion: [
     {
       title: "Runway Lighting Package",
-      image: "/fashion-runway-lighting.jpg",
+      image: "/fashion-runway-lighting.webp",
       features: ["Lighting", "Moving Heads", "DMX"],
       rentalPrice: 4500,
       originalPrice: 5500,

@@ -7,9 +7,9 @@ import Link from "next/link"
 import { Heart, ArrowRight, Sparkles, HandHeart, Users2, CalendarHeart } from "lucide-react"
 
 const photos = [
-  { src: "/images/charity/charity-1.jpg", alt: "Young girl with walker giving thumbs up" },
-  { src: "/images/charity/charity-2.jpg", alt: "Girl with leg braces in front of flower wall" },
-  { src: "/images/charity/charity-3.jpg", alt: "Girl smiling with her dog" },
+  { src: "/images/charity/charity-1.webp", alt: "Young girl with walker giving thumbs up" },
+  { src: "/images/charity/charity-2.webp", alt: "Girl with leg braces in front of flower wall" },
+  { src: "/images/charity/charity-3.webp", alt: "Girl smiling with her dog" },
 ]
 
 function useCount(end: number, duration = 2200) {

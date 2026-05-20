@@ -23,7 +23,7 @@ const caseStudies = [
     gallery: [
       { src: "/images/case-studies/tiktok-1.webp", alt: "TikTok Shop Summit main stage presentation" },
       { src: "/images/case-studies/tiktok-2.webp", alt: "Summit stage setup with disco ball and lighting" },
-      { src: "/images/case-studies/tiktok-3.jpg", alt: "TikTok Shop Summit exhibition floor" },
+      { src: "/images/case-studies/tiktok-3.webp", alt: "TikTok Shop Summit exhibition floor" },
       { src: "/images/case-studies/tiktok-4.webp", alt: "Speaker presenting TikTok Shop ecosystem milestones" },
       { src: "/images/case-studies/tiktok-5.webp", alt: "L-Acoustics speaker array setup" },
       { src: "/images/case-studies/tiktok-6.webp", alt: "Lighting console operator at work" },

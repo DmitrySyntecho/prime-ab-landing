@@ -50,7 +50,7 @@ export function ServicesGridSection() {
       icon: Projector,
       title: "Projector & Screen Rental",
       description: "Boardroom to ballroom — 6 ft to 40+ ft screens, 4K laser projectors, and projection mapping.",
-      image: "/images/services/projector-screen-card.jpg",
+      image: "/images/services/projector-screen.jpg",
       href: "/services/projector-screen-rental",
       darkening: "medium", // 15% more
     },

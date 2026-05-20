@@ -209,10 +209,12 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     ctaLabel: "Get a Quote in 24 Hours",
     collage: [
-      "/images/case-studies/ramp-1.webp",
-      "/images/case-studies/amagi-4.webp",
-      "/images/case-studies/lca-3.webp",
-      "/images/case-studies/miami-2.webp",
+      "/images/services/proj-01.jpg",
+      "/images/services/proj-02.jpg",
+      "/images/services/proj-03.jpg",
+      "/images/services/proj-04.jpg",
+      "/images/services/proj-05.jpg",
+      "/images/services/proj-06.jpg",
     ],
     collageStats: [
       { value: "30,000+", label: "Lumens Available" },

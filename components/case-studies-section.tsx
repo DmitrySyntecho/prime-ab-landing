@@ -106,12 +106,12 @@ const caseStudies = [
     muxId: MUX_ASIAN_FLAME_ID,
     thumbnail: `https://image.mux.com/${MUX_ASIAN_FLAME_ID}/thumbnail.jpg?time=5&width=800`,
     gallery: [
-      { src: "/images/case-studies/asian-flame-1.jpg", alt: "Live band performance on stage with 20th anniversary branding" },
-      { src: "/images/case-studies/asian-flame-2.jpg", alt: "Ballroom wide shot with LED wall and feather centrepieces" },
-      { src: "/images/case-studies/asian-flame-3.jpg", alt: "Lighting technician operating follow-spot from the balcony" },
-      { src: "/images/case-studies/asian-flame-4.jpg", alt: "Empty grand ballroom during load-in" },
-      { src: "/images/case-studies/asian-flame-5.jpg", alt: "Crew rigging truss inside the ornate venue" },
-      { src: "/images/case-studies/asian-flame-6.jpg", alt: "Technician focusing follow-spot lights on the balcony rail" },
+      { src: "/images/case-studies/asian-flame-1.webp", alt: "Live band performance on stage with 20th anniversary branding" },
+      { src: "/images/case-studies/asian-flame-2.webp", alt: "Ballroom wide shot with LED wall and feather centrepieces" },
+      { src: "/images/case-studies/asian-flame-3.webp", alt: "Lighting technician operating follow-spot from the balcony" },
+      { src: "/images/case-studies/asian-flame-4.webp", alt: "Empty grand ballroom during load-in" },
+      { src: "/images/case-studies/asian-flame-5.webp", alt: "Crew rigging truss inside the ornate venue" },
+      { src: "/images/case-studies/asian-flame-6.webp", alt: "Technician focusing follow-spot lights on the balcony rail" },
     ],
   },
 ]

@@ -17,7 +17,7 @@ export default function ProjectorScreenRentalsPage() {
         {
           title: "Meeting Room Package",
           description: "3,500 lumen projector with tripod screen",
-          image: "/meeting-room-av-setup-projector-screen.jpg",
+          image: "/meeting-room-av-setup-projector-screen.webp",
           price: 350,
           features: ["3.5K Lumens", "6 ft Screen", "HDMI"],
         },

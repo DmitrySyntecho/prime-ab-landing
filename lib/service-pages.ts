@@ -195,7 +195,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     subheadline:
       "Boardroom to ballroom — plus projection mapping when the room is the canvas.",
     heroCta: "Get a Quote in 24 Hours",
-    image: "/images/services/projector-screen-card.jpg",
+    image: "/images/services/projector-screen.jpg",
     descriptionHeading: "Projection sized to your room — and your idea.",
     description:
       "Primeline supplies projectors and screens for corporate keynotes, conferences, brand activations, weddings, and outdoor events across Los Angeles — from a 6 ft conference-room screen to a 40 ft ballroom fast-fold, with the right projector brightness for the ambient light in the room.\n\nAnd when the room itself is the canvas — a wall, a façade, a stage build, a product — we design, produce, and program full projection mapping.",

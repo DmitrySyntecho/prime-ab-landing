@@ -147,8 +147,8 @@ export function PromoTopBanner() {
             href="/fifa-2026-packages"
             className="ml-auto sm:ml-0 group inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-[11px] sm:text-[12px] font-extrabold tracking-[0.04em] uppercase whitespace-nowrap text-white transition-all hover:-translate-y-px"
             style={{
-              background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
-              boxShadow: "0 8px 22px -6px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
+              background: "linear-gradient(135deg, #FFD24A, #FF5E3A)",
+              boxShadow: "0 8px 22px -6px rgba(255,210,74,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
             }}
           >
             <span className="hidden sm:inline">View Packages</span>

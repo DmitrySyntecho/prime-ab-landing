@@ -17,7 +17,8 @@
       "Bash(git push *)",
       "Bash(cd /e/Syntecho && ls -la | grep -i prime)",
       "Read(//e/Syntecho/**)",
-      "Bash(xargs -I {} basename {})"
+      "Bash(xargs -I {} basename {})",
+      "Bash(npm uninstall *)"
     ]
   }
 }

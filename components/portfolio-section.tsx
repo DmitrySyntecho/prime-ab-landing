@@ -46,7 +46,7 @@ const projects = [
 
 export function PortfolioSection() {
   return (
-    <section id="portfolio" className="py-24 md:py-28 relative overflow-hidden">
+    <section id="our-work" className="py-24 md:py-28 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section head */}
         <div className="text-center mb-12 max-w-3xl mx-auto">

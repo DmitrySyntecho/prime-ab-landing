@@ -175,7 +175,7 @@ export function CaseStudiesSection() {
   }
 
   return (
-    <section className="py-20 md:py-24 relative overflow-hidden">
+    <section id="our-work" className="py-20 md:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Header */}
@@ -283,7 +283,7 @@ export function CaseStudiesSection() {
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a
-                href="tel:7869338488"
+                href="tel:5615944288"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-semibold text-[13px] backdrop-blur-md hover:bg-white/[0.10] transition-all"
               >
                 Talk to an Expert

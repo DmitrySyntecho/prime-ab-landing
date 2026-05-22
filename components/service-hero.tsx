@@ -12,7 +12,7 @@ interface ServiceHeroProps {
   onStartQuote: () => void
 }
 
-const PHONE = "(786) 933-8488"
+const PHONE = "(561) 594-4288"
 
 // Real alpha-fade at the bottom: a CSS mask is applied to the wrapper holding
 // the photo + the left-side dim layer, so the actual pixels become transparent
@@ -26,7 +26,7 @@ export function ServiceHero({ eyebrow, h1, subheadline, heroCta, image, onStartQ
     <section
       className="relative isolate overflow-hidden flex items-center
                  -mt-[100px] md:-mt-[120px] lg:-mt-[140px]
-                 min-h-[100svh] md:min-h-screen"
+                 pt-[160px] md:pt-[200px] lg:pt-[220px] pb-16 md:pb-20"
     >
       {/* Masked wrapper — photo + left dim layer fade to transparent at the bottom */}
       <div

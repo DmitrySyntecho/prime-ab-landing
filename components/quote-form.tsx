@@ -165,6 +165,8 @@ interface FormData {
   message: string
   promoCode: string
   agreeTerms: boolean
+  optInCall: boolean
+  optInSms: boolean
   honeypot: string
 }
 
@@ -192,6 +194,8 @@ const empty: FormData = {
   message: "",
   promoCode: "",
   agreeTerms: false,
+  optInCall: false,
+  optInSms: false,
   honeypot: "",
 }
 
@@ -221,10 +225,14 @@ function formatPhone(raw: string, country: Country): string {
 
 /* ============ COMPONENT ============ */
 
+const CTM_URL =
+  "https://api.calltrackingmetrics.com/api/v1/formreactor/FRT472ABB2C5B9B141AF5CC9D8A09C2CC812153956096F45ED6DE27A3624E9F41F9?key=VJVuWkEx9OXra7ApyAzUaKcyunMtBl40M65STROT_F0ML4vb"
+
 export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
   const [step, setStep] = useState(1)
   const [data, setData] = useState<FormData>(empty)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null)
   const [phoneSuggestion, setPhoneSuggestion] = useState<string | null>(null)
@@ -283,15 +291,13 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
     if (step === 6) return !!data.dropoffDate && !!data.dropoffTime && !!data.pickupDate && !!data.pickupTime
     if (step === 7) return data.address.trim().length >= 5 && data.city.trim().length >= 2 && !!data.state && data.zip.trim().length === 5
     if (step === 8) return !!data.bestTime
-    if (step === 9) return data.agreeTerms
+    if (step === 9) return data.agreeTerms && data.optInCall && data.optInSms
     return false
   }
 
-  const handleSubmit = () => {
-    // Anti-spam: Honeypot check
+  const handleSubmit = async () => {
     if (data.honeypot) return
 
-    // Anti-spam: Timing check (min 3 seconds)
     if (formStartTime.current) {
       const timingCheck = checkSubmissionTiming(formStartTime.current, 3)
       if (timingCheck.isSpam) {
@@ -300,28 +306,60 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
       }
     }
 
-    // Validate phone number
     const phoneValidation = validateUSPhoneNumber(data.phone)
     if (!phoneValidation.isValid) {
       setErrors((e) => ({ ...e, phone: phoneValidation.error || "Invalid phone" }))
       return
     }
 
-    // Validate email
     const emailValidation = validateEmail(data.email)
     if (!emailValidation.isValid) {
       setErrors((e) => ({ ...e, email: emailValidation.error || "Invalid email" }))
-      if (emailValidation.suggestion) {
-        setEmailSuggestion(emailValidation.suggestion)
-      }
+      if (emailValidation.suggestion) setEmailSuggestion(emailValidation.suggestion)
       return
     }
 
-    // Clear errors and submit
     setErrors({})
     setEmailSuggestion(null)
     setPhoneSuggestion(null)
-    setSubmitted(true)
+    setSubmitting(true)
+
+    try {
+      const phoneCountry = countries.find((c) => c.code === data.phoneCountry) || countries[0]
+      const countryCode = phoneCountry.dial.replace("+", "")
+      const eventLabel = eventTypes.find((e) => e.id === data.eventType)?.label || data.eventType
+      const servicesList = data.services
+        .map((id) => serviceOptions.find((o) => o.id === id)?.title)
+        .filter(Boolean)
+        .join(", ")
+      const fullAddress = [data.address, data.address2, `${data.city}, ${data.state} ${data.zip}`]
+        .filter(Boolean)
+        .join(", ")
+
+      const payload = new FormData()
+      payload.append("caller_name", `${data.firstName} ${data.lastName}`.trim())
+      payload.append("phone_number", data.phone)
+      payload.append("country_code", countryCode)
+      payload.append("email", data.email)
+      payload.append("message", `New quote request from ${data.firstName} ${data.lastName} — ${eventLabel} | Services: ${servicesList}`)
+      payload.append("custom_fields[event_type]", eventLabel)
+      payload.append("custom_fields[services]", servicesList)
+      payload.append("custom_fields[dropoff]", `${data.dropoffDate} ${data.dropoffTime}`)
+      payload.append("custom_fields[pickup]", `${data.pickupDate} ${data.pickupTime}`)
+      payload.append("custom_fields[address]", fullAddress)
+      if (data.bestTime) payload.append("custom_fields[best_time]", data.bestTime)
+      if (data.message) payload.append("custom_fields[notes]", data.message)
+      if (data.promoCode) payload.append("custom_fields[promo_code]", data.promoCode)
+      if (data.hasWhatsapp && data.waPhone) payload.append("custom_fields[whatsapp]", data.waPhone)
+
+      const res = await fetch(CTM_URL, { method: "POST", body: payload })
+      if (!res.ok) throw new Error("CTM error")
+      setSubmitted(true)
+    } catch {
+      setErrors({ submit: "Something went wrong. Please call us directly at (561) 594-4288." })
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const reset = () => {
@@ -451,7 +489,7 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
                 ) : (
                   <button
                     onClick={handleSubmit}
-                    disabled={!canContinue()}
+                    disabled={!canContinue() || submitting}
                     className="inline-flex items-center gap-1.5 sm:gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-white font-extrabold text-[12px] sm:text-[13px] tracking-[0.02em] transition-all disabled:opacity-40 disabled:cursor-not-allowed enabled:hover:-translate-y-0.5"
                     style={{
                       background:
@@ -460,11 +498,15 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
                         "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
                     }}
                   >
-                    Submit
+                    {submitting ? "Sending…" : "Submit"}
                     <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </button>
                 )}
               </div>
+
+              {errors.submit && (
+                <p className="mt-3 text-red-400 text-[12px] text-center">{errors.submit}</p>
+              )}
 
               {/* Honeypot — bots fill this, humans don't see it */}
               <div
@@ -1065,6 +1107,74 @@ function Step9({
         {data.promoCode && summaryRow("Promo", data.promoCode)}
       </div>
 
+      {/* Opt-in Call */}
+      <div className="space-y-1.5">
+        <p className="text-white text-[13px] font-bold">
+          Opt-in Call<span className="text-[#FF2D6F]">*</span>
+        </p>
+        <label className="flex items-start gap-3 cursor-pointer group">
+          <span
+            className={`mt-0.5 w-5 h-5 rounded-md flex-shrink-0 flex items-center justify-center transition-all ${
+              data.optInCall
+                ? "bg-[#FF2D6F] border border-[#FF2D6F]"
+                : "bg-white/[0.04] border border-white/[0.18] group-hover:border-white/[0.30]"
+            }`}
+          >
+            {data.optInCall && <Check className="w-3 h-3 text-white" strokeWidth={4} />}
+          </span>
+          <input
+            type="checkbox"
+            checked={data.optInCall}
+            onChange={(e) => update("optInCall", e.target.checked)}
+            className="sr-only"
+          />
+          <span className="text-white/55 text-[12px] leading-[1.6]">
+            By clicking this box you provide express written consent indicating a willingness for us to call you. We will never share your information.
+          </span>
+        </label>
+      </div>
+
+      {/* Opt-in SMS */}
+      <div className="space-y-1.5">
+        <p className="text-white text-[13px] font-bold">
+          Opt-in SMS<span className="text-[#FF2D6F]">*</span>
+        </p>
+        <label className="flex items-start gap-3 cursor-pointer group">
+          <span
+            className={`mt-0.5 w-5 h-5 rounded-md flex-shrink-0 flex items-center justify-center transition-all ${
+              data.optInSms
+                ? "bg-[#FF2D6F] border border-[#FF2D6F]"
+                : "bg-white/[0.04] border border-white/[0.18] group-hover:border-white/[0.30]"
+            }`}
+          >
+            {data.optInSms && <Check className="w-3 h-3 text-white" strokeWidth={4} />}
+          </span>
+          <input
+            type="checkbox"
+            checked={data.optInSms}
+            onChange={(e) => update("optInSms", e.target.checked)}
+            className="sr-only"
+          />
+          <span className="text-white/55 text-[12px] leading-[1.6]">
+            By clicking this box you provide express written consent to contact you via SMS no more than 2-4 times/month. Text STOP to opt-out at anytime.
+          </span>
+        </label>
+      </div>
+
+      {/* Privacy Policy */}
+      <p className="text-white/45 text-[11px]">
+        Privacy Policy:{" "}
+        <a
+          href="/privacy-policy"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#4A90E2] underline hover:text-[#6AAFF2] transition-colors"
+        >
+          primelineav.com/privacy-policy
+        </a>
+      </p>
+
+      {/* General consent */}
       <label className="flex items-start gap-3 cursor-pointer group">
         <span
           className={`mt-0.5 w-5 h-5 rounded-md flex-shrink-0 flex items-center justify-center transition-all ${

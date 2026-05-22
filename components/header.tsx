@@ -10,7 +10,7 @@ import { PromoTopBanner } from "./promo-top-banner"
 const navLinks = [
   { label: "Services", href: "/#services" },
   { label: "Why Us", href: "/#why-us" },
-  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Portfolio", href: "#our-work" },
   { label: "Industry", href: "/#events" },
   { label: "About", href: "/#about" },
 ]
@@ -126,11 +126,11 @@ export function Header() {
             {/* Right side: Phone + Quote CTA */}
             <div className="hidden md:flex items-center gap-2.5">
               <a
-                href="tel:7869338488"
+                href="tel:5615944288"
                 className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-[10px] bg-white/[0.04] border border-white/[0.10] text-white/85 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.20] transition-all text-[13px] font-semibold"
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span className="hidden xl:inline">(786) 933-8488</span>
+                <span className="hidden xl:inline">(561) 594-4288</span>
               </a>
 
               <button
@@ -187,11 +187,11 @@ export function Header() {
                 <div className="h-px bg-white/[0.08] my-2" />
 
                 <a
-                  href="tel:7869338488"
+                  href="tel:5615944288"
                   className="flex items-center justify-center gap-2 w-full px-3 py-3 rounded-[10px] bg-white/[0.04] border border-white/[0.10] text-white/85 font-semibold text-[14px]"
                 >
                   <Phone className="w-4 h-4" />
-                  (786) 933-8488
+                  (561) 594-4288
                 </a>
                 <button
                   onClick={openQuote}

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"e:\\\\Syntecho\\\\prime-site\" -Depth 2)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue)",
+      "Read(//e/Syntecho/prime-line-av/**)",
+      "Bash(Get-ChildItem -Recurse -Include \"*.tsx\",\"*.ts\")",
+      "Bash(Select-String -Pattern \"786.*933.*8488|7869338488\" -List)",
+      "Bash(Select-Object -ExpandProperty Path)"
+    ]
+  }
+}

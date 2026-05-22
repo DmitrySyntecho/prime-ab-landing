@@ -55,6 +55,7 @@ export function MobileBottomNav({ onStartQuote }: MobileBottomNavProps) {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [chooserOpen, setChooserOpen] = useState(false)
   const [navVisible, setNavVisible] = useState(false)
+  const [headerMenuOpen, setHeaderMenuOpen] = useState(false)
 
   // Show nav only after scrolling past the first block
   useEffect(() => {
@@ -96,6 +97,13 @@ export function MobileBottomNav({ onStartQuote }: MobileBottomNavProps) {
     setChooserOpen(false)
   }, [pathname])
 
+  // Hide when header burger menu is open
+  useEffect(() => {
+    const handler = (e: Event) => setHeaderMenuOpen((e as CustomEvent).detail.open)
+    document.addEventListener("headerMenuToggle", handler)
+    return () => document.removeEventListener("headerMenuToggle", handler)
+  }, [])
+
   // Close services panel on outside tap
   const panelRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -135,7 +143,7 @@ export function MobileBottomNav({ onStartQuote }: MobileBottomNavProps) {
       <div
         ref={panelRef}
         className={`md:hidden fixed bottom-[72px] left-3 right-3 z-50 transition-all duration-300 ease-out ${
-          servicesOpen && navVisible
+          servicesOpen && navVisible && !headerMenuOpen
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-4 pointer-events-none"
         }`}
@@ -176,10 +184,10 @@ export function MobileBottomNav({ onStartQuote }: MobileBottomNavProps) {
       <nav
         className="md:hidden fixed bottom-3 left-3 right-3 z-50 pointer-events-none transition-all duration-500 ease-out"
         style={{
-          opacity: navVisible ? 1 : 0,
-          transform: navVisible ? "translateY(0)" : "translateY(48px)",
+          opacity: navVisible && !headerMenuOpen ? 1 : 0,
+          transform: navVisible && !headerMenuOpen ? "translateY(0)" : "translateY(48px)",
         }}
-        aria-hidden={!navVisible}
+        aria-hidden={!navVisible || headerMenuOpen}
       >
         <div className="relative max-w-md mx-auto pointer-events-auto">
           <div

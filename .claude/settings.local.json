@@ -8,7 +8,16 @@
       "Read(//e/Syntecho/prime-line-av/**)",
       "Bash(Get-ChildItem -Recurse -Include \"*.tsx\",\"*.ts\")",
       "Bash(Select-String -Pattern \"786.*933.*8488|7869338488\" -List)",
-      "Bash(Select-Object -ExpandProperty Path)"
+      "Bash(Select-Object -ExpandProperty Path)",
+      "Bash(pnpm install *)",
+      "Bash(npm list *)",
+      "Bash(git add *)",
+      "Bash(git restore *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(cd /e/Syntecho && ls -la | grep -i prime)",
+      "Read(//e/Syntecho/**)",
+      "Bash(xargs -I {} basename {})"
     ]
   }
 }

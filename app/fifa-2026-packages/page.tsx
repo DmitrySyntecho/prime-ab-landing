@@ -114,93 +114,35 @@ type FlagCode =
   | "champ-a"
   | "champ-b"
 
-const flagStyles: Record<FlagCode, React.CSSProperties> = {
-  usa: {
-    background:
-      "linear-gradient(180deg, #ef4444 0%, #ef4444 33%, #fff 33%, #fff 66%, #1e3a8a 66%, #1e3a8a 100%)",
-  },
-  mex: {
-    background:
-      "linear-gradient(90deg, #16a34a 0%, #16a34a 33%, #fff 33%, #fff 66%, #ef4444 66%, #ef4444 100%)",
-  },
-  can: {
-    background:
-      "linear-gradient(90deg, #ef4444 0%, #ef4444 25%, #fff 25%, #fff 75%, #ef4444 75%, #ef4444 100%)",
-  },
-  arg: {
-    background:
-      "linear-gradient(180deg, #38bdf8 0%, #38bdf8 33%, #fff 33%, #fff 66%, #38bdf8 66%, #38bdf8 100%)",
-  },
-  bra: {
-    background:
-      "#facc15 url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Cpolygon points='18,4 32,13 18,22 4,13' fill='%2316a34a'/%3E%3Ccircle cx='18' cy='13' r='5' fill='%231e3a8a'/%3E%3C/svg%3E\") center/cover",
-  },
-  fra: {
-    background:
-      "linear-gradient(90deg, #1e3a8a 0%, #1e3a8a 33%, #fff 33%, #fff 66%, #ef4444 66%, #ef4444 100%)",
-  },
-  eng: {
-    background:
-      "#fff url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Crect x='15' y='0' width='6' height='26' fill='%23ef4444'/%3E%3Crect x='0' y='10' width='36' height='6' fill='%23ef4444'/%3E%3C/svg%3E\") center/cover",
-  },
-  ger: {
-    background:
-      "linear-gradient(180deg, #000 0%, #000 33%, #ef4444 33%, #ef4444 66%, #facc15 66%, #facc15 100%)",
-  },
-  esp: {
-    background:
-      "linear-gradient(180deg, #ef4444 0%, #ef4444 25%, #facc15 25%, #facc15 75%, #ef4444 75%, #ef4444 100%)",
-  },
-  por: { background: "linear-gradient(90deg, #16a34a 0%, #16a34a 40%, #ef4444 40%, #ef4444 100%)" },
-  // South Africa — simplified Y-shaped tricolor (green/yellow/black/white/red/blue)
-  zaf: {
-    background:
-      "#000 url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Crect width='36' height='26' fill='%23000'/%3E%3Cpolygon points='0,0 14,13 0,26' fill='%23007749'/%3E%3Cpolygon points='0,0 14,13 36,0' fill='%23ffb612'/%3E%3Cpolygon points='0,26 14,13 36,26' fill='%23de3831'/%3E%3Crect x='14' y='10' width='22' height='6' fill='%23fff'/%3E%3Crect x='14' y='11' width='22' height='4' fill='%23002395'/%3E%3C/svg%3E\") center/cover",
-  },
-  // Paraguay — red/white/blue with seal
-  par: {
-    background:
-      "linear-gradient(180deg, #d52b1e 0%, #d52b1e 33%, #fff 33%, #fff 66%, #0038a8 66%, #0038a8 100%)",
-  },
-  // Morocco — solid red with green pentagram (simplified to red/green star)
-  mar: {
-    background:
-      "#c1272d url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Cpolygon points='18,7 19.8,12.5 25.5,12.5 20.9,16 22.7,21.5 18,18 13.3,21.5 15.1,16 10.5,12.5 16.2,12.5' fill='none' stroke='%23006233' stroke-width='1.2'/%3E%3C/svg%3E\") center/cover",
-  },
-  // Algeria — green/white vertical with red star+crescent
-  alg: {
-    background:
-      "linear-gradient(90deg, #006233 0%, #006233 50%, #fff 50%, #fff 100%)",
-  },
-  // Croatia — red/white/blue tricolor (simplified)
-  cro: {
-    background:
-      "linear-gradient(180deg, #ff0000 0%, #ff0000 33%, #fff 33%, #fff 66%, #171796 66%, #171796 100%)",
-  },
-  // Senegal — green/yellow/red vertical
-  sen: {
-    background:
-      "linear-gradient(90deg, #00853f 0%, #00853f 33%, #fdef42 33%, #fdef42 66%, #e31b23 66%, #e31b23 100%)",
-  },
-  // South Korea — white with taeguk (simplified white/blue/red)
-  kor: {
-    background:
-      "#fff url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Crect width='36' height='26' fill='%23fff'/%3E%3Cpath d='M11 13 a7 7 0 0 1 14 0 a3.5 3.5 0 0 1 -7 0 a3.5 3.5 0 0 0 -7 0' fill='%23c60c30'/%3E%3Cpath d='M11 13 a7 7 0 0 0 14 0 a3.5 3.5 0 0 0 -7 0 a3.5 3.5 0 0 1 -7 0' fill='%23003478'/%3E%3C/svg%3E\") center/cover",
-  },
-  // Czechia — white/red horizontal with blue triangle
-  cze: {
-    background:
-      "linear-gradient(180deg, #fff 0%, #fff 50%, #d7141a 50%, #d7141a 100%)",
-  },
-  // Australia — blue with red/white cross + stars (simplified blue field)
-  aus: { background: "#012169" },
-  // Türkiye — solid red with white star+crescent (simplified solid red)
-  tur: { background: "#e30a17" },
-  // Bosnia — blue with yellow triangle
-  bih: {
-    background:
-      "#002395 url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Crect width='36' height='26' fill='%23002395'/%3E%3Cpolygon points='8,0 28,0 28,26' fill='%23fecb00'/%3E%3C/svg%3E\") center/cover",
-  },
+// ISO 3166-1 alpha-2 codes for flagcdn.com; null = use gradient fallback
+const flagIsoCodes: Record<FlagCode, string | null> = {
+  usa: "us",
+  mex: "mx",
+  can: "ca",
+  arg: "ar",
+  bra: "br",
+  fra: "fr",
+  eng: "gb-eng",
+  ger: "de",
+  esp: "es",
+  por: "pt",
+  zaf: "za",
+  par: "py",
+  mar: "ma",
+  alg: "dz",
+  cro: "hr",
+  sen: "sn",
+  kor: "kr",
+  cze: "cz",
+  aus: "au",
+  tur: "tr",
+  bih: "ba",
+  tbd: null,
+  "champ-a": null,
+  "champ-b": null,
+}
+
+const flagFallbackStyles: Partial<Record<FlagCode, React.CSSProperties>> = {
   tbd: { background: "linear-gradient(135deg, #6b7280, #4b5563)" },
   "champ-a": { background: "linear-gradient(135deg, #5BC25A, #E61D25)" },
   "champ-b": { background: "linear-gradient(135deg, #E61D25, #5BC25A)" },
@@ -281,11 +223,26 @@ const matches: Match[] = [
 ]
 
 function Flag({ code }: { code: FlagCode }) {
+  const iso = flagIsoCodes[code]
+  if (iso) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={`https://flagcdn.com/w40/${iso}.png`}
+        alt=""
+        aria-hidden
+        width={40}
+        height={21}
+        className="w-10 h-auto rounded-[4px] flex-shrink-0"
+        style={{ boxShadow: "0 4px 10px rgba(0,0,0,0.4)" }}
+      />
+    )
+  }
   return (
     <span
-      className="w-9 h-[26px] rounded-[4px] flex-shrink-0"
+      className="w-10 h-[21px] rounded-[4px] flex-shrink-0"
       style={{
-        ...flagStyles[code],
+        ...(flagFallbackStyles[code] ?? { background: "#6b7280" }),
         boxShadow: "0 4px 10px rgba(0,0,0,0.4)",
       }}
       aria-hidden

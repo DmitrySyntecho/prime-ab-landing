@@ -3,29 +3,29 @@
 // Each card on the homepage maps to one entry here by slug.
 
 export interface ServicePage {
-  slug: string
+  slug: string;
   /** H1 on the service page hero */
-  h1: string
+  h1: string;
   /** Short eyebrow shown above H1 */
-  eyebrow: string
+  eyebrow: string;
   /** Sub-heading rendered under H1 */
-  subheadline: string
+  subheadline: string;
   /** Primary CTA label shown on the hero button */
-  heroCta: string
+  heroCta: string;
   /** Background image — same asset shown on the homepage card */
-  image: string
+  image: string;
   /** Long-form description rendered in the second block */
-  description: string
+  description: string;
   /** Headline of the second (description + CTA) block */
-  descriptionHeading: string
+  descriptionHeading: string;
   /** 3–5 bullet points highlighting what's included */
-  highlights: string[]
+  highlights: string[];
   /** CTA button label in the description block */
-  ctaLabel: string
+  ctaLabel: string;
   /** 4 photos shown as a collage on the right side of the second block */
-  collage: string[]
+  collage: string[];
   /** Two floating stat chips overlaid on the collage */
-  collageStats: { value: string; label: string }[]
+  collageStats: { value: string; label: string }[];
 }
 
 export const SERVICE_PAGES: ServicePage[] = [
@@ -37,7 +37,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Portable, truss-built, or mobile — engineered, certified, and crewed.",
     heroCta: "Get a Quote",
     image: "/images/services/stage-rental-card.webp",
-    descriptionHeading: "Stages built for the show — not borrowed from a warehouse",
+    descriptionHeading:
+      "Stages built for the show — not borrowed from a warehouse",
     description:
       "Primeline designs and installs stages for corporate keynotes, concerts, fashion runways, and brand activations across Los Angeles. Every build is structurally engineered, ADA-compliant where required, and signed off before doors open.\n\nWe don't just drop platforms and leave. Our riggers and stagehands stay through rehearsal, show, and strike.",
     highlights: [
@@ -65,9 +66,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     slug: "sound-system-rental",
     h1: "Sound System Rental in Los Angeles",
     eyebrow: "Sound System Rental",
-    subheadline:
-      "L-Acoustics and d&b, tuned to your room. Same-day quote.",
-    heroCta: "Get a Same-Day Quote",
+    subheadline: "L-Acoustics and d&b, tuned to your room. Same-day quote.",
+    heroCta: "Get a Quote",
     image: "/images/services/sound-system-hero.webp",
     descriptionHeading: "Premium sound, sized to your room.",
     description:
@@ -79,7 +79,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       "DiGiCo and Yamaha consoles, A1 + A2 on every show",
       "Rider-compliant. Backup gear standard.",
     ],
-    ctaLabel: "Get a Same-Day Quote",
+    ctaLabel: "Get a Quote",
     collage: [
       "/images/services/sound06.webp",
       "/images/services/sound05.webp",
@@ -101,7 +101,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Designed, pre-vis'd, and programmed. Senior LD on every event.",
     heroCta: "Get a Quote",
     image: "/images/services/lighting-rental-card.webp",
-    descriptionHeading: "Lighting designed for your show — not pulled off a shelf.",
+    descriptionHeading:
+      "Lighting designed for your show — not pulled off a shelf.",
     description:
       "Primeline supplies and programs lighting for corporate events, weddings, concerts, and festivals across Los Angeles. Every job starts with our in-house lighting designer building the look — color palette, fixture plot, cue list, and pre-vis — before a single truss hits the deck.\n\nWe use top-tier fixtures and consoles the industry actually runs on, with a senior LD at the board from rehearsal through show.",
     highlights: [
@@ -162,14 +163,15 @@ export const SERVICE_PAGES: ServicePage[] = [
     h1: "TV Rental in Los Angeles",
     eyebrow: "TV Rental",
     subheadline:
-      "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor.",
+      'Confidence monitors to video walls — 32" to 98", indoor and outdoor.',
     heroCta: "Get a Quote",
     image: "/images/services/tv-rental-card.webp",
-    descriptionHeading: "TVs for every event — from a single confidence monitor to a multi-screen wall.",
+    descriptionHeading:
+      "TVs for every event — from a single confidence monitor to a multi-screen wall.",
     description:
       "Primeline supplies commercial-grade TVs across Los Angeles for corporate events, conferences, trade shows, brand activations, broadcast sets, and outdoor events. Single screens or full video walls. Portrait or landscape. Same content across every screen — or independent feeds on each one.\n\nEvery TV ships with the right mount, the right cable run, and an on-site tech who actually understands signal flow.",
     highlights: [
-      "32\" to 98\" commercial displays in stock",
+      '32" to 98" commercial displays in stock',
       "Indoor and outdoor (sunlight-readable) screens",
       "Portrait or landscape mounting — floor stands, wall mounts, truss mounts",
       "Multi-screen sync — same content or independent feeds per panel",
@@ -186,7 +188,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       "/images/case-studies/miami-3.webp",
     ],
     collageStats: [
-      { value: "32\"–98\"", label: "Display Range" },
+      { value: '32"–98"', label: "Display Range" },
       { value: "Indoor + Outdoor", label: "Screens Available" },
     ],
   },
@@ -263,7 +265,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Indoor, outdoor, mobile — same-day quote, senior crew on every job.",
     heroCta: "Get a Quote",
     image: "/images/services/led-screen-card.webp",
-    descriptionHeading: "Indoor and outdoor LED walls for any event in Los Angeles",
+    descriptionHeading:
+      "Indoor and outdoor LED walls for any event in Los Angeles",
     description:
       "Primeline supplies and operates LED walls across LA — from intimate corporate stages to outdoor brand activations and festival main screens. We own the inventory, we send the crew, and we run the show file. No subletting, no day-laborers, no surprises on site.\n\nEvery install includes pre-vis, backup gear, and an on-site tech from load-in through strike.",
     highlights: [
@@ -287,8 +290,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       { value: "Indoor + Outdoor", label: "IP-Rated Available" },
     ],
   },
-]
+];
 
 export function getServicePage(slug: string): ServicePage | undefined {
-  return SERVICE_PAGES.find((s) => s.slug === slug)
+  return SERVICE_PAGES.find((s) => s.slug === slug);
 }

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { Sparkles, Play } from "lucide-react"
+import MuxPlayer from "@mux/mux-player-react"
 
 // Images with Next.js Image optimization
 const images = {
@@ -43,6 +44,8 @@ function GalleryImage({
     </div>
   )
 }
+
+const TIKTOK_PLAYBACK_ID = "KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU"
 
 export function TikTokSummitShowcase() {
   const [videoPlaying, setVideoPlaying] = useState(false)
@@ -103,18 +106,17 @@ export function TikTokSummitShowcase() {
               className="relative overflow-hidden rounded-xl border border-white/[0.08] flex-shrink-0 bg-black"
               style={{ width: "50%", aspectRatio: "16/9", boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
             >
-              {videoPlaying ? (
-                <video
-                  className="absolute inset-0 w-full h-full object-cover"
-                  src="https://stream.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU.m3u8"
-                  autoPlay
-                  controls
-                  playsInline
+              {videoPlaying && (
+                <MuxPlayer
+                  playbackId={TIKTOK_PLAYBACK_ID}
+                  autoPlay="any"
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
                 />
-              ) : (
+              )}
+              {!videoPlaying && (
                 <>
                   <Image
-                    src="https://image.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=30&width=800"
+                    src={`https://image.mux.com/${TIKTOK_PLAYBACK_ID}/thumbnail.jpg?time=30&width=800`}
                     alt="TikTok Summit BTS video thumbnail"
                     fill
                     className="object-cover"
@@ -164,18 +166,17 @@ export function TikTokSummitShowcase() {
               className="relative overflow-hidden rounded-xl border border-white/[0.08] aspect-video"
               style={{ boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
             >
-              {videoPlaying ? (
-                <video
-                  className="absolute inset-0 w-full h-full object-cover"
-                  src="https://stream.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU.m3u8"
-                  autoPlay
-                  controls
-                  playsInline
+              {videoPlaying && (
+                <MuxPlayer
+                  playbackId={TIKTOK_PLAYBACK_ID}
+                  autoPlay="any"
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
                 />
-              ) : (
+              )}
+              {!videoPlaying && (
                 <>
                   <Image
-                    src="https://image.mux.com/KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU/thumbnail.jpg?time=30&width=640"
+                    src={`https://image.mux.com/${TIKTOK_PLAYBACK_ID}/thumbnail.jpg?time=30&width=640`}
                     alt="TikTok Summit BTS video thumbnail"
                     fill
                     className="object-cover"

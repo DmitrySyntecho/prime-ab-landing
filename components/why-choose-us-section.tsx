@@ -75,12 +75,6 @@ export function WhyChooseUsSection() {
           >
             {/* Top text */}
             <div className="flex flex-col gap-3">
-              <span
-                className="self-start px-3 py-1.5 rounded-full backdrop-blur-md border border-[#FF2D6F]/30 text-[11px] tracking-[0.14em] uppercase font-bold text-[#FF2D6F]"
-                style={{ background: "rgba(8,18,26,0.7)" }}
-              >
-                Since 2018
-              </span>
               <div
                 className="text-[72px] md:text-[100px] font-black tracking-[-0.04em] leading-none"
                 style={{

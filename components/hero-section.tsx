@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react"
 import { ArrowRight, Play, Star, Clock, CheckCircle2 } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
+import MuxPlayer from "@mux/mux-player-react"
 
 interface HeroSectionProps {
   onStartQuote: () => void
@@ -132,18 +133,13 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
             >
               <div className="m-3 md:m-5 rounded-[14px] md:rounded-[18px] overflow-hidden bg-black border border-white/[0.08]">
                 <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-                  {/* iframe always mounted so it's ready to play instantly */}
-                  <iframe
-                    ref={(el) => { if (el) (el as any).__muxFrame = true }}
-                    id="hero-mux-player"
-                    src="https://player.mux.com/jAJRQcO5mGsuhpGE01tMMiFUn70067j423fE5Er4gIJqk?metadata-video-title=About+us+%281%29&video-title=About+us+%281%29"
-                    className="absolute inset-0 w-full h-full"
-                    style={{ border: "none", opacity: videoPlaying ? 1 : 0, pointerEvents: videoPlaying ? "auto" : "none" }}
-                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                    allowFullScreen
-                  />
-
-                  {/* Overlay with GIF preview — hidden once playing */}
+                  {videoPlaying && (
+                    <MuxPlayer
+                      playbackId="jAJRQcO5mGsuhpGE01tMMiFUn70067j423fE5Er4gIJqk"
+                      autoPlay="any"
+                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+                    />
+                  )}
                   {!videoPlaying && (
                     <>
                       <img
@@ -153,13 +149,7 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
                       />
                       <div className="absolute inset-0 bg-black/30" />
                       <button
-                        onClick={() => {
-                          setVideoPlaying(true)
-                          const frame = document.getElementById("hero-mux-player") as HTMLIFrameElement | null
-                          if (frame?.contentWindow) {
-                            frame.contentWindow.postMessage(JSON.stringify({ type: "play" }), "*")
-                          }
-                        }}
+                        onClick={() => setVideoPlaying(true)}
                         className="absolute inset-0 flex items-center justify-center group"
                         aria-label="Play video"
                       >

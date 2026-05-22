@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { createPortal } from "react-dom"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { validateEmail } from "@/lib/validation/email"
 import { validateUSPhoneNumber, formatPhoneNumber } from "@/lib/validation/phone"
@@ -49,6 +50,20 @@ interface QuoteFormProps {
   onClose: () => void
   serviceName?: string
   serviceQuestions?: unknown[]
+  serviceSlug?: string
+  eventTypeId?: string
+}
+
+// Maps service page slug → serviceOptions id
+const SERVICE_SLUG_MAP: Record<string, string> = {
+  "stage-rental": "staging",
+  "sound-system-rental": "audio",
+  "lighting-rental": "lighting",
+  "full-av-production": "full-av",
+  "tv-rental": "led",
+  "projector-screen-rental": "led",
+  "pipe-drape-rental": "drape",
+  "led-screen-rental": "led",
 }
 
 /* ============ DATA ============ */
@@ -164,6 +179,7 @@ interface FormData {
   bestTime: string
   message: string
   promoCode: string
+  dateTbd: boolean
   agreeTerms: boolean
   optInCall: boolean
   optInSms: boolean
@@ -193,10 +209,56 @@ const empty: FormData = {
   bestTime: "",
   message: "",
   promoCode: "",
+  dateTbd: false,
   agreeTerms: false,
   optInCall: false,
   optInSms: false,
   honeypot: "",
+}
+
+/* ============ PHONE VALIDATION ============ */
+
+function validatePhoneForCountry(phone: string, countryCode: string): { isValid: boolean; error?: string } {
+  const digits = phone.replace(/\D/g, "")
+  const country = countries.find((c) => c.code === countryCode)
+  if (country?.format) {
+    // US / CA — use strict 10-digit validator
+    return validateUSPhoneNumber(phone)
+  }
+  // International: E.164 allows 7–15 digits
+  if (digits.length < 7) return { isValid: false, error: "Phone number is too short" }
+  if (digits.length > 15) return { isValid: false, error: "Phone number is too long" }
+  return { isValid: true }
+}
+
+/* ============ NAME VALIDATION ============ */
+
+const FAKE_NAMES = new Set([
+  "test","tester","testing","tested",
+  "asdf","qwerty","qwert","zxcv","zxcvb","zxcvbn",
+  "fake","false","none","null","na","n/a","nope","no",
+  "abc","xyz","aaa","bbb","ccc","ddd","eee","fff",
+  "xxx","yyy","zzz","qqq","www","eee","rrr","ttt",
+  "foo","bar","baz","foobar",
+  "name","user","admin","guest","anon","anonymous",
+])
+
+function validateName(value: string): { isValid: boolean; error?: string } {
+  const v = value.trim().toLowerCase()
+  if (v.length < 2) return { isValid: false, error: "Too short" }
+  if (FAKE_NAMES.has(v)) return { isValid: false, error: "Please enter your real name" }
+  // all same characters: aaa, bbbb
+  if (/^(.)\1+$/.test(v)) return { isValid: false, error: "Please enter your real name" }
+  // Latin keyboard rows
+  if (/[qwerty]{4,}|[asdfgh]{4,}|[zxcvbn]{4,}/i.test(v))
+    return { isValid: false, error: "Please enter your real name" }
+  // Cyrillic keyboard rows (й-ц-у-к / ф-ы-в-а / я-ч-с-м)
+  if (/[йцукенгшщзх]{4,}|[фывапролджэ]{4,}|[ячсмитьбю]{4,}/i.test(v))
+    return { isValid: false, error: "Please enter your real name" }
+  // repeating substring pattern: фывфыв, asdasd, abcabc
+  if (/^(.{2,6})\1+$/.test(v))
+    return { isValid: false, error: "Please enter your real name" }
+  return { isValid: true }
 }
 
 /* ============ PHONE INPUT MASKING ============ */
@@ -228,7 +290,7 @@ function formatPhone(raw: string, country: Country): string {
 const CTM_URL =
   "https://api.calltrackingmetrics.com/api/v1/formreactor/FRT472ABB2C5B9B141AF5CC9D8A09C2CC812153956096F45ED6DE27A3624E9F41F9?key=VJVuWkEx9OXra7ApyAzUaKcyunMtBl40M65STROT_F0ML4vb"
 
-export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
+export function QuoteForm({ isOpen, onClose, serviceSlug, eventTypeId }: QuoteFormProps) {
   const [step, setStep] = useState(1)
   const [data, setData] = useState<FormData>(empty)
   const [submitted, setSubmitted] = useState(false)
@@ -252,6 +314,28 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
     }
   }, [isOpen])
 
+  // Which steps are pre-filled and should be skipped
+  const skippedSteps = useMemo(() => {
+    const s = new Set<number>()
+    if (eventTypeId) s.add(1)
+    if (serviceSlug && SERVICE_SLUG_MAP[serviceSlug]) s.add(2)
+    return s
+  }, [eventTypeId, serviceSlug])
+
+  // Pre-fill data and jump to first non-skipped step when form opens
+  useEffect(() => {
+    if (!isOpen) return
+    if (eventTypeId) setData((d) => ({ ...d, eventType: eventTypeId }))
+    if (serviceSlug) {
+      const serviceId = SERVICE_SLUG_MAP[serviceSlug]
+      if (serviceId) setData((d) => ({ ...d, services: [serviceId] }))
+    }
+    // Start at the first step that wasn't pre-filled
+    let startStep = 1
+    while (skippedSteps.has(startStep)) startStep++
+    setStep(startStep)
+  }, [isOpen, eventTypeId, serviceSlug, skippedSteps])
+
   if (!isOpen) return null
 
   const update = <K extends keyof FormData>(key: K, value: FormData[K]) => {
@@ -266,7 +350,9 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
   }
 
   const goNext = () => {
-    if (step < totalSteps) setStep(step + 1)
+    let next = step + 1
+    while (next < totalSteps && skippedSteps.has(next)) next++
+    setStep(next)
   }
 
   const goBack = () => {
@@ -277,18 +363,13 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
   const canContinue = () => {
     if (step === 1) return !!data.eventType
     if (step === 2) return data.services.length > 0
-    if (step === 3) return data.firstName.trim().length >= 2 && data.lastName.trim().length >= 2
-    if (step === 4) {
-      const phoneValidation = validateUSPhoneNumber(data.phone)
-      const okPhone = phoneValidation.isValid
-      const okWa = !data.hasWhatsapp || validateUSPhoneNumber(data.waPhone).isValid
-      return okPhone && okWa
-    }
+    if (step === 3) return validateName(data.firstName).isValid && validateName(data.lastName).isValid
+    if (step === 4) return validatePhoneForCountry(data.phone, data.phoneCountry).isValid
     if (step === 5) {
       const emailValidation = validateEmail(data.email)
       return emailValidation.isValid
     }
-    if (step === 6) return !!data.dropoffDate && !!data.dropoffTime && !!data.pickupDate && !!data.pickupTime
+    if (step === 6) return data.dateTbd || (!!data.dropoffDate && !!data.dropoffTime && !!data.pickupDate && !!data.pickupTime)
     if (step === 7) return data.address.trim().length >= 5 && data.city.trim().length >= 2 && !!data.state && data.zip.trim().length === 5
     if (step === 8) return !!data.bestTime
     if (step === 9) return data.agreeTerms && data.optInCall && data.optInSms
@@ -344,13 +425,13 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
       payload.append("message", `New quote request from ${data.firstName} ${data.lastName} — ${eventLabel} | Services: ${servicesList}`)
       payload.append("custom_fields[event_type]", eventLabel)
       payload.append("custom_fields[services]", servicesList)
-      payload.append("custom_fields[dropoff]", `${data.dropoffDate} ${data.dropoffTime}`)
-      payload.append("custom_fields[pickup]", `${data.pickupDate} ${data.pickupTime}`)
+      payload.append("custom_fields[dropoff]", data.dateTbd ? "TBD" : `${data.dropoffDate} ${data.dropoffTime}`)
+      payload.append("custom_fields[pickup]", data.dateTbd ? "TBD" : `${data.pickupDate} ${data.pickupTime}`)
       payload.append("custom_fields[address]", fullAddress)
       if (data.bestTime) payload.append("custom_fields[best_time]", data.bestTime)
       if (data.message) payload.append("custom_fields[notes]", data.message)
       if (data.promoCode) payload.append("custom_fields[promo_code]", data.promoCode)
-      if (data.hasWhatsapp && data.waPhone) payload.append("custom_fields[whatsapp]", data.waPhone)
+      if (data.hasWhatsapp) payload.append("custom_fields[whatsapp]", data.phone)
 
       const res = await fetch(CTM_URL, { method: "POST", body: payload })
       if (!res.ok) throw new Error("CTM error")
@@ -670,6 +751,8 @@ function Step3({
   data: FormData
   update: <K extends keyof FormData>(k: K, v: FormData[K]) => void
 }) {
+  const firstResult = data.firstName.trim().length >= 2 ? validateName(data.firstName) : null
+  const lastResult = data.lastName.trim().length >= 2 ? validateName(data.lastName) : null
   return (
     <div className="space-y-4">
       <Field
@@ -681,6 +764,7 @@ function Step3({
         autoComplete="given-name"
         autoFocus
         secured
+        error={firstResult && !firstResult.isValid ? firstResult.error : undefined}
       />
       <Field
         icon={User}
@@ -690,6 +774,7 @@ function Step3({
         placeholder="Doe"
         autoComplete="family-name"
         secured
+        error={lastResult && !lastResult.isValid ? lastResult.error : undefined}
       />
       <LegalNote />
     </div>
@@ -700,13 +785,16 @@ function Step4({
   data,
   update,
   errors,
-  phoneSuggestion,
 }: {
   data: FormData
   update: <K extends keyof FormData>(k: K, v: FormData[K]) => void
   errors: Record<string, string>
   phoneSuggestion: string | null
 }) {
+  const digits = data.phone.replace(/\D/g, "")
+  const phoneResult = digits.length >= 7 ? validatePhoneForCountry(data.phone, data.phoneCountry) : null
+  const phoneError = errors.phone || (phoneResult && !phoneResult.isValid ? phoneResult.error : undefined)
+
   return (
     <div className="space-y-4">
       <PhoneInput
@@ -717,59 +805,8 @@ function Step4({
         onChange={(v) => update("phone", v)}
         autoComplete="tel"
         secured
-        error={errors.phone}
+        error={phoneError}
       />
-
-      {/* WhatsApp toggle — OFF by default */}
-      <div
-        className="flex items-center gap-3 p-4 rounded-[14px] border transition-colors"
-        style={{
-          background: data.hasWhatsapp ? "rgba(37,211,102,0.08)" : "rgba(255,255,255,0.03)",
-          border: data.hasWhatsapp
-            ? "1px solid rgba(37,211,102,0.30)"
-            : "1px solid rgba(255,255,255,0.08)",
-        }}
-      >
-        <span
-          className="w-10 h-10 rounded-[10px] flex items-center justify-center flex-shrink-0"
-          style={{
-            background: data.hasWhatsapp ? "rgba(37,211,102,0.20)" : "rgba(37,211,102,0.08)",
-            color: "#25D366",
-            transition: "all 0.25s",
-          }}
-        >
-          <WhatsAppIcon className="w-5 h-5" />
-        </span>
-        <div className="flex-1">
-          <div className="text-white text-[14px] font-bold">Available on WhatsApp?</div>
-          <div className="text-white/50 text-[12px]">
-            For quick coordination during your event.
-          </div>
-        </div>
-        <Toggle
-          value={data.hasWhatsapp}
-          onChange={(v) => {
-            update("hasWhatsapp", v)
-            // when turning ON for the first time, prefill country from phone
-            if (v && !data.waPhone) update("waCountry", data.phoneCountry)
-          }}
-        />
-      </div>
-
-      {data.hasWhatsapp && (
-        <PhoneInput
-          label="WhatsApp Number"
-          accentIcon={WhatsAppIcon}
-          countryCode={data.waCountry}
-          onCountryChange={(c) => update("waCountry", c)}
-          value={data.waPhone}
-          onChange={(v) => update("waPhone", v)}
-          accentColor="#25D366"
-          hint="Same as phone? Just retype it here so we know it's confirmed for WhatsApp."
-          secured
-          error={errors.waPhone}
-        />
-      )}
 
       <LegalNote />
     </div>
@@ -787,6 +824,11 @@ function Step5({
   errors: Record<string, string>
   emailSuggestion: string | null
 }) {
+  // Show inline error once the user has typed enough for a valid email structure
+  const emailResult = data.email.includes("@") ? validateEmail(data.email) : null
+  const emailError = errors.email || (emailResult && !emailResult.isValid ? emailResult.error : undefined)
+  const suggestion = emailSuggestion || (emailResult?.suggestion ?? null)
+
   return (
     <div className="space-y-4">
       <div>
@@ -800,17 +842,17 @@ function Step5({
           autoComplete="email"
           autoFocus
           secured
-          error={errors.email}
+          error={emailError}
         />
-        {emailSuggestion && (
+        {suggestion && !emailError && (
           <div className="mt-2 p-3 rounded-[12px] bg-blue-500/10 border border-blue-500/30 text-sm">
             <p className="text-blue-100 mb-2">Did you mean?</p>
             <button
               type="button"
-              onClick={() => update("email", emailSuggestion)}
+              onClick={() => emailSuggestion && update("email", emailSuggestion)}
               className="text-blue-300 hover:text-blue-200 font-semibold underline text-left"
             >
-              {emailSuggestion}
+              {suggestion}
             </button>
           </div>
         )}
@@ -830,42 +872,71 @@ function Step6({
   const today = new Date().toISOString().split("T")[0]
   return (
     <div className="space-y-5">
-      <div>
-        <Label icon={Calendar}>Drop-Off</Label>
-        <div className="grid grid-cols-2 gap-3">
-          <DateField
-            label="Date"
-            value={data.dropoffDate}
-            onChange={(v) => update("dropoffDate", v)}
-            min={today}
-          />
-          <TimeField
-            label="Time"
-            value={data.dropoffTime}
-            onChange={(v) => update("dropoffTime", v)}
-          />
+      {/* TBD toggle */}
+      <button
+        type="button"
+        onClick={() => update("dateTbd", !data.dateTbd)}
+        className="w-full flex items-center gap-3 p-4 rounded-[14px] border transition-all text-left"
+        style={{
+          background: data.dateTbd ? "rgba(255,210,74,0.08)" : "rgba(255,255,255,0.03)",
+          border: data.dateTbd ? "1px solid rgba(255,210,74,0.35)" : "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
+        <div className="flex-1">
+          <div className="text-white text-[14px] font-bold">Date not decided yet (TBD)</div>
+          <div className="text-white/50 text-[12px]">We'll reach out to coordinate the schedule.</div>
         </div>
-      </div>
+        <span
+          className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 transition-all ${
+            data.dateTbd ? "bg-[#FFD24A] border border-[#FFD24A]" : "bg-white/[0.04] border border-white/[0.18]"
+          }`}
+        >
+          {data.dateTbd && <Check className="w-3 h-3 text-black" strokeWidth={4} />}
+        </span>
+      </button>
 
-      <div>
-        <Label icon={CalendarClock}>Pick-Up</Label>
-        <div className="grid grid-cols-2 gap-3">
-          <DateField
-            label="Date"
-            value={data.pickupDate}
-            onChange={(v) => update("pickupDate", v)}
-            min={data.dropoffDate || today}
-          />
-          <TimeField
-            label="Time"
-            value={data.pickupTime}
-            onChange={(v) => update("pickupTime", v)}
-          />
-        </div>
-      </div>
+      {!data.dateTbd && (
+        <>
+          <div className="space-y-2">
+            <Label icon={Calendar}>Drop-Off</Label>
+            <div className="grid grid-cols-2 gap-3">
+              <CalendarPicker
+                label="Date"
+                value={data.dropoffDate}
+                onChange={(v) => update("dropoffDate", v)}
+                min={today}
+              />
+              <TimeDrum
+                label="Time"
+                value={data.dropoffTime}
+                onChange={(v) => update("dropoffTime", v)}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label icon={CalendarClock}>Pick-Up</Label>
+            <div className="grid grid-cols-2 gap-3">
+              <CalendarPicker
+                label="Date"
+                value={data.pickupDate}
+                onChange={(v) => update("pickupDate", v)}
+                min={data.dropoffDate || today}
+              />
+              <TimeDrum
+                label="Time"
+                value={data.pickupTime}
+                onChange={(v) => update("pickupTime", v)}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }
+
+const GMAPS_KEY = "AIzaSyC1yeejnqNObRr_lrePA_4-SQRpCL4_zpg"
 
 function Step7({
   data,
@@ -874,58 +945,72 @@ function Step7({
   data: FormData
   update: <K extends keyof FormData>(k: K, v: FormData[K]) => void
 }) {
-  const [zipLookup, setZipLookup] = useState<"idle" | "loading" | "ok" | "fail">("idle")
-  const lastZipRef = useRef<string>("")
+  const addressInputRef = useRef<HTMLInputElement>(null)
+  const updateRef = useRef(update)
+  useEffect(() => { updateRef.current = update })
+  const [gmapsReady, setGmapsReady] = useState(false)
 
-  // Debounced US ZIP -> city/state lookup (zippopotam.us, no auth)
+  // Load Google Maps script once
   useEffect(() => {
-    const zip = data.zip.trim()
-    if (!/^\d{5}$/.test(zip)) {
-      if (zipLookup !== "idle") setZipLookup("idle")
-      lastZipRef.current = ""
-      return
-    }
-    if (zip === lastZipRef.current) return
-    lastZipRef.current = zip
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const g = (window as any).google
+    if (g?.maps?.places) { setGmapsReady(true); return }
+    const existing = document.querySelector(`script[src*="maps.googleapis.com"]`)
+    if (existing) { existing.addEventListener("load", () => setGmapsReady(true)); return }
+    const script = document.createElement("script")
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${GMAPS_KEY}&libraries=places`
+    script.async = true
+    script.onload = () => setGmapsReady(true)
+    document.head.appendChild(script)
+  }, [])
 
-    const timer = setTimeout(async () => {
-      setZipLookup("loading")
-      try {
-        const res = await fetch(`https://api.zippopotam.us/us/${zip}`)
-        if (!res.ok) throw new Error("not found")
-        const json = (await res.json()) as {
-          places?: Array<{ "place name"?: string; "state abbreviation"?: string }>
-        }
-        const place = json.places?.[0]
-        const city = place?.["place name"] || ""
-        const stateAbbr = place?.["state abbreviation"] || ""
-        if (city && !data.city.trim()) update("city", city)
-        else if (city && data.city !== city) update("city", city)
-        if (stateAbbr) update("state", stateAbbr)
-        setZipLookup("ok")
-      } catch {
-        setZipLookup("fail")
+  // Init Autocomplete once — never re-runs
+  useEffect(() => {
+    if (!gmapsReady || !addressInputRef.current) return
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const g = (window as any).google
+    const ac = new g.maps.places.Autocomplete(addressInputRef.current, {
+      types: ["address"],
+      componentRestrictions: { country: "us" },
+      fields: ["address_components"],
+    })
+    ac.addListener("place_changed", () => {
+      const place = ac.getPlace()
+      if (!place.address_components) return
+      let streetNumber = "", route = "", city = "", state = "", zip = ""
+      for (const comp of place.address_components) {
+        if (comp.types.includes("street_number")) streetNumber = comp.long_name
+        if (comp.types.includes("route")) route = comp.long_name
+        if (comp.types.includes("locality") || comp.types.includes("sublocality_level_1")) city = comp.long_name
+        if (comp.types.includes("administrative_area_level_1")) state = comp.short_name
+        if (comp.types.includes("postal_code")) zip = comp.long_name
       }
-    }, 350)
-
-    return () => clearTimeout(timer)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data.zip])
+      const u = updateRef.current
+      if (streetNumber || route) u("address", `${streetNumber} ${route}`.trim())
+      if (city) u("city", city)
+      if (state) u("state", state)
+      if (zip) u("zip", zip)
+    })
+    return () => { g.maps.event.clearInstanceListeners(ac) }
+  }, [gmapsReady]) // only runs when Maps becomes ready
 
   return (
     <div className="space-y-3">
-      {/* Row 1: Street Address */}
-      <Field
-        icon={Home}
-        label="Street Address"
-        value={data.address}
-        onChange={(v) => update("address", v.slice(0, 120))}
-        placeholder="123 Main Street"
-        autoComplete="address-line1"
-        autoFocus
-        secured
-      />
-      {/* Row 2: Apt / Suite / Unit (optional) */}
+      {/* Row 1: Street Address — Google Places Autocomplete */}
+      <div>
+        <Label icon={Home} secured>Street Address</Label>
+        <input
+          ref={addressInputRef}
+          type="text"
+          value={data.address}
+          onChange={(e) => update("address", e.target.value.slice(0, 120))}
+          placeholder="123 Main Street"
+          autoComplete="off"
+          autoFocus
+          className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.10] text-white text-[14px] placeholder-white/35 focus:outline-none focus:border-[#FF2D6F]/50 transition-colors"
+        />
+      </div>
+      {/* Row 2: Apt / Suite */}
       <Field
         label="Apt, Suite, Unit (optional)"
         value={data.address2}
@@ -934,7 +1019,7 @@ function Step7({
         autoComplete="address-line2"
         secured
       />
-      {/* Row 3: City full-width */}
+      {/* Row 3: City */}
       <Field
         label="City"
         value={data.city}
@@ -943,7 +1028,7 @@ function Step7({
         autoComplete="address-level2"
         secured
       />
-      {/* Row 4: State + ZIP side by side */}
+      {/* Row 4: State + ZIP */}
       <div className="grid grid-cols-2 gap-3">
         <SelectField
           label="State"
@@ -955,14 +1040,9 @@ function Step7({
         <ZipField
           value={data.zip}
           onChange={(v) => update("zip", v.replace(/[^0-9]/g, "").slice(0, 5))}
-          status={zipLookup}
+          status="idle"
         />
       </div>
-      {zipLookup === "fail" && (
-        <p className="text-amber-300/80 text-[11px] ml-1">
-          Couldn&apos;t find that ZIP — please fill city &amp; state manually.
-        </p>
-      )}
       <LegalNote />
     </div>
   )
@@ -1074,7 +1154,6 @@ function Step9({
   update: <K extends keyof FormData>(k: K, v: FormData[K]) => void
 }) {
   const country = countries.find((c) => c.code === data.phoneCountry)!
-  const waCountry = countries.find((c) => c.code === data.waCountry)!
   const services = data.services
     .map((id) => serviceOptions.find((o) => o.id === id)?.title)
     .filter(Boolean)
@@ -1091,13 +1170,10 @@ function Step9({
         {summaryRow("Name", `${data.firstName} ${data.lastName}`.trim())}
         {summaryRow("Phone", `${country.dial} ${formatPhone(data.phone, country)}`)}
         {data.hasWhatsapp &&
-          summaryRow(
-            "WhatsApp",
-            `${waCountry.dial} ${formatPhone(data.waPhone, waCountry)}`,
-          )}
+          summaryRow("WhatsApp", `${country.dial} ${formatPhone(data.phone, country)}`)}
         {summaryRow("Email", data.email)}
-        {summaryRow("Drop-Off", `${formatDate(data.dropoffDate)} · ${formatTime(data.dropoffTime)}`)}
-        {summaryRow("Pick-Up", `${formatDate(data.pickupDate)} · ${formatTime(data.pickupTime)}`)}
+        {summaryRow("Drop-Off", data.dateTbd ? "TBD" : `${formatDate(data.dropoffDate)} · ${formatTime(data.dropoffTime)}`)}
+        {summaryRow("Pick-Up", data.dateTbd ? "TBD" : `${formatDate(data.pickupDate)} · ${formatTime(data.pickupTime)}`)}
         {summaryRow(
           "Address",
           [data.address, data.address2, `${data.city}, ${data.state} ${data.zip}`].filter(Boolean).join(", "),
@@ -1256,7 +1332,7 @@ function SuccessState({ onClose }: { onClose: () => void }) {
       </p>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
         <a
-          href="tel:+1XXXXXXXXXX"
+          href="tel:+15615944288"
           className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-white font-extrabold text-[14px] tracking-[0.02em] transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center"
           style={{
             background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
@@ -1267,7 +1343,7 @@ function SuccessState({ onClose }: { onClose: () => void }) {
           Call now
         </a>
         <a
-          href="https://wa.me/1XXXXXXXXXX"
+          href="https://wa.me/15615944288"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-white font-extrabold text-[14px] tracking-[0.02em] transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center"
@@ -1429,7 +1505,12 @@ function SelectField({
   )
 }
 
-function DateField({
+/* ============ CALENDAR PICKER ============ */
+
+const CAL_MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+const CAL_DOW = ["Su","Mo","Tu","We","Th","Fr","Sa"]
+
+function CalendarPicker({
   label,
   value,
   onChange,
@@ -1440,40 +1521,263 @@ function DateField({
   onChange: (v: string) => void
   min?: string
 }) {
-  const ref = useRef<HTMLInputElement>(null)
-  const openPicker = () => {
-    const el = ref.current as HTMLInputElement & { showPicker?: () => void }
-    if (el?.showPicker) {
-      try {
-        el.showPicker()
-      } catch {
-        el.focus()
-      }
-    } else {
-      el?.focus()
+  const todayMemo = useMemo(() => { const d = new Date(); d.setHours(0,0,0,0); return d }, [])
+  const [open, setOpen] = useState(false)
+  const [view, setView] = useState(() => {
+    const base = value ? new Date(value + "T12:00:00") : new Date()
+    return { y: base.getFullYear(), m: base.getMonth() }
+  })
+  const [popupStyle, setPopupStyle] = useState<{ top: number; left: number; width: number } | null>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const popupRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const handler = (e: MouseEvent) => {
+      if (triggerRef.current?.contains(e.target as Node)) return
+      if (!popupRef.current?.contains(e.target as Node)) setOpen(false)
     }
+    document.addEventListener("mousedown", handler)
+    return () => document.removeEventListener("mousedown", handler)
+  }, [open])
+
+  const openCalendar = () => {
+    if (open) { setOpen(false); return }
+    const rect = triggerRef.current?.getBoundingClientRect()
+    if (!rect) return
+    const CAL_H = 320
+    const spaceBelow = window.innerHeight - rect.bottom - 8
+    const spaceAbove = rect.top - 8
+    const openBelow = spaceBelow >= spaceAbove
+    const rawTop = openBelow ? rect.bottom + 4 : rect.top - CAL_H - 4
+    const top = Math.max(8, Math.min(rawTop, window.innerHeight - CAL_H - 8))
+    setPopupStyle({ top, left: rect.left, width: Math.max(rect.width, 260) })
+    const base = value ? new Date(value + "T12:00:00") : new Date()
+    setView({ y: base.getFullYear(), m: base.getMonth() })
+    setOpen(true)
   }
+
+  const minDate = min ? new Date(min + "T00:00:00") : null
+  const selY = value ? parseInt(value.split("-")[0]) : null
+  const selM = value ? parseInt(value.split("-")[1]) - 1 : null
+  const selD = value ? parseInt(value.split("-")[2]) : null
+
+  const daysInMonth = new Date(view.y, view.m + 1, 0).getDate()
+  const firstDow = new Date(view.y, view.m, 1).getDay()
+
+  const prevMonth = () => setView(v => v.m === 0 ? { y: v.y - 1, m: 11 } : { ...v, m: v.m - 1 })
+  const nextMonth = () => setView(v => v.m === 11 ? { y: v.y + 1, m: 0 } : { ...v, m: v.m + 1 })
+
+  const pick = (day: number) => {
+    onChange(`${view.y}-${String(view.m + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`)
+    setOpen(false)
+  }
+
+  const isDisabled = (day: number) => !!minDate && new Date(view.y, view.m, day) < minDate
+
+  const displayVal = value
+    ? (() => { const [y, m, d] = value.split("-"); return `${m} . ${d} . ${y}` })()
+    : null
+
   return (
     <div>
-      <label className="flex items-center gap-1.5 text-white/65 text-[11px] tracking-[0.06em] uppercase font-semibold mb-2">
+      <label className="flex items-center gap-1.5 text-white/55 text-[10px] tracking-[0.08em] uppercase font-semibold mb-1.5">
         <Calendar className="w-3 h-3 text-[#FF2D6F]" />
         {label}
       </label>
-      <input
-        ref={ref}
-        type="date"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onClick={openPicker}
-        onFocus={openPicker}
-        min={min}
-        className="ios-picker w-full px-3.5 py-3 rounded-xl bg-white/[0.04] border border-white/[0.10] text-white text-[14px] focus:outline-none focus:border-[#FF2D6F]/50 transition-colors cursor-pointer"
-      />
+      <button
+        ref={triggerRef}
+        type="button"
+        onClick={openCalendar}
+        className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/[0.04] border text-[13px] transition-colors text-left ${
+          open ? "border-[#FF2D6F]/50" : "border-white/[0.10]"
+        }`}
+      >
+        <span className={displayVal ? "text-white font-medium" : "text-white/35"}>
+          {displayVal ?? "Choose date"}
+        </span>
+        <Calendar className="w-3.5 h-3.5 text-white/25 flex-shrink-0" strokeWidth={1.5} />
+      </button>
+
+      {open && popupStyle && typeof document !== "undefined" && createPortal(
+        <div
+          ref={popupRef}
+          style={{
+            position: "fixed",
+            top: popupStyle.top,
+            left: popupStyle.left,
+            width: popupStyle.width,
+            zIndex: 9999,
+            background: "linear-gradient(135deg, rgba(14,10,30,0.99) 0%, rgba(22,14,38,0.99) 100%)",
+            boxShadow: "0 20px 60px -10px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.04)",
+          }}
+          className="rounded-2xl border border-white/[0.10] p-3"
+        >
+          <div className="flex items-center justify-between mb-3">
+            <button type="button" onClick={prevMonth} className="w-7 h-7 rounded-[8px] bg-white/[0.05] hover:bg-white/[0.10] text-white/50 hover:text-white flex items-center justify-center transition-all">
+              <ArrowLeft className="w-3 h-3" />
+            </button>
+            <span className="text-white text-[13px] font-bold">{CAL_MONTHS[view.m]} {view.y}</span>
+            <button type="button" onClick={nextMonth} className="w-7 h-7 rounded-[8px] bg-white/[0.05] hover:bg-white/[0.10] text-white/50 hover:text-white flex items-center justify-center transition-all">
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
+          <div className="grid grid-cols-7 mb-1">
+            {CAL_DOW.map(d => <div key={d} className="text-center text-white/25 text-[9px] font-bold tracking-[0.06em] py-1">{d}</div>)}
+          </div>
+          <div className="grid grid-cols-7 gap-y-0.5">
+            {Array.from({ length: firstDow }, (_, i) => <div key={`p${i}`} />)}
+            {Array.from({ length: daysInMonth }, (_, i) => {
+              const day = i + 1
+              const dis = isDisabled(day)
+              const sel = selY === view.y && selM === view.m && selD === day
+              const tod = todayMemo.getFullYear() === view.y && todayMemo.getMonth() === view.m && todayMemo.getDate() === day
+              return (
+                <button key={day} type="button" disabled={dis} onClick={() => pick(day)}
+                  className={`flex items-center justify-center h-8 rounded-[8px] text-[12px] font-semibold transition-all ${
+                    sel ? "bg-[#FF2D6F] text-white shadow-[0_4px_14px_-2px_rgba(255,45,111,0.50)]"
+                    : dis ? "text-white/15 cursor-not-allowed"
+                    : tod ? "ring-1 ring-[#FF2D6F]/40 text-[#FF2D6F] hover:bg-[#FF2D6F]/10"
+                    : "text-white/70 hover:bg-white/[0.08] hover:text-white"
+                  }`}
+                >{day}</button>
+              )
+            })}
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   )
 }
 
-function TimeField({
+/* ============ TIME DRUM ============ */
+
+const DRUM_ITEM_H = 40
+const DRUM_VISIBLE = 5
+
+function DrumColumn({
+  items,
+  selected,
+  onSelect,
+}: {
+  items: { value: string; label: string }[]
+  selected: string
+  onSelect: (v: string) => void
+}) {
+  const outerRef = useRef<HTMLDivElement>(null)
+  const innerRef = useRef<HTMLDivElement>(null)
+  const ownUpdate = useRef(false)
+  const [hlIdx, setHlIdx] = useState(() => Math.max(0, items.findIndex(i => i.value === selected)))
+
+  const offsetRef = useRef(Math.max(0, items.findIndex(i => i.value === selected)) * DRUM_ITEM_H)
+  const maxOffset = (items.length - 1) * DRUM_ITEM_H
+
+  const applyOffset = (val: number) => {
+    const clamped = Math.max(0, Math.min(val, maxOffset))
+    offsetRef.current = clamped
+    if (innerRef.current) {
+      innerRef.current.style.transform = `translateY(${DRUM_ITEM_H * 2 - clamped}px)`
+    }
+  }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { applyOffset(offsetRef.current) }, [])
+
+  useEffect(() => {
+    if (ownUpdate.current) { ownUpdate.current = false; return }
+    const idx = items.findIndex(i => i.value === selected)
+    if (idx >= 0) { applyOffset(idx * DRUM_ITEM_H); setHlIdx(idx) }
+  }, [selected, items]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const drag = useRef<{ startY: number; startOffset: number } | null>(null)
+  const momentum = useRef<{ y: number; t: number }>({ y: 0, t: 0 })
+  const vel = useRef(0)
+  const raf = useRef<number | null>(null)
+
+  const snapAndCommit = () => {
+    const ci = Math.max(0, Math.min(Math.round(offsetRef.current / DRUM_ITEM_H), items.length - 1))
+    const target = ci * DRUM_ITEM_H
+    const start = offsetRef.current
+    const diff = target - start
+    const t0 = Date.now()
+    const run = () => {
+      const p = Math.min((Date.now() - t0) / 150, 1)
+      applyOffset(start + diff * (1 - Math.pow(1 - p, 2)))
+      if (p < 1) { raf.current = requestAnimationFrame(run) }
+      else { applyOffset(target); setHlIdx(ci); ownUpdate.current = true; onSelect(items[ci].value) }
+    }
+    setHlIdx(ci)
+    if (Math.abs(diff) < 1) { applyOffset(target); ownUpdate.current = true; onSelect(items[ci].value); return }
+    raf.current = requestAnimationFrame(run)
+  }
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (raf.current) { cancelAnimationFrame(raf.current); raf.current = null }
+    e.currentTarget.setPointerCapture(e.pointerId)
+    drag.current = { startY: e.clientY, startOffset: offsetRef.current }
+    momentum.current = { y: e.clientY, t: Date.now() }
+    vel.current = 0
+  }
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!drag.current) return
+    applyOffset(drag.current.startOffset + drag.current.startY - e.clientY)
+    const now = Date.now()
+    const dt = Math.max(now - momentum.current.t, 1)
+    vel.current = ((momentum.current.y - e.clientY) / dt) * 16
+    momentum.current = { y: e.clientY, t: now }
+  }
+
+  const onPointerUp = () => {
+    if (!drag.current) return
+    drag.current = null
+    let v = vel.current
+    const run = () => {
+      applyOffset(offsetRef.current + v)
+      v *= 0.88
+      if (Math.abs(v) > 0.5) { raf.current = requestAnimationFrame(run) }
+      else snapAndCommit()
+    }
+    if (Math.abs(v) > 0.5) { raf.current = requestAnimationFrame(run) }
+    else snapAndCommit()
+  }
+
+  return (
+    <div ref={outerRef} className="flex-1 relative overflow-hidden" style={{ height: DRUM_ITEM_H * DRUM_VISIBLE }}>
+      <div className="absolute inset-x-0 top-0 pointer-events-none z-10"
+        style={{ height: DRUM_ITEM_H * 2, background: "linear-gradient(to bottom, rgba(14,10,30,1) 0%, transparent 100%)" }} />
+      <div className="absolute inset-x-0 bottom-0 pointer-events-none z-10"
+        style={{ height: DRUM_ITEM_H * 2, background: "linear-gradient(to top, rgba(14,10,30,1) 0%, transparent 100%)" }} />
+      <div className="absolute inset-x-2 pointer-events-none z-[5] rounded-xl"
+        style={{ top: DRUM_ITEM_H * 2, height: DRUM_ITEM_H, background: "rgba(255,45,111,0.12)", border: "1px solid rgba(255,45,111,0.32)" }} />
+      <div
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        style={{ height: "100%", overflow: "hidden", touchAction: "none", userSelect: "none", cursor: "grab" }}
+      >
+        <div ref={innerRef} style={{ willChange: "transform" }}>
+          {items.map(({ value, label }, idx) => {
+            const dist = Math.abs(hlIdx - idx)
+            return (
+              <div key={value} style={{ height: DRUM_ITEM_H }} className="flex items-center justify-center">
+                <span className="font-bold transition-all duration-150" style={{
+                  fontSize: dist === 0 ? 20 : dist === 1 ? 15 : 12,
+                  color: dist === 0 ? "#ffffff" : dist === 1 ? "rgba(255,255,255,0.40)" : "rgba(255,255,255,0.14)",
+                  pointerEvents: "none",
+                }}>{label}</span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TimeDrum({
   label,
   value,
   onChange,
@@ -1482,34 +1786,140 @@ function TimeField({
   value: string
   onChange: (v: string) => void
 }) {
-  const ref = useRef<HTMLInputElement>(null)
-  const openPicker = () => {
-    const el = ref.current as HTMLInputElement & { showPicker?: () => void }
-    if (el?.showPicker) {
-      try {
-        el.showPicker()
-      } catch {
-        el.focus()
-      }
-    } else {
-      el?.focus()
-    }
+  const [open, setOpen] = useState(false)
+  const [popupStyle, setPopupStyle] = useState<{ top: number; left: number; width: number } | null>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const popupRef = useRef<HTMLDivElement>(null)
+
+  const parseValue = (v: string) => {
+    if (!v) return { h: 9, m: 0, ampm: "AM" }
+    const [hStr, mStr] = v.split(":")
+    const h = parseInt(hStr) || 0
+    const m = parseInt(mStr) || 0
+    return { h: h % 12 || 12, m, ampm: h >= 12 ? "PM" : "AM" }
   }
+
+  const buildValue = (h: number, m: number, ampm: string) => {
+    let h24 = h % 12
+    if (ampm === "PM") h24 += 12
+    return `${String(h24).padStart(2, "0")}:${String(m).padStart(2, "0")}`
+  }
+
+  const { h: selH, m: selM, ampm: selAmpm } = parseValue(value)
+
+  const hours = Array.from({ length: 12 }, (_, i) => ({ value: String(i + 1), label: String(i + 1) }))
+  const minutes = [0, 15, 30, 45].map(m => ({ value: String(m), label: String(m).padStart(2, "0") }))
+
+  const openDrum = () => {
+    if (open) { setOpen(false); return }
+    const rect = triggerRef.current?.getBoundingClientRect()
+    if (!rect) return
+    const POPUP_H = DRUM_ITEM_H * DRUM_VISIBLE + 24
+    const popupW = Math.max(rect.width, 240)
+    const spaceBelow = window.innerHeight - rect.bottom - 8
+    const spaceAbove = rect.top - 8
+    // same direction logic as CalendarPicker: prefer side with more space
+    const openBelow = spaceBelow >= spaceAbove
+    const rawTop = openBelow ? rect.bottom + 4 : rect.top - POPUP_H - 4
+    const top = Math.max(8, Math.min(rawTop, window.innerHeight - POPUP_H - 8))
+    const left = Math.max(8, Math.min(rect.left, window.innerWidth - popupW - 8))
+    setPopupStyle({ top, left, width: popupW })
+    setOpen(true)
+  }
+
+  useEffect(() => {
+    if (!open) return
+    const handler = (e: MouseEvent) => {
+      if (triggerRef.current?.contains(e.target as Node)) return
+      if (!popupRef.current?.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener("mousedown", handler)
+    return () => document.removeEventListener("mousedown", handler)
+  }, [open])
+
+  const displayVal = value ? formatTime(value) : null
+
   return (
     <div>
-      <label className="flex items-center gap-1.5 text-white/65 text-[11px] tracking-[0.06em] uppercase font-semibold mb-2">
+      <label className="flex items-center gap-1.5 text-white/55 text-[10px] tracking-[0.08em] uppercase font-semibold mb-1.5">
         <Clock className="w-3 h-3 text-[#FF2D6F]" />
         {label}
       </label>
-      <input
-        ref={ref}
-        type="time"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onClick={openPicker}
-        onFocus={openPicker}
-        className="ios-picker w-full px-3.5 py-3 rounded-xl bg-white/[0.04] border border-white/[0.10] text-white text-[14px] focus:outline-none focus:border-[#FF2D6F]/50 transition-colors cursor-pointer"
-      />
+      <button
+        ref={triggerRef}
+        type="button"
+        onClick={openDrum}
+        className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/[0.04] border text-[13px] transition-colors text-left ${
+          open ? "border-[#FF2D6F]/50" : "border-white/[0.10]"
+        }`}
+      >
+        <span className={displayVal ? "text-white font-medium" : "text-white/35"}>
+          {displayVal ?? "Choose time"}
+        </span>
+        <Clock className="w-3.5 h-3.5 text-white/25 flex-shrink-0" strokeWidth={1.5} />
+      </button>
+
+      {open && popupStyle && typeof document !== "undefined" && createPortal(
+        <div
+          ref={popupRef}
+          style={{
+            position: "fixed",
+            top: popupStyle.top,
+            left: popupStyle.left,
+            width: popupStyle.width,
+            zIndex: 9999,
+            background: "linear-gradient(135deg, rgba(14,10,30,0.99) 0%, rgba(22,14,38,0.99) 100%)",
+            boxShadow: "0 20px 60px -10px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.04)",
+          }}
+          className="rounded-2xl border border-white/[0.10] overflow-hidden"
+        >
+          {/* brand accent top line */}
+          <div className="h-px w-full"
+            style={{ background: "linear-gradient(90deg, transparent 0%, #FF2D6F 50%, transparent 100%)" }} />
+
+          {/* hours drum · minutes drum · AM/PM click toggle */}
+          <div className="flex px-1 pt-2 pb-3">
+            <DrumColumn
+              items={hours}
+              selected={String(selH)}
+              onSelect={(v) => onChange(buildValue(parseInt(v), selM, selAmpm))}
+            />
+            <div className="w-px bg-white/[0.06] my-4 self-stretch" />
+            <DrumColumn
+              items={minutes}
+              selected={String(selM)}
+              onSelect={(v) => onChange(buildValue(selH, parseInt(v), selAmpm))}
+            />
+            <div className="w-px bg-white/[0.06] my-4 self-stretch" />
+            {/* AM/PM static toggle — click only, no drum */}
+            <div className="flex flex-col justify-center gap-2 px-2" style={{ width: 52 }}>
+              {(["AM", "PM"] as const).map((period) => {
+                const active = selAmpm === period
+                return (
+                  <button
+                    key={period}
+                    type="button"
+                    onClick={() => onChange(buildValue(selH, selM, period))}
+                    className="w-full py-2.5 rounded-[10px] text-[12px] font-extrabold tracking-widest transition-all"
+                    style={active ? {
+                      background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+                      color: "#fff",
+                      boxShadow: "0 4px 14px -4px rgba(255,45,111,0.55)",
+                    } : {
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.10)",
+                      color: "rgba(255,255,255,0.35)",
+                    }}
+                  >
+                    {period}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   )
 }

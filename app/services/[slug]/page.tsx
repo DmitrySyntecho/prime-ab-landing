@@ -25,7 +25,7 @@ export default function ServicePage() {
   if (!service) notFound()
 
   const handleStartQuote = () => {
-    document.dispatchEvent(new CustomEvent("openQuoteForm"))
+    document.dispatchEvent(new CustomEvent("openQuoteForm", { detail: { serviceSlug: params.slug } }))
   }
 
   return (

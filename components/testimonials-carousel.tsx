@@ -1,8 +1,9 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useState, useRef } from "react"
 import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 import Image from "next/image"
+import MuxPlayer from "@mux/mux-player-react"
 
 interface Testimonial {
   name: string
@@ -62,15 +63,14 @@ function MuxVideoCard({ testimonial }: { testimonial: Testimonial }) {
           boxShadow: "0 20px 40px -12px rgba(0,0,0,0.5)",
         }}
       >
-        {isPlaying ? (
-          <iframe
-            src={`https://player.mux.com/${testimonial.muxPlaybackId}?autoplay=1`}
-            className="absolute inset-0 w-full h-full"
-            style={{ border: "none" }}
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen
+        {isPlaying && (
+          <MuxPlayer
+            playbackId={testimonial.muxPlaybackId}
+            autoPlay="any"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
           />
-        ) : (
+        )}
+        {!isPlaying && (
           <>
             <Image
               src={`https://image.mux.com/${testimonial.muxPlaybackId}/thumbnail.jpg?time=1&width=400`}

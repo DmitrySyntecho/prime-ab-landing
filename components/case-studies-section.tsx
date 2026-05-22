@@ -179,6 +179,15 @@ export function CaseStudiesSection() {
     touchStartX.current = null
   }
 
+  // Lock body scroll while lightbox is open
+  const isLightboxOpen = lightboxIndex !== null
+  useEffect(() => {
+    if (!isLightboxOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => { document.body.style.overflow = prev }
+  }, [isLightboxOpen])
+
   useEffect(() => {
     if (lightboxIndex === null) return
     const onKey = (e: KeyboardEvent) => {
@@ -371,7 +380,7 @@ export function CaseStudiesSection() {
       {lightboxIndex !== null && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ background: "rgba(0,0,0,0.92)" }}
+          style={{ background: "rgba(0,0,0,0.92)", touchAction: "none" }}
           onClick={closeLightbox}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}

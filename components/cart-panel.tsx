@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useCart } from '@/lib/cart-context'
 import {
@@ -54,6 +54,13 @@ export function CartPanel() {
     notes: '',
   })
   const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    if (!isCartOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => { document.body.style.overflow = prev }
+  }, [isCartOpen])
 
   const subtotal = items.reduce((sum, i) => sum + i.product.price * i.quantity * i.rentalDays, 0)
   const delivery = items.reduce((sum, i) => sum + i.product.deliveryFee * i.quantity, 0)

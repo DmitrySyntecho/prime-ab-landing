@@ -39,6 +39,11 @@ export function Header() {
     if (hidden) setMobileMenuOpen(false)
   }, [hidden])
 
+  // Notify bottom nav when burger menu opens/closes
+  useEffect(() => {
+    document.dispatchEvent(new CustomEvent("headerMenuToggle", { detail: { open: mobileMenuOpen } }))
+  }, [mobileMenuOpen])
+
   useEffect(() => {
     let raf = 0
     let pending = false

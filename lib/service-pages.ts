@@ -35,7 +35,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Stage Rental",
     subheadline:
       "Portable, truss-built, or mobile — engineered, certified, and crewed.",
-    heroCta: "Get a Quote in 24 Hours",
+    heroCta: "Get a Quote",
     image: "/images/services/stage-rental-card.webp",
     descriptionHeading: "Stages built for the show — not borrowed from a warehouse",
     description:
@@ -47,7 +47,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Engineering drawings + certified rigging on request",
       "Senior stagehand and rigger on every install",
     ],
-    ctaLabel: "Get a Quote in 24 Hours",
+    ctaLabel: "Get a Quote",
     collage: [
       "/images/services/stage02.webp",
       "/images/services/stage01.webp",
@@ -99,7 +99,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Lighting Equipment Rental",
     subheadline:
       "Designed, pre-vis'd, and programmed. Senior LD on every event.",
-    heroCta: "Get a Quote in 24 Hours",
+    heroCta: "Get a Quote",
     image: "/images/services/lighting-rental-card.webp",
     descriptionHeading: "Lighting designed for your show — not pulled off a shelf.",
     description:
@@ -111,7 +111,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Haze, atmospherics, follow spots, and dimmer racks available",
       "Show file delivered, backup gear standard, senior LD on-site",
     ],
-    ctaLabel: "Get a Quote in 24 Hours",
+    ctaLabel: "Get a Quote",
     collage: [
       "/images/case-studies/lca-1.webp",
       "/images/case-studies/ramp-2.webp",
@@ -161,7 +161,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "TV Rental",
     subheadline:
       "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor.",
-    heroCta: "Get a Quote in 24 Hours",
+    heroCta: "Get a Quote",
     image: "/images/services/tv-rental-card.webp",
     descriptionHeading: "TVs for every event — from a single confidence monitor to a multi-screen wall.",
     description:
@@ -174,7 +174,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       "HDMI, SDI, NDI inputs and live streaming supported",
       "On-site video tech included",
     ],
-    ctaLabel: "Get a Quote in 24 Hours",
+    ctaLabel: "Get a Quote",
     collage: [
       "/images/services/tv-01.webp",
       "/images/services/tv-02.webp",
@@ -194,7 +194,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Projector & Screen Rental",
     subheadline:
       "Boardroom to ballroom — plus projection mapping when the room is the canvas.",
-    heroCta: "Get a Quote in 24 Hours",
+    heroCta: "Get a Quote",
     image: "/images/services/projector-screen.webp",
     descriptionHeading: "Projection sized to your room — and your idea.",
     description:
@@ -207,7 +207,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Projection mapping — design, content production, and programming",
       "Senior video tech on every install",
     ],
-    ctaLabel: "Get a Quote in 24 Hours",
+    ctaLabel: "Get a Quote",
     collage: [
       "/images/services/proj-03.webp",
       "/images/services/proj-02.webp",
@@ -227,7 +227,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "Pipe & Drape Rental",
     subheadline:
       "IFR-certified drape, any height and color, installed by our crew.",
-    heroCta: "Get a Quote in 24 Hours",
+    heroCta: "Get a Quote",
     image: "/images/services/pipe-drape-card.webp",
     descriptionHeading: "Pipe and drape, supplied and installed across LA.",
     description:
@@ -239,7 +239,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Black, white, ivory, navy, red, gold and custom colors on request",
       "Engineered bases for high-traffic and outdoor builds",
     ],
-    ctaLabel: "Get a Quote in 24 Hours",
+    ctaLabel: "Get a Quote",
     collage: [
       "/images/services/drape-01.webp",
       "/images/services/drape-02.webp",
@@ -259,7 +259,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     eyebrow: "LED Screen Rental",
     subheadline:
       "Indoor, outdoor, mobile — same-day quote, senior crew on every job.",
-    heroCta: "Get a Quote in 24 Hours",
+    heroCta: "Get a Quote",
     image: "/images/services/led-screen-card.webp",
     descriptionHeading: "Indoor and outdoor LED walls for any event in Los Angeles",
     description:
@@ -271,7 +271,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       "Senior LED tech and rigger on every job",
       "Same-day quote, transparent line-item pricing",
     ],
-    ctaLabel: "Get a Quote in 24 Hours",
+    ctaLabel: "Get a Quote",
     collage: [
       "/images/services/led-01.webp",
       "/images/services/led-02.webp",

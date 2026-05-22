@@ -20,7 +20,7 @@ const eventTypes = [
 export function EventTypesSection() {
   return (
     <section id="events" className="py-24 md:py-28 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4">
+      <div id="event-types" className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <span className="ds-pill mb-5">
             <span className="dot" />

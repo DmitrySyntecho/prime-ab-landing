@@ -5,16 +5,16 @@ import { ArrowUpRight, Sparkles } from "lucide-react"
 const openQuote = () => document.dispatchEvent(new CustomEvent("openQuoteForm"))
 
 const eventTypes = [
-  { title: "Experiential Marketing", tag: "Experiential", image: "/images/events/experiential-marketing.jpg" },
-  { title: "Corporate", tag: "Corporate", image: "/images/events/corporate.jpg" },
-  { title: "Fashion Shows", tag: "Fashion", image: "/images/events/fashion-shows.jpg" },
-  { title: "Trade Shows", tag: "Trade Show", image: "/images/events/trade-shows.jpg" },
-  { title: "Weddings", tag: "Wedding", image: "/images/events/weddings.jpg" },
-  { title: "Festivals", tag: "Festival", image: "/images/events/festivals.jpg" },
-  { title: "Virtual/Hybrid Events", tag: "Hybrid", image: "/images/events/hybrid-events.jpg" },
-  { title: "Private", tag: "Private", image: "/images/events/private.jpg" },
-  { title: "Film Production", tag: "Production", image: "/images/events/film-production.jpg" },
-  { title: "Grand Opening", tag: "Grand Opening", image: "/images/events/grand-opening.jpg" },
+  { title: "Experiential Marketing", tag: "Experiential", image: "/images/events/experiential-marketing.webp" },
+  { title: "Corporate", tag: "Corporate", image: "/images/events/corporate.webp" },
+  { title: "Fashion Shows", tag: "Fashion", image: "/images/events/fashion-shows.webp" },
+  { title: "Trade Shows", tag: "Trade Show", image: "/images/events/trade-shows.webp" },
+  { title: "Weddings", tag: "Wedding", image: "/images/events/weddings.webp" },
+  { title: "Festivals", tag: "Festival", image: "/images/events/festivals.webp" },
+  { title: "Virtual/Hybrid Events", tag: "Hybrid", image: "/images/events/hybrid-events.webp" },
+  { title: "Private", tag: "Private", image: "/images/events/private.webp" },
+  { title: "Film Production", tag: "Production", image: "/images/events/film-production.webp" },
+  { title: "Grand Opening", tag: "Grand Opening", image: "/images/events/grand-opening.webp" },
 ]
 
 export function EventTypesSection() {

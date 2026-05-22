@@ -161,6 +161,7 @@ interface FormData {
   city: string
   state: string
   zip: string
+  bestTime: string
   message: string
   promoCode: string
   agreeTerms: boolean
@@ -187,6 +188,7 @@ const empty: FormData = {
   city: "",
   state: "",
   zip: "",
+  bestTime: "",
   message: "",
   promoCode: "",
   agreeTerms: false,
@@ -280,7 +282,7 @@ export function QuoteForm({ isOpen, onClose }: QuoteFormProps) {
     }
     if (step === 6) return !!data.dropoffDate && !!data.dropoffTime && !!data.pickupDate && !!data.pickupTime
     if (step === 7) return data.address.trim().length >= 5 && data.city.trim().length >= 2 && !!data.state && data.zip.trim().length === 5
-    if (step === 8) return true
+    if (step === 8) return !!data.bestTime
     if (step === 9) return data.agreeTerms
     return false
   }
@@ -978,6 +980,26 @@ function Step8({
   return (
     <div className="space-y-4">
       <div>
+        <Label icon={Clock}>Best time to reach you <span className="text-[#FF2D6F]">*</span></Label>
+        <p className="text-white/40 text-[11px] mb-2.5 -mt-1">So we don&apos;t miss you when we call back.</p>
+        <div className="grid grid-cols-3 gap-2">
+          {["Morning", "Afternoon", "Evening"].map((slot) => (
+            <button
+              key={slot}
+              type="button"
+              onClick={() => update("bestTime", slot)}
+              className={`py-3 rounded-xl border text-[13px] font-semibold transition-all ${
+                data.bestTime === slot
+                  ? "border-[#FF2D6F]/50 bg-[#FF2D6F]/12 text-white"
+                  : "border-white/[0.10] bg-white/[0.03] text-white/65 hover:border-white/[0.22] hover:text-white"
+              }`}
+            >
+              {slot}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div>
         <Label icon={MessageSquare}>Notes (optional)</Label>
         <textarea
           value={data.message}
@@ -1038,6 +1060,7 @@ function Step9({
           "Address",
           [data.address, data.address2, `${data.city}, ${data.state} ${data.zip}`].filter(Boolean).join(", "),
         )}
+        {summaryRow("Best Time", data.bestTime)}
         {data.message && summaryRow("Notes", data.message)}
         {data.promoCode && summaryRow("Promo", data.promoCode)}
       </div>
@@ -1108,27 +1131,50 @@ function SuccessState({ onClose }: { onClose: () => void }) {
         <CheckCircle2 className="w-10 h-10 text-[#FF2D6F]" strokeWidth={2} />
       </div>
       <h2 className="text-[26px] sm:text-[32px] font-extrabold tracking-[-0.025em] leading-[1.18] text-white mb-3">
-        Request <span style={{
+        We&apos;re{" "}
+        <span style={{
           background: "linear-gradient(135deg, #FF2D6F 0%, #FFD24A 100%)",
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
           WebkitTextFillColor: "transparent",
           fontStyle: "italic",
           paddingRight: "0.18em",
-        }}>received.</span>
+        }}>on it.</span>
       </h2>
-      <p className="text-white/60 text-[14px] max-w-md mx-auto mb-6">
-        Our team will reach out within hours via your preferred channel with a custom quote and 3D render.
+      <p className="text-white/60 text-[14px] max-w-md mx-auto mb-8">
+        Expect a call from our team any moment. Can&apos;t wait? Reach us now:
       </p>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+        <a
+          href="tel:+1XXXXXXXXXX"
+          className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-white font-extrabold text-[14px] tracking-[0.02em] transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center"
+          style={{
+            background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
+            boxShadow: "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
+          }}
+        >
+          <Phone className="w-4 h-4" strokeWidth={2.2} />
+          Call now
+        </a>
+        <a
+          href="https://wa.me/1XXXXXXXXXX"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-white font-extrabold text-[14px] tracking-[0.02em] transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center"
+          style={{
+            background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
+            boxShadow: "0 12px 36px -8px rgba(37,211,102,0.45), inset 0 1px 0 rgba(255,255,255,0.25)",
+          }}
+        >
+          <WhatsAppIcon className="w-4 h-4" />
+          WhatsApp
+        </a>
+      </div>
       <button
         onClick={onClose}
-        className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-white font-extrabold text-[14px] tracking-[0.02em] transition-all hover:-translate-y-0.5"
-        style={{
-          background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
-          boxShadow: "0 12px 36px -8px rgba(255,45,111,0.55), inset 0 1px 0 rgba(255,255,255,0.30)",
-        }}
+        className="text-white/40 hover:text-white/70 text-[13px] transition-colors"
       >
-        Done
+        Close
       </button>
     </div>
   )

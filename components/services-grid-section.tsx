@@ -6,8 +6,6 @@ import { Layers, Volume2, Monitor, Lightbulb, Box, Tv, Projector, GalleryVertica
 import { useLanguage } from "@/lib/i18n/language-context"
 
 export function ServicesGridSection() {
-  const { t } = useLanguage()
-
   const services = [
     { icon: Box, slug: "stage-rental", title: t("services.stageRental"), description: t("services.stageRental.desc"), image: "/images/services/staging-rigging.webp" },
     { icon: Volume2, slug: "sound-system-rental", title: t("services.soundRental"), description: t("services.soundRental.desc"), image: "/images/services/sound-audio.webp" },
@@ -49,7 +47,7 @@ export function ServicesGridSection() {
                   "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
               }}
             >
-              {/* Background image — always visible */}
+              {/* Background image — always visible, fills entire card */}
               <Image
                 src={service.image}
                 alt={service.title}
@@ -58,12 +56,16 @@ export function ServicesGridSection() {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
-              {/* Dark gradient overlay so text stays readable */}
+              {/* Dark gradient overlay — opacity varies by card */}
               <div
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(3,7,10,0.25) 0%, rgba(3,7,10,0.45) 60%, rgba(3,7,10,0.65) 100%)",
+                    service.darkening === "heavy"
+                      ? "linear-gradient(180deg, rgba(3,7,10,0.50) 0%, rgba(3,7,10,0.70) 60%, rgba(3,7,10,0.85) 100%)"
+                      : service.darkening === "extra"
+                        ? "linear-gradient(180deg, rgba(3,7,10,0.50) 0%, rgba(3,7,10,0.75) 60%, rgba(3,7,10,0.90) 100%)"
+                        : "linear-gradient(180deg, rgba(3,7,10,0.40) 0%, rgba(3,7,10,0.60) 60%, rgba(3,7,10,0.80) 100%)",
                 }}
                 aria-hidden
               />
@@ -78,7 +80,7 @@ export function ServicesGridSection() {
                 aria-hidden
               />
 
-              <div className="relative z-10">
+              <div className="relative z-10 p-7 md:p-8">
                 <div className="w-14 h-14 rounded-[14px] bg-[#FF2D6F]/22 border border-[#FF2D6F]/35 flex items-center justify-center text-[#FF2D6F] mb-5 backdrop-blur-md">
                   <service.icon className="w-6 h-6" strokeWidth={1.7} />
                 </div>

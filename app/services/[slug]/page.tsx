@@ -1,49 +1,32 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowRight, CheckCircle2, Phone } from "lucide-react"
+import { useParams } from "next/navigation"
+import { getServicePage } from "@/lib/service-pages"
+import { ServiceHero } from "@/components/service-hero"
+import { ServiceDescriptionSection } from "@/components/service-description-section"
 import { TrustedBySection } from "@/components/trusted-by-section"
 import { TestimonialsCarousel } from "@/components/testimonials-carousel"
-import { QuoteForm } from "@/components/quote-form"
-import { StickyCTA } from "@/components/sticky-cta"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import {
-  SERVICES,
-  INDUSTRIES,
-  STATES,
-  RESOURCES,
-  COMPARISONS,
-  PACKAGES,
-  NAV_INDUSTRIES,
-  NAV_LOCATIONS,
-  NAV_RESOURCES,
-  NAV_COMPARISONS,
-  NAV_PACKAGES,
-} from "@/lib/sitemap-data"
+import { AboutUsSection } from "@/components/about-us-section"
+import { EventTypesSection } from "@/components/event-types-section"
+import { CaseStudiesSection } from "@/components/case-studies-section"
+import { WhyChooseUsSection } from "@/components/why-choose-us-section"
+import { CharitySection } from "@/components/charity-section"
+import { RentalCategoriesSection } from "@/components/rental-categories-section"
+import { PromoBannersSection } from "@/components/promo-banners-section"
+import { ServicesGridSection } from "@/components/services-grid-section"
+import { FAQSection } from "@/components/faq-section"
+import { FIFAPromoBanner } from "@/components/fifa-promo-banner"
+import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const [showQuoteForm, setShowQuoteForm] = useState(false)
-  const service = SERVICES.find((s) => s.slug === params.slug)
-
-  useEffect(() => {
-    const container = document.getElementById("service-vidalytics-container")
-    if (!container || container.hasChildNodes()) return
-    const embedDiv = document.createElement("div")
-    embedDiv.id = "vidalytics_embed_M1gJkHNjodX8sVP6_service"
-    embedDiv.style.cssText = "width: 100%; position: relative; padding-top: 56.25%;"
-    container.appendChild(embedDiv)
-    const script = document.createElement("script")
-    script.type = "text/javascript"
-    script.innerHTML = `(function (v, i, d, a, l, y, t, c, s) {y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';if (!vsl){vsl=function(u,cb){if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}i.getElementsByTagName("head")[0].appendChild(s);};}vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});})(window, document, 'Vidalytics', 'vidalytics_embed_M1gJkHNjodX8sVP6_service', 'https://fast.vidalytics.com/embeds/o5ZPHiF7/M1gJkHNjodX8sVP6/');`
-    container.appendChild(script)
-  }, [])
-
+export default function ServicePage() {
+  const params = useParams<{ slug: string }>()
+  const service = getServicePage(params.slug)
   if (!service) notFound()
 
-  const relatedServices = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 4)
+  const handleStartQuote = () => {
+    document.dispatchEvent(new CustomEvent("openQuoteForm"))
+  }
 
   return (
     <div className="bg-white">
@@ -96,7 +79,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      <TrustedBySection />
       <TestimonialsCarousel />
 
       {/* About the Service - Two Column Layout */}

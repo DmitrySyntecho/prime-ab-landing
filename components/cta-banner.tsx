@@ -46,7 +46,7 @@ export function CTABanner({ onStartQuote }: CTABannerProps) {
 
             <button
               onClick={onStartQuote}
-              className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-[#03070a] font-extrabold text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white font-extrabold text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
               style={{
                 boxShadow:
                   "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",

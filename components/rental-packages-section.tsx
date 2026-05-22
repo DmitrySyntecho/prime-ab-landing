@@ -29,7 +29,7 @@ const packages: Record<string, Package[]> = {
   corporate: [
     {
       title: "Meeting Room AV Package",
-      image: "/meeting-room-av-setup-projector-screen.jpg",
+      image: "/meeting-room-av-setup-projector-screen.webp",
       features: ["Projector", "Screen", "Audio"],
       rentalPrice: 450,
       originalPrice: 600,
@@ -143,7 +143,7 @@ const packages: Record<string, Package[]> = {
     },
     {
       title: "Keynote Stage Package",
-      image: "/keynote-stage-led-screen.jpg",
+      image: "/keynote-stage-led-screen.webp",
       features: ["Main Stage", "LED Wall", "Teleprompter"],
       rentalPrice: 8500,
     },
@@ -189,7 +189,7 @@ const packages: Record<string, Package[]> = {
     },
     {
       title: "Expo Lighting Kit",
-      image: "/expo-booth-lighting.jpg",
+      image: "/expo-booth-lighting.webp",
       features: ["Lighting", "Spotlights", "Ambient"],
       rentalPrice: 550,
     },
@@ -211,7 +211,7 @@ const packages: Record<string, Package[]> = {
     },
     {
       title: "Reception Lighting Package",
-      image: "/wedding-reception-uplighting.jpg",
+      image: "/wedding-reception-uplighting.webp",
       features: ["Lighting", "Uplights", "Wireless"],
       rentalPrice: 800,
     },
@@ -237,7 +237,7 @@ const packages: Record<string, Package[]> = {
   fashion: [
     {
       title: "Runway Lighting Package",
-      image: "/fashion-runway-lighting.jpg",
+      image: "/fashion-runway-lighting.webp",
       features: ["Lighting", "Moving Heads", "DMX"],
       rentalPrice: 4500,
       originalPrice: 5500,
@@ -245,7 +245,7 @@ const packages: Record<string, Package[]> = {
     },
     {
       title: "Fashion Show Audio Kit",
-      image: "/fashion-show-sound-system.jpg",
+      image: "/fashion-show-sound-system.webp",
       features: ["Audio", "Line Array", "Sub"],
       rentalPrice: 2800,
     },

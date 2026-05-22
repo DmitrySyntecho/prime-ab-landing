@@ -68,7 +68,7 @@ export const metadata: Metadata = {
       "Full AV production for corporate events, brand activations, experiential marketing, and studio work.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Prime Line AV — Full-service audio, video, lighting & staging",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     title: "Prime Line AV | When Everything Is Just Perfect",
     description:
       "Full AV production for corporate events, brand activations, experiential marketing, and studio work.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.webp"],
   },
 }
 

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
       "LED walls up to 800sqft, broadcast audio, and full production crew for every kickoff from June 11 to the MetLife Final on July 19.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Prime Line AV — FIFA 2026 Watch Party Packages",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: "FIFA World Cup 2026 Watch Party Packages | Prime Line AV",
     description:
       "LED walls, broadcast sound, and full production crew for every kickoff. Packages from $799/day.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.webp"],
   },
 }
 

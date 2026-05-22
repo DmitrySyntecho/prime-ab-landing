@@ -6,7 +6,7 @@ import { Sparkles, Play } from "lucide-react"
 
 // Images with Next.js Image optimization
 const images = {
-  topRight1: { src: "/images/case-studies/tiktok-3.jpg", alt: "TikTok Shop Summit exhibition floor" },
+  topRight1: { src: "/images/case-studies/tiktok-3.webp", alt: "TikTok Shop Summit exhibition floor" },
   topRight2: { src: "/images/case-studies/tiktok-6.webp", alt: "Lighting console operator at work" },
   midRight1: { src: "/images/case-studies/tiktok-4.webp", alt: "Speaker presenting TikTok Shop ecosystem milestones" },
   midRight2: { src: "/images/case-studies/tiktok-5.webp", alt: "L-Acoustics speaker array setup" },

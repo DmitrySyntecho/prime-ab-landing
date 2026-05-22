@@ -691,3 +691,51 @@ h3:has(.ds-accent-text) {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 45, 111, 0.4);
 }
+
+/* ============ GOOGLE PLACES AUTOCOMPLETE DROPDOWN ============ */
+.pac-container {
+  background: rgba(10, 8, 24, 0.98) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(20px);
+  margin-top: 4px;
+  z-index: 99999 !important;
+  font-family: 'Manrope', system-ui, sans-serif;
+  overflow: hidden;
+}
+.pac-item {
+  padding: 10px 14px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  line-height: 1.4;
+}
+.pac-item:first-child { border-top: none; }
+.pac-item:hover, .pac-item-selected {
+  background: rgba(255, 45, 111, 0.10) !important;
+  color: #fff;
+}
+.pac-item-query {
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+}
+.pac-matched { color: #FF2D6F; }
+.pac-icon { display: none; }
+.pac-logo::after { display: none; }
+
+/* Time drum — hide scrollbar */
+.drum-scroll::-webkit-scrollbar { display: none; }
+.drum-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Native time input — style clock icon */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.25;
+  cursor: pointer;
+}
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 0.55;
+}

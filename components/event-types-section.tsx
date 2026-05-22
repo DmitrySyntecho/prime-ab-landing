@@ -1,23 +1,29 @@
 "use client"
 
 import { ArrowUpRight, Sparkles } from "lucide-react"
-
-const openQuote = () => document.dispatchEvent(new CustomEvent("openQuoteForm"))
+import { usePathname } from "next/navigation"
 
 const eventTypes = [
-  { title: "Experiential Marketing", tag: "Experiential", image: "/images/events/experiential-marketing.webp" },
-  { title: "Corporate", tag: "Corporate", image: "/images/events/corporate.webp" },
-  { title: "Fashion Shows", tag: "Fashion", image: "/images/events/fashion-shows.webp" },
-  { title: "Trade Shows", tag: "Trade Show", image: "/images/events/trade-shows.webp" },
-  { title: "Weddings", tag: "Wedding", image: "/images/events/weddings.webp" },
-  { title: "Festivals", tag: "Festival", image: "/images/events/festivals.webp" },
-  { title: "Virtual/Hybrid Events", tag: "Hybrid", image: "/images/events/hybrid-events.webp" },
-  { title: "Private", tag: "Private", image: "/images/events/private.webp" },
-  { title: "Film Production", tag: "Production", image: "/images/events/film-production.webp" },
-  { title: "Grand Opening", tag: "Grand Opening", image: "/images/events/grand-opening.webp" },
+  { title: "Experiential Marketing", tag: "Experiential", id: "experiential", image: "/images/events/experiential-marketing.webp" },
+  { title: "Corporate", tag: "Corporate", id: "corporate", image: "/images/events/corporate.webp" },
+  { title: "Fashion Shows", tag: "Fashion", id: "fashion-show", image: "/images/events/fashion-shows.webp" },
+  { title: "Trade Shows", tag: "Trade Show", id: "trade-show", image: "/images/events/trade-shows.webp" },
+  { title: "Weddings", tag: "Wedding", id: "private", image: "/images/events/weddings.webp" },
+  { title: "Festivals", tag: "Festival", id: "festival", image: "/images/events/festivals.webp" },
+  { title: "Virtual/Hybrid Events", tag: "Hybrid", id: "other", image: "/images/events/hybrid-events.webp" },
+  { title: "Private", tag: "Private", id: "private", image: "/images/events/private.webp" },
+  { title: "Film Production", tag: "Production", id: "studio", image: "/images/events/film-production.webp" },
+  { title: "Grand Opening", tag: "Grand Opening", id: "brand-activation", image: "/images/events/grand-opening.webp" },
 ]
 
 export function EventTypesSection() {
+  const pathname = usePathname()
+  const serviceSlug = pathname?.startsWith("/services/") ? pathname.split("/")[2] : undefined
+
+  const openQuote = (eventTypeId?: string) =>
+    document.dispatchEvent(new CustomEvent("openQuoteForm", {
+      detail: { ...(eventTypeId ? { eventTypeId } : {}), ...(serviceSlug ? { serviceSlug } : {}) },
+    }))
   return (
     <section id="events" className="py-24 md:py-28 relative overflow-hidden">
       <div id="event-types" className="max-w-7xl mx-auto px-4">
@@ -40,7 +46,7 @@ export function EventTypesSection() {
             <button
               key={event.title}
               type="button"
-              onClick={openQuote}
+              onClick={() => openQuote(event.id)}
               aria-label={`Get a quote for ${event.title}`}
               className="group relative aspect-[3/4] rounded-[16px] overflow-hidden border border-white/[0.08] cursor-pointer transition-all duration-500 hover:-translate-y-1 hover:border-[#FF2D6F]/30 text-left"
             >
@@ -78,7 +84,7 @@ export function EventTypesSection() {
         <div className="mt-10 text-center">
           <button
             type="button"
-            onClick={openQuote}
+            onClick={() => openQuote()}
             className="inline-flex items-center gap-1.5 text-white hover:text-[#FF2D6F] transition-colors font-semibold text-sm"
           >
             Don&apos;t see your event? Get a Quote

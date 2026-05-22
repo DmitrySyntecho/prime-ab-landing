@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
 import { Play, ChevronLeft, ChevronRight, ArrowRight, X } from "lucide-react"
+import MuxPlayer from "@mux/mux-player-react"
 
 const MUX_TIKTOK_ID = "KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU"
 const MUX_MIAMI_ID = "a1VM513vYaAw3u8rBfLB8bG4MMma2FbIFN2YGepuxiA"
@@ -108,7 +109,7 @@ const caseStudies = [
     gallery: [
       { src: "/images/case-studies/asian-flame-1.webp", alt: "Live band performance on stage with 20th anniversary branding" },
       { src: "/images/case-studies/asian-flame-2.webp", alt: "Ballroom wide shot with LED wall and feather centrepieces" },
-      { src: "/images/case-studies/asian-flame-3.webp", alt: "Lighting technician operating follow-spot from the balcony" },
+      { src: "/images/services/lighting-rental-card.webp", alt: "Professional lighting equipment setup for live event production" },
       { src: "/images/case-studies/asian-flame-4.webp", alt: "Empty grand ballroom during load-in" },
       { src: "/images/case-studies/asian-flame-5.webp", alt: "Crew rigging truss inside the ornate venue" },
       { src: "/images/case-studies/asian-flame-6.webp", alt: "Technician focusing follow-spot lights on the balcony rail" },
@@ -145,11 +146,38 @@ export function CaseStudiesSection() {
 
   const galleryPhotos = activeStudy.gallery || []
 
-  const closeLightbox = useCallback(() => setLightboxIndex(null), [])
-  const prevPhoto = useCallback(() =>
-    setLightboxIndex((i) => (i === null ? null : (i - 1 + galleryPhotos.length) % galleryPhotos.length)), [galleryPhotos.length])
-  const nextPhoto = useCallback(() =>
-    setLightboxIndex((i) => (i === null ? null : (i + 1) % galleryPhotos.length)), [galleryPhotos.length])
+  const [imgVisible, setImgVisible] = useState(true)
+  const touchStartX = useRef<number | null>(null)
+
+  const resetPlayer = useCallback(() => {
+    setIsPlaying(false)
+  }, [])
+
+  const closeLightbox = useCallback(() => { setLightboxIndex(null); setImgVisible(true) }, [])
+
+  const changePhoto = useCallback((newIdx: number) => {
+    setImgVisible(false)
+    setTimeout(() => { setLightboxIndex(newIdx); setImgVisible(true) }, 160)
+  }, [])
+
+  const prevPhoto = useCallback(() => {
+    if (lightboxIndex === null) return
+    changePhoto((lightboxIndex - 1 + galleryPhotos.length) % galleryPhotos.length)
+  }, [lightboxIndex, galleryPhotos.length, changePhoto])
+
+  const nextPhoto = useCallback(() => {
+    if (lightboxIndex === null) return
+    changePhoto((lightboxIndex + 1) % galleryPhotos.length)
+  }, [lightboxIndex, galleryPhotos.length, changePhoto])
+
+  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const delta = touchStartX.current - e.changedTouches[0].clientX
+    if (delta > 50) nextPhoto()
+    else if (delta < -50) prevPhoto()
+    touchStartX.current = null
+  }
 
   useEffect(() => {
     if (lightboxIndex === null) return
@@ -163,13 +191,13 @@ export function CaseStudiesSection() {
   }, [lightboxIndex, closeLightbox, prevPhoto, nextPhoto])
 
   const handlePrev = () => {
-    setIsPlaying(false)
+    resetPlayer()
     setLightboxIndex(null)
     setActiveIndex((prev) => (prev === 0 ? caseStudies.length - 1 : prev - 1))
   }
 
   const handleNext = () => {
-    setIsPlaying(false)
+    resetPlayer()
     setLightboxIndex(null)
     setActiveIndex((prev) => (prev === caseStudies.length - 1 ? 0 : prev + 1))
   }
@@ -217,30 +245,19 @@ export function CaseStudiesSection() {
 
           {/* Video Player */}
           <div className="relative aspect-video rounded-xl overflow-hidden bg-black">
-            {isPlaying ? (
-              activeStudy.muxId ? (
-                <video
-                  className="absolute inset-0 w-full h-full object-cover"
-                  src={`https://stream.mux.com/${activeStudy.muxId}.m3u8`}
-                  autoPlay
-                  controls
-                  playsInline
-                />
-              ) : (
-                <iframe
-                  src={`https://www.youtube.com/embed/${activeStudy.youtubeId}?autoplay=1&rel=0`}
-                  title={activeStudy.title}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              )
-            ) : (
+            {isPlaying && (
+              <MuxPlayer
+                playbackId={activeStudy.muxId}
+                autoPlay="any"
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+              />
+            )}
+            {!isPlaying && (
               <>
                 <img
                   src={activeStudy.thumbnail}
                   alt={activeStudy.title}
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div
                   className="absolute inset-0"
@@ -297,8 +314,8 @@ export function CaseStudiesSection() {
                   <button
                     key={study.id}
                     onClick={() => {
+                      resetPlayer()
                       setActiveIndex(index)
-                      setIsPlaying(false)
                     }}
                     className={`relative aspect-video w-full rounded-lg overflow-hidden transition-all ${
                       index === activeIndex
@@ -356,6 +373,8 @@ export function CaseStudiesSection() {
           className="fixed inset-0 z-50 flex items-center justify-center"
           style={{ background: "rgba(0,0,0,0.92)" }}
           onClick={closeLightbox}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
         >
           {/* Close button */}
           <button
@@ -383,7 +402,7 @@ export function CaseStudiesSection() {
           {/* Image */}
           <div
             className="relative w-full max-w-5xl mx-12 md:mx-24"
-            style={{ aspectRatio: "16/9" }}
+            style={{ aspectRatio: "16/9", opacity: imgVisible ? 1 : 0, transition: "opacity 160ms ease" }}
             onClick={(e) => e.stopPropagation()}
           >
             <Image

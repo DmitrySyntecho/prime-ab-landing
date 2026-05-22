@@ -10,10 +10,21 @@ import { PromoTopBanner } from "./promo-top-banner"
 const navLinks = [
   { label: "Services", href: "/#services" },
   { label: "Why Us", href: "/#why-us" },
-  { label: "Portfolio", href: "#our-work" },
+  { label: "Portfolio", href: "/#our-work" },
   { label: "Industry", href: "/#events" },
   { label: "About", href: "/#about" },
 ]
+
+function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  const hash = href.split("#")[1]
+  if (!hash) return
+  const el = document.getElementById(hash)
+  if (el) {
+    e.preventDefault()
+    el.scrollIntoView({ behavior: "smooth" })
+  }
+  // no element on this page → let Next.js navigate to /#hash
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -110,6 +121,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="px-3.5 py-2.5 rounded-[10px] text-[13px] font-semibold tracking-[0.04em] uppercase text-white/65 hover:text-white hover:bg-white/[0.04] transition-all"
                 >
                   {link.label}
@@ -170,7 +182,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={(e) => { handleNavClick(e, link.href); setMobileMenuOpen(false) }}
                     className="px-3 py-3 rounded-[10px] text-[14px] font-semibold tracking-[0.02em] uppercase text-white/75 hover:text-white hover:bg-white/[0.05] transition-all"
                   >
                     {link.label}

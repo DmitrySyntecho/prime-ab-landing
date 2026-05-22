@@ -136,6 +136,16 @@ function findDomainSuggestion(domain: string): string | null {
   return bestMatch;
 }
 
+// Domains that look real but are fake/test
+const FAKE_DOMAINS = new Set([
+  "test.com", "test.org", "test.net",
+  "example.com", "example.org", "example.net",
+  "fake.com", "fake.org", "fake.net",
+  "domain.com", "email.com", "mail.com",
+  "noemail.com", "noreply.com",
+  "abc.com", "xyz.com", "qwerty.com", "asdf.com",
+])
+
 // RFC 5322 simplified regex (practical validation)
 const RFC_5322_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -153,7 +163,15 @@ export interface EmailValidationResult {
 export function validateEmail(email: string): EmailValidationResult {
   email = email.trim().toLowerCase();
 
-  // 1. Basic RFC 5322 validation
+  // 1. Latin characters only (no Cyrillic, Arabic, CJK, etc.)
+  if (/[^\x00-\x7F]/.test(email)) {
+    return {
+      isValid: false,
+      error: "Email must contain Latin characters only",
+    };
+  }
+
+  // 2. Basic RFC 5322 validation
   if (!RFC_5322_REGEX.test(email)) {
     return {
       isValid: false,
@@ -163,12 +181,29 @@ export function validateEmail(email: string): EmailValidationResult {
 
   const [localPart, domain] = email.split("@");
 
+  // 3. TLD must be letters only, 2–24 chars (no numbers, no fake TLDs)
+  const tld = domain.split(".").pop() ?? ""
+  if (!/^[a-z]{2,24}$/.test(tld)) {
+    return { isValid: false, error: "Email domain doesn't look valid" };
+  }
+  // Reserved / non-public TLDs (IANA)
+  const RESERVED_TLDS = new Set(["test", "example", "invalid", "localhost", "local", "localdomain"])
+  if (RESERVED_TLDS.has(tld)) {
+    return { isValid: false, error: "Email domain doesn't look valid" };
+  }
+
   // 2. Local part must be at least 2 characters
   if (localPart.length < 2) {
     return {
       isValid: false,
       error: "Local part must be at least 2 characters",
     };
+  }
+
+  // 3a. Block fake local parts
+  const FAKE_LOCAL = new Set(["test","tester","testing","fake","noreply","no-reply","null","none","admin","user","asdf","qwerty","abc","xyz","foo","bar","baz","example","sample"])
+  if (FAKE_LOCAL.has(localPart)) {
+    return { isValid: false, error: "Please use your real email address" };
   }
 
   // 3. Block obvious garbage (local part = domain name)
@@ -178,6 +213,14 @@ export function validateEmail(email: string): EmailValidationResult {
     return {
       isValid: false,
       error: "This email address looks incomplete or invalid",
+    };
+  }
+
+  // 4b. Block known fake/test domains
+  if (FAKE_DOMAINS.has(domain)) {
+    return {
+      isValid: false,
+      error: "Please use your real email address",
     };
   }
 

@@ -113,10 +113,12 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     ctaLabel: "Get a Quote",
     collage: [
-      "/images/case-studies/lca-1.webp",
-      "/images/case-studies/ramp-2.webp",
-      "/images/case-studies/lca-5.webp",
-      "/images/case-studies/tiktok-2.webp",
+      "/images/services/lighting-col-1.jpg",
+      "/images/services/lighting-col-2.jpg",
+      "/images/services/lighting-col-3.jpg",
+      "/images/services/lighting-col-4.jpg",
+      "/images/services/lighting-col-5.jpg",
+      "/images/services/lighting-col-6.jpg",
     ],
     collageStats: [
       { value: "GrandMA3", label: "Programmed Live" },

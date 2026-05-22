@@ -78,7 +78,7 @@ export function MobileBottomNav({ onStartQuote }: MobileBottomNavProps) {
     { href: "/", icon: Home, label: "Home", match: pathname === "/" },
   ]
   const rightItems = [
-    { href: "/#events", icon: PartyPopper, label: "Events", match: false },
+    { href: "/#events", icon: PartyPopper, label: "Industry", match: false },
     {
       href: "/fifa-2026-packages",
       icon: Trophy,

@@ -95,7 +95,7 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
       key: "whatsapp",
       label: "WhatsApp",
       icon: <WhatsAppIcon className="w-4 h-4" />,
-      href: "https://wa.me/17869338488",
+      href: "https://wa.me/15615944288",
       style: {
         background: "rgba(37,211,102,0.12)",
         color: "#25D366",
@@ -104,9 +104,9 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
     },
     {
       key: "call",
-      label: "(786) 933-8488",
+      label: "(561) 594-4288",
       icon: <Phone className="w-4 h-4" />,
-      href: "tel:7869338488",
+      href: "tel:5615944288",
       style: {
         background: "rgba(255,255,255,0.06)",
         color: "rgba(255,255,255,0.9)",

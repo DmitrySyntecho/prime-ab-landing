@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ArrowRight, CheckCircle2, Sparkles, Clock } from "lucide-react"
 
@@ -22,10 +23,61 @@ export function ServiceDescriptionSection({
   collageStats,
   onStartQuote,
 }: ServiceDescriptionSectionProps) {
-  // Render all provided photos, up to 6, always in a 2-column grid
   const photos = collage.slice(0, 6).filter(Boolean)
+  const setA = photos.slice(0, 3)
+  const setB = photos.slice(3, 6)
   const stat0 = collageStats[0]
   const stat1 = collageStats[1]
+
+  // showingB[i] = true means slot i is showing setB photo (faded in on top)
+  const [showingB, setShowingB] = useState([false, false, false])
+
+  useEffect(() => {
+    if (photos.length < 4) return
+
+    const FADE_MS = 800
+    const STAGGER_MS = 1000
+    const HOLD_MS = 5000
+
+    const timeouts: ReturnType<typeof setTimeout>[] = []
+
+    const cycle = (toB: boolean) => {
+      for (let i = 0; i < 3; i++) {
+        const t = setTimeout(() => {
+          setShowingB(prev => {
+            const next = [...prev]
+            next[i] = toB
+            return next
+          })
+        }, i * STAGGER_MS)
+        timeouts.push(t)
+      }
+      // next cycle starts after: hold + last stagger + fade completes
+      const nextT = setTimeout(() => cycle(!toB), HOLD_MS + 2 * STAGGER_MS + FADE_MS)
+      timeouts.push(nextT)
+    }
+
+    const initial = setTimeout(() => cycle(true), HOLD_MS)
+    timeouts.push(initial)
+
+    return () => timeouts.forEach(clearTimeout)
+  }, [photos.length])
+
+  // Layout mirrors AboutUsSection: top-center wide, bottom-left rotated, bottom-right rotated
+  const slotLayout = [
+    {
+      className: "absolute top-0 left-[5%] w-[90%] h-[55%] rounded-2xl overflow-hidden border border-white/10 z-10",
+      style: { boxShadow: "0 25px 50px -15px rgba(0,0,0,0.5), 0 10px 20px -10px rgba(0,0,0,0.3)" },
+    },
+    {
+      className: "absolute bottom-[5%] left-[-3%] w-[55%] h-[48%] rounded-2xl overflow-hidden border-2 border-white/15 z-20",
+      style: { transform: "rotate(-3deg)", boxShadow: "0 30px 60px -15px rgba(0,0,0,0.6), 0 15px 30px -10px rgba(0,0,0,0.4)" },
+    },
+    {
+      className: "absolute bottom-[8%] right-[-5%] w-[52%] h-[45%] rounded-2xl overflow-hidden border-2 border-white/15 z-30",
+      style: { transform: "rotate(2.5deg)", boxShadow: "0 35px 70px -20px rgba(0,0,0,0.65), 0 18px 36px -12px rgba(0,0,0,0.45)" },
+    },
+  ]
 
   return (
     <section className="py-20 md:py-24 lg:py-28 relative overflow-hidden">
@@ -41,12 +93,6 @@ export function ServiceDescriptionSection({
             <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold tracking-[-0.025em] leading-[1.08] text-white mb-6">
               {heading}
             </h2>
-
-            <div className="text-white/65 text-[16px] md:text-[17px] leading-relaxed mb-7 space-y-4">
-              {description.split("\n\n").map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
-            </div>
 
             <ul className="space-y-3 mb-9">
               {highlights.map((item, idx) => (
@@ -65,8 +111,7 @@ export function ServiceDescriptionSection({
               onClick={onStartQuote}
               className="group inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white font-extrabold text-[14px] md:text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
               style={{
-                boxShadow:
-                  "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",
+                boxShadow: "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",
               }}
             >
               {ctaLabel}
@@ -74,93 +119,74 @@ export function ServiceDescriptionSection({
             </button>
           </div>
 
-          {/* RIGHT — glass-frame photo collage with floating stat cards */}
+          {/* RIGHT — 3-photo animated collage */}
           <div className="order-1 lg:order-2 relative">
-            <div
-              className="relative rounded-[24px] overflow-hidden border border-white/10 backdrop-blur-2xl"
-              style={{
-                background: "linear-gradient(135deg, rgba(255, 45, 111,0.10), rgba(255, 210, 74,0.05))",
-                boxShadow: "0 40px 80px -20px rgba(0,0,0,0.7)",
-              }}
-            >
-              <div className="m-3 md:m-5 rounded-[14px] md:rounded-[18px] overflow-hidden bg-black border border-white/[0.08]">
-                <div className="grid grid-cols-2 gap-1.5 md:gap-2 p-1.5 md:p-2">
-                  {photos.map((src, idx) => (
-                    <div
-                      key={idx}
-                      className="relative aspect-[4/3] overflow-hidden rounded-[10px] md:rounded-[12px]"
-                    >
-                      <Image
-                        src={src}
-                        alt=""
-                        fill
-                        sizes="(max-width: 1024px) 50vw, 25vw"
-                        className="object-cover transition-transform duration-700 hover:scale-105"
-                      />
-                      {/* Subtle inner gradient */}
-                      <div
-                        className="absolute inset-0 pointer-events-none"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.35) 100%)",
-                        }}
-                        aria-hidden
-                      />
-                    </div>
-                  ))}
+            <div className="relative h-[420px] md:h-[520px]">
+              {slotLayout.map((slot, i) => (
+                <div key={i} className={slot.className} style={slot.style}>
+                  {/* Base image — set A */}
+                  {setA[i] && (
+                    <Image
+                      src={setA[i]}
+                      alt=""
+                      fill
+                      sizes="(max-width: 1024px) 90vw, 40vw"
+                      className="object-cover"
+                    />
+                  )}
+                  {/* Overlay image — set B, fades in/out */}
+                  {setB[i] && (
+                    <Image
+                      src={setB[i]}
+                      alt=""
+                      fill
+                      sizes="(max-width: 1024px) 90vw, 40vw"
+                      className="object-cover absolute inset-0 transition-opacity duration-[800ms]"
+                      style={{ opacity: showingB[i] ? 1 : 0 }}
+                    />
+                  )}
                 </div>
-              </div>
+              ))}
 
-              {/* Live tag */}
-              <div className="absolute left-6 top-6 md:left-9 md:top-9 z-10 inline-flex items-center gap-2 px-2.5 md:px-3 py-1 md:py-1.5 rounded-[10px] bg-black/55 backdrop-blur-md border border-white/[0.12] text-[9px] md:text-[10px] font-bold tracking-[0.14em] uppercase text-white">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inset-0 rounded-full bg-[#FF2D6F] animate-ping opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF2D6F]" />
-                </span>
-                Production · Live
-              </div>
+              {/* Floating stat card — top-right */}
+              {stat0 && (
+                <div
+                  className="hidden md:flex absolute top-4 right-[-10px] md:right-[-20px] z-40 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#FF2D6F]/25 backdrop-blur-2xl animate-float-y"
+                  style={{
+                    background: "rgba(8,18,26,0.85)",
+                    boxShadow: "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <div className="w-9 h-9 rounded-[10px] bg-[#FF2D6F]/16 grid place-items-center text-[#FF2D6F]">
+                    <Sparkles className="w-[18px] h-[18px]" />
+                  </div>
+                  <div>
+                    <b className="block text-[13px] font-bold text-white leading-tight">{stat0.value}</b>
+                    <span className="text-[11px] text-white/45">{stat0.label}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Floating stat card — bottom-left */}
+              {stat1 && (
+                <div
+                  className="hidden md:flex absolute bottom-[14%] -left-6 z-40 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#FF2D6F]/20 backdrop-blur-2xl animate-float-y"
+                  style={{
+                    animationDelay: "-2.5s",
+                    background: "rgba(8,18,26,0.7)",
+                    boxShadow: "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <div className="w-9 h-9 rounded-[10px] bg-[#FF2D6F]/16 grid place-items-center text-[#FF2D6F]">
+                    <Clock className="w-[18px] h-[18px]" />
+                  </div>
+                  <div>
+                    <b className="block text-[13px] font-bold text-white leading-tight">{stat1.value}</b>
+                    <span className="text-[11px] text-white/45">{stat1.label}</span>
+                  </div>
+                </div>
+              )}
             </div>
-
-            {/* Floating stat card — top-left */}
-            {stat0 && (
-              <div
-                className="hidden md:flex absolute top-[12%] -left-6 z-20 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#FF2D6F]/20 backdrop-blur-2xl animate-float-y"
-                style={{
-                  background: "rgba(8,18,26,0.7)",
-                  boxShadow:
-                    "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
-                }}
-              >
-                <div className="w-9 h-9 rounded-[10px] bg-[#FF2D6F]/16 grid place-items-center text-[#FF2D6F]">
-                  <Sparkles className="w-[18px] h-[18px]" />
-                </div>
-                <div>
-                  <b className="block text-[13px] font-bold text-white leading-tight">{stat0.value}</b>
-                  <span className="text-[11px] text-white/45">{stat0.label}</span>
-                </div>
-              </div>
-            )}
-
-            {/* Floating stat card — bottom-right */}
-            {stat1 && (
-              <div
-                className="hidden md:flex absolute bottom-[14%] -right-6 z-20 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#FF2D6F]/20 backdrop-blur-2xl animate-float-y"
-                style={{
-                  animationDelay: "-2.5s",
-                  background: "rgba(8,18,26,0.7)",
-                  boxShadow:
-                    "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
-                }}
-              >
-                <div className="w-9 h-9 rounded-[10px] bg-[#FF2D6F]/16 grid place-items-center text-[#FF2D6F]">
-                  <Clock className="w-[18px] h-[18px]" />
-                </div>
-                <div>
-                  <b className="block text-[13px] font-bold text-white leading-tight">{stat1.value}</b>
-                  <span className="text-[11px] text-white/45">{stat1.label}</span>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>

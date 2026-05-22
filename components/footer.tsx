@@ -131,14 +131,14 @@ export function Footer() {
             {/* Contact info stacked */}
             <div className="flex flex-col gap-3">
               <a
-                href="tel:7869338488"
+                href="tel:5615944288"
                 className="group flex items-center gap-2.5"
               >
                 <span className={`w-7 h-7 rounded-lg ${accentBg} flex items-center justify-center ${accentText} shrink-0`}>
                   <Phone className="w-3.5 h-3.5" strokeWidth={2.4} />
                 </span>
                 <span className={`text-[13px] font-semibold text-white/65 ${accentHover} transition-colors`}>
-                  (786) 933-8488
+                  (561) 594-4288
                 </span>
               </a>
               <div className="flex items-center gap-2.5">

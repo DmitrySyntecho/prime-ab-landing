@@ -66,7 +66,7 @@ export function TrustedBySection() {
   }
 
   return (
-    <section className="py-14 md:py-16 relative">
+    <section className="pb-14 md:pb-16 relative">
       <div className="max-w-7xl mx-auto px-4 mb-8">
         <h2 className="text-center text-[13px] md:text-sm font-semibold text-white/55 tracking-[0.18em] uppercase">
           Trusted by Leading Brands, Agencies &amp; Corporate Teams

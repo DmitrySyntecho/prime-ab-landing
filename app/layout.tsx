@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 
-import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
 import "./globals.css"
 
@@ -108,7 +107,6 @@ export default function RootLayout({
             </CartProvider>
           </LanguageProvider>
         </div>
-        <Analytics />
       </body>
     </html>
   )

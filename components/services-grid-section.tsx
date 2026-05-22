@@ -2,19 +2,74 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Layers, Volume2, Monitor, Lightbulb, Box, Tv, Projector, GalleryVerticalEnd } from "lucide-react"
-import { useLanguage } from "@/lib/i18n/language-context"
+import { Layers, Volume2, Monitor, Lightbulb, Box, Tv, Projector, Columns } from "lucide-react"
 
 export function ServicesGridSection() {
   const services = [
-    { icon: Box, slug: "stage-rental", title: t("services.stageRental"), description: t("services.stageRental.desc"), image: "/images/services/staging-rigging.webp" },
-    { icon: Volume2, slug: "sound-system-rental", title: t("services.soundRental"), description: t("services.soundRental.desc"), image: "/images/services/sound-audio.webp" },
-    { icon: Lightbulb, slug: "lighting-equipment-rental", title: t("services.lightingRental"), description: t("services.lightingRental.desc"), image: "/images/services/lighting.webp" },
-    { icon: Layers, slug: "full-av-production", title: t("services.fullAVProduction"), description: t("services.fullAVProduction.desc"), image: "/images/services/event-production.webp" },
-    { icon: Tv, slug: "tv-rental", title: t("services.tvRental"), description: t("services.tvRental.desc"), image: "/images/services/video-led.webp" },
-    { icon: Projector, slug: "projector-screen-rental", title: t("services.projectorRental"), description: t("services.projectorRental.desc"), image: "/images/services/event-production.webp" },
-    { icon: GalleryVerticalEnd, slug: "pipe-and-drape-rental", title: t("services.pipeDrapeRental"), description: t("services.pipeDrapeRental.desc"), image: "/images/services/permanent-av.webp" },
-    { icon: Monitor, slug: "led-screen-rental", title: t("services.ledRental"), description: t("services.ledRental.desc"), image: "/images/services/video-led.webp" },
+    {
+      icon: Box,
+      title: "Stage Rental",
+      description: "Portable, truss-built, or mobile stages — engineered, certified, and crewed for any event in LA.",
+      image: "/images/services/stage-rental-card.webp",
+      href: "/services/stage-rental",
+      darkening: "heavy", // significant darkening
+    },
+    {
+      icon: Volume2,
+      title: "Sound System Rental",
+      description: "L-Acoustics and d&b audio systems, tuned to your room with A1 + A2 engineers on every show.",
+      image: "/images/services/sound-system-card.webp",
+      href: "/services/sound-system-rental",
+      darkening: "medium", // 15% more
+    },
+    {
+      icon: Lightbulb,
+      title: "Lighting Equipment Rental",
+      description: "Designed, pre-vis'd, and programmed by a senior LD — moving heads, washes, and GrandMA3 console.",
+      image: "/images/services/lighting-rental-card.webp",
+      href: "/services/lighting-rental",
+      darkening: "medium", // 15% more
+    },
+    {
+      icon: Layers,
+      title: "Full AV Production",
+      description: "One team, one contract, one producer — sound, lighting, video, LED, and stage from pre-vis to strike.",
+      image: "/images/services/full-av-card.webp",
+      href: "/services/full-av-production",
+      darkening: "extra", // 30% more
+    },
+    {
+      icon: Tv,
+      title: "TV Rental",
+      description: "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor, with on-site video tech.",
+      image: "/images/services/tv-rental-card.webp",
+      href: "/services/tv-rental",
+      darkening: "medium", // 15% more
+    },
+    {
+      icon: Projector,
+      title: "Projector & Screen Rental",
+      description: "Boardroom to ballroom — 6 ft to 40+ ft screens, 4K laser projectors, and projection mapping.",
+      image: "/images/services/projector-screen.webp",
+      href: "/services/projector-screen-rental",
+      darkening: "medium", // 15% more
+    },
+    {
+      icon: Columns,
+      title: "Pipe & Drape Rental",
+      description: "IFR-certified drape in any height and color, installed and struck by our crew across Los Angeles.",
+      image: "/images/services/pipe-drape-card.webp",
+      href: "/services/pipe-drape-rental",
+      darkening: "medium", // 15% more
+    },
+    {
+      icon: Monitor,
+      title: "LED Screen Rental",
+      description: "Indoor, outdoor, and curved LED walls — same-day quote, senior LED tech and rigger on every job.",
+      image: "/images/services/led-screen-card.webp",
+      href: "/services/led-screen-rental",
+      darkening: "medium", // 15% more
+    },
   ]
 
   return (
@@ -39,9 +94,9 @@ export function ServicesGridSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {services.map((service, index) => (
             <Link
-              href={`/services/${service.slug}`}
               key={index}
-              className="group relative p-7 md:p-8 min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden transition-all hover:border-[#FF2D6F]/40 hover:scale-[1.02]"
+              href={service.href}
+              className="group relative min-h-[280px] rounded-[22px] border border-[#FF2D6F]/20 overflow-hidden block transition-transform hover:-translate-y-0.5 hover:border-[#FF2D6F]/45 bg-[#0a0a0a]"
               style={{
                 boxShadow:
                   "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
@@ -52,8 +107,9 @@ export function ServicesGridSection() {
                 src={service.image}
                 alt={service.title}
                 fill
-                sizes="(max-width: 1024px) 100vw, 25vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                priority={index < 4}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className="absolute inset-0 object-cover"
               />
 
               {/* Dark gradient overlay — opacity varies by card */}

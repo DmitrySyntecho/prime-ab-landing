@@ -24,6 +24,11 @@ const COMPANY = [
   { label: "FIFA 2026", href: "/fifa-2026-packages" },
 ]
 
+const LEGAL = [
+  { label: "Privacy Policy", href: "/legal/privacy" },
+  { label: "Terms of Service", href: "/legal/terms" },
+]
+
 export function Footer() {
   const pathname = usePathname()
   const isFifa = pathname?.startsWith("/fifa-2026-packages")
@@ -53,7 +58,7 @@ export function Footer() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 pt-16 pb-8">
 
         {/* Main footer grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr] gap-10 lg:gap-12 pb-12 border-b border-white/[0.06]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_0.9fr] gap-10 lg:gap-12 pb-12 border-b border-white/[0.06]">
 
           {/* Brand column */}
           <div className="flex flex-col gap-5">
@@ -150,6 +155,40 @@ export function Footer() {
               </div>
             </div>
           </div>
+
+          {/* Legal column */}
+          <div className="hidden lg:block">
+            <p className={`text-[10px] font-extrabold tracking-[0.16em] uppercase mb-5 ${accentText}`}>
+              Legal
+            </p>
+            <ul className="flex flex-col gap-2.5">
+              {LEGAL.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={`text-[13px] font-medium text-white/55 ${accentHover} transition-colors`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Mobile legal links */}
+        <div className="lg:hidden flex gap-4 justify-center py-6 border-b border-white/[0.06] text-[12px]">
+          {LEGAL.map((item, idx) => (
+            <div key={item.href} className="flex items-center gap-4">
+              <Link
+                href={item.href}
+                className={`font-medium text-white/55 ${accentHover} transition-colors`}
+              >
+                {item.label}
+              </Link>
+              {idx < LEGAL.length - 1 && <span className="text-white/20">·</span>}
+            </div>
+          ))}
         </div>
 
         {/* Copyright */}

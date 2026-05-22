@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { useEffect, useState } from "react"
 import { ArrowRight, CheckCircle2, Sparkles, Clock } from "lucide-react"
 
 interface ServiceDescriptionSectionProps {
@@ -23,27 +22,10 @@ export function ServiceDescriptionSection({
   collageStats,
   onStartQuote,
 }: ServiceDescriptionSectionProps) {
+  // Render all provided photos, up to 6, always in a 2-column grid
   const photos = collage.slice(0, 6).filter(Boolean)
   const stat0 = collageStats[0]
   const stat1 = collageStats[1]
-
-  const [activeIdx, setActiveIdx] = useState(0)
-  const [prevIdx, setPrevIdx] = useState<number | null>(null)
-  const [fading, setFading] = useState(false)
-
-  useEffect(() => {
-    if (photos.length <= 1) return
-    const interval = setInterval(() => {
-      setPrevIdx(activeIdx)
-      setFading(true)
-      setTimeout(() => {
-        setActiveIdx((i) => (i + 1) % photos.length)
-        setFading(false)
-        setPrevIdx(null)
-      }, 700)
-    }, 3500)
-    return () => clearInterval(interval)
-  }, [activeIdx, photos.length])
 
   return (
     <section className="py-20 md:py-24 lg:py-28 relative overflow-hidden">
@@ -92,7 +74,7 @@ export function ServiceDescriptionSection({
             </button>
           </div>
 
-          {/* RIGHT — glass-frame auto-playing slideshow */}
+          {/* RIGHT — glass-frame photo collage with floating stat cards */}
           <div className="order-1 lg:order-2 relative">
             <div
               className="relative rounded-[24px] overflow-hidden border border-white/10 backdrop-blur-2xl"
@@ -102,55 +84,30 @@ export function ServiceDescriptionSection({
               }}
             >
               <div className="m-3 md:m-5 rounded-[14px] md:rounded-[18px] overflow-hidden bg-black border border-white/[0.08]">
-                {/* Slideshow container — fixed aspect ratio, images fade over each other */}
-                <div className="relative aspect-[4/3] w-full">
+                <div className="grid grid-cols-2 gap-1.5 md:gap-2 p-1.5 md:p-2">
                   {photos.map((src, idx) => (
                     <div
-                      key={src}
-                      className="absolute inset-0 transition-opacity duration-700"
-                      style={{
-                        opacity: idx === activeIdx ? 1 : 0,
-                        zIndex: idx === activeIdx ? 2 : prevIdx === idx ? 1 : 0,
-                      }}
+                      key={idx}
+                      className="relative aspect-[4/3] overflow-hidden rounded-[10px] md:rounded-[12px]"
                     >
                       <Image
                         src={src}
                         alt=""
                         fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover"
-                        priority={idx === 0}
+                        sizes="(max-width: 1024px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-700 hover:scale-105"
                       />
-                      {/* Subtle bottom gradient */}
+                      {/* Subtle inner gradient */}
                       <div
                         className="absolute inset-0 pointer-events-none"
                         style={{
                           background:
-                            "linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%)",
+                            "linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.35) 100%)",
                         }}
                         aria-hidden
                       />
                     </div>
                   ))}
-
-                  {/* Dot indicators */}
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
-                    {photos.map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => {
-                          setPrevIdx(activeIdx)
-                          setActiveIdx(idx)
-                        }}
-                        aria-label={`Show image ${idx + 1}`}
-                        className="h-1.5 rounded-full transition-all duration-300"
-                        style={{
-                          width: idx === activeIdx ? "20px" : "6px",
-                          background: idx === activeIdx ? "#FF2D6F" : "rgba(255,255,255,0.35)",
-                        }}
-                      />
-                    ))}
-                  </div>
                 </div>
               </div>
 

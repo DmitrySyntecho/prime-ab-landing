@@ -135,7 +135,7 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
                 <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
                   {videoPlaying && (
                     <MuxPlayer
-                      playbackId="jAJRQcO5mGsuhpGE01tMMiFUn70067j423fE5Er4gIJqk"
+                      playbackId="sotNy01Bw9hXSjlHAaTe4lF9vEG00ZRO2Z7Wpf6QF1Ou00"
                       autoPlay="any"
                       style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
                     />
@@ -143,7 +143,7 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
                   {!videoPlaying && (
                     <>
                       <img
-                        src="https://image.mux.com/jAJRQcO5mGsuhpGE01tMMiFUn70067j423fE5Er4gIJqk/animated.gif?width=320"
+                        src="https://image.mux.com/sotNy01Bw9hXSjlHAaTe4lF9vEG00ZRO2Z7Wpf6QF1Ou00/animated.gif?width=320"
                         alt="Video preview"
                         className="absolute inset-0 w-full h-full object-cover"
                       />

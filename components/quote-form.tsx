@@ -64,6 +64,24 @@ const SERVICE_SLUG_MAP: Record<string, string> = {
   "projector-screen-rental": "led",
   "pipe-drape-rental": "drape",
   "led-screen-rental": "led",
+  // Miami variants
+  "stage-rental-miami": "staging",
+  "sound-system-rental-miami": "audio",
+  "lighting-rental-miami": "lighting",
+  "full-av-production-miami": "full-av",
+  "tv-rental-miami": "led",
+  "projector-screen-rental-miami": "led",
+  "pipe-drape-rental-miami": "drape",
+  "led-screen-rental-miami": "led",
+  // Orlando variants
+  "stage-rental-orlando": "staging",
+  "sound-system-rental-orlando": "audio",
+  "lighting-rental-orlando": "lighting",
+  "full-av-production-orlando": "full-av",
+  "tv-rental-orlando": "led",
+  "projector-screen-rental-orlando": "led",
+  "pipe-drape-rental-orlando": "drape",
+  "led-screen-rental-orlando": "led",
 }
 
 /* ============ DATA ============ */
@@ -432,6 +450,7 @@ export function QuoteForm({ isOpen, onClose, serviceSlug, eventTypeId }: QuoteFo
       if (data.message) payload.append("custom_fields[notes]", data.message)
       if (data.promoCode) payload.append("custom_fields[promo_code]", data.promoCode)
       if (data.hasWhatsapp) payload.append("custom_fields[whatsapp]", data.phone)
+      payload.append("embed_url", window.location.href)
 
       const res = await fetch(CTM_URL, { method: "POST", body: payload })
       if (!res.ok) throw new Error("CTM error")

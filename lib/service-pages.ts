@@ -28,7 +28,7 @@ export interface ServicePage {
   collageStats: { value: string; label: string }[];
 }
 
-export const SERVICE_PAGES: ServicePage[] = [
+const BASE_PAGES: ServicePage[] = [
   {
     slug: "stage-rental",
     h1: "Stage Rental in Los Angeles",
@@ -291,6 +291,26 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
   },
 ];
+
+function cityVariant(base: ServicePage, city: string, citySlug: string): ServicePage {
+  const replaceCity = (text: string) =>
+    text
+      .replace(/Los Angeles/g, city)
+      .replace(/\bacross LA\b/g, `across ${city}`)
+  return {
+    ...base,
+    slug: `${base.slug}-${citySlug}`,
+    h1: replaceCity(base.h1),
+    description: replaceCity(base.description),
+    descriptionHeading: replaceCity(base.descriptionHeading),
+  }
+}
+
+export const SERVICE_PAGES: ServicePage[] = [
+  ...BASE_PAGES,
+  ...BASE_PAGES.map((s) => cityVariant(s, "Miami", "miami")),
+  ...BASE_PAGES.map((s) => cityVariant(s, "Orlando", "orlando")),
+]
 
 export function getServicePage(slug: string): ServicePage | undefined {
   return SERVICE_PAGES.find((s) => s.slug === slug);

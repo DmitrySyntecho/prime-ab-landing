@@ -18,7 +18,12 @@
       "Bash(cd /e/Syntecho && ls -la | grep -i prime)",
       "Read(//e/Syntecho/**)",
       "Bash(xargs -I {} basename {})",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "PowerShell(Get-ChildItem -Path \"e:\\\\Syntecho\\\\prime-site\" -Force | Select-Object Name, @{Name=\"Type\"; Expression={if\\($_.PSIsContainer\\){\"Dir\"}else{\"File\"}}} | Format-Table -AutoSize)",
+      "Bash(Get-ChildItem -Recurse -Path \"e:\\\\Syntecho\\\\prime-site\\\\public\" -Include \"*.mp4\",\"*.webm\",\"*.mov\")",
+      "Bash(Select-Object FullName, Length)",
+      "Bash(Get-ChildItem -Path \"e:\\\\Syntecho\\\\prime-site\" -Directory)",
+      "Bash(Select-Object -ExpandProperty Name)"
     ]
   }
 }

@@ -435,6 +435,11 @@ export function QuoteForm({ isOpen, onClose, serviceSlug, eventTypeId }: QuoteFo
         .filter(Boolean)
         .join(", ")
 
+      const getCookie = (name: string) => {
+        const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"))
+        return match ? decodeURIComponent(match[2]) : null
+      }
+
       const payload = new FormData()
       payload.append("caller_name", `${data.firstName} ${data.lastName}`.trim())
       payload.append("phone_number", data.phone)
@@ -450,7 +455,8 @@ export function QuoteForm({ isOpen, onClose, serviceSlug, eventTypeId }: QuoteFo
       if (data.message) payload.append("custom_fields[notes]", data.message)
       if (data.promoCode) payload.append("custom_fields[promo_code]", data.promoCode)
       if (data.hasWhatsapp) payload.append("custom_fields[whatsapp]", data.phone)
-      payload.append("embed_url", window.location.href)
+      const ctmId = getCookie("__ctmid")
+      if (ctmId) payload.append("visitor_id", ctmId)
 
       const res = await fetch(CTM_URL, { method: "POST", body: payload })
       if (!res.ok) throw new Error("CTM error")

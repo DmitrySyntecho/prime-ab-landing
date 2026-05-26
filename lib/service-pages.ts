@@ -296,13 +296,16 @@ function cityVariant(base: ServicePage, city: string, citySlug: string): Service
   const replaceCity = (text: string) =>
     text
       .replace(/Los Angeles/g, city)
+      .replace(/\bin LA\b/g, `in ${city}`)
       .replace(/\bacross LA\b/g, `across ${city}`)
   return {
     ...base,
     slug: `${base.slug}-${citySlug}`,
     h1: replaceCity(base.h1),
+    subheadline: replaceCity(base.subheadline),
     description: replaceCity(base.description),
     descriptionHeading: replaceCity(base.descriptionHeading),
+    highlights: base.highlights.map(replaceCity),
   }
 }
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { ArrowRight } from "lucide-react"
+import { usePageCity } from "@/lib/use-page-city"
 import {
   Monitor,
   Volume2,
@@ -36,6 +37,7 @@ const categories = [
 ]
 
 export function RentalCategoriesSection() {
+  const city = usePageCity()
   const openQuote = () => {
     document.dispatchEvent(new CustomEvent("openQuoteForm"))
   }
@@ -49,11 +51,11 @@ export function RentalCategoriesSection() {
             Equipment Rentals
           </span>
           <h2 className="text-[32px] md:text-[44px] lg:text-[48px] font-extrabold tracking-[-0.025em] leading-[1.18] text-white mb-4">
-            AV Equipment <span className="ds-accent-text">Rental Categories</span> in Los Angeles
+            AV Equipment <span className="ds-accent-text">Rental Categories</span> in {city}
           </h2>
           <p className="text-white/55 text-[15px] md:text-[17px]">
             Find the right AV equipment fast — LED walls, staging, audio systems, lighting, pipe &amp; drape, and full
-            AV production available across Los Angeles.
+            AV production available across {city}.
           </p>
         </div>
 

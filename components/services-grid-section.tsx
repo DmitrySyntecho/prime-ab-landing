@@ -3,13 +3,15 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Layers, Volume2, Monitor, Lightbulb, Box, Tv, Projector, Columns } from "lucide-react"
+import { usePageCity } from "@/lib/use-page-city"
 
 export function ServicesGridSection() {
+  const city = usePageCity()
   const services = [
     {
       icon: Box,
       title: "Stage Rental",
-      description: "Portable, truss-built, or mobile stages — engineered, certified, and crewed for any event in LA.",
+      description: `Portable, truss-built, or mobile stages — engineered, certified, and crewed for any event in ${city}.`,
       image: "/images/services/stage-rental-card.webp",
       href: "/services/stage-rental",
       darkening: "heavy", // significant darkening
@@ -57,7 +59,7 @@ export function ServicesGridSection() {
     {
       icon: Columns,
       title: "Pipe & Drape Rental",
-      description: "IFR-certified drape in any height and color, installed and struck by our crew across Los Angeles.",
+      description: `IFR-certified drape in any height and color, installed and struck by our crew across ${city}.`,
       image: "/images/services/pipe-drape-card.webp",
       href: "/services/pipe-drape-rental",
       darkening: "medium", // 15% more

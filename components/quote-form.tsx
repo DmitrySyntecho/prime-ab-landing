@@ -457,8 +457,10 @@ export function QuoteForm({ isOpen, onClose, serviceSlug, eventTypeId }: QuoteFo
       if (data.promoCode) payload.append("custom_fields[promo_code]", data.promoCode)
       if (data.hasWhatsapp) payload.append("custom_fields[whatsapp]", data.phone)
       payload.append("custom_fields[embed_url]", window.location.href)
-      const ctmId = getCookie("__ctmid")
-      if (ctmId) payload.append("visitor_id", ctmId)
+      const ctmId =
+        (typeof window !== "undefined" && (window as any).__ctm?.config?.sid) ||
+        getCookie("__ctmid")
+      if (ctmId) payload.append("visitor_sid", ctmId)
 
       const res = await fetch(CTM_URL, { method: "POST", body: payload })
       if (!res.ok) throw new Error("CTM error")

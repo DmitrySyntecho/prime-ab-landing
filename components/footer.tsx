@@ -4,7 +4,6 @@ import { Phone, MapPin, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useCity } from "@/lib/city-context"
 
 const SERVICES = [
   { label: "Stage Rental", href: "/services/stage-rental" },
@@ -32,7 +31,6 @@ const LEGAL = [
 
 export function Footer() {
   const pathname = usePathname()
-  const city = useCity()
   const isFifa = pathname?.startsWith("/fifa-2026-packages")
 
   const accent = isFifa ? "#E61D25" : "#FF2D6F"
@@ -153,7 +151,7 @@ export function Footer() {
                 <span className={`w-7 h-7 rounded-lg ${accentBg} flex items-center justify-center ${accentText} shrink-0`}>
                   <MapPin className="w-3.5 h-3.5" strokeWidth={2.4} />
                 </span>
-                <span className="text-[13px] text-white/45">{city} · Coast-to-coast</span>
+                <span className="text-[13px] text-white/45">Nationwide · Coast-to-coast</span>
               </div>
             </div>
           </div>

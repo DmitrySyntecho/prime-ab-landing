@@ -22,7 +22,7 @@ import {
 } from "lucide-react"
 import type React from "react"
 
-const WHATSAPP_HREF = "https://wa.me/15615944288"
+const WHATSAPP_HREF = "https://wa.me/15612202555"
 const PHONE_HREF = "tel:5615944288"
 const PHONE_LABEL = "(561) 594-4288"
 

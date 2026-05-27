@@ -24,7 +24,7 @@ const faqs = [
     {
       question: "Do you work nationwide?",
       answer:
-        "LA-based, deployed coast to coast. Multi-city tours, corporate roadshows, festival circuits — all covered.",
+        "Deployed coast to coast. Multi-city tours, corporate roadshows, festival circuits — all covered.",
     },
 ]
 

@@ -455,6 +455,7 @@ export function QuoteForm({ isOpen, onClose, serviceSlug, eventTypeId }: QuoteFo
       if (data.message) payload.append("custom_fields[notes]", data.message)
       if (data.promoCode) payload.append("custom_fields[promo_code]", data.promoCode)
       if (data.hasWhatsapp) payload.append("custom_fields[whatsapp]", data.phone)
+      payload.append("custom_fields[embed_url]", window.location.href)
       const ctmId = getCookie("__ctmid")
       if (ctmId) payload.append("visitor_id", ctmId)
 
@@ -1368,7 +1369,7 @@ function SuccessState({ onClose }: { onClose: () => void }) {
           Call now
         </a>
         <a
-          href="https://wa.me/15615944288"
+          href="https://wa.me/15612202555"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-white font-extrabold text-[14px] tracking-[0.02em] transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center"

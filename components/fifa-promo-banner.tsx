@@ -3,10 +3,7 @@
 import Link from "next/link"
 import { ArrowRight, Trophy, MapPin, Tv, Volume2, Sparkles } from "lucide-react"
 import { useEffect, useState } from "react"
-import { useCity } from "@/lib/city-context"
-
 export function FIFAPromoBanner() {
-  const city = useCity()
   const [t, setT] = useState({ days: 0, hours: 0, mins: 0 })
 
   useEffect(() => {
@@ -167,7 +164,7 @@ export function FIFAPromoBanner() {
                 {[
                   { icon: Tv, label: "LED Walls 80–800 sqft" },
                   { icon: Volume2, label: "Broadcast Audio" },
-                  { icon: MapPin, label: `${city} + Nationwide` },
+                  { icon: MapPin, label: "Nationwide" },
                   { icon: Trophy, label: "Packages from $799/day" },
                 ].map(({ icon: Icon, label }) => (
                   <span

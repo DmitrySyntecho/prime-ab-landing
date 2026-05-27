@@ -3,10 +3,10 @@
 import Link from "next/link"
 import { ArrowRight, Trophy, MapPin, Tv, Volume2, Sparkles } from "lucide-react"
 import { useEffect, useState } from "react"
-import { usePageCity } from "@/lib/use-page-city"
+import { useCity } from "@/lib/city-context"
 
 export function FIFAPromoBanner() {
-  const city = usePageCity()
+  const city = useCity()
   const [t, setT] = useState({ days: 0, hours: 0, mins: 0 })
 
   useEffect(() => {

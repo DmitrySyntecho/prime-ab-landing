@@ -1,7 +1,7 @@
 "use client"
 
 import { ArrowRight } from "lucide-react"
-import { usePageCity } from "@/lib/use-page-city"
+import { useCity } from "@/lib/city-context"
 import {
   Monitor,
   Volume2,
@@ -37,7 +37,7 @@ const categories = [
 ]
 
 export function RentalCategoriesSection() {
-  const city = usePageCity()
+  const city = useCity()
   const openQuote = () => {
     document.dispatchEvent(new CustomEvent("openQuoteForm"))
   }

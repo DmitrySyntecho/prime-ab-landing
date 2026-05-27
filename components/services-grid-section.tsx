@@ -3,10 +3,10 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Layers, Volume2, Monitor, Lightbulb, Box, Tv, Projector, Columns } from "lucide-react"
-import { usePageCity } from "@/lib/use-page-city"
+import { useCity } from "@/lib/city-context"
 
 export function ServicesGridSection() {
-  const city = usePageCity()
+  const city = useCity()
   const services = [
     {
       icon: Box,

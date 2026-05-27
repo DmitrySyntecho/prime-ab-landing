@@ -1,69 +1,29 @@
-"use client"
-
 import { notFound } from "next/navigation"
-import { useParams } from "next/navigation"
 import { getServicePage } from "@/lib/service-pages"
-import { ServiceHero } from "@/components/service-hero"
-import { ServiceDescriptionSection } from "@/components/service-description-section"
-import { TrustedBySection } from "@/components/trusted-by-section"
-import { TestimonialsCarousel } from "@/components/testimonials-carousel"
-import { AboutUsSection } from "@/components/about-us-section"
-import { EventTypesSection } from "@/components/event-types-section"
-import { CaseStudiesSection } from "@/components/case-studies-section"
-import { WhyChooseUsSection } from "@/components/why-choose-us-section"
-import { CharitySection } from "@/components/charity-section"
-import { RentalCategoriesSection } from "@/components/rental-categories-section"
-import { PromoBannersSection } from "@/components/promo-banners-section"
-import { ServicesGridSection } from "@/components/services-grid-section"
-import { FAQSection } from "@/components/faq-section"
-import { FIFAPromoBanner } from "@/components/fifa-promo-banner"
-import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
+import { CityProvider } from "@/lib/city-context"
+import { ServicePageClient } from "./service-page-client"
 
-export default function ServicePage() {
-  const params = useParams<{ slug: string }>()
-  const service = getServicePage(params.slug)
+export default async function ServicePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const service = getServicePage(slug)
   if (!service) notFound()
 
-  const handleStartQuote = () => {
-    document.dispatchEvent(new CustomEvent("openQuoteForm", { detail: { serviceSlug: params.slug } }))
-  }
+  // For Miami / Orlando dedicated pages, override the layout-level geo city
+  const cityOverride = slug.endsWith("-miami")
+    ? "Miami"
+    : slug.endsWith("-orlando")
+      ? "Orlando"
+      : null
 
-  return (
-    <div className="min-h-screen">
-      <ServiceHero
-        eyebrow={service.eyebrow}
-        h1={service.h1}
-        subheadline={service.subheadline}
-        heroCta={service.heroCta}
-        image={service.image}
-        onStartQuote={handleStartQuote}
-      />
+  const content = <ServicePageClient service={service} slug={slug} />
 
-      {/* Pull logos up into the transparent tail of the hero image */}
-      <TrustedBySection />
-
-      <ServiceDescriptionSection
-        heading={service.descriptionHeading}
-        description={service.description}
-        highlights={service.highlights}
-        ctaLabel={service.ctaLabel}
-        collage={service.collage}
-        collageStats={service.collageStats}
-        onStartQuote={handleStartQuote}
-      />
-
-      <TestimonialsCarousel />
-      <WhyChooseUsSection />
-      <CaseStudiesSection />
-      <ServicesGridSection />
-      <RentalCategoriesSection />
-      <FIFAPromoBanner />
-      <AboutUsSection />
-      <PromoBannersSection />
-      <EventTypesSection />
-      <CharitySection />
-      <FAQSection />
-      <ContactSpecialistBanner onStartQuote={handleStartQuote} />
-    </div>
+  return cityOverride ? (
+    <CityProvider city={cityOverride}>{content}</CityProvider>
+  ) : (
+    content
   )
 }

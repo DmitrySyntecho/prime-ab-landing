@@ -4,7 +4,7 @@ import { Phone, MapPin, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { usePageCity } from "@/lib/use-page-city"
+import { useCity } from "@/lib/city-context"
 
 const SERVICES = [
   { label: "Stage Rental", href: "/services/stage-rental" },
@@ -32,7 +32,7 @@ const LEGAL = [
 
 export function Footer() {
   const pathname = usePathname()
-  const city = usePageCity()
+  const city = useCity()
   const isFifa = pathname?.startsWith("/fifa-2026-packages")
 
   const accent = isFifa ? "#E61D25" : "#FF2D6F"

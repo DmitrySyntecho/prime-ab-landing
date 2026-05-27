@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
+import { headers } from "next/headers"
 
 import Script from "next/script"
 import "./globals.css"
@@ -11,6 +12,8 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { BackgroundFX } from "@/components/background-fx"
 import { GlobalCTA } from "@/components/global-cta"
+import { CityProvider } from "@/lib/city-context"
+import { resolveLocation } from "@/lib/geo"
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -84,11 +87,18 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const h = await headers()
+  const proto = h.get("x-forwarded-proto") ?? "https"
+  const host = h.get("x-forwarded-host") || h.get("host") || ""
+  const requestUrl = host ? `${proto}://${host}/` : ""
+  const detectedCity = await resolveLocation(requestUrl)
+  const city = detectedCity || "Los Angeles"
+
   return (
     <html lang="en" className={`${manrope.variable} ${jetbrainsMono.variable}`}>
       <head>
@@ -98,14 +108,16 @@ export default function RootLayout({
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PSZZXWTK" height="0" width="0" style={{display:"none",visibility:"hidden"}}></iframe></noscript>
         <BackgroundFX />
         <div className="page-content">
-          <LanguageProvider>
-            <CartProvider>
-              <Header />
-              <main>{children}</main>
-              <Footer />
-              <GlobalCTA />
-            </CartProvider>
-          </LanguageProvider>
+          <CityProvider city={city}>
+            <LanguageProvider>
+              <CartProvider>
+                <Header />
+                <main>{children}</main>
+                <Footer />
+                <GlobalCTA />
+              </CartProvider>
+            </LanguageProvider>
+          </CityProvider>
         </div>
       </body>
     </html>

@@ -1,41 +1,35 @@
-"use client"
+import { headers } from "next/headers"
+import { resolveLocation } from "@/lib/geo"
+import { CityProvider } from "@/lib/city-context"
+import { HomeClient } from "./home-client"
 
-import { HeroSection } from "@/components/hero-section"
-import { TrustedBySection } from "@/components/trusted-by-section"
-import { TestimonialsCarousel } from "@/components/testimonials-carousel"
-import { AboutUsSection } from "@/components/about-us-section"
-import { EventTypesSection } from "@/components/event-types-section"
-import { CaseStudiesSection } from "@/components/case-studies-section"
-import { WhyChooseUsSection } from "@/components/why-choose-us-section"
-import { CharitySection } from "@/components/charity-section"
-import { RentalCategoriesSection } from "@/components/rental-categories-section"
-import { PromoBannersSection } from "@/components/promo-banners-section"
-import { ServicesGridSection } from "@/components/services-grid-section"
-import { FAQSection } from "@/components/faq-section"
-import { FIFAPromoBanner } from "@/components/fifa-promo-banner"
-import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
+function buildRequestUrl(proto: string, host: string, query: string) {
+  const base = host ? `${proto}://${host}/` : ""
+  const url = query ? `${base}?${query}` : base
+  return url.replace(/^https?:\/\/localhost(:\d+)?/, "https://lp.primelineav.com")
+}
 
-export default function Home() {
-  const handleStartQuote = () => {
-    document.dispatchEvent(new CustomEvent("openQuoteForm"))
-  }
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string>>
+}) {
+  const h = await headers()
+  const proto = h.get("x-forwarded-proto") ?? "https"
+  const host = h.get("x-forwarded-host") || h.get("host") || ""
+  const params = await searchParams
+  const query = new URLSearchParams(params).toString()
+  const requestUrl = buildRequestUrl(proto, host, query)
+
+  const detectedCity = await resolveLocation(requestUrl)
+  const city = detectedCity || "Los Angeles"
+  console.log("[geo] requestUrl:", requestUrl)
+  console.log("[geo] detectedCity:", detectedCity)
+  console.log("[geo] city:", city)
 
   return (
-    <div className="min-h-screen">
-      <HeroSection onStartQuote={handleStartQuote} />
-      <TrustedBySection />
-      <TestimonialsCarousel />
-      <WhyChooseUsSection />
-      <CaseStudiesSection />
-      <ServicesGridSection />
-      <RentalCategoriesSection />
-      <FIFAPromoBanner />
-      <AboutUsSection />
-      <PromoBannersSection />
-      <EventTypesSection />
-      <CharitySection />
-      <FAQSection />
-      <ContactSpecialistBanner onStartQuote={handleStartQuote} />
-    </div>
+    <CityProvider city={city}>
+      <HomeClient />
+    </CityProvider>
   )
 }

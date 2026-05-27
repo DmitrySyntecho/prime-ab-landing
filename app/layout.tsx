@@ -26,8 +26,6 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 })
 
-// Viewport must be its own export in Next 14+ (was deprecated inside metadata).
-// maximumScale: 1 + userScalable: false disable pinch-zoom AND iOS focus auto-zoom.
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,

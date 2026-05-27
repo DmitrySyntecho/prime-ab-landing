@@ -1,69 +1,46 @@
-"use client"
-
+import { headers } from "next/headers"
 import { notFound } from "next/navigation"
-import { useParams } from "next/navigation"
 import { getServicePage } from "@/lib/service-pages"
-import { ServiceHero } from "@/components/service-hero"
-import { ServiceDescriptionSection } from "@/components/service-description-section"
-import { TrustedBySection } from "@/components/trusted-by-section"
-import { TestimonialsCarousel } from "@/components/testimonials-carousel"
-import { AboutUsSection } from "@/components/about-us-section"
-import { EventTypesSection } from "@/components/event-types-section"
-import { CaseStudiesSection } from "@/components/case-studies-section"
-import { WhyChooseUsSection } from "@/components/why-choose-us-section"
-import { CharitySection } from "@/components/charity-section"
-import { RentalCategoriesSection } from "@/components/rental-categories-section"
-import { PromoBannersSection } from "@/components/promo-banners-section"
-import { ServicesGridSection } from "@/components/services-grid-section"
-import { FAQSection } from "@/components/faq-section"
-import { FIFAPromoBanner } from "@/components/fifa-promo-banner"
-import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
+import { resolveLocation } from "@/lib/geo"
+import { CityProvider } from "@/lib/city-context"
+import { ServicePageClient } from "./service-page-client"
 
-export default function ServicePage() {
-  const params = useParams<{ slug: string }>()
-  const service = getServicePage(params.slug)
+function buildRequestUrl(proto: string, host: string, slug: string, query: string) {
+  const base = host ? `${proto}://${host}/services/${slug}` : ""
+  const url = query ? `${base}?${query}` : base
+  return url.replace(/^https?:\/\/localhost(:\d+)?/, "https://lp.primelineav.com")
+}
+
+export default async function ServicePage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<Record<string, string>>
+}) {
+  const { slug } = await params
+  const service = getServicePage(slug)
   if (!service) notFound()
 
-  const handleStartQuote = () => {
-    document.dispatchEvent(new CustomEvent("openQuoteForm", { detail: { serviceSlug: params.slug } }))
+  let city: string
+  if (slug.endsWith("-miami")) {
+    city = "Miami"
+  } else if (slug.endsWith("-orlando")) {
+    city = "Orlando"
+  } else {
+    const h = await headers()
+    const proto = h.get("x-forwarded-proto") ?? "https"
+    const host = h.get("x-forwarded-host") || h.get("host") || ""
+    const p = await searchParams
+    const query = new URLSearchParams(p).toString()
+    const requestUrl = buildRequestUrl(proto, host, slug, query)
+    const detected = await resolveLocation(requestUrl)
+    city = detected || "Los Angeles"
   }
 
   return (
-    <div className="min-h-screen">
-      <ServiceHero
-        eyebrow={service.eyebrow}
-        h1={service.h1}
-        subheadline={service.subheadline}
-        heroCta={service.heroCta}
-        image={service.image}
-        onStartQuote={handleStartQuote}
-      />
-
-      {/* Pull logos up into the transparent tail of the hero image */}
-      <TrustedBySection />
-
-      <ServiceDescriptionSection
-        heading={service.descriptionHeading}
-        description={service.description}
-        highlights={service.highlights}
-        ctaLabel={service.ctaLabel}
-        collage={service.collage}
-        collageStats={service.collageStats}
-        onStartQuote={handleStartQuote}
-      />
-
-      <TestimonialsCarousel />
-      <WhyChooseUsSection />
-      <CaseStudiesSection />
-      <ServicesGridSection />
-      <RentalCategoriesSection />
-      <FIFAPromoBanner />
-      <AboutUsSection />
-      <PromoBannersSection />
-      <EventTypesSection />
-      <CharitySection />
-      <FAQSection />
-      <ContactSpecialistBanner onStartQuote={handleStartQuote} />
-    </div>
+    <CityProvider city={city}>
+      <ServicePageClient service={service} slug={slug} />
+    </CityProvider>
   )
 }

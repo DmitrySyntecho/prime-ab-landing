@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Phone, CalendarDays, Sparkles } from "lucide-react"
 
 const PHONE = "(561) 594-4288"
-const WHATSAPP_LINK = `https://wa.me/15615944288`
+const WHATSAPP_LINK = `https://wa.me/15612202555`
 
 interface ContactSpecialistBannerProps {
   onStartQuote?: () => void

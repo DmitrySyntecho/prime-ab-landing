@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react"
 import { ArrowRight, Play, Star, Clock, CheckCircle2 } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
+import { useCity } from "@/lib/city-context"
 import MuxPlayer from "@mux/mux-player-react"
 
 interface HeroSectionProps {
@@ -53,6 +54,7 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
   const eventsCounter = useCountUp(1986, 2500)
   const ratingCounter = useCountUp(49, 2000, false)
   const { t } = useLanguage()
+  const city = useCity()
   const [videoPlaying, setVideoPlaying] = useState(false)
 
 
@@ -65,7 +67,7 @@ export function HeroSection({ onStartQuote }: HeroSectionProps) {
           <div className="order-2 lg:order-1">
             <span className="ds-pill mb-3 md:mb-6 text-[10px] md:text-[12px]">
               <span className="dot" />
-              AV Company in Los Angeles
+              AV Company in {city}
             </span>
 
             <h1 className="text-[34px] sm:text-[48px] lg:text-[72px] font-extrabold tracking-[-0.03em] leading-[1.02] text-white mt-3 mb-4 md:my-6">

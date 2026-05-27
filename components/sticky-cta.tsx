@@ -95,7 +95,7 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
       key: "whatsapp",
       label: "WhatsApp",
       icon: <WhatsAppIcon className="w-4 h-4" />,
-      href: "https://wa.me/15615944288",
+      href: "https://wa.me/15612202555",
       style: {
         background: "rgba(37,211,102,0.12)",
         color: "#25D366",

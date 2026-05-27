@@ -41,7 +41,7 @@ SUBHEADLINE: "From intimate executive meetings to large-scale conferences, we de
 
 BUTTONS:
 - [Start Your Quote →] (Green, primary CTA)
-- [☎ (786) 883-9070] (White border, phone CTA)
+- [☎ Phone CTA] (White border, phone CTA)
 ```
 
 ### 2. Trusted By Section

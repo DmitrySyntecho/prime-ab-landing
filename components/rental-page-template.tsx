@@ -9,7 +9,7 @@ import { ArrowRight, CheckCircle2, Phone } from "lucide-react"
 import { TestimonialsCarousel } from "@/components/testimonials-carousel"
 import { TrustedBySection } from "@/components/trusted-by-section"
 import { QuoteForm, type ServiceQuestion } from "@/components/quote-form"
-import { PHONE_TEL } from "@/lib/contact"
+import { PHONE_TEL, PHONE_DISPLAY } from "@/lib/contact"
 
 interface RentalPageProps {
   categoryName: string
@@ -133,7 +133,7 @@ export function RentalPageTemplate({
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-md hover:bg-white/10 transition-colors"
                 >
                   <Phone className="w-5 h-5" />
-                  (786) 883-9070
+                  {PHONE_DISPLAY}
                 </a>
               </div>
             </div>

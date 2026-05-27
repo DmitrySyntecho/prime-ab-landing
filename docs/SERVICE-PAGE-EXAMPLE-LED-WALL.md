@@ -23,7 +23,7 @@ Subheadline:
 
 CTA Buttons:
 - Primary: "Start Your Quote" → Opens quote form
-- Secondary: "(786) 883-9070" → Phone call
+- Secondary: Phone CTA
 
 Video: Vidalytics embed (service demo video)
 ```

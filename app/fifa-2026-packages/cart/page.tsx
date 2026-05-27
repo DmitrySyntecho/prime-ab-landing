@@ -26,7 +26,7 @@ import {
   Zap,
   X,
 } from "lucide-react"
-import { PHONE_TEL } from "@/lib/contact"
+import { PHONE_TEL, PHONE_DISPLAY } from "@/lib/contact"
 
 type CheckoutStep = "cart" | "details" | "payment" | "confirmation"
 
@@ -204,7 +204,7 @@ export default function CartPage() {
               }}
             >
               <Phone className="w-5 h-5" />
-              (786) 883-9070
+              {PHONE_DISPLAY}
             </a>
           </div>
         </div>
@@ -764,7 +764,7 @@ export default function CartPage() {
                   className="flex items-center gap-2 text-[14px] font-bold text-[#FFD24A] hover:underline"
                 >
                   <Phone className="w-4 h-4" />
-                  (786) 883-9070
+                  {PHONE_DISPLAY}
                 </a>
               </div>
             </div>

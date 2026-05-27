@@ -25,7 +25,7 @@ import {
   TreePine,
   Briefcase,
 } from "lucide-react"
-import { PHONE_TEL } from "@/lib/contact"
+import { PHONE_TEL, PHONE_DISPLAY } from "@/lib/contact"
 
 const packages = [
   {
@@ -464,7 +464,7 @@ export default function FIFA2026PackagesPage() {
                   className="inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-white/[0.05] border border-white/[0.14] backdrop-blur-md text-white font-bold text-[13px] uppercase tracking-[0.04em] transition-all hover:bg-white/[0.10]"
                 >
                   <Phone className="w-4 h-4" />
-                  (786) 883-9070
+                  {PHONE_DISPLAY}
                 </a>
               </div>
 
@@ -1068,7 +1068,7 @@ export default function FIFA2026PackagesPage() {
                   }}
                 >
                   <Phone className="w-4 h-4" />
-                  (786) 883-9070
+                  {PHONE_DISPLAY}
                 </a>
               </div>
               <div className="text-white/40 text-[12px] mt-7 tracking-[0.04em]">

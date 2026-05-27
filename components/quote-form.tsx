@@ -3,6 +3,7 @@
 import type React from "react"
 import { createPortal } from "react-dom"
 import { useEffect, useMemo, useRef, useState } from "react"
+import { PHONE_DISPLAY, PHONE_TEL_INTL, WHATSAPP_HREF } from "@/lib/contact"
 import { validateEmail } from "@/lib/validation/email"
 import { validateUSPhoneNumber, formatPhoneNumber } from "@/lib/validation/phone"
 import { performAntiSpamCheck, checkSubmissionTiming } from "@/lib/validation/anti-spam"
@@ -463,7 +464,7 @@ export function QuoteForm({ isOpen, onClose, serviceSlug, eventTypeId }: QuoteFo
       if (!res.ok) throw new Error("CTM error")
       setSubmitted(true)
     } catch {
-      setErrors({ submit: "Something went wrong. Please call us directly at (561) 594-4288." })
+      setErrors({ submit: `Something went wrong. Please call us directly at ${PHONE_DISPLAY}.` })
     } finally {
       setSubmitting(false)
     }
@@ -962,7 +963,7 @@ function Step6({
   )
 }
 
-const GMAPS_KEY = "AIzaSyC1yeejnqNObRr_lrePA_4-SQRpCL4_zpg"
+const GMAPS_KEY = process.env.NEXT_PUBLIC_GMAPS_KEY ?? ""
 
 function Step7({
   data,
@@ -1358,7 +1359,7 @@ function SuccessState({ onClose }: { onClose: () => void }) {
       </p>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
         <a
-          href="tel:+15615944288"
+          href={PHONE_TEL_INTL}
           className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-white font-extrabold text-[14px] tracking-[0.02em] transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center"
           style={{
             background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
@@ -1369,7 +1370,7 @@ function SuccessState({ onClose }: { onClose: () => void }) {
           Call now
         </a>
         <a
-          href="https://wa.me/15612202555"
+          href={WHATSAPP_HREF}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-white font-extrabold text-[14px] tracking-[0.02em] transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center"

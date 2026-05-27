@@ -27,6 +27,7 @@ import {
   Timer,
 } from "lucide-react"
 import { QuoteForm } from "@/components/quote-form"
+import { PHONE_TEL } from "@/lib/contact"
 
 // Consistent number formatting to avoid hydration mismatch
 function formatPrice(num: number): string {
@@ -336,7 +337,7 @@ export default function ShopProductDetailPage(props: { params: Promise<{ slug: s
               <Phone className="w-5 h-5 text-[#FFD24A]" />
               <div>
                 <div className="text-[13px] font-bold text-white">Need help? Call us</div>
-                <a href="tel:7868839070" className="text-[14px] text-[#FFD24A] font-bold hover:underline">
+                <a href={PHONE_TEL} className="text-[14px] text-[#FFD24A] font-bold hover:underline">
                   (786) 883-9070
                 </a>
               </div>

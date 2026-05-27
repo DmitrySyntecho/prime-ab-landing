@@ -4,6 +4,7 @@ import { Phone, MapPin, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact"
 
 const SERVICES = [
   { label: "Stage Rental", href: "/services/stage-rental" },
@@ -131,14 +132,14 @@ export function Footer() {
             {/* Contact info stacked */}
             <div className="flex flex-col gap-3">
               <a
-                href="tel:5615944288"
+                href={PHONE_TEL}
                 className="group flex items-center gap-2.5"
               >
                 <span className={`w-7 h-7 rounded-lg ${accentBg} flex items-center justify-center ${accentText} shrink-0`}>
                   <Phone className="w-3.5 h-3.5" strokeWidth={2.4} />
                 </span>
                 <span className={`text-[13px] font-semibold text-white/65 ${accentHover} transition-colors`}>
-                  (561) 594-4288
+                  {PHONE_DISPLAY}
                 </span>
               </a>
               <div className="flex items-center gap-2.5">

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Phone, Sparkles, MessageCircle } from "lucide-react"
 import { usePathname } from "next/navigation"
+import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_HREF } from "@/lib/contact"
 
 interface StickyCTAProps {
   visible?: boolean
@@ -95,7 +96,7 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
       key: "whatsapp",
       label: "WhatsApp",
       icon: <WhatsAppIcon className="w-4 h-4" />,
-      href: "https://wa.me/15612202555",
+      href: WHATSAPP_HREF,
       style: {
         background: "rgba(37,211,102,0.12)",
         color: "#25D366",
@@ -104,9 +105,9 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
     },
     {
       key: "call",
-      label: "(561) 594-4288",
+      label: PHONE_DISPLAY,
       icon: <Phone className="w-4 h-4" />,
-      href: "tel:5615944288",
+      href: PHONE_TEL,
       style: {
         background: "rgba(255,255,255,0.06)",
         color: "rgba(255,255,255,0.9)",

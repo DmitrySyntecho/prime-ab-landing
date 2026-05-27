@@ -8,6 +8,7 @@ import { QuoteForm } from "@/components/quote-form"
 import { StickyCTA } from "@/components/sticky-cta"
 import { TrustedBySection } from "@/components/trusted-by-section"
 import { COMPARISONS, NAV_SERVICES, NAV_RESOURCES } from "@/lib/sitemap-data"
+import { PHONE_TEL } from "@/lib/contact"
 
 export default function ComparisonPage({ params }: { params: { slug: string } }) {
   const [showQuoteForm, setShowQuoteForm] = useState(false)
@@ -70,7 +71,7 @@ export default function ComparisonPage({ params }: { params: { slug: string } })
                 Start Your Quote <ArrowRight className="w-4 h-4" />
               </button>
               <a
-                href="tel:7868839070"
+                href={PHONE_TEL}
                 className="inline-flex items-center gap-2 px-6 py-3 border border-[#16A34A] text-[#16A34A] font-semibold rounded-md hover:bg-[#16A34A]/10 transition-colors"
               >
                 <Phone className="w-4 h-4" /> (786) 883-9070

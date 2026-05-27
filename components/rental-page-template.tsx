@@ -9,6 +9,7 @@ import { ArrowRight, CheckCircle2, Phone } from "lucide-react"
 import { TestimonialsCarousel } from "@/components/testimonials-carousel"
 import { TrustedBySection } from "@/components/trusted-by-section"
 import { QuoteForm, type ServiceQuestion } from "@/components/quote-form"
+import { PHONE_TEL } from "@/lib/contact"
 
 interface RentalPageProps {
   categoryName: string
@@ -128,7 +129,7 @@ export function RentalPageTemplate({
                   <ArrowRight className="w-5 h-5" />
                 </button>
                 <a
-                  href="tel:7868839070"
+                  href={PHONE_TEL}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-md hover:bg-white/10 transition-colors"
                 >
                   <Phone className="w-5 h-5" />

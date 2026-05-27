@@ -12,7 +12,7 @@ interface ServiceHeroProps {
   onStartQuote: () => void
 }
 
-const PHONE = "(561) 594-4288"
+import { PHONE_DISPLAY as PHONE } from "@/lib/contact"
 
 // Real alpha-fade at the bottom: a CSS mask is applied to the wrapper holding
 // the photo + the left-side dim layer, so the actual pixels become transparent

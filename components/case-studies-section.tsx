@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
 import { Play, ChevronLeft, ChevronRight, ArrowRight, X } from "lucide-react"
 import MuxPlayer from "@mux/mux-player-react"
+import { PHONE_TEL } from "@/lib/contact"
 
 const MUX_TIKTOK_ID = "KfJ00XD74CFG01AI5eclQ58q439V3U004sBcuSENC2A9IU"
 const MUX_MIAMI_ID = "a1VM513vYaAw3u8rBfLB8bG4MMma2FbIFN2YGepuxiA"
@@ -309,7 +310,7 @@ export function CaseStudiesSection() {
                 <ArrowRight className="w-4 h-4" />
               </button>
               <a
-                href="tel:5615944288"
+                href={PHONE_TEL}
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-semibold text-[13px] backdrop-blur-md hover:bg-white/[0.10] transition-all"
               >
                 Talk to an Expert

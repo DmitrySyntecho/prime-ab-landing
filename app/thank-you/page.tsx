@@ -5,6 +5,7 @@ import { TestimonialsCarousel } from "@/components/testimonials-carousel"
 import { TrustedBySection } from "@/components/trusted-by-section"
 import { CheckCircle2, Phone, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { PHONE_TEL } from "@/lib/contact"
 
 export default function ThankYouPage() {
   useEffect(() => {
@@ -91,7 +92,7 @@ export default function ThankYouPage() {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="tel:7868839070"
+                  href={PHONE_TEL}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#4ADE80] text-[#0B1217] font-semibold rounded-lg hover:bg-[#3ab8c9] transition-colors"
                 >
                   <Phone className="w-5 h-5" />

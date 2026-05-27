@@ -29,6 +29,7 @@ import {
   Activity,
   Timer,
 } from "lucide-react"
+import { PHONE_TEL } from "@/lib/contact"
 
 export default function ProductDetailPage(props: { params: Promise<{ slug: string }> }) {
   const params = use(props.params)
@@ -375,7 +376,7 @@ export default function ProductDetailPage(props: { params: Promise<{ slug: strin
               <Phone className="w-5 h-5 text-[#FFD24A]" />
               <div>
                 <div className="text-[13px] font-bold text-white">Need help? Call us</div>
-                <a href="tel:7868839070" className="text-[14px] text-[#FFD24A] font-bold hover:underline">
+                <a href={PHONE_TEL} className="text-[14px] text-[#FFD24A] font-bold hover:underline">
                   (786) 883-9070
                 </a>
               </div>

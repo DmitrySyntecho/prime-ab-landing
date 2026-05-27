@@ -26,6 +26,7 @@ import {
   Zap,
   X,
 } from "lucide-react"
+import { PHONE_TEL } from "@/lib/contact"
 
 type CheckoutStep = "cart" | "details" | "payment" | "confirmation"
 
@@ -195,7 +196,7 @@ export default function CartPage() {
               Back to FIFA 2026 Packages
             </Link>
             <a
-              href="tel:7868839070"
+              href={PHONE_TEL}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-white font-bold transition-all"
               style={{
                 background: "rgba(255,255,255,0.06)",
@@ -759,7 +760,7 @@ export default function CartPage() {
               <div className="mt-6 pt-4 border-t border-white/10">
                 <div className="text-[12px] text-white/50 mb-2">Questions? Call us</div>
                 <a
-                  href="tel:7868839070"
+                  href={PHONE_TEL}
                   className="flex items-center gap-2 text-[14px] font-bold text-[#FFD24A] hover:underline"
                 >
                   <Phone className="w-4 h-4" />

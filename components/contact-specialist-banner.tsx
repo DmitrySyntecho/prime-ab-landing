@@ -173,6 +173,7 @@ export function ContactSpecialistBanner({ onStartQuote, variant = "default" }: C
               <div className="flex flex-col sm:flex-row items-center md:items-start justify-center md:justify-start gap-3 mb-6">
                 <a
                   href={PHONE_TEL}
+                  suppressHydrationWarning
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm text-white transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center sm:justify-start"
                   style={{
                     background: `linear-gradient(135deg, ${accent1} 0%, ${accent2} 100%)`,

@@ -311,6 +311,7 @@ export function CaseStudiesSection() {
               </button>
               <a
                 href={PHONE_TEL}
+                suppressHydrationWarning
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-semibold text-[13px] backdrop-blur-md hover:bg-white/[0.10] transition-all"
               >
                 Talk to an Expert

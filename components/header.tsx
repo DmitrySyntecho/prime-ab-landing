@@ -45,6 +45,25 @@ export function Header() {
     document.dispatchEvent(new CustomEvent("headerMenuToggle", { detail: { open: mobileMenuOpen } }))
   }, [mobileMenuOpen])
 
+  // CTM swap when mobile menu opens (menu is conditionally rendered, missed by initial scan)
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const swap = () => {
+      try {
+        const ctm = (window as any).__ctm
+        if (!ctm) return
+        ctm.main?.scan?.()
+        ctm.main?.runNow?.()
+      } catch (e) {}
+    }
+    const t1 = setTimeout(swap, 50)
+    const t2 = setTimeout(swap, 400)
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
+  }, [mobileMenuOpen])
+
   useEffect(() => {
     let raf = 0
     let pending = false
@@ -151,6 +170,7 @@ export function Header() {
               <div className="hidden md:flex items-center gap-2.5">
                 <a
                   href={PHONE_TEL}
+                  suppressHydrationWarning
                   className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-[10px] bg-white/[0.04] border border-white/[0.10] text-white/85 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.20] transition-all text-[13px] font-semibold"
                 >
                   <Phone className="w-3.5 h-3.5" />
@@ -219,6 +239,7 @@ export function Header() {
 
               <a
                 href={PHONE_TEL}
+                suppressHydrationWarning
                 className="flex items-center justify-center gap-2 w-full px-3 py-3 rounded-[10px] bg-white/[0.04] border border-white/[0.10] text-white/85 font-semibold text-[14px]"
               >
                 <Phone className="w-4 h-4" />

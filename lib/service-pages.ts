@@ -132,7 +132,7 @@ const BASE_PAGES: ServicePage[] = [
     eyebrow: "Full AV Production",
     subheadline:
       "One team. One contract. One producer. From pre-vis to strike.",
-    heroCta: "Talk to a Producer",
+    heroCta: "Get a Quote",
     image: "/images/services/full-av-card.webp",
     descriptionHeading: "A production partner, not a rental house.",
     description:
@@ -144,7 +144,7 @@ const BASE_PAGES: ServicePage[] = [
       "Brand-safe execution: color, logo, stage, and exec coaching",
       "Transparent pricing, line-item quotes, no surprise fees",
     ],
-    ctaLabel: "Talk to a Producer",
+    ctaLabel: "Get a Quote",
     collage: [
       "/images/services/av-01.webp",
       "/images/services/av-02.webp",

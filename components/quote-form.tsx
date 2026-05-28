@@ -1270,12 +1270,12 @@ function Step9({
       <p className="text-white/45 text-[11px]">
         Privacy Policy:{" "}
         <a
-          href="/privacy-policy"
+          href="/legal/privacy"
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#4A90E2] underline hover:text-[#6AAFF2] transition-colors"
         >
-          primelineav.com/privacy-policy
+          primelineav.com/legal/privacy
         </a>
       </p>
 
@@ -1337,6 +1337,29 @@ function formatTime(t: string) {
 /* ============ SUCCESS ============ */
 
 function SuccessState({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    const swap = () => {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const ctm = (window as any).__ctm
+        if (!ctm) return
+        ctm.main?.scan?.()
+        ctm.main?.runNow?.()
+      } catch (e) {
+        console.warn("[CTM] swap failed", e)
+      }
+    }
+
+    const t1 = setTimeout(swap, 50)
+    const t2 = setTimeout(swap, 400)
+    const t3 = setTimeout(swap, 1200)
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+    }
+  }, [])
+
   return (
     <div className="text-center py-8">
       <div
@@ -1362,6 +1385,7 @@ function SuccessState({ onClose }: { onClose: () => void }) {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
         <a
           href={PHONE_TEL_INTL}
+          suppressHydrationWarning
           className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-white font-extrabold text-[14px] tracking-[0.02em] transition-all hover:-translate-y-0.5 w-full sm:w-auto justify-center"
           style={{
             background: "linear-gradient(135deg, #FF2D6F 0%, #FF5E3A 100%)",
@@ -2005,6 +2029,7 @@ function PhoneInput({
 }) {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState("")
+  const [popupStyle, setPopupStyle] = useState<{ top: number; left: number; width: number } | null>(null)
   const country = countries.find((c) => c.code === countryCode) || countries[0]
   const filtered = useMemo(
     () =>
@@ -2016,12 +2041,14 @@ function PhoneInput({
       ),
     [search],
   )
-  const ref = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const popupRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!open) return
     const onClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+      if (triggerRef.current?.contains(e.target as Node)) return
+      if (!popupRef.current?.contains(e.target as Node)) setOpen(false)
     }
     document.addEventListener("mousedown", onClickOutside)
     return () => document.removeEventListener("mousedown", onClickOutside)
@@ -2034,14 +2061,29 @@ function PhoneInput({
 
   const focusBorder = `${accentColor}80`
 
+  const openDropdown = () => {
+    if (open) { setOpen(false); return }
+    const rect = triggerRef.current?.getBoundingClientRect()
+    if (!rect) return
+    const POPUP_H = 320
+    const spaceBelow = window.innerHeight - rect.bottom - 8
+    const spaceAbove = rect.top - 8
+    const openBelow = spaceBelow >= spaceAbove
+    const rawTop = openBelow ? rect.bottom + 4 : rect.top - POPUP_H - 4
+    const top = Math.max(8, Math.min(rawTop, window.innerHeight - POPUP_H - 8))
+    setPopupStyle({ top, left: rect.left, width: Math.max(rect.width + 200, 280) })
+    setOpen(true)
+  }
+
   return (
-    <div ref={ref}>
+    <div>
       <Label icon={AccentIcon as React.ComponentType<{ className?: string; strokeWidth?: number }>} secured={secured}>{label}</Label>
-      <div className="flex gap-2 relative">
+      <div className="flex gap-2">
         {/* Country selector — flag SVG + dial */}
         <button
+          ref={triggerRef}
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={openDropdown}
           className="flex items-center gap-2 px-3 py-3 rounded-xl bg-white/[0.04] border border-white/[0.10] text-white text-[14px] hover:bg-white/[0.06] transition-colors flex-shrink-0"
         >
           <CountryFlag code={country.code} size={22} />
@@ -2070,15 +2112,23 @@ function PhoneInput({
           onBlur={(e) => (e.currentTarget.style.borderColor = error ? "rgba(239, 68, 68, 0.5)" : "rgba(255,255,255,0.10)")}
         />
 
-        {/* Country dropdown */}
-        {open && (
+        {/* Country dropdown — portal to avoid stacking context clipping */}
+        {open && popupStyle && typeof document !== "undefined" && createPortal(
           <div
-            className="absolute top-full left-0 mt-2 w-full max-w-md max-h-[280px] overflow-y-auto rounded-xl border border-white/[0.10] z-30"
+            ref={popupRef}
             style={{
+              position: "fixed",
+              top: popupStyle.top,
+              left: popupStyle.left,
+              width: popupStyle.width,
+              zIndex: 9999,
               background: "rgba(10,8,24,0.98)",
               backdropFilter: "blur(20px)",
               boxShadow: "0 24px 48px -12px rgba(0,0,0,0.7)",
+              maxHeight: 280,
+              overflowY: "auto",
             }}
+            className="rounded-xl border border-white/[0.10]"
           >
             <div className="sticky top-0 z-10 p-2 bg-[rgba(10,8,24,0.98)] border-b border-white/[0.08]">
               <div className="relative">
@@ -2116,7 +2166,8 @@ function PhoneInput({
                 <div className="px-3 py-4 text-center text-white/45 text-[12px]">No countries found</div>
               )}
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </div>
       {error ? (

@@ -101,6 +101,7 @@ export function ServiceHero({ eyebrow, h1, subheadline, heroCta, image, onStartQ
 
             <a
               href={`tel:${PHONE.replace(/\D/g, "")}`}
+              suppressHydrationWarning
               className="inline-flex items-center justify-center gap-2.5 px-6 md:px-7 py-3.5 md:py-4 rounded-xl border border-white/15 bg-white/[0.04] backdrop-blur-md text-white font-bold text-[14px] md:text-[15px] hover:bg-white/[0.08] transition-all"
             >
               <Phone className="w-4 h-4" />

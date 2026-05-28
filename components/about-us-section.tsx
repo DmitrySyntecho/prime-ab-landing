@@ -59,6 +59,7 @@ export function AboutUsSection() {
               </button>
               <a
                 href={PHONE_TEL}
+                suppressHydrationWarning
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-semibold backdrop-blur-md transition-all hover:bg-white/[0.10]"
               >
                 <Phone className="w-4 h-4" />

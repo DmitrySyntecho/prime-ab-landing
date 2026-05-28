@@ -162,7 +162,7 @@ export default function PrivacyPage() {
             </p>
             <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/10">
               <p className="text-white font-semibold">Prime Line AV</p>
-              <p className="text-white/70">Email: privacy@primelineav.com</p>
+              <p className="text-white/70">Email: info@primelineav.com</p>
               <p className="text-white/70">Fort Lauderdale, FL 33312</p>
             </div>
           </div>

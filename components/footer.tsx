@@ -1,5 +1,6 @@
 "use client"
 
+import type React from "react"
 import { Phone, MapPin, Clock, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -20,7 +21,7 @@ const SERVICES = [
 const COMPANY = [
   { label: "Why Us", href: "/#why-us" },
   { label: "About", href: "/#about" },
-  { label: "Portfolio", href: "/portfolio#our-recent-work" },
+  { label: "Portfolio", href: "/#our-work" },
   { label: "Industry", href: "/#events" },
   { label: "FIFA 2026", href: "/fifa-2026-packages" },
 ]
@@ -45,8 +46,18 @@ export function Footer() {
     document.dispatchEvent(new CustomEvent("openQuoteForm"))
   }
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const hash = href.split("#")[1]
+    if (!hash) return
+    const el = document.getElementById(hash)
+    if (el) {
+      e.preventDefault()
+      el.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
-    <footer className={`relative overflow-hidden border-t ${accentBorder}`}>
+    <footer className={`relative overflow-hidden border-t pb-24 md:pb-0 ${accentBorder}`}>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -121,6 +132,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className={`text-[13px] font-medium text-white/55 ${accentHover} transition-colors`}
                   >
                     {item.label}
@@ -133,6 +145,7 @@ export function Footer() {
             <div className="flex flex-col gap-3">
               <a
                 href={PHONE_TEL}
+                suppressHydrationWarning
                 className="group flex items-center gap-2.5"
               >
                 <span className={`w-7 h-7 rounded-lg ${accentBg} flex items-center justify-center ${accentText} shrink-0`}>
@@ -194,7 +207,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="pt-7 flex flex-col sm:flex-row items-center justify-between gap-2 text-white/35 text-[12px]">
-          <p>© {new Date().getFullYear()} Prime Line AV. All rights reserved.</p>
+          <p suppressHydrationWarning>© {new Date().getFullYear()} Prime Line AV. All rights reserved.</p>
           <p>When everything is just perfect.</p>
         </div>
       </div>

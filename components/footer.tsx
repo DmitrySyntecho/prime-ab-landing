@@ -151,7 +151,7 @@ export function Footer() {
                 <span className={`w-7 h-7 rounded-lg ${accentBg} flex items-center justify-center ${accentText} shrink-0`}>
                   <Phone className="w-3.5 h-3.5" strokeWidth={2.4} />
                 </span>
-                <span className={`text-[13px] font-semibold text-white/65 ${accentHover} transition-colors`}>
+                <span suppressHydrationWarning className={`text-[13px] font-semibold text-white/65 ${accentHover} transition-colors`}>
                   {PHONE_DISPLAY}
                 </span>
               </a>

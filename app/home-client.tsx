@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { HeroSection } from "@/components/hero-section"
 import { TrustedBySection } from "@/components/trusted-by-section"
 import { TestimonialsCarousel } from "@/components/testimonials-carousel"
@@ -19,6 +20,18 @@ export function HomeClient() {
   const handleStartQuote = () => {
     document.dispatchEvent(new CustomEvent("openQuoteForm"))
   }
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (!hash) return
+    const tryScroll = () => {
+      const el = document.getElementById(hash)
+      if (el) el.scrollIntoView({ behavior: "smooth" })
+    }
+    tryScroll()
+    const t = setTimeout(tryScroll, 150)
+    return () => clearTimeout(t)
+  }, [])
 
   return (
     <div className="min-h-screen">

@@ -174,7 +174,7 @@ export function Header() {
                   className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-[10px] bg-white/[0.04] border border-white/[0.10] text-white/85 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.20] transition-all text-[13px] font-semibold"
                 >
                   <Phone className="w-3.5 h-3.5" />
-                  <span className="hidden xl:inline">{PHONE_DISPLAY}</span>
+                  <span suppressHydrationWarning className="hidden xl:inline">{PHONE_DISPLAY}</span>
                 </a>
 
                 <button

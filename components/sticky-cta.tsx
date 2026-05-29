@@ -134,6 +134,7 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
           const delay = `${i * 40}ms`
           const inner = (
             <span
+              suppressHydrationWarning
               className="flex items-center gap-2.5 px-5 py-3 rounded-full text-[13px] font-bold whitespace-nowrap backdrop-blur-xl transition-all duration-200 hover:scale-105 active:scale-95"
               style={{ ...action.style, width: "200px", justifyContent: "flex-start" }}
             >
@@ -144,7 +145,7 @@ export function StickyCTA({ onStartQuote }: StickyCTAProps) {
           return (
             <div key={action.key} style={{ transitionDelay: open ? delay : "0ms" }}>
               {action.href ? (
-                <a href={action.href} target={action.key === "whatsapp" ? "_blank" : undefined} rel="noopener noreferrer">
+                <a suppressHydrationWarning href={action.href} target={action.key === "whatsapp" ? "_blank" : undefined} rel="noopener noreferrer">
                   {inner}
                 </a>
               ) : (

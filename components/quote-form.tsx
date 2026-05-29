@@ -456,6 +456,8 @@ export function QuoteForm({ isOpen, onClose, serviceSlug, eventTypeId }: QuoteFo
       if (data.message) payload.append("custom_fields[notes]", data.message)
       if (data.promoCode) payload.append("custom_fields[promo_code]", data.promoCode)
       if (data.hasWhatsapp) payload.append("custom_fields[whatsapp]", data.phone)
+      payload.append("custom_fields[opt_in_call]", data.optInCall ? "Yes" : "No")
+      payload.append("custom_fields[opt_in_sms]", data.optInSms ? "Yes" : "No")
       payload.append("custom_fields[embed_url]", window.location.href)
       const ctmId =
         (typeof window !== "undefined" && (window as any).__ctm?.config?.sid) ||

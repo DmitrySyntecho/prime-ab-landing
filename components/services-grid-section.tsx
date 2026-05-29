@@ -7,70 +7,71 @@ import { useCity } from "@/lib/city-context"
 
 export function ServicesGridSection() {
   const city = useCity()
+  const citySlug = city === "Miami" ? "-miami" : city === "Orlando" ? "-orlando" : ""
   const services = [
     {
       icon: Box,
       title: "Stage Rental",
       description: `Portable, truss-built, or mobile stages — engineered, certified, and crewed for any event in ${city}.`,
       image: "/images/services/stage-rental-card.webp",
-      href: "/services/stage-rental",
-      darkening: "heavy", // significant darkening
+      href: `/services/stage-rental${citySlug}`,
+      darkening: "heavy",
     },
     {
       icon: Volume2,
       title: "Sound System Rental",
       description: "L-Acoustics and d&b audio systems, tuned to your room with A1 + A2 engineers on every show.",
       image: "/images/services/sound-system-card.webp",
-      href: "/services/sound-system-rental",
-      darkening: "medium", // 15% more
+      href: `/services/sound-system-rental${citySlug}`,
+      darkening: "medium",
     },
     {
       icon: Lightbulb,
       title: "Lighting Equipment Rental",
       description: "Designed, pre-vis'd, and programmed by a senior LD — moving heads, washes, and GrandMA3 console.",
       image: "/images/services/lighting-rental-card.webp",
-      href: "/services/lighting-rental",
-      darkening: "medium", // 15% more
+      href: `/services/lighting-rental${citySlug}`,
+      darkening: "medium",
     },
     {
       icon: Layers,
       title: "Full AV Production",
       description: "One team, one contract, one producer — sound, lighting, video, LED, and stage from pre-vis to strike.",
       image: "/images/services/full-av-card.webp",
-      href: "/services/full-av-production",
-      darkening: "extra", // 30% more
+      href: `/services/full-av-production${citySlug}`,
+      darkening: "extra",
     },
     {
       icon: Tv,
       title: "TV Rental",
       description: "Confidence monitors to video walls — 32\" to 98\", indoor and outdoor, with on-site video tech.",
       image: "/images/services/tv-rental-card.webp",
-      href: "/services/tv-rental",
-      darkening: "medium", // 15% more
+      href: `/services/tv-rental${citySlug}`,
+      darkening: "medium",
     },
     {
       icon: Projector,
       title: "Projector & Screen Rental",
       description: "Boardroom to ballroom — 6 ft to 40+ ft screens, 4K laser projectors, and projection mapping.",
       image: "/images/services/projector-screen.webp",
-      href: "/services/projector-screen-rental",
-      darkening: "medium", // 15% more
+      href: `/services/projector-screen-rental${citySlug}`,
+      darkening: "medium",
     },
     {
       icon: Columns,
       title: "Pipe & Drape Rental",
       description: `IFR-certified drape in any height and color, installed and struck by our crew across ${city}.`,
       image: "/images/services/pipe-drape-card.webp",
-      href: "/services/pipe-drape-rental",
-      darkening: "medium", // 15% more
+      href: `/services/pipe-drape-rental${citySlug}`,
+      darkening: "medium",
     },
     {
       icon: Monitor,
       title: "LED Screen Rental",
       description: "Indoor, outdoor, and curved LED walls — same-day quote, senior LED tech and rigger on every job.",
       image: "/images/services/led-screen-card.webp",
-      href: "/services/led-screen-rental",
-      darkening: "medium", // 15% more
+      href: `/services/led-screen-rental${citySlug}`,
+      darkening: "medium",
     },
   ]
 

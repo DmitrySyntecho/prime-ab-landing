@@ -15,6 +15,8 @@ import { ServicesGridSection } from "@/components/services-grid-section"
 import { FAQSection } from "@/components/faq-section"
 import { FIFAPromoBanner } from "@/components/fifa-promo-banner"
 import { ContactSpecialistBanner } from "@/components/contact-specialist-banner"
+import { useCity } from "@/lib/city-context"
+import { applyCity } from "@/lib/service-pages"
 import type { ServicePage } from "@/lib/service-pages"
 
 interface ServicePageClientProps {
@@ -23,6 +25,18 @@ interface ServicePageClientProps {
 }
 
 export function ServicePageClient({ service, slug }: ServicePageClientProps) {
+  const city = useCity()
+  const s = city !== "Los Angeles"
+    ? {
+        ...service,
+        h1: applyCity(service.h1, city),
+        subheadline: applyCity(service.subheadline, city),
+        descriptionHeading: applyCity(service.descriptionHeading, city),
+        description: applyCity(service.description, city),
+        highlights: service.highlights.map((h) => applyCity(h, city)),
+      }
+    : service
+
   const handleStartQuote = () => {
     document.dispatchEvent(new CustomEvent("openQuoteForm", { detail: { serviceSlug: slug } }))
   }
@@ -30,23 +44,23 @@ export function ServicePageClient({ service, slug }: ServicePageClientProps) {
   return (
     <div className="min-h-screen">
       <ServiceHero
-        eyebrow={service.eyebrow}
-        h1={service.h1}
-        subheadline={service.subheadline}
-        heroCta={service.heroCta}
-        image={service.image}
+        eyebrow={s.eyebrow}
+        h1={s.h1}
+        subheadline={s.subheadline}
+        heroCta={s.heroCta}
+        image={s.image}
         onStartQuote={handleStartQuote}
       />
 
       <TrustedBySection />
 
       <ServiceDescriptionSection
-        heading={service.descriptionHeading}
-        description={service.description}
-        highlights={service.highlights}
-        ctaLabel={service.ctaLabel}
-        collage={service.collage}
-        collageStats={service.collageStats}
+        heading={s.descriptionHeading}
+        description={s.description}
+        highlights={s.highlights}
+        ctaLabel={s.ctaLabel}
+        collage={s.collage}
+        collageStats={s.collageStats}
         onStartQuote={handleStartQuote}
       />
 

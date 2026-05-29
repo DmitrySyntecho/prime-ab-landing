@@ -64,7 +64,7 @@ const features = [
   { icon: Volume2, title: "Pro Sound Systems", desc: "Feel every goal with powerful, broadcast-grade audio." },
   { icon: Lightbulb, title: "Event Lighting", desc: "Team colours, ambient lighting, celebratory effects." },
   { icon: Users, title: "Full Tech Support", desc: "Crew handles setup, operation, and strike — every match." },
-  { icon: MapPin, title: "Los Angeles Based", desc: "Fast delivery throughout LA and Southern California." },
+  { icon: MapPin, title: "Nationwide Coverage", desc: "Fast delivery coast-to-coast." },
   { icon: Star, title: "Premium Equipment", desc: "Professionally maintained gear, reliable performance." },
 ]
 

@@ -292,20 +292,22 @@ const BASE_PAGES: ServicePage[] = [
   },
 ];
 
+export function applyCity(text: string, city: string): string {
+  return text
+    .replace(/Los Angeles/g, city)
+    .replace(/\bin LA\b/g, `in ${city}`)
+    .replace(/\bacross LA\b/g, `across ${city}`)
+}
+
 function cityVariant(base: ServicePage, city: string, citySlug: string): ServicePage {
-  const replaceCity = (text: string) =>
-    text
-      .replace(/Los Angeles/g, city)
-      .replace(/\bin LA\b/g, `in ${city}`)
-      .replace(/\bacross LA\b/g, `across ${city}`)
   return {
     ...base,
     slug: `${base.slug}-${citySlug}`,
-    h1: replaceCity(base.h1),
-    subheadline: replaceCity(base.subheadline),
-    description: replaceCity(base.description),
-    descriptionHeading: replaceCity(base.descriptionHeading),
-    highlights: base.highlights.map(replaceCity),
+    h1: applyCity(base.h1, city),
+    subheadline: applyCity(base.subheadline, city),
+    description: applyCity(base.description, city),
+    descriptionHeading: applyCity(base.descriptionHeading, city),
+    highlights: base.highlights.map((h) => applyCity(h, city)),
   }
 }
 

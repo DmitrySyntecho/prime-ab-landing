@@ -14,7 +14,7 @@ import { GlobalCTA } from "@/components/global-cta"
 
 const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-manrope",
   display: "swap",
 })
@@ -91,6 +91,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${manrope.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        {/* Warm up the Mux video hosts so the hero reel connects faster on play */}
+        <link rel="preconnect" href="https://image.mux.com" crossOrigin="" />
+        <link rel="preconnect" href="https://stream.mux.com" crossOrigin="" />
+        <link rel="preconnect" href="https://player.mux.com" crossOrigin="" />
+      </head>
       <body className="font-sans antialiased text-[#e6f4ee]">
         <BackgroundFX />
         <div className="page-content">

@@ -193,20 +193,73 @@ export function Header() {
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
 
-            {/* Phone contact button (<md): chat icon → contact menu like the desktop FAB */}
-            <button
-              data-mobile-contact
-              className="md:hidden relative text-white p-2.5 rounded-xl"
-              style={{
-                background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
-                boxShadow: ctaShadow,
-              }}
-              onClick={() => setContactOpen((v) => !v)}
-              aria-label={contactOpen ? "Close contact menu" : "Contact us"}
-              aria-expanded={contactOpen}
-            >
-              {contactOpen ? <X className="w-5 h-5" /> : <MessageCircle className="w-5 h-5" />}
-            </button>
+            {/* Phone contact button + popover (<md): chat icon → contact menu.
+                The popover is absolutely positioned so it overlays content
+                instead of pushing the page down. */}
+            <div data-mobile-contact className="md:hidden relative">
+              <button
+                className="relative text-white p-2.5 rounded-xl"
+                style={{
+                  background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
+                  boxShadow: ctaShadow,
+                }}
+                onClick={() => setContactOpen((v) => !v)}
+                aria-label={contactOpen ? "Close contact menu" : "Contact us"}
+                aria-expanded={contactOpen}
+              >
+                {contactOpen ? <X className="w-5 h-5" /> : <MessageCircle className="w-5 h-5" />}
+              </button>
+
+              {contactOpen && (
+                <div
+                  className="absolute right-0 top-full mt-2 z-50 w-[240px] p-2 rounded-2xl border border-white/10 backdrop-blur-2xl"
+                  style={{
+                    background: "rgba(6, 16, 24, 0.96)",
+                    boxShadow: "0 18px 40px -12px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <div className="flex flex-col gap-2">
+                    <button
+                      onClick={openQuote}
+                      className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl text-white font-bold text-[13px]"
+                      style={{
+                        background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
+                        boxShadow: ctaShadow,
+                      }}
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      Request a Quote
+                    </button>
+                    <a
+                      href="https://wa.me/17869338488"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl font-bold text-[13px]"
+                      style={{
+                        background: "rgba(37,211,102,0.12)",
+                        color: "#25D366",
+                        border: "1px solid rgba(37,211,102,0.25)",
+                      }}
+                    >
+                      <WhatsAppIcon className="w-4 h-4" />
+                      WhatsApp
+                    </a>
+                    <a
+                      href="tel:7869338488"
+                      className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl font-bold text-[13px]"
+                      style={{
+                        background: "rgba(255,255,255,0.06)",
+                        color: "rgba(255,255,255,0.9)",
+                        border: "1px solid rgba(255,255,255,0.12)",
+                      }}
+                    >
+                      <Phone className="w-4 h-4" />
+                      (786) 933-8488
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Tablet nav dropdown (md–lg) — phones use the bottom dock + contact popover */}
@@ -261,57 +314,6 @@ export function Header() {
             </nav>
           )}
 
-          {/* Phone contact popover (<md) — mirrors the desktop chat FAB menu */}
-          {contactOpen && (
-            <div
-              data-mobile-contact
-              className="md:hidden mt-3 ml-auto w-[230px] p-2 rounded-2xl border border-white/10 backdrop-blur-2xl"
-              style={{
-                background: "rgba(6, 16, 24, 0.94)",
-                boxShadow: "0 18px 40px -12px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06)",
-              }}
-            >
-              <div className="flex flex-col gap-2">
-                <button
-                  onClick={openQuote}
-                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl text-white font-bold text-[13px]"
-                  style={{
-                    background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
-                    boxShadow: ctaShadow,
-                  }}
-                >
-                  <Sparkles className="w-4 h-4" />
-                  Request a Quote
-                </button>
-                <a
-                  href="https://wa.me/17869338488"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl font-bold text-[13px]"
-                  style={{
-                    background: "rgba(37,211,102,0.12)",
-                    color: "#25D366",
-                    border: "1px solid rgba(37,211,102,0.25)",
-                  }}
-                >
-                  <WhatsAppIcon className="w-4 h-4" />
-                  WhatsApp
-                </a>
-                <a
-                  href="tel:7869338488"
-                  className="flex items-center gap-2.5 w-full px-4 py-3 rounded-xl font-bold text-[13px]"
-                  style={{
-                    background: "rgba(255,255,255,0.06)",
-                    color: "rgba(255,255,255,0.9)",
-                    border: "1px solid rgba(255,255,255,0.12)",
-                  }}
-                >
-                  <Phone className="w-4 h-4" />
-                  (786) 933-8488
-                </a>
-              </div>
-            </div>
-          )}
         </div>
       </header>
     </div>

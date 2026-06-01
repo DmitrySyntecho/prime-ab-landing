@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { QuoteForm } from "./quote-form"
 import { StickyCTA } from "./sticky-cta"
-import { MobileBottomNav } from "./mobile-bottom-nav"
+import { MobileActionDock } from "./mobile-action-dock"
 
 export function GlobalCTA() {
   const [open, setOpen] = useState(false)
@@ -20,8 +20,8 @@ export function GlobalCTA() {
       <div className="hidden md:block">
         <StickyCTA onStartQuote={() => setOpen(true)} />
       </div>
-      {/* Mobile bottom navigation (<md) */}
-      <MobileBottomNav onStartQuote={() => setOpen(true)} />
+      {/* Mobile bottom-right action dock (<md) */}
+      <MobileActionDock onStartQuote={() => setOpen(true)} />
       <QuoteForm isOpen={open} onClose={() => setOpen(false)} />
     </>
   )

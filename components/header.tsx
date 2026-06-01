@@ -27,6 +27,8 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [contactOpen, setContactOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
+  // Past the top: used to collapse the promo banner on desktop (header itself stays)
+  const [scrolled, setScrolled] = useState(false)
   const lastY = useRef(0)
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pathname = usePathname()
@@ -41,6 +43,8 @@ export function Header() {
       pending = false
       const y = window.scrollY
       const delta = y - lastY.current
+
+      setScrolled(y > 24)
 
       if (y < 80) {
         setHidden(false)
@@ -88,23 +92,35 @@ export function Header() {
     document.dispatchEvent(new CustomEvent("openQuoteForm"))
   }
 
-  // Close the mobile contact popover when tapping outside of it
+  // Close the mobile contact popover when tapping outside of it.
+  // Use "click" (not pointerdown) so the opening tap can never self-close it,
+  // and the [data-mobile-contact] guard keeps taps on the button/popover open.
   useEffect(() => {
     if (!contactOpen) return
-    const onPointer = (e: PointerEvent) => {
+    const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       if (!target.closest("[data-mobile-contact]")) setContactOpen(false)
     }
-    document.addEventListener("pointerdown", onPointer)
-    return () => document.removeEventListener("pointerdown", onPointer)
+    document.addEventListener("click", onClick)
+    return () => document.removeEventListener("click", onClick)
   }, [contactOpen])
 
   return (
     <div
-      className="sticky top-0 z-50 transition-transform duration-500 ease-out will-change-transform"
-      style={{ transform: hidden ? "translateY(-110%)" : "translateY(0)" }}
+      className={`sticky top-0 z-50 transition-transform duration-500 ease-out will-change-transform ${
+        hidden ? "max-md:-translate-y-[110%]" : ""
+      }`}
     >
-      <PromoTopBanner />
+      {/* Promo banner collapses on scroll. On desktop (≥md) the header bar below
+          stays pinned (the container never translates); on phones (<md) the whole
+          thing hides on scroll-down as before. */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-out ${
+          scrolled ? "md:max-h-0 md:opacity-0 md:pointer-events-none" : "md:max-h-24 md:opacity-100"
+        }`}
+      >
+        <PromoTopBanner />
+      </div>
 
       <header className="py-3">
         <div className="max-w-7xl mx-auto px-4">

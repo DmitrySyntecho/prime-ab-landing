@@ -4,7 +4,9 @@ import { useEffect, useState, useRef } from "react"
 import { ArrowRight, Play, Star, Clock, CheckCircle2 } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { useCity } from "@/lib/city-context"
-import MuxPlayer from "@mux/mux-player-react"
+import dynamic from "next/dynamic"
+
+const MuxPlayer = dynamic(() => import("@mux/mux-player-react"), { ssr: false })
 
 interface HeroSectionProps {
   onStartQuote: () => void

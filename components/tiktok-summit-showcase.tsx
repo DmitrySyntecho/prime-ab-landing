@@ -3,7 +3,9 @@
 import { useState } from "react"
 import Image from "next/image"
 import { Sparkles, Play } from "lucide-react"
-import MuxPlayer from "@mux/mux-player-react"
+import dynamic from "next/dynamic"
+
+const MuxPlayer = dynamic(() => import("@mux/mux-player-react"), { ssr: false })
 
 // Images with Next.js Image optimization
 const images = {

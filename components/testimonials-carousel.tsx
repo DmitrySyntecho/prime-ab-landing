@@ -3,7 +3,9 @@
 import { useState, useRef } from "react"
 import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 import Image from "next/image"
-import MuxPlayer from "@mux/mux-player-react"
+import dynamic from "next/dynamic"
+
+const MuxPlayer = dynamic(() => import("@mux/mux-player-react"), { ssr: false })
 
 interface Testimonial {
   name: string

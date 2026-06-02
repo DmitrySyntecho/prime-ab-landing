@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Phone, MessageCircle, X, ArrowRight, Sparkles } from "lucide-react"
+import { Phone, X, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -47,6 +47,8 @@ export function Header() {
   useEffect(() => {
     if (hidden) setMobileMenuOpen(false)
   }, [hidden])
+
+
 
   // Notify bottom nav when burger menu opens/closes
   useEffect(() => {
@@ -138,20 +140,20 @@ export function Header() {
         <header className="py-3">
           <div className="max-w-7xl mx-auto px-4">
             <div
-              className="flex items-center justify-between gap-4 px-5 py-3 rounded-2xl border border-white/10 backdrop-blur-2xl backdrop-saturate-150"
+              className="flex items-center justify-between gap-2 lg:gap-4 px-3 lg:px-5 py-3 rounded-2xl border border-white/10 backdrop-blur-2xl backdrop-saturate-150"
               style={{
                 background: headerBg,
                 boxShadow:
                   "0 12px 36px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)",
               }}
             >
-              <Link href="/" className="flex items-center shrink-0">
+              <Link href="/" className="lg:shrink-0 flex items-center w-[40%] lg:w-auto">
                 <Image
                   src="/images/prime-line-av-logo-dark-bg.svg"
                   alt="Prime Line AV"
                   width={210}
                   height={38}
-                  className="h-9 w-auto"
+                  className="h-5 lg:h-9 w-auto max-w-full"
                 />
               </Link>
 
@@ -199,14 +201,42 @@ export function Header() {
                 </button>
               </div>
 
-              {/* Mobile menu button — chat-style icon, opens the desktop-like nav menu */}
-              <button
-                className="lg:hidden text-white p-2 rounded-lg bg-white/[0.04] border border-white/[0.08]"
-                onClick={toggleMenu}
-                aria-label="Menu"
+              {/* Mobile: Call Now button — direct call, CSS animation cycles between text and number */}
+              <a
+                href={PHONE_TEL}
+                suppressHydrationWarning
+                className="md:hidden w-[60%] max-w-[160px] relative inline-flex items-center justify-center overflow-hidden py-3 rounded-xl text-white font-extrabold text-[14px] tracking-[0.01em] transition-all active:scale-95"
+                style={{
+                  background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
+                  boxShadow: ctaShadow,
+                }}
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <MessageCircle className="w-5 h-5" />}
-              </button>
+                <style href="hdr-call-btn" precedence="default">{`
+                  @keyframes hdrBtnText {
+                    0%, 40%  { transform: translateY(0);     opacity: 1; }
+                    49%      { transform: translateY(-100%);  opacity: 0; }
+                    50%      { transform: translateY(100%);   opacity: 0; }
+                    88%      { transform: translateY(100%);   opacity: 0; }
+                    100%     { transform: translateY(0);      opacity: 1; }
+                  }
+                  @keyframes hdrBtnPhone {
+                    0%, 40%  { transform: translateY(100%);  opacity: 0; }
+                    49%      { transform: translateY(0);      opacity: 1; }
+                    88%      { transform: translateY(0);      opacity: 1; }
+                    100%     { transform: translateY(-100%);  opacity: 0; }
+                  }
+                `}</style>
+                <span className="absolute inset-0 flex items-center justify-center text-[17px]"
+                  style={{ animation: "hdrBtnText 7s ease-in-out infinite" }}>
+                  Call Now
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center gap-2 whitespace-nowrap"
+                  style={{ opacity: 0, transform: "translateY(100%)", animation: "hdrBtnPhone 7s ease-in-out infinite" }}>
+                  <Phone className="w-4 h-4 shrink-0" />
+                  <span suppressHydrationWarning>{PHONE_DISPLAY}</span>
+                </span>
+                <span className="invisible">Call Now</span>
+              </a>
             </div>
           </div>
         </header>
@@ -226,24 +256,6 @@ export function Header() {
             }}
           >
             <div className="flex flex-col gap-2">
-              {/* Request a Quote */}
-              <button
-                onClick={openQuote}
-                className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl text-left ${ctaTextColor} font-bold transition-transform active:scale-[0.99]`}
-                style={{
-                  background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
-                  boxShadow: ctaShadow,
-                }}
-              >
-                <span className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(255,255,255,0.18)" }}>
-                  <Sparkles className="w-5 h-5" />
-                </span>
-                <span className="flex flex-col">
-                  <span className="text-[15px] leading-tight">Request a Quote</span>
-                  <span className="text-[12px] font-medium text-white/80">Get a tailored proposal</span>
-                </span>
-              </button>
-
               {/* WhatsApp */}
               <a
                 href={WHATSAPP_HREF}

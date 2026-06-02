@@ -12,6 +12,7 @@ import { Footer } from "@/components/footer"
 import { BackgroundFX } from "@/components/background-fx"
 import { GlobalCTA } from "@/components/global-cta"
 import { CTMScanner } from "@/components/ctm-scanner"
+import { CallNowPopup } from "@/components/call-now-popup"
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -110,6 +111,7 @@ export default function RootLayout({
               <Footer />
               <GlobalCTA />
               <CTMScanner />
+              <CallNowPopup />
             </CartProvider>
           </LanguageProvider>
         </div>

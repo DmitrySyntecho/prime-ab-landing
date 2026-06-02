@@ -35,7 +35,15 @@ export function GlobalCTA() {
       </div>
       {/* Mobile bottom navigation (<md) */}
       <MobileBottomNav onStartQuote={openClean} />
-      <QuoteForm isOpen={open} onClose={() => setOpen(false)} serviceSlug={serviceSlug} eventTypeId={eventTypeId} />
+      <QuoteForm
+        isOpen={open}
+        onClose={() => {
+          setOpen(false)
+          document.dispatchEvent(new CustomEvent("quoteFormClosed"))
+        }}
+        serviceSlug={serviceSlug}
+        eventTypeId={eventTypeId}
+      />
     </>
   )
 }

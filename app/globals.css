@@ -117,6 +117,7 @@ html, body {
 }
 
 .animate-fadeIn { animation: fadeIn 0.3s ease-out forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
 .animate-scroll-left { animation: scroll-left 76s linear infinite; }
 .animate-scroll-left:hover { animation-play-state: paused; }
 .animate-scroll-right { animation: scroll-right 84s linear infinite; }

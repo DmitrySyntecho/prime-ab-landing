@@ -4,3 +4,12 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[plugins]]
+  package = "netlify-plugin-lighthouse"
+
+  [[plugins.inputs.audits]]
+    path = "/"
+
+  [[plugins.inputs.audits]]
+    path = "/services/full-av-production"

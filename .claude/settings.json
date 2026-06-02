@@ -15,7 +15,9 @@
       "Bash(curl -s \"https://geo2.service.syntecho.com/health\" -H \"x-sec-code: bae9Eih0Eilac&ee\")",
       "Bash(curl -s \"https://geo2.service.syntecho.com/locations\" -H \"x-sec-code: bae9Eih0Eilac&ee\")",
       "Bash(Get-ChildItem -Path \"e:\\\\Syntecho\\\\prime-site\\\\public\" -Recurse -Include \"*.jpg\",\"*.jpeg\",\"*.png\",\"*.webp\",\"*.avif\")",
-      "Bash(Sort-Object FullName)"
+      "Bash(Sort-Object FullName)",
+      "Bash(findstr \"version\\\\|name\\\\|description\")",
+      "Bash(findstr /i \"lighthouse\" \"E:\\\\Syntecho\\\\v0-luxury-home-staging\\\\package.json\")"
     ]
   }
 }

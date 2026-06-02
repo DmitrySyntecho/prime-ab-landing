@@ -46,6 +46,15 @@ export function MobileBottomNav({ onStartQuote }: MobileBottomNavProps) {
   const isFifa = pathname?.startsWith("/fifa-2026-packages")
   const [servicesOpen, setServicesOpen] = useState(false)
   const [contactOpen, setContactOpen] = useState(false)
+  const [pastHero, setPastHero] = useState(false)
+
+  // Show nav only after scrolling past hero section
+  useEffect(() => {
+    const check = () => setPastHero(window.scrollY > window.innerHeight * 0.75)
+    check()
+    window.addEventListener("scroll", check, { passive: true })
+    return () => window.removeEventListener("scroll", check)
+  }, [])
 
   // Close both panels when navigating
   useEffect(() => {
@@ -93,8 +102,13 @@ export function MobileBottomNav({ onStartQuote }: MobileBottomNavProps) {
   return (
     <div
       ref={wrapRef}
-      className="md:hidden fixed left-3 right-3 z-50"
-      style={{ bottom: "max(env(safe-area-inset-bottom), 12px)" }}
+      className="md:hidden fixed left-3 right-3 z-50 transition-all duration-300 ease-out"
+      style={{
+        bottom: "max(env(safe-area-inset-bottom), 12px)",
+        opacity: pastHero ? 1 : 0,
+        transform: pastHero ? "translateY(0)" : "translateY(16px)",
+        pointerEvents: pastHero ? "auto" : "none",
+      }}
     >
       <div className="relative flex items-stretch gap-2.5">
         {/* Contact panel — floats above the buttons, aligned to the right */}

@@ -127,7 +127,7 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
   }
 
   return (
-    <section id="top" className="relative pt-6 pb-12 md:pt-10 md:pb-16 overflow-hidden">
+    <section id="top" className="relative pt-6 pb-2 md:pt-10 md:pb-4 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4">
         {/* Scarcity banner */}
         <div

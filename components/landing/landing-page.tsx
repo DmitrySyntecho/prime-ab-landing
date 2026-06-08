@@ -39,8 +39,9 @@ export function LandingPage({ data }: { data: LandingCity }) {
   return (
     <div className="min-h-screen">
       <LandingHero data={data} onQuote={scrollToQuote} />
-      <LandingWhyUs />
+      {/* Company logos at the bottom of the first block (original carousel design) */}
       <TrustedBySection />
+      <LandingWhyUs />
       <TestimonialsCarousel />
       <WhyChooseUsSection />
       <CaseStudiesSection />

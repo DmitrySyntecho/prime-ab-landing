@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { ArrowRight, Play, Box, UserCheck, Clock, BadgeCheck, Sparkles } from "lucide-react"
-import { LandingLogoStrip } from "./landing-logo-strip"
 import type { LandingCity } from "@/lib/landing-cities"
 
 interface LandingHeroProps {
@@ -130,6 +129,24 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
   return (
     <section id="top" className="relative pt-6 pb-12 md:pt-10 md:pb-16 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4">
+        {/* Scarcity banner */}
+        <div
+          className="mb-6 md:mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full"
+          style={{
+            background: "linear-gradient(90deg, rgba(255,45,111,0.16), rgba(255,94,58,0.16))",
+            border: "1px solid rgba(255,45,111,0.30)",
+          }}
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inset-0 rounded-full bg-[#FF2D6F] animate-ping opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF2D6F]" />
+          </span>
+          <span className="text-[12px] md:text-[13px] font-bold text-white">
+            <span className="text-[#FF8FAA] uppercase tracking-[0.06em] mr-1">World Cup 2026:</span>
+            June–July dates filling fast. Book your crew now.
+          </span>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 md:gap-10 lg:gap-14 items-center">
           {/* LEFT — compact text */}
           <div className="order-2 lg:order-1">
@@ -191,9 +208,6 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
             <HeroCollage />
           </div>
         </div>
-
-        {/* Company logos — bottom of the first screen */}
-        <LandingLogoStrip />
       </div>
     </section>
   )

@@ -2,8 +2,6 @@
 
 import { useParams } from "next/navigation"
 import { CheckCircle2, FileSearch, Sparkles, CalendarCheck, ArrowRight } from "lucide-react"
-import { LandingTopBar } from "@/components/landing/landing-topbar"
-import { LandingFooter } from "@/components/landing/landing-footer"
 import { WhatsAppIcon } from "@/components/landing/whatsapp-icon"
 import { whatsappLink, WHATSAPP_VENUE_MESSAGE } from "@/components/landing/contact"
 import { getLandingCity } from "@/lib/landing-cities"
@@ -21,8 +19,6 @@ export default function ThankYouPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <LandingTopBar />
-
       <section className="relative flex-1 py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <div className="w-20 h-20 rounded-full bg-[#FF2D6F]/15 border border-[#FF2D6F]/30 flex items-center justify-center mx-auto mb-7" style={{ boxShadow: "0 0 40px rgba(255,45,111,0.35)" }}>
@@ -77,8 +73,6 @@ export default function ThankYouPage() {
           </a>
         </div>
       </section>
-
-      <LandingFooter />
     </div>
   )
 }

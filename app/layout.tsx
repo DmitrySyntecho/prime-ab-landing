@@ -7,12 +7,8 @@ import "./globals.css"
 import { Manrope, JetBrains_Mono } from "next/font/google"
 import { LanguageProvider } from "@/lib/i18n/language-context"
 import { CartProvider } from "@/lib/cart-context"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
 import { BackgroundFX } from "@/components/background-fx"
-import { GlobalCTA } from "@/components/global-cta"
-import { CTMScanner } from "@/components/ctm-scanner"
-import { CallNowPopup } from "@/components/call-now-popup"
+import { SiteChrome } from "@/components/site-chrome"
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -106,12 +102,7 @@ export default function RootLayout({
         <div className="page-content">
           <LanguageProvider>
             <CartProvider>
-              <Header />
-              <main>{children}</main>
-              <Footer />
-              <GlobalCTA />
-              <CTMScanner />
-              <CallNowPopup />
+              <SiteChrome>{children}</SiteChrome>
             </CartProvider>
           </LanguageProvider>
         </div>

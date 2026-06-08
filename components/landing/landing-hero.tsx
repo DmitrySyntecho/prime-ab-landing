@@ -129,24 +129,6 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
   return (
     <section id="top" className="relative pt-6 pb-2 md:pt-10 md:pb-4 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4">
-        {/* Scarcity banner */}
-        <div
-          className="mb-6 md:mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full"
-          style={{
-            background: "linear-gradient(90deg, rgba(255,45,111,0.16), rgba(255,94,58,0.16))",
-            border: "1px solid rgba(255,45,111,0.30)",
-          }}
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inset-0 rounded-full bg-[#FF2D6F] animate-ping opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF2D6F]" />
-          </span>
-          <span className="text-[12px] md:text-[13px] font-bold text-white">
-            <span className="text-[#FF8FAA] uppercase tracking-[0.06em] mr-1">World Cup 2026:</span>
-            June–July dates filling fast. Book your crew now.
-          </span>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 md:gap-10 lg:gap-14 items-center">
           {/* LEFT — compact text */}
           <div className="order-2 lg:order-1">
@@ -175,14 +157,19 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
               ))}
             </ul>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-3">
+            <div className="flex flex-col sm:flex-row gap-3 mb-4">
               <button
                 onClick={onQuote}
-                className="group inline-flex items-center justify-center gap-2.5 px-6 md:px-7 py-3.5 md:py-4 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white font-extrabold text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
+                className="group inline-flex flex-col items-center justify-center gap-0.5 px-6 md:px-8 py-3 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white transition-all hover:-translate-y-0.5"
                 style={{ boxShadow: "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)" }}
               >
-                Get Your Custom Quote
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                <span className="inline-flex items-center gap-2.5 font-extrabold text-[15px] tracking-[0.01em]">
+                  Get Your Custom Quote
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </span>
+                <span className="text-[11px] font-semibold text-white/85 tracking-[0.01em]">
+                  Delivered in under 4 hours — not days.
+                </span>
               </button>
 
               <button
@@ -193,8 +180,6 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
                 Watch How We Work
               </button>
             </div>
-
-            <p className="text-white/55 text-[13px] mb-2.5">Delivered in under 4 hours — not days.</p>
 
             <div className="inline-flex items-start gap-2 px-3 py-2 rounded-[10px] bg-[#FFD24A]/[0.08] border border-[#FFD24A]/25 max-w-[520px]">
               <span className="text-[#FFD24A] text-[12px] md:text-[13px] leading-snug font-semibold">

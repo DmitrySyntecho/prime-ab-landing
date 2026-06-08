@@ -31,17 +31,17 @@ export function LandingWhyUs() {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-7 md:gap-10 items-center">
-          {/* LEFT — Video */}
+        <div className="grid lg:grid-cols-2 gap-7 md:gap-10 items-stretch">
+          {/* LEFT — Video (matches the right cards grid height on desktop) */}
           <div
-            className="relative rounded-[20px] overflow-hidden border border-white/10 backdrop-blur-2xl"
+            className="relative rounded-[20px] overflow-hidden border border-white/10 backdrop-blur-2xl flex lg:h-full"
             style={{
               background: "linear-gradient(135deg, rgba(255, 45, 111,0.10), rgba(255, 210, 74,0.05))",
               boxShadow: "0 40px 80px -20px rgba(0,0,0,0.7)",
             }}
           >
-            <div className="m-3 md:m-4 rounded-[14px] overflow-hidden bg-black border border-white/[0.08]">
-              <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+            <div className="m-3 md:m-4 rounded-[14px] overflow-hidden bg-black border border-white/[0.08] flex-1">
+              <div className="relative w-full aspect-video lg:aspect-auto lg:h-full">
                 {playing ? (
                   <iframe
                     src={`https://player.mux.com/${SHOWREEL_MUX_ID}?autoplay=1`}

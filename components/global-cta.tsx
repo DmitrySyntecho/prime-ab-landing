@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { QuoteForm } from "./quote-form"
+import { LandingQuoteForm } from "./landing/landing-quote-form"
 import { StickyCTA } from "./sticky-cta"
 import { MobileBottomNav } from "./mobile-bottom-nav"
 
@@ -35,14 +35,12 @@ export function GlobalCTA() {
       </div>
       {/* Mobile bottom navigation (<md) */}
       <MobileBottomNav onStartQuote={openClean} />
-      <QuoteForm
+      <LandingQuoteForm
         isOpen={open}
         onClose={() => {
           setOpen(false)
           document.dispatchEvent(new CustomEvent("quoteFormClosed"))
         }}
-        serviceSlug={serviceSlug}
-        eventTypeId={eventTypeId}
       />
     </>
   )

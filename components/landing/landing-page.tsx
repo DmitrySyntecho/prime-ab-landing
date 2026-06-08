@@ -2,7 +2,6 @@
 
 import { LandingHero } from "./landing-hero"
 import { LandingWhyUs } from "./landing-why-us"
-import { LandingQuoteForm } from "./landing-quote-form"
 import { TrustedBySection } from "@/components/trusted-by-section"
 import { TestimonialsCarousel } from "@/components/testimonials-carousel"
 import { AboutUsSection } from "@/components/about-us-section"
@@ -32,20 +31,15 @@ export function LandingPage({ data }: { data: LandingCity }) {
     document.dispatchEvent(new CustomEvent("openQuoteForm"))
   }
 
-  const scrollToQuote = () => {
-    document.getElementById("quote")?.scrollIntoView({ behavior: "smooth", block: "start" })
-  }
-
   return (
     <div className="min-h-screen">
-      <LandingHero data={data} onQuote={scrollToQuote} />
+      <LandingHero data={data} onQuote={handleStartQuote} />
       {/* Company logos at the bottom of the first block (original carousel design) */}
       <TrustedBySection />
       <LandingWhyUs />
       <TestimonialsCarousel />
       <WhyChooseUsSection />
       <CaseStudiesSection />
-      <LandingQuoteForm data={data} />
       <ServicesGridSection />
       <RentalCategoriesSection />
       <FIFAPromoBanner />

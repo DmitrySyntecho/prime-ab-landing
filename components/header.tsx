@@ -6,6 +6,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { PromoTopBanner } from "./promo-top-banner"
+import { WorldCupCTA } from "./landing/world-cup-cta"
 import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_HREF } from "@/lib/contact"
 
 function WhatsAppGlyph({ className }: { className?: string }) {
@@ -42,6 +43,7 @@ export function Header() {
   const headerRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const isFifa = pathname?.startsWith("/fifa-2026-packages")
+  const isLp = pathname?.startsWith("/lp")
 
   // Close menu when header hides
   useEffect(() => {
@@ -188,17 +190,21 @@ export function Header() {
                   <span suppressHydrationWarning className="hidden xl:inline">{PHONE_DISPLAY}</span>
                 </a>
 
-                <button
-                  onClick={openQuote}
-                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-[10px] ${ctaTextColor} font-extrabold text-[13px] tracking-[0.02em] transition-all hover:-translate-y-0.5`}
-                  style={{
-                    background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
-                    boxShadow: ctaShadow,
-                  }}
-                >
-                  Get a Quote
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                {isLp ? (
+                  <WorldCupCTA onClick={openQuote} />
+                ) : (
+                  <button
+                    onClick={openQuote}
+                    className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-[10px] ${ctaTextColor} font-extrabold text-[13px] tracking-[0.02em] transition-all hover:-translate-y-0.5`}
+                    style={{
+                      background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
+                      boxShadow: ctaShadow,
+                    }}
+                  >
+                    Get a Quote
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
 
               {/* Mobile: Call Now button — direct call, CSS animation cycles between text and number */}

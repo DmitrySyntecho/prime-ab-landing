@@ -1,10 +1,11 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { validateEmail } from "@/lib/validation/email"
 import {
+  X,
   ArrowRight,
   ArrowLeft,
   Check,
@@ -25,10 +26,13 @@ import {
   Phone,
   MapPin,
 } from "lucide-react"
-import type { LandingCity } from "@/lib/landing-cities"
 
 interface LandingQuoteFormProps {
-  data: LandingCity
+  isOpen: boolean
+  onClose: () => void
+  /** city slug used for the thank-you redirect */
+  citySlug?: string
+  defaultCity?: string
 }
 
 const eventTypes = [
@@ -90,12 +94,24 @@ const empty: FormData = {
   phone: "",
 }
 
-export function LandingQuoteForm({ data }: LandingQuoteFormProps) {
+export function LandingQuoteForm({ isOpen, onClose, citySlug = "los-angeles", defaultCity = "Los Angeles" }: LandingQuoteFormProps) {
   const router = useRouter()
   const [step, setStep] = useState(1)
-  const [form, setForm] = useState<FormData>({ ...empty, venue: data.city })
+  const [form, setForm] = useState<FormData>({ ...empty, venue: defaultCity })
   const [emailError, setEmailError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    if (!isOpen) return
+    document.body.style.overflow = "hidden"
+    document.body.classList.add("modal-open")
+    return () => {
+      document.body.style.overflow = ""
+      document.body.classList.remove("modal-open")
+    }
+  }, [isOpen])
+
+  if (!isOpen) return null
 
   const set = <K extends keyof FormData>(k: K, v: FormData[K]) => setForm((f) => ({ ...f, [k]: v }))
 
@@ -115,7 +131,7 @@ export function LandingQuoteForm({ data }: LandingQuoteFormProps) {
   const next = () => {
     if (step < TOTAL_STEPS && canContinue()) setStep(step + 1)
   }
-  const back = () => step > 1 && setStep(step - 1)
+  const back = () => (step > 1 ? setStep(step - 1) : onClose())
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -127,11 +143,12 @@ export function LandingQuoteForm({ data }: LandingQuoteFormProps) {
     setEmailError(null)
     setSubmitting(true)
     try {
-      sessionStorage.setItem("plav_quote", JSON.stringify({ ...form, city: data.city }))
+      sessionStorage.setItem("plav_quote", JSON.stringify({ ...form, city: defaultCity }))
     } catch {
       /* ignore storage failures */
     }
-    router.push(`/lp/${data.slug}/thank-you`)
+    onClose()
+    router.push(`/lp/${citySlug}/thank-you`)
   }
 
   const microcopy =
@@ -142,53 +159,71 @@ export function LandingQuoteForm({ data }: LandingQuoteFormProps) {
         : "Where should we send your custom quote and 3D render?"
 
   return (
-    <section id="quote" className="relative py-16 md:py-24 scroll-mt-4">
-      <div className="max-w-3xl mx-auto px-4">
-        <div className="text-center mb-7 md:mb-9">
-          <span className="ds-pill mb-4">
-            <span className="dot" />
-            Free Custom Quote
-          </span>
-          <h2 className="text-[28px] md:text-[40px] font-extrabold tracking-[-0.025em] leading-[1.1] text-white">
-            Build Your <span className="ds-accent-text">Quote</span>
-          </h2>
-        </div>
-
+    <div
+      className="z-[100] flex items-center justify-center p-2 sm:p-4 md:p-6"
+      style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100dvh", background: "rgba(3,7,10,0.92)" }}
+    >
+      <div
+        className="relative w-full max-w-2xl overflow-y-auto rounded-2xl sm:rounded-[24px] border border-[#FF2D6F]/22"
+        style={{
+          maxHeight: "calc(100dvh - 32px)",
+          background: "linear-gradient(135deg, rgba(10,8,24,0.96) 0%, rgba(20,12,30,0.96) 100%)",
+          boxShadow: "0 40px 80px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06)",
+        }}
+      >
         <div
-          className="relative rounded-[22px] border border-[#FF2D6F]/20 p-5 sm:p-7 md:p-9 overflow-hidden"
+          className="absolute inset-0 pointer-events-none rounded-2xl sm:rounded-[24px]"
           style={{
-            background: "linear-gradient(135deg, rgba(10,8,24,0.92) 0%, rgba(20,12,30,0.92) 100%)",
-            boxShadow: "0 40px 80px -20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",
+            background:
+              "radial-gradient(ellipse 60% 50% at 30% 0%, rgba(255,45,111,0.10) 0%, transparent 70%), radial-gradient(ellipse 60% 60% at 70% 100%, rgba(255,210,74,0.06) 0%, transparent 70%)",
           }}
+          aria-hidden
+        />
+
+        <button
+          onClick={onClose}
+          className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-[10px] bg-white/[0.05] border border-white/[0.10] hover:bg-white/[0.10] hover:border-white/[0.20] flex items-center justify-center text-white/65 hover:text-white transition-all"
+          aria-label="Close"
         >
-          {/* Progress */}
-          <div className="mb-5 sm:mb-7">
-            <div className="flex items-center justify-between mb-2.5">
-              <span className="text-white/55 text-[12px] sm:text-[13px] font-semibold tracking-[0.04em]">
-                Step {step} of {TOTAL_STEPS}
-              </span>
-              <span className="text-white/45 text-[12px]">
-                {step === 1 ? "The Basics" : step === 2 ? "The Details" : "Send the Quote"}
-              </span>
-            </div>
-            <div className="h-1.5 w-full rounded-full bg-white/[0.06] overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-500"
-                style={{
-                  width: `${(step / TOTAL_STEPS) * 100}%`,
-                  background: "linear-gradient(90deg, #FF2D6F 0%, #FF5E3A 50%, #FFD24A 100%)",
-                  boxShadow: "0 0 16px rgba(255,45,111,0.55)",
-                }}
-              />
-            </div>
+          <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+        </button>
+
+        <div className="relative z-[1] p-4 sm:p-7 md:p-9">
+          {/* Header */}
+          <div className="mb-3.5 sm:mb-5">
+            <span
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-[9px] sm:text-[11px] font-bold tracking-[0.14em] sm:tracking-[0.16em] uppercase mb-2 sm:mb-3"
+              style={{ background: "rgba(255,45,111,0.10)", border: "1px solid rgba(255,45,111,0.22)", color: "#FF2D6F" }}
+            >
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 animate-pulse-ds" />
+              Free Custom Quote
+            </span>
+            <h2 className="text-[18px] sm:text-[24px] md:text-[28px] font-extrabold tracking-[-0.025em] leading-[1.2] text-white pr-8">
+              {step === 1 ? "The Basics" : step === 2 ? "The Details" : "Where to send the quote"}
+            </h2>
+            <p className="text-white/50 text-[11px] sm:text-[12px] mt-1 sm:mt-1.5">
+              Step {step} of {TOTAL_STEPS}
+            </p>
           </div>
 
-          <p className="text-white/70 text-[14px] sm:text-[15px] mb-5 leading-snug">{microcopy}</p>
+          {/* Progress */}
+          <div className="mb-4 sm:mb-6 h-[3px] sm:h-1 w-full rounded-full bg-white/[0.06] overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-500"
+              style={{
+                width: `${(step / TOTAL_STEPS) * 100}%`,
+                background: "linear-gradient(90deg, #FF2D6F 0%, #FF5E3A 50%, #FFD24A 100%)",
+                boxShadow: "0 0 16px rgba(255,45,111,0.55)",
+              }}
+            />
+          </div>
+
+          <p className="text-white/70 text-[13px] sm:text-[14px] mb-4 leading-snug">{microcopy}</p>
 
           <form onSubmit={handleSubmit} className="animate-fadeIn">
             {/* STEP 1 */}
             {step === 1 && (
-              <div className="space-y-6">
+              <div className="space-y-5">
                 <div>
                   <FieldLabel>Event Type</FieldLabel>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
@@ -215,7 +250,7 @@ export function LandingQuoteForm({ data }: LandingQuoteFormProps) {
 
             {/* STEP 2 */}
             {step === 2 && (
-              <div className="space-y-6">
+              <div className="space-y-5">
                 <div>
                   <FieldLabel>Services</FieldLabel>
                   <p className="text-white/45 text-[12px] mb-2.5 -mt-1">Pick all that apply — multi-select.</p>
@@ -273,10 +308,10 @@ export function LandingQuoteForm({ data }: LandingQuoteFormProps) {
             )}
 
             {/* Footer */}
-            <div className="mt-7 flex items-center justify-between gap-3">
-              <button type="button" onClick={back} disabled={step === 1} className="inline-flex items-center gap-2 px-4 sm:px-5 py-3 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white/85 font-semibold text-[13px] backdrop-blur-md hover:bg-white/[0.08] transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+            <div className="mt-6 flex items-center justify-between gap-3">
+              <button type="button" onClick={back} className="inline-flex items-center gap-2 px-4 sm:px-5 py-3 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white/85 font-semibold text-[13px] backdrop-blur-md hover:bg-white/[0.08] transition-all">
                 <ArrowLeft className="w-4 h-4" />
-                Back
+                {step === 1 ? "Cancel" : "Back"}
               </button>
 
               {step < TOTAL_STEPS ? (
@@ -305,7 +340,7 @@ export function LandingQuoteForm({ data }: LandingQuoteFormProps) {
           </form>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 

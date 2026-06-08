@@ -1,13 +1,15 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { ArrowRight, Play, Box, UserCheck, Clock, BadgeCheck } from "lucide-react"
 import type { LandingCity } from "@/lib/landing-cities"
 
 interface LandingHeroProps {
   data: LandingCity
-  onQuote: () => void
 }
+
+const openQuote = () => document.dispatchEvent(new CustomEvent("openQuoteForm"))
 
 const bullets = [
   { icon: Box, text: "Free 3D render — see your event before you commit" },
@@ -16,31 +18,112 @@ const bullets = [
   { icon: BadgeCheck, text: "Trusted by Apple, Nike, TikTok and 500+ brands" },
 ]
 
-/* APS-style 4-photo collage. Real production photography from past LA events. */
-const collage = [
-  { src: "/images/case-studies/tiktok-2.webp", alt: "Main stage with LED walls and lighting design" },
-  { src: "/images/case-studies/amagi-5.webp", alt: "Massive LED video wall with gradient branding" },
-  { src: "/images/case-studies/lca-1.webp", alt: "Gala stage with full lighting design" },
-  { src: "/images/case-studies/miami-1.webp", alt: "Corporate summit main stage with LED wall" },
+/* 3-slot collage — each slot cross-fades through its own pair, so 6 real LA
+   production photos cycle through the three frames (like the charity block). */
+const slots: { images: { src: string; alt: string }[]; raised?: boolean }[] = [
+  {
+    images: [
+      { src: "/images/case-studies/tiktok-2.webp", alt: "Main stage with LED walls and lighting" },
+      { src: "/images/case-studies/miami-1.webp", alt: "Corporate summit main stage with LED wall" },
+    ],
+  },
+  {
+    raised: true,
+    images: [
+      { src: "/images/case-studies/amagi-5.webp", alt: "Massive LED video wall with gradient branding" },
+      { src: "/images/case-studies/ramp-1.webp", alt: "Brand activation production setup" },
+    ],
+  },
+  {
+    images: [
+      { src: "/images/case-studies/lca-1.webp", alt: "Gala stage with full lighting design" },
+      { src: "/images/case-studies/tiktok-5.webp", alt: "L-Acoustics line array and lighting rig" },
+    ],
+  },
 ]
 
-export function LandingHero({ data, onQuote }: LandingHeroProps) {
+function RotatingFrame({
+  images,
+  raised,
+  delay,
+  priority,
+}: {
+  images: { src: string; alt: string }[]
+  raised?: boolean
+  delay: number
+  priority?: boolean
+}) {
+  const [active, setActive] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => setActive((a) => (a + 1) % images.length), 4200)
+    return () => clearInterval(id)
+  }, [images.length])
+
+  return (
+    <div
+      className="relative aspect-[3/4] rounded-[14px] overflow-hidden border border-white/[0.10]"
+      style={{
+        boxShadow: "0 18px 40px -16px rgba(0,0,0,0.6)",
+        transform: raised ? "translateY(-16px)" : "translateY(0)",
+        animationDelay: `${delay}ms`,
+      }}
+    >
+      {images.map((img, i) => (
+        <Image
+          key={img.src}
+          src={img.src}
+          alt={img.alt}
+          fill
+          sizes="(max-width: 1024px) 30vw, 220px"
+          priority={priority && i === 0}
+          className="object-cover transition-opacity duration-[1200ms] ease-in-out"
+          style={{ opacity: i === active ? 1 : 0 }}
+        />
+      ))}
+      <div
+        className="absolute inset-0 mix-blend-overlay opacity-25 pointer-events-none"
+        style={{ background: "linear-gradient(180deg, rgba(255,45,111,0), rgba(255,45,111,0.45))" }}
+      />
+    </div>
+  )
+}
+
+export function LandingHero({ data }: LandingHeroProps) {
   const scrollToVideo = () => {
-    document.getElementById("why-us")?.scrollIntoView({ behavior: "smooth", block: "start" })
+    document.getElementById("lp-video")?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 
   return (
-    <section id="top" className="relative pt-6 pb-12 md:pt-10 md:pb-20 overflow-hidden">
+    <section id="top" className="relative pt-6 pb-12 md:pt-16 md:pb-24 lg:pt-20 lg:pb-28 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] gap-7 md:gap-10 lg:gap-14 items-center">
+        {/* Scarcity banner */}
+        <div
+          className="mb-6 md:mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full"
+          style={{
+            background: "linear-gradient(90deg, rgba(255,45,111,0.16), rgba(255,94,58,0.16))",
+            border: "1px solid rgba(255,45,111,0.30)",
+          }}
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inset-0 rounded-full bg-[#FF2D6F] animate-ping opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF2D6F]" />
+          </span>
+          <span className="text-[12px] md:text-[13px] font-bold text-white">
+            <span className="text-[#FF8FAA] uppercase tracking-[0.06em] mr-1">World Cup 2026:</span>
+            June–July dates filling fast. Book your crew now.
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-7 md:gap-10 lg:gap-14 items-center">
           {/* LEFT — compact text */}
           <div className="order-2 lg:order-1">
-            <span className="ds-pill mb-4 md:mb-5 text-[10px] md:text-[12px]">
+            <span className="ds-pill mb-3 md:mb-6 text-[10px] md:text-[12px]">
               <span className="dot" />
               AV Production in {data.city}
             </span>
 
-            <h1 className="text-[32px] sm:text-[44px] lg:text-[58px] font-extrabold tracking-[-0.03em] leading-[1.04] text-white mb-3 md:mb-4">
+            <h1 className="text-[32px] sm:text-[46px] lg:text-[64px] font-extrabold tracking-[-0.03em] leading-[1.04] text-white mt-3 mb-4 md:mb-5">
               {data.keyword} in <span className="ds-accent-text">{data.city}</span>
             </h1>
 
@@ -48,7 +131,6 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
               Your event runs flawlessly — or we make it right. One team, one contract, zero surprises.
             </p>
 
-            {/* Bullets */}
             <ul className="space-y-2.5 mb-6 md:mb-8 max-w-[560px]">
               {bullets.map(({ icon: Icon, text }) => (
                 <li key={text} className="flex items-start gap-3">
@@ -60,14 +142,11 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
               ))}
             </ul>
 
-            {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 mb-3">
               <button
-                onClick={onQuote}
+                onClick={openQuote}
                 className="group inline-flex items-center justify-center gap-2.5 px-6 md:px-7 py-3.5 md:py-4 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white font-extrabold text-[15px] tracking-[0.01em] transition-all hover:-translate-y-0.5"
-                style={{
-                  boxShadow: "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)",
-                }}
+                style={{ boxShadow: "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)" }}
               >
                 Get Your Custom Quote
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -82,9 +161,7 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
               </button>
             </div>
 
-            <p className="text-white/55 text-[13px] mb-2.5">
-              Delivered in under 4 hours — not days.
-            </p>
+            <p className="text-white/55 text-[13px] mb-2.5">Delivered in under 4 hours — not days.</p>
 
             <div className="inline-flex items-start gap-2 px-3 py-2 rounded-[10px] bg-[#FFD24A]/[0.08] border border-[#FFD24A]/25 max-w-[540px]">
               <span className="text-[#FFD24A] text-[12px] md:text-[13px] leading-snug font-semibold">
@@ -93,39 +170,23 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
             </div>
           </div>
 
-          {/* RIGHT — 4-photo collage in a glass frame */}
-          <div className="order-1 lg:order-2 relative">
-            <div
-              className="relative rounded-[24px] overflow-hidden border border-white/10 backdrop-blur-2xl p-3 md:p-4"
-              style={{
-                background: "linear-gradient(135deg, rgba(255, 45, 111,0.10), rgba(255, 210, 74,0.05))",
-                boxShadow: "0 40px 80px -20px rgba(0,0,0,0.7)",
-              }}
-            >
-              <div className="grid grid-cols-2 gap-2.5 md:gap-3">
-                {collage.map((img, i) => (
-                  <div
-                    key={img.src}
-                    className={`relative overflow-hidden rounded-[14px] border border-white/[0.08] bg-black ${
-                      i === 0 ? "aspect-[4/5]" : i === 1 ? "aspect-square" : i === 2 ? "aspect-square" : "aspect-[4/5]"
-                    } ${i === 1 ? "mt-0 md:mt-6" : ""} ${i === 2 ? "-mt-0 md:-mt-6" : ""}`}
-                  >
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 45vw, 24vw"
-                      priority={i < 2}
-                    />
-                  </div>
-                ))}
-              </div>
+          {/* RIGHT — rotating 3-of-6 collage */}
+          <div className="order-1 lg:order-2 relative pt-4 pb-6">
+            <div className="grid grid-cols-3 gap-2.5 md:gap-3">
+              {slots.map((slot, i) => (
+                <RotatingFrame
+                  key={i}
+                  images={slot.images}
+                  raised={slot.raised}
+                  delay={i * 700}
+                  priority={i < 2}
+                />
+              ))}
             </div>
 
             {/* Floating trust card */}
             <div
-              className="hidden md:flex absolute -bottom-5 -left-5 z-20 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#FF2D6F]/20 backdrop-blur-2xl animate-float-y"
+              className="hidden md:flex absolute -bottom-3 -left-4 z-20 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#FF2D6F]/20 backdrop-blur-2xl animate-float-y"
               style={{
                 background: "rgba(8,18,26,0.78)",
                 boxShadow: "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)",

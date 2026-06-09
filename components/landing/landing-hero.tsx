@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { ArrowRight, Play, Box, UserCheck, Clock, BadgeCheck, Sparkles, Gift } from "lucide-react"
+import { VideoOverlay } from "./video-overlay"
 
 export interface HeroConfig {
   /** Full H1 text, e.g. "Full-Service AV Production in Los Angeles" */
@@ -217,11 +218,11 @@ function GiftLine({ fullWidth }: { fullWidth?: boolean }) {
 }
 
 export function LandingHero({ hero, onQuote }: LandingHeroProps) {
-  const scrollToVideo = () => {
-    document.getElementById("why-us")?.scrollIntoView({ behavior: "smooth", block: "start" })
-  }
+  const [videoOpen, setVideoOpen] = useState(false)
+  const openVideo = () => setVideoOpen(true)
 
   return (
+    <>
     <section id="top" className="relative pt-6 pb-2 md:pt-10 md:pb-4 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4">
         {/* MOBILE order (centered): heading + subheadline → images → buttons + render line → bullets */}
@@ -229,7 +230,7 @@ export function LandingHero({ hero, onQuote }: LandingHeroProps) {
           <Heading hero={hero} centered />
           <HeroCollage images={hero.collage} />
           <div className="flex flex-col gap-4">
-            <CtaButtons onQuote={onQuote} onWatch={scrollToVideo} centered />
+            <CtaButtons onQuote={onQuote} onWatch={openVideo} centered />
             <div>
               <GiftLine />
             </div>
@@ -247,7 +248,7 @@ export function LandingHero({ hero, onQuote }: LandingHeroProps) {
             {/* Buttons + gift line share a buttons-width wrapper so the "Includes…"
                 plate matches the combined length of the two buttons. */}
             <div className="mt-6 w-fit">
-              <CtaButtons onQuote={onQuote} onWatch={scrollToVideo} />
+              <CtaButtons onQuote={onQuote} onWatch={openVideo} />
               <div className="mt-4 w-0 min-w-full">
                 <GiftLine fullWidth />
               </div>
@@ -259,5 +260,8 @@ export function LandingHero({ hero, onQuote }: LandingHeroProps) {
         </div>
       </div>
     </section>
+
+    <VideoOverlay open={videoOpen} onClose={() => setVideoOpen(false)} />
+    </>
   )
 }

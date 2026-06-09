@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { ArrowRight, Play, Box, UserCheck, Clock, BadgeCheck, Sparkles } from "lucide-react"
+import { ArrowRight, Play, Box, UserCheck, Clock, BadgeCheck, Sparkles, Gift } from "lucide-react"
 
 export interface HeroConfig {
   /** Full H1 text, e.g. "Full-Service AV Production in Los Angeles" */
@@ -201,9 +201,14 @@ function CtaButtons({ onQuote, onWatch, centered }: { onQuote: () => void; onWat
   )
 }
 
-function GiftLine() {
+function GiftLine({ fullWidth }: { fullWidth?: boolean }) {
   return (
-    <div className="inline-flex items-start gap-2 px-3 py-2 rounded-[10px] bg-[#FFD24A]/[0.08] border border-[#FFD24A]/25 max-w-[520px]">
+    <div
+      className={`items-center gap-2 px-3 py-2 rounded-[10px] bg-[#FFD24A]/[0.08] border border-[#FFD24A]/25 ${
+        fullWidth ? "flex w-full" : "inline-flex max-w-[520px]"
+      }`}
+    >
+      <Gift className="w-4 h-4 text-[#FFD24A] flex-shrink-0" strokeWidth={2.2} />
       <span className="text-[#FFD24A] text-[12px] md:text-[13px] leading-snug font-semibold">
         Includes: Free 3D render + site survey + dedicated Technical Director
       </span>
@@ -239,11 +244,13 @@ export function LandingHero({ hero, onQuote }: LandingHeroProps) {
             <div className="mt-6">
               <Bullets />
             </div>
-            <div className="mt-6">
+            {/* Buttons + gift line share a buttons-width wrapper so the "Includes…"
+                plate matches the combined length of the two buttons. */}
+            <div className="mt-6 w-fit">
               <CtaButtons onQuote={onQuote} onWatch={scrollToVideo} />
-            </div>
-            <div className="mt-4">
-              <GiftLine />
+              <div className="mt-4 w-0 min-w-full">
+                <GiftLine fullWidth />
+              </div>
             </div>
           </div>
           <div className="relative">

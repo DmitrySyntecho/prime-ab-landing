@@ -15,6 +15,7 @@ import {
   Projector,
   Columns,
   X,
+  ArrowRight,
 } from "lucide-react"
 import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_HREF } from "@/lib/contact"
 
@@ -236,16 +237,19 @@ export function MobileBottomNav({ onStartQuote }: MobileBottomNavProps) {
           {servicesOpen ? <X className="w-6 h-6" strokeWidth={2.2} /> : <Layers className="w-6 h-6" strokeWidth={2.2} />}
         </button>
 
-        {/* Get a Quote — opens contact panel */}
+        {/* Get a Quote — matches the hero CTA; opens the contact panel */}
         <button
           onClick={() => { setServicesOpen(false); setContactOpen((v) => !v) }}
-          className="flex-1 inline-flex items-center justify-center gap-2.5 h-14 rounded-full text-white font-extrabold text-[16px] tracking-[0.02em] transition-transform active:scale-[0.98]"
+          className="flex-1 inline-flex flex-col items-center justify-center gap-0.5 h-14 rounded-2xl text-white transition-transform active:scale-[0.98]"
           style={{ background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`, boxShadow: quoteShadow }}
-          aria-label="Get a Quote"
+          aria-label="Get Your Custom Quote"
           aria-expanded={contactOpen}
         >
-          {contactOpen ? <X className="w-5 h-5" strokeWidth={2.2} /> : <Sparkles className="w-5 h-5" strokeWidth={2.2} />}
-          Get a Quote
+          <span className="inline-flex items-center gap-2 font-extrabold text-[15px] tracking-[0.01em]">
+            Get Your Custom Quote
+            {contactOpen ? <X className="w-4 h-4" strokeWidth={2.4} /> : <ArrowRight className="w-4 h-4" />}
+          </span>
+          <span className="text-[10px] font-semibold text-white/85 leading-tight">Delivered in under 4 hours — not days.</span>
         </button>
       </div>
     </div>

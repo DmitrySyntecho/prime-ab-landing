@@ -188,9 +188,9 @@ export function LandingQuoteForm({ isOpen, onClose, citySlug = "los-angeles", de
           <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </button>
 
-        <div className="relative z-[1] p-4 sm:p-7 md:p-9">
+        <div className="relative z-[1] p-3.5 sm:p-7 md:p-9">
           {/* Header */}
-          <div className="mb-3.5 sm:mb-5">
+          <div className="mb-3 sm:mb-5">
             <span
               className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-md text-[9px] sm:text-[11px] font-bold tracking-[0.14em] sm:tracking-[0.16em] uppercase mb-2 sm:mb-3"
               style={{ background: "rgba(255,45,111,0.10)", border: "1px solid rgba(255,45,111,0.22)", color: "#FF2D6F" }}
@@ -207,7 +207,7 @@ export function LandingQuoteForm({ isOpen, onClose, citySlug = "los-angeles", de
           </div>
 
           {/* Progress */}
-          <div className="mb-4 sm:mb-6 h-[3px] sm:h-1 w-full rounded-full bg-white/[0.06] overflow-hidden">
+          <div className="mb-3 sm:mb-6 h-[3px] sm:h-1 w-full rounded-full bg-white/[0.06] overflow-hidden">
             <div
               className="h-full rounded-full transition-all duration-500"
               style={{
@@ -218,18 +218,18 @@ export function LandingQuoteForm({ isOpen, onClose, citySlug = "los-angeles", de
             />
           </div>
 
-          <p className="text-white/70 text-[13px] sm:text-[14px] mb-4 leading-snug">{microcopy}</p>
+          <p className="text-white/70 text-[13px] sm:text-[14px] mb-3 sm:mb-4 leading-snug">{microcopy}</p>
 
           <form onSubmit={handleSubmit} className="animate-fadeIn">
             {/* STEP 1 */}
             {step === 1 && (
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 <div>
                   <FieldLabel>Event Type</FieldLabel>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
                     {eventTypes.map(({ id, label, icon: Icon }) => (
                       <Tile key={id} active={form.eventType === id} onClick={() => set("eventType", id)}>
-                        <div className={`w-9 h-9 rounded-[10px] grid place-items-center mb-2 transition-all ${form.eventType === id ? "bg-[#FF2D6F] text-white" : "bg-[#FF2D6F]/14 border border-[#FF2D6F]/24 text-[#FF2D6F]"}`}>
+                        <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-[10px] grid place-items-center mb-1.5 sm:mb-2 transition-all ${form.eventType === id ? "bg-[#FF2D6F] text-white" : "bg-[#FF2D6F]/14 border border-[#FF2D6F]/24 text-[#FF2D6F]"}`}>
                           <Icon className="w-[18px] h-[18px]" strokeWidth={1.8} />
                         </div>
                         <span className="text-[12px] sm:text-[13px] font-bold text-white">{label}</span>
@@ -250,14 +250,14 @@ export function LandingQuoteForm({ isOpen, onClose, citySlug = "los-angeles", de
 
             {/* STEP 2 */}
             {step === 2 && (
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 <div>
                   <FieldLabel>Services</FieldLabel>
                   <p className="text-white/45 text-[12px] mb-2.5 -mt-1">Pick all that apply — multi-select.</p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
                     {serviceOptions.map(({ id, label, icon: Icon }) => (
                       <Tile key={id} active={form.services.includes(id)} onClick={() => toggleService(id)}>
-                        <div className={`w-9 h-9 rounded-[10px] grid place-items-center mb-2 transition-all ${form.services.includes(id) ? "bg-[#FF2D6F] text-white" : "bg-[#FF2D6F]/14 border border-[#FF2D6F]/24 text-[#FF2D6F]"}`}>
+                        <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-[10px] grid place-items-center mb-1.5 sm:mb-2 transition-all ${form.services.includes(id) ? "bg-[#FF2D6F] text-white" : "bg-[#FF2D6F]/14 border border-[#FF2D6F]/24 text-[#FF2D6F]"}`}>
                           <Icon className="w-[18px] h-[18px]" strokeWidth={1.8} />
                         </div>
                         <span className="text-[12px] sm:text-[13px] font-semibold text-white">{label}</span>
@@ -308,7 +308,7 @@ export function LandingQuoteForm({ isOpen, onClose, citySlug = "los-angeles", de
             )}
 
             {/* Footer */}
-            <div className="mt-6 flex items-center justify-between gap-3">
+            <div className="mt-5 sm:mt-6 flex items-center justify-between gap-3">
               <button type="button" onClick={back} className="inline-flex items-center gap-2 px-4 sm:px-5 py-3 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white/85 font-semibold text-[13px] backdrop-blur-md hover:bg-white/[0.08] transition-all">
                 <ArrowLeft className="w-4 h-4" />
                 {step === 1 ? "Cancel" : "Back"}
@@ -347,7 +347,7 @@ export function LandingQuoteForm({ isOpen, onClose, citySlug = "los-angeles", de
 /* ============ PRIMITIVES ============ */
 
 function FieldLabel({ children }: { children: React.ReactNode }) {
-  return <label className="block text-white/65 text-[11px] tracking-[0.08em] uppercase font-semibold mb-2.5">{children}</label>
+  return <label className="block text-white/65 text-[11px] tracking-[0.08em] uppercase font-semibold mb-2 sm:mb-2.5">{children}</label>
 }
 
 function Tile({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
@@ -355,7 +355,7 @@ function Tile({ active, onClick, children }: { active: boolean; onClick: () => v
     <button
       type="button"
       onClick={onClick}
-      className={`relative p-3 sm:p-3.5 rounded-[14px] border text-left transition-all ${active ? "border-[#FF2D6F]/50 bg-[#FF2D6F]/10" : "border-white/[0.08] bg-white/[0.03] hover:border-white/[0.18]"}`}
+      className={`relative p-2.5 sm:p-3.5 rounded-[14px] border text-left transition-all ${active ? "border-[#FF2D6F]/50 bg-[#FF2D6F]/10" : "border-white/[0.08] bg-white/[0.03] hover:border-white/[0.18]"}`}
     >
       {children}
       {active && (
@@ -377,7 +377,7 @@ function RadioRow({ options, value, onChange }: { options: { id: string; label: 
             key={id}
             type="button"
             onClick={() => onChange(id)}
-            className={`px-3 py-3 rounded-xl border text-center text-[13px] font-semibold transition-all ${active ? "border-[#FF2D6F]/50 bg-[#FF2D6F]/10 text-white" : "border-white/[0.08] bg-white/[0.03] text-white/75 hover:border-white/[0.18]"}`}
+            className={`px-3 py-2.5 sm:py-3 rounded-xl border text-center text-[13px] font-semibold transition-all ${active ? "border-[#FF2D6F]/50 bg-[#FF2D6F]/10 text-white" : "border-white/[0.08] bg-white/[0.03] text-white/75 hover:border-white/[0.18]"}`}
           >
             {label}
           </button>

@@ -25,7 +25,8 @@ export function ServicePageClient({ service }: ServicePageClientProps) {
       hero={{
         title: h1,
         accentPhrase: service.eyebrow,
-        pillLabel: `${service.eyebrow} in ${city}`,
+        // Generic category eyebrow so the pill doesn't repeat the H1 verbatim.
+        pillLabel: `AV Production in ${city}`,
         collage: service.collage,
       }}
     />

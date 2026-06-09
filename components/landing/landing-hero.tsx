@@ -77,7 +77,7 @@ function HeroCollage({ images }: { images: string[] }) {
   }, [photos.length])
 
   return (
-    <div className="relative h-[360px] sm:h-[440px] md:h-[500px]">
+    <div className="relative h-[250px] sm:h-[310px] md:h-[500px]">
       {slotLayout.map((slot, i) => (
         <div key={i} className={slot.className} style={slot.style}>
           {setA[i] && <Image src={setA[i]} alt="" fill sizes="(max-width: 1024px) 90vw, 40vw" className="object-cover" priority={i === 0} />}

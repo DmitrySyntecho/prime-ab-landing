@@ -3,10 +3,20 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { ArrowRight, Play, Box, UserCheck, Clock, BadgeCheck, Sparkles } from "lucide-react"
-import type { LandingCity } from "@/lib/landing-cities"
+
+export interface HeroConfig {
+  /** Full H1 text, e.g. "Full-Service AV Production in Los Angeles" */
+  title: string
+  /** Phrase inside the title to highlight (gradient), e.g. "AV Production" */
+  accentPhrase?: string
+  /** Eyebrow pill text, e.g. "AV Production in Los Angeles" */
+  pillLabel: string
+  /** Six photos for the animated 3-frame collage */
+  collage: string[]
+}
 
 interface LandingHeroProps {
-  data: LandingCity
+  hero: HeroConfig
   onQuote: () => void
 }
 
@@ -15,18 +25,6 @@ const bullets = [
   { icon: UserCheck, text: "One dedicated Technical Director from planning to strike" },
   { icon: Clock, text: "Production complete and tested 2 hours before doors open" },
   { icon: BadgeCheck, text: "Trusted by Apple, Nike, TikTok and 500+ brands" },
-]
-
-/* 3-photo collage moved over from the service pages' second block
-   (ServiceDescriptionSection): About-Us-style layout, each slot cross-fades
-   between set A and set B so 6 real production photos cycle through 3 frames. */
-const collage = [
-  "/images/services/av-01.webp",
-  "/images/services/av-02.webp",
-  "/images/services/av-03.webp",
-  "/images/services/av-06.webp",
-  "/images/services/av-05.webp",
-  "/images/services/av-07.webp",
 ]
 
 const slotLayout = [
@@ -44,12 +42,16 @@ const slotLayout = [
   },
 ]
 
-function HeroCollage() {
-  const setA = collage.slice(0, 3)
-  const setB = collage.slice(3, 6)
+/* About-Us-style 3-frame collage. Each frame cross-fades between set A and set B
+   so the 6 supplied photos cycle through 3 frames. */
+function HeroCollage({ images }: { images: string[] }) {
+  const photos = images.slice(0, 6).filter(Boolean)
+  const setA = photos.slice(0, 3)
+  const setB = photos.slice(3, 6)
   const [showingB, setShowingB] = useState([false, false, false])
 
   useEffect(() => {
+    if (photos.length < 4) return
     const STAGGER_MS = 1000
     const HOLD_MS = 5000
     const FADE_MS = 800
@@ -72,7 +74,7 @@ function HeroCollage() {
 
     timeouts.push(setTimeout(() => cycle(true), HOLD_MS))
     return () => timeouts.forEach(clearTimeout)
-  }, [])
+  }, [photos.length])
 
   return (
     <div className="relative h-[360px] sm:h-[440px] md:h-[500px]">
@@ -121,14 +123,12 @@ function HeroCollage() {
   )
 }
 
-/* Render the keyword with the accentPhrase highlighted (gradient), e.g.
-   "Full-Service [AV Production]". Falls back to the plain keyword. */
-function renderKeyword(data: LandingCity) {
-  const { keyword, accentPhrase } = data
-  if (!accentPhrase || !keyword.includes(accentPhrase)) {
-    return <span className="ds-accent-text">{keyword}</span>
+/* Render the title with accentPhrase highlighted (gradient). */
+function renderTitle(title: string, accentPhrase?: string) {
+  if (!accentPhrase || !title.includes(accentPhrase)) {
+    return title
   }
-  const [before, after] = keyword.split(accentPhrase)
+  const [before, after] = title.split(accentPhrase)
   return (
     <>
       {before}
@@ -138,16 +138,16 @@ function renderKeyword(data: LandingCity) {
   )
 }
 
-function Heading({ data, centered }: { data: LandingCity; centered?: boolean }) {
+function Heading({ hero, centered }: { hero: HeroConfig; centered?: boolean }) {
   return (
     <div className={centered ? "text-center" : ""}>
       <span className="ds-pill mb-4 md:mb-5 text-[10px] md:text-[12px]">
         <span className="dot" />
-        AV Production in {data.city}
+        {hero.pillLabel}
       </span>
       {/* H1 — wraps to max 2 lines on desktop (mobile exempt) */}
       <h1 className="text-[30px] sm:text-[38px] lg:text-[42px] font-extrabold tracking-[-0.02em] leading-[1.08] text-white mb-4">
-        {renderKeyword(data)} in {data.city}
+        {renderTitle(hero.title, hero.accentPhrase)}
       </h1>
       <p className={`text-white/65 text-[15px] md:text-[17px] leading-relaxed max-w-[520px] ${centered ? "mx-auto" : ""}`}>
         Your event runs flawlessly — or we make it right. One team, one contract, zero surprises.
@@ -211,7 +211,7 @@ function GiftLine() {
   )
 }
 
-export function LandingHero({ data, onQuote }: LandingHeroProps) {
+export function LandingHero({ hero, onQuote }: LandingHeroProps) {
   const scrollToVideo = () => {
     document.getElementById("why-us")?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
@@ -221,8 +221,8 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
       <div className="relative max-w-7xl mx-auto px-4">
         {/* MOBILE order (centered): heading + subheadline → images → buttons + render line → bullets */}
         <div className="lg:hidden flex flex-col gap-7 text-center">
-          <Heading data={data} centered />
-          <HeroCollage />
+          <Heading hero={hero} centered />
+          <HeroCollage images={hero.collage} />
           <div className="flex flex-col gap-4">
             <CtaButtons onQuote={onQuote} onWatch={scrollToVideo} centered />
             <div>
@@ -235,7 +235,7 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
         {/* DESKTOP order: text column (heading, bullets, buttons, gift) + collage */}
         <div className="hidden lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 items-center">
           <div>
-            <Heading data={data} />
+            <Heading hero={hero} />
             <div className="mt-6">
               <Bullets />
             </div>
@@ -247,7 +247,7 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
             </div>
           </div>
           <div className="relative">
-            <HeroCollage />
+            <HeroCollage images={hero.collage} />
           </div>
         </div>
       </div>

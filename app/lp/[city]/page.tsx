@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { LANDING_CITIES, getLandingCity } from "@/lib/landing-cities"
-import { LandingPage } from "@/components/landing/landing-page"
+import { LandingPage, AV_PRODUCTION_COLLAGE } from "@/components/landing/landing-page"
 
 export const dynamicParams = false
 
@@ -32,5 +32,14 @@ export default async function Page({ params }: { params: Promise<{ city: string 
   const data = getLandingCity(city)
   if (!data) notFound()
 
-  return <LandingPage data={data} />
+  return (
+    <LandingPage
+      hero={{
+        title: `${data.keyword} in ${data.city}`,
+        accentPhrase: data.accentPhrase,
+        pillLabel: `AV Production in ${data.city}`,
+        collage: AV_PRODUCTION_COLLAGE,
+      }}
+    />
+  )
 }

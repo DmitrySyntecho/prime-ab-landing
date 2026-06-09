@@ -5,7 +5,6 @@ import { Phone, X, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { PromoTopBanner } from "./promo-top-banner"
 import { WorldCupCTA } from "./landing/world-cup-cta"
 import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_HREF } from "@/lib/contact"
 
@@ -131,9 +130,6 @@ export function Header() {
 
   return (
     <>
-      {/* Pre-header banner — scrolls away with the page (not sticky) */}
-      <PromoTopBanner />
-
       <div
         ref={headerRef}
         data-hidden={hidden}

@@ -34,7 +34,7 @@ export function LandingPage({ data }: { data: LandingCity }) {
   return (
     <div className="min-h-screen">
       {/* First screen: hero fills the viewport, logo carousel pinned to the bottom */}
-      <div className="flex flex-col min-h-[calc(100svh-132px)]">
+      <div className="flex flex-col min-h-[calc(100svh-92px)]">
         <div className="flex-1 flex flex-col justify-center">
           <LandingHero data={data} onQuote={handleStartQuote} />
         </div>

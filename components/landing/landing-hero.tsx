@@ -75,7 +75,7 @@ function HeroCollage() {
   }, [])
 
   return (
-    <div className="relative h-[400px] md:h-[500px]">
+    <div className="relative h-[360px] sm:h-[440px] md:h-[500px]">
       {slotLayout.map((slot, i) => (
         <div key={i} className={slot.className} style={slot.style}>
           {setA[i] && <Image src={setA[i]} alt="" fill sizes="(max-width: 1024px) 90vw, 40vw" className="object-cover" priority={i === 0} />}
@@ -92,7 +92,7 @@ function HeroCollage() {
         </div>
       ))}
 
-      {/* Floating stat cards */}
+      {/* Floating stat cards (desktop only) */}
       <div
         className="hidden md:flex absolute top-4 right-[-10px] md:right-[-20px] z-40 items-center gap-3 px-4 py-3.5 rounded-[14px] border border-[#FF2D6F]/25 backdrop-blur-2xl animate-float-y"
         style={{ background: "rgba(8,18,26,0.85)", boxShadow: "0 18px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)" }}
@@ -121,6 +121,77 @@ function HeroCollage() {
   )
 }
 
+function Heading({ data }: { data: LandingCity }) {
+  return (
+    <div>
+      <span className="ds-pill mb-4 md:mb-5 text-[10px] md:text-[12px]">
+        <span className="dot" />
+        AV Production in {data.city}
+      </span>
+      {/* H1 — wraps to max 2 lines on desktop (mobile exempt) */}
+      <h1 className="text-[30px] sm:text-[38px] lg:text-[42px] font-extrabold tracking-[-0.02em] leading-[1.08] text-white mb-4">
+        {data.keyword} in <span className="ds-accent-text">{data.city}</span>
+      </h1>
+      <p className="text-white/65 text-[15px] md:text-[17px] leading-relaxed max-w-[520px]">
+        Your event runs flawlessly — or we make it right. One team, one contract, zero surprises.
+      </p>
+    </div>
+  )
+}
+
+function Bullets() {
+  return (
+    <ul className="space-y-2.5 max-w-[540px]">
+      {bullets.map(({ icon: Icon, text }) => (
+        <li key={text} className="flex items-start gap-3">
+          <span className="mt-0.5 w-6 h-6 rounded-[8px] bg-[#FF2D6F]/14 border border-[#FF2D6F]/24 grid place-items-center text-[#FF2D6F] flex-shrink-0">
+            <Icon className="w-3.5 h-3.5" strokeWidth={2.2} />
+          </span>
+          <span className="text-[14px] md:text-[15px] text-white/80 leading-snug">{text}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function CtaButtons({ onQuote, onWatch }: { onQuote: () => void; onWatch: () => void }) {
+  return (
+    <div className="flex flex-col sm:flex-row gap-3">
+      <button
+        onClick={onQuote}
+        className="group inline-flex flex-col items-center justify-center gap-0.5 px-6 md:px-8 py-3 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white transition-all hover:-translate-y-0.5"
+        style={{ boxShadow: "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)" }}
+      >
+        <span className="inline-flex items-center gap-2.5 font-extrabold text-[15px] tracking-[0.01em]">
+          Get Your Custom Quote
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+        </span>
+        <span className="text-[11px] font-semibold text-white/85 tracking-[0.01em]">
+          Delivered in under 4 hours — not days.
+        </span>
+      </button>
+
+      <button
+        onClick={onWatch}
+        className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 md:py-4 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-bold text-[14px] backdrop-blur-md hover:bg-white/[0.10] hover:border-white/[0.22] transition-all"
+      >
+        <Play className="w-4 h-4 fill-white" />
+        Watch How We Work
+      </button>
+    </div>
+  )
+}
+
+function GiftLine() {
+  return (
+    <div className="inline-flex items-start gap-2 px-3 py-2 rounded-[10px] bg-[#FFD24A]/[0.08] border border-[#FFD24A]/25 max-w-[520px]">
+      <span className="text-[#FFD24A] text-[12px] md:text-[13px] leading-snug font-semibold">
+        Includes: Free 3D render + site survey + dedicated Technical Director
+      </span>
+    </div>
+  )
+}
+
 export function LandingHero({ data, onQuote }: LandingHeroProps) {
   const scrollToVideo = () => {
     document.getElementById("why-us")?.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -129,67 +200,32 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
   return (
     <section id="top" className="relative pt-6 pb-2 md:pt-10 md:pb-4 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-8 md:gap-10 lg:gap-14 items-center">
-          {/* LEFT — compact text */}
-          <div className="order-2 lg:order-1">
-            <span className="ds-pill mb-4 md:mb-5 text-[10px] md:text-[12px]">
-              <span className="dot" />
-              AV Production in {data.city}
-            </span>
+        {/* MOBILE order: heading + subheadline → images → buttons + render line → bullets */}
+        <div className="lg:hidden flex flex-col gap-7">
+          <Heading data={data} />
+          <HeroCollage />
+          <div className="flex flex-col gap-4">
+            <CtaButtons onQuote={onQuote} onWatch={scrollToVideo} />
+            <GiftLine />
+          </div>
+          <Bullets />
+        </div>
 
-            {/* H1 — sized to wrap to a maximum of 2 lines on desktop (mobile exempt) */}
-            <h1 className="text-[30px] sm:text-[38px] lg:text-[42px] font-extrabold tracking-[-0.02em] leading-[1.08] text-white mb-4">
-              {data.keyword} in <span className="ds-accent-text">{data.city}</span>
-            </h1>
-
-            <p className="text-white/65 text-[15px] md:text-[17px] leading-relaxed max-w-[520px] mb-5 md:mb-6">
-              Your event runs flawlessly — or we make it right. One team, one contract, zero surprises.
-            </p>
-
-            <ul className="space-y-2.5 mb-6 max-w-[540px]">
-              {bullets.map(({ icon: Icon, text }) => (
-                <li key={text} className="flex items-start gap-3">
-                  <span className="mt-0.5 w-6 h-6 rounded-[8px] bg-[#FF2D6F]/14 border border-[#FF2D6F]/24 grid place-items-center text-[#FF2D6F] flex-shrink-0">
-                    <Icon className="w-3.5 h-3.5" strokeWidth={2.2} />
-                  </span>
-                  <span className="text-[14px] md:text-[15px] text-white/80 leading-snug">{text}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex flex-col sm:flex-row gap-3 mb-4">
-              <button
-                onClick={onQuote}
-                className="group inline-flex flex-col items-center justify-center gap-0.5 px-6 md:px-8 py-3 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white transition-all hover:-translate-y-0.5"
-                style={{ boxShadow: "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)" }}
-              >
-                <span className="inline-flex items-center gap-2.5 font-extrabold text-[15px] tracking-[0.01em]">
-                  Get Your Custom Quote
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </span>
-                <span className="text-[11px] font-semibold text-white/85 tracking-[0.01em]">
-                  Delivered in under 4 hours — not days.
-                </span>
-              </button>
-
-              <button
-                onClick={scrollToVideo}
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 md:py-4 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-bold text-[14px] backdrop-blur-md hover:bg-white/[0.10] hover:border-white/[0.22] transition-all"
-              >
-                <Play className="w-4 h-4 fill-white" />
-                Watch How We Work
-              </button>
+        {/* DESKTOP order: text column (heading, bullets, buttons, gift) + collage */}
+        <div className="hidden lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 items-center">
+          <div>
+            <Heading data={data} />
+            <div className="mt-6">
+              <Bullets />
             </div>
-
-            <div className="inline-flex items-start gap-2 px-3 py-2 rounded-[10px] bg-[#FFD24A]/[0.08] border border-[#FFD24A]/25 max-w-[520px]">
-              <span className="text-[#FFD24A] text-[12px] md:text-[13px] leading-snug font-semibold">
-                Includes: Free 3D render + site survey + dedicated Technical Director
-              </span>
+            <div className="mt-6">
+              <CtaButtons onQuote={onQuote} onWatch={scrollToVideo} />
+            </div>
+            <div className="mt-4">
+              <GiftLine />
             </div>
           </div>
-
-          {/* RIGHT — animated 3-photo collage */}
-          <div className="order-1 lg:order-2 relative">
+          <div className="relative">
             <HeroCollage />
           </div>
         </div>

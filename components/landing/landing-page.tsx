@@ -33,9 +33,14 @@ export function LandingPage({ data }: { data: LandingCity }) {
 
   return (
     <div className="min-h-screen">
-      <LandingHero data={data} onQuote={handleStartQuote} />
-      {/* Company logos at the bottom of the first block (original carousel design) */}
-      <TrustedBySection />
+      {/* First screen: hero fills the viewport, logo carousel pinned to the bottom */}
+      <div className="flex flex-col min-h-[calc(100svh-132px)]">
+        <div className="flex-1 flex flex-col justify-center">
+          <LandingHero data={data} onQuote={handleStartQuote} />
+        </div>
+        {/* Company logos pinned to the bottom of the first screen (original carousel design) */}
+        <TrustedBySection />
+      </div>
       <LandingWhyUs />
       <TestimonialsCarousel />
       <WhyChooseUsSection />

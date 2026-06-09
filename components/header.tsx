@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Phone, X, ArrowRight } from "lucide-react"
+import { Phone, X } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -42,7 +42,6 @@ export function Header() {
   const headerRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const isFifa = pathname?.startsWith("/fifa-2026-packages")
-  const isLp = pathname?.startsWith("/lp")
 
   // Close menu when header hides
   useEffect(() => {
@@ -186,21 +185,7 @@ export function Header() {
                   <span suppressHydrationWarning className="hidden xl:inline">{PHONE_DISPLAY}</span>
                 </a>
 
-                {isLp ? (
-                  <WorldCupCTA onClick={openQuote} />
-                ) : (
-                  <button
-                    onClick={openQuote}
-                    className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-[10px] ${ctaTextColor} font-extrabold text-[13px] tracking-[0.02em] transition-all hover:-translate-y-0.5`}
-                    style={{
-                      background: `linear-gradient(135deg, ${accent} 0%, ${accentDeep} 100%)`,
-                      boxShadow: ctaShadow,
-                    }}
-                  >
-                    Get a Quote
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                )}
+                <WorldCupCTA onClick={openQuote} />
               </div>
 
               {/* Mobile: Call Now button — direct call, CSS animation cycles between text and number */}

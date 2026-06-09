@@ -101,8 +101,10 @@ export function LandingWhyUs() {
 
           <p className="relative text-center text-[18px] md:text-[22px] leading-relaxed text-white/90 font-medium text-balance">
             “We&apos;ve used Prime Line for 6 events now. The difference is{" "}
-            <span className="ds-accent-text">night and day</span>. They{" "}
-            <span className="ds-accent-text">own the entire production</span> so I can actually focus on my guests.”
+            <span className="whitespace-nowrap">
+              <span className="ds-accent-text">night and day</span>.
+            </span>{" "}
+            They <span className="ds-accent-text">own the entire production</span> so I can actually focus on my guests.”
           </p>
 
           {/* Bottom row: author + stars centered, side by side */}

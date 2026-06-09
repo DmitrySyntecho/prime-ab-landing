@@ -13,6 +13,7 @@ import { BackgroundFX } from "@/components/background-fx"
 import { GlobalCTA } from "@/components/global-cta"
 import { CTMScanner } from "@/components/ctm-scanner"
 import { CallNowPopup } from "@/components/call-now-popup"
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -103,6 +104,7 @@ export default function RootLayout({
           <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`} height="0" width="0" style={{display:"none",visibility:"hidden"}}></iframe></noscript>
         )}
         <BackgroundFX />
+        <ScrollToTop />
         <div className="page-content">
           <LanguageProvider>
             <CartProvider>

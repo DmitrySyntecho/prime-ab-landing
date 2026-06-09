@@ -105,8 +105,8 @@ export function LandingWhyUs() {
             <span className="ds-accent-text">own the entire production</span> so I can actually focus on my guests.”
           </p>
 
-          {/* Bottom row: author (left) and stars (right) on one line */}
-          <div className="relative mt-6 flex items-center justify-between gap-4 flex-wrap">
+          {/* Bottom row: author + stars centered, side by side */}
+          <div className="relative mt-6 flex items-center justify-center gap-4 flex-wrap">
             <div className="flex items-center gap-3">
               <div
                 className="w-11 h-11 rounded-full bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] grid place-items-center text-white font-bold text-[14px]"
@@ -114,11 +114,13 @@ export function LandingWhyUs() {
               >
                 LS
               </div>
-              <div>
+              <div className="text-left">
                 <p className="text-white font-bold text-[14px] leading-tight">Lauren Selman</p>
                 <p className="text-white/50 text-[12px]">Event Producer</p>
               </div>
             </div>
+
+            <span className="hidden sm:block h-8 w-px bg-white/15" aria-hidden />
 
             <div className="flex items-center gap-1">
               {Array.from({ length: 5 }).map((_, i) => (

@@ -172,11 +172,13 @@ function Bullets({ centered }: { centered?: boolean }) {
 }
 
 function CtaButtons({ onQuote, onWatch, centered }: { onQuote: () => void; onWatch: () => void; centered?: boolean }) {
+  // On mobile the buttons stretch to the full content width; from sm up they size to content.
+  const fullWidth = centered ? "w-full sm:w-auto" : ""
   return (
-    <div className={`flex flex-col sm:flex-row gap-3 ${centered ? "items-center sm:justify-center" : ""}`}>
+    <div className={`flex flex-col sm:flex-row gap-3 ${centered ? "sm:justify-center" : ""}`}>
       <button
         onClick={onQuote}
-        className="group inline-flex flex-col items-center justify-center gap-0.5 px-6 md:px-8 py-3 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white transition-all hover:-translate-y-0.5"
+        className={`group inline-flex flex-col items-center justify-center gap-0.5 px-6 md:px-8 py-3 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white transition-all hover:-translate-y-0.5 ${fullWidth}`}
         style={{ boxShadow: "0 12px 36px -8px rgba(255, 45, 111,0.55), inset 0 1px 0 rgba(255,255,255,0.3)" }}
       >
         <span className="inline-flex items-center gap-2.5 font-extrabold text-[15px] tracking-[0.01em]">
@@ -190,7 +192,7 @@ function CtaButtons({ onQuote, onWatch, centered }: { onQuote: () => void; onWat
 
       <button
         onClick={onWatch}
-        className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 md:py-4 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-bold text-[14px] backdrop-blur-md hover:bg-white/[0.10] hover:border-white/[0.22] transition-all"
+        className={`inline-flex items-center justify-center gap-2.5 px-6 py-3.5 md:py-4 rounded-xl bg-white/[0.05] border border-white/[0.12] text-white font-bold text-[14px] backdrop-blur-md hover:bg-white/[0.10] hover:border-white/[0.22] transition-all ${fullWidth}`}
       >
         <Play className="w-4 h-4 fill-white" />
         Watch How We Work
@@ -221,9 +223,11 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
         <div className="lg:hidden flex flex-col gap-7 text-center">
           <Heading data={data} centered />
           <HeroCollage />
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col gap-4">
             <CtaButtons onQuote={onQuote} onWatch={scrollToVideo} centered />
-            <GiftLine />
+            <div>
+              <GiftLine />
+            </div>
           </div>
           <Bullets centered />
         </div>

@@ -62,23 +62,16 @@ export function VideoOverlay({
           <X className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2.2} />
         </button>
 
-        {/* Video — largest 16:9 that fits the screen */}
-        <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-6 md:p-10">
-          <div
-            className="relative w-full max-w-6xl aspect-video rounded-2xl overflow-hidden bg-black border border-white/10"
-            style={{ boxShadow: "0 40px 100px -20px rgba(0,0,0,0.8)" }}
-          >
-            {open && (
-              <iframe
-                src={`https://player.mux.com/${muxId}?autoplay=1`}
-                className="absolute inset-0 w-full h-full"
-                style={{ border: "none" }}
-                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
-            )}
-          </div>
-        </div>
+        {/* Video — fills the entire screen (any resolution, incl. 4K) */}
+        {open && (
+          <iframe
+            src={`https://player.mux.com/${muxId}?autoplay=true`}
+            className="absolute inset-0 w-full h-full bg-black"
+            style={{ border: "none" }}
+            allow="autoplay; fullscreen; accelerometer; gyroscope; encrypted-media; picture-in-picture"
+            allowFullScreen
+          />
+        )}
       </div>
     </div>
   )

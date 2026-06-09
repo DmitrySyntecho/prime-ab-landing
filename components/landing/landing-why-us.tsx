@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Play, Users, ShieldCheck, CheckCircle2, Clock, Quote } from "lucide-react"
+import { Play, Users, ShieldCheck, CheckCircle2, Clock, Quote, Star } from "lucide-react"
 
 /* Block 2 showreel — Prime Line reel (Mux). Swap this ID for a dedicated LA cut
    when one is available. The heavy player iframe only mounts after play. */
@@ -89,20 +89,37 @@ export function LandingWhyUs() {
 
         {/* Testimonial */}
         <div
-          className="mt-8 md:mt-12 relative rounded-[20px] border border-white/[0.08] p-6 md:p-9 overflow-hidden"
+          className="mt-8 md:mt-12 relative rounded-[24px] border border-white/[0.08] px-6 py-10 md:px-10 md:py-14 overflow-hidden text-center"
           style={{
             background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)",
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
           }}
         >
-          <Quote className="absolute -top-1 right-5 w-20 h-20 text-[#FF2D6F]/10" />
-          <p className="relative text-[17px] md:text-[22px] leading-relaxed text-white/90 font-medium max-w-4xl">
-            “We&apos;ve used Prime Line for 6 events now. The difference is night and day. They own the entire
-            production so I can actually focus on my guests.”
+          {/* Decorative quote marks */}
+          <Quote className="absolute -top-2 left-5 w-16 h-16 md:w-20 md:h-20 text-[#FF2D6F]/10 -scale-x-100" aria-hidden />
+          <Quote className="absolute -bottom-3 right-5 w-16 h-16 md:w-20 md:h-20 text-[#FF2D6F]/10" aria-hidden />
+
+          {/* Stars */}
+          <div className="relative flex justify-center gap-1 mb-5 md:mb-6">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star key={i} className="w-5 h-5 md:w-6 md:h-6 text-[#FFD24A] fill-[#FFD24A]" />
+            ))}
+          </div>
+
+          <p className="relative mx-auto text-[18px] md:text-[24px] lg:text-[27px] leading-relaxed text-white/90 font-medium max-w-3xl text-balance">
+            “We&apos;ve used Prime Line for 6 events now. The difference is{" "}
+            <span className="ds-accent-text">night and day</span>. They{" "}
+            <span className="ds-accent-text">own the entire production</span> so I can actually focus on my guests.”
           </p>
-          <div className="relative mt-5 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] grid place-items-center text-white font-bold text-[14px]">LS</div>
-            <div>
+
+          <div className="relative mt-7 md:mt-8 flex items-center justify-center gap-3">
+            <div
+              className="w-11 h-11 rounded-full bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] grid place-items-center text-white font-bold text-[14px]"
+              style={{ boxShadow: "0 8px 24px -8px rgba(255,45,111,0.6)" }}
+            >
+              LS
+            </div>
+            <div className="text-left">
               <p className="text-white font-bold text-[14px] leading-tight">Lauren Selman</p>
               <p className="text-white/50 text-[12px]">Event Producer</p>
             </div>

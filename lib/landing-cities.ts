@@ -11,6 +11,8 @@ export interface LandingCity {
   city: string
   /** SEO/H1 keyword, e.g. "Full-Service AV Production" */
   keyword: string
+  /** Phrase inside the keyword to highlight in the H1 (gradient accent). */
+  accentPhrase?: string
 }
 
 export const LANDING_CITIES: Record<string, LandingCity> = {
@@ -18,6 +20,7 @@ export const LANDING_CITIES: Record<string, LandingCity> = {
     slug: "los-angeles",
     city: "Los Angeles",
     keyword: "Full-Service AV Production",
+    accentPhrase: "AV Production",
   },
 }
 

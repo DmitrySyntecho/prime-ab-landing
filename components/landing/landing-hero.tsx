@@ -121,30 +121,47 @@ function HeroCollage() {
   )
 }
 
-function Heading({ data }: { data: LandingCity }) {
+/* Render the keyword with the accentPhrase highlighted (gradient), e.g.
+   "Full-Service [AV Production]". Falls back to the plain keyword. */
+function renderKeyword(data: LandingCity) {
+  const { keyword, accentPhrase } = data
+  if (!accentPhrase || !keyword.includes(accentPhrase)) {
+    return <span className="ds-accent-text">{keyword}</span>
+  }
+  const [before, after] = keyword.split(accentPhrase)
   return (
-    <div>
+    <>
+      {before}
+      <span className="ds-accent-text">{accentPhrase}</span>
+      {after}
+    </>
+  )
+}
+
+function Heading({ data, centered }: { data: LandingCity; centered?: boolean }) {
+  return (
+    <div className={centered ? "text-center" : ""}>
       <span className="ds-pill mb-4 md:mb-5 text-[10px] md:text-[12px]">
         <span className="dot" />
         AV Production in {data.city}
       </span>
       {/* H1 — wraps to max 2 lines on desktop (mobile exempt) */}
       <h1 className="text-[30px] sm:text-[38px] lg:text-[42px] font-extrabold tracking-[-0.02em] leading-[1.08] text-white mb-4">
-        {data.keyword} in <span className="ds-accent-text">{data.city}</span>
+        {renderKeyword(data)} in {data.city}
       </h1>
-      <p className="text-white/65 text-[15px] md:text-[17px] leading-relaxed max-w-[520px]">
+      <p className={`text-white/65 text-[15px] md:text-[17px] leading-relaxed max-w-[520px] ${centered ? "mx-auto" : ""}`}>
         Your event runs flawlessly — or we make it right. One team, one contract, zero surprises.
       </p>
     </div>
   )
 }
 
-function Bullets() {
+function Bullets({ centered }: { centered?: boolean }) {
   return (
-    <ul className="space-y-2.5 max-w-[540px]">
+    <ul className={`space-y-3 ${centered ? "max-w-[420px] mx-auto text-left" : "max-w-[540px]"}`}>
       {bullets.map(({ icon: Icon, text }) => (
-        <li key={text} className="flex items-start gap-3">
-          <span className="mt-0.5 w-6 h-6 rounded-[8px] bg-[#FF2D6F]/14 border border-[#FF2D6F]/24 grid place-items-center text-[#FF2D6F] flex-shrink-0">
+        <li key={text} className="flex items-center gap-3">
+          <span className="w-6 h-6 rounded-[8px] bg-[#FF2D6F]/14 border border-[#FF2D6F]/24 grid place-items-center text-[#FF2D6F] flex-shrink-0">
             <Icon className="w-3.5 h-3.5" strokeWidth={2.2} />
           </span>
           <span className="text-[14px] md:text-[15px] text-white/80 leading-snug">{text}</span>
@@ -154,9 +171,9 @@ function Bullets() {
   )
 }
 
-function CtaButtons({ onQuote, onWatch }: { onQuote: () => void; onWatch: () => void }) {
+function CtaButtons({ onQuote, onWatch, centered }: { onQuote: () => void; onWatch: () => void; centered?: boolean }) {
   return (
-    <div className="flex flex-col sm:flex-row gap-3">
+    <div className={`flex flex-col sm:flex-row gap-3 ${centered ? "items-center sm:justify-center" : ""}`}>
       <button
         onClick={onQuote}
         className="group inline-flex flex-col items-center justify-center gap-0.5 px-6 md:px-8 py-3 rounded-xl bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] text-white transition-all hover:-translate-y-0.5"
@@ -200,15 +217,15 @@ export function LandingHero({ data, onQuote }: LandingHeroProps) {
   return (
     <section id="top" className="relative pt-6 pb-2 md:pt-10 md:pb-4 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4">
-        {/* MOBILE order: heading + subheadline → images → buttons + render line → bullets */}
-        <div className="lg:hidden flex flex-col gap-7">
-          <Heading data={data} />
+        {/* MOBILE order (centered): heading + subheadline → images → buttons + render line → bullets */}
+        <div className="lg:hidden flex flex-col gap-7 text-center">
+          <Heading data={data} centered />
           <HeroCollage />
-          <div className="flex flex-col gap-4">
-            <CtaButtons onQuote={onQuote} onWatch={scrollToVideo} />
+          <div className="flex flex-col items-center gap-4">
+            <CtaButtons onQuote={onQuote} onWatch={scrollToVideo} centered />
             <GiftLine />
           </div>
-          <Bullets />
+          <Bullets centered />
         </div>
 
         {/* DESKTOP order: text column (heading, bullets, buttons, gift) + collage */}

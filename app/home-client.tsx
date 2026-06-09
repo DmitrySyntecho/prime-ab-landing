@@ -24,7 +24,8 @@ export function HomeClient() {
       hero={{
         title: `Full-Service AV Production in ${city}`,
         accentPhrase: "AV Production",
-        pillLabel: `AV Production in ${city}`,
+        // Eyebrow kept distinct from the H1 (no "AV Production" / city overlap).
+        pillLabel: "Lights · Sound · LED · Staging",
         collage: AV_PRODUCTION_COLLAGE,
       }}
     />

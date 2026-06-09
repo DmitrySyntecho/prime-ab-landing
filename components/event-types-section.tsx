@@ -3,17 +3,19 @@
 import { ArrowUpRight, Sparkles } from "lucide-react"
 import { usePathname } from "next/navigation"
 
+// Pill `tag` is a related sub-angle, deliberately different from `title` so the
+// two never read as the same word on a card.
 const eventTypes = [
-  { title: "Experiential Marketing", tag: "Experiential", id: "experiential", image: "/images/events/experiential-marketing.webp" },
-  { title: "Corporate", tag: "Corporate", id: "corporate", image: "/images/events/corporate.webp" },
-  { title: "Fashion Shows", tag: "Fashion", id: "fashion-show", image: "/images/events/fashion-shows.webp" },
-  { title: "Trade Shows", tag: "Trade Show", id: "trade-show", image: "/images/events/trade-shows.webp" },
-  { title: "Weddings", tag: "Wedding", id: "private", image: "/images/events/weddings.webp" },
-  { title: "Festivals", tag: "Festival", id: "festival", image: "/images/events/festivals.webp" },
-  { title: "Virtual/Hybrid Events", tag: "Hybrid", id: "other", image: "/images/events/hybrid-events.webp" },
-  { title: "Private", tag: "Private", id: "private", image: "/images/events/private.webp" },
-  { title: "Film Production", tag: "Production", id: "studio", image: "/images/events/film-production.webp" },
-  { title: "Grand Opening", tag: "Grand Opening", id: "brand-activation", image: "/images/events/grand-opening.webp" },
+  { title: "Experiential Marketing", tag: "Activations", id: "experiential", image: "/images/events/experiential-marketing.webp" },
+  { title: "Corporate", tag: "Conferences", id: "corporate", image: "/images/events/corporate.webp" },
+  { title: "Fashion Shows", tag: "Runway", id: "fashion-show", image: "/images/events/fashion-shows.webp" },
+  { title: "Trade Shows", tag: "Expo", id: "trade-show", image: "/images/events/trade-shows.webp" },
+  { title: "Weddings", tag: "Celebrations", id: "private", image: "/images/events/weddings.webp" },
+  { title: "Festivals", tag: "Concerts", id: "festival", image: "/images/events/festivals.webp" },
+  { title: "Virtual/Hybrid Events", tag: "Streaming", id: "other", image: "/images/events/hybrid-events.webp" },
+  { title: "Private", tag: "VIP", id: "private", image: "/images/events/private.webp" },
+  { title: "Film Production", tag: "Studio", id: "studio", image: "/images/events/film-production.webp" },
+  { title: "Grand Opening", tag: "Launch", id: "brand-activation", image: "/images/events/grand-opening.webp" },
 ]
 
 export function EventTypesSection() {

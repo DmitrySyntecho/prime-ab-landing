@@ -89,7 +89,7 @@ export function LandingWhyUs() {
 
         {/* Testimonial */}
         <div
-          className="mt-8 md:mt-12 relative mx-auto max-w-2xl rounded-[24px] border border-white/[0.08] px-6 py-9 md:px-9 md:py-11 overflow-hidden text-center"
+          className="mt-8 md:mt-12 relative rounded-[24px] border border-white/[0.08] px-6 py-7 md:px-10 md:py-9 overflow-hidden"
           style={{
             background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)",
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
@@ -99,32 +99,33 @@ export function LandingWhyUs() {
           <Quote className="absolute -top-2 left-4 w-14 h-14 md:w-16 md:h-16 text-[#FF2D6F]/10 -scale-x-100" aria-hidden />
           <Quote className="absolute -bottom-3 right-4 w-14 h-14 md:w-16 md:h-16 text-[#FF2D6F]/10" aria-hidden />
 
-          {/* Author at the top */}
-          <div className="relative flex items-center justify-center gap-3 mb-5">
-            <div
-              className="w-11 h-11 rounded-full bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] grid place-items-center text-white font-bold text-[14px]"
-              style={{ boxShadow: "0 8px 24px -8px rgba(255,45,111,0.6)" }}
-            >
-              LS
-            </div>
-            <div className="text-left">
-              <p className="text-white font-bold text-[14px] leading-tight">Lauren Selman</p>
-              <p className="text-white/50 text-[12px]">Event Producer</p>
-            </div>
-          </div>
-
-          {/* Stars */}
-          <div className="relative flex justify-center gap-1 mb-4">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="w-5 h-5 text-[#FFD24A] fill-[#FFD24A]" />
-            ))}
-          </div>
-
-          <p className="relative text-[17px] md:text-[20px] leading-relaxed text-white/90 font-medium text-balance">
+          <p className="relative text-center text-[18px] md:text-[22px] leading-relaxed text-white/90 font-medium text-balance">
             “We&apos;ve used Prime Line for 6 events now. The difference is{" "}
             <span className="ds-accent-text">night and day</span>. They{" "}
             <span className="ds-accent-text">own the entire production</span> so I can actually focus on my guests.”
           </p>
+
+          {/* Bottom row: author (left) and stars (right) on one line */}
+          <div className="relative mt-6 flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-3">
+              <div
+                className="w-11 h-11 rounded-full bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] grid place-items-center text-white font-bold text-[14px]"
+                style={{ boxShadow: "0 8px 24px -8px rgba(255,45,111,0.6)" }}
+              >
+                LS
+              </div>
+              <div>
+                <p className="text-white font-bold text-[14px] leading-tight">Lauren Selman</p>
+                <p className="text-white/50 text-[12px]">Event Producer</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="w-5 h-5 text-[#FFD24A] fill-[#FFD24A]" />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

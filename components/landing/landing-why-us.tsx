@@ -89,30 +89,18 @@ export function LandingWhyUs() {
 
         {/* Testimonial */}
         <div
-          className="mt-8 md:mt-12 relative rounded-[24px] border border-white/[0.08] px-6 py-10 md:px-10 md:py-14 overflow-hidden text-center"
+          className="mt-8 md:mt-12 relative mx-auto max-w-2xl rounded-[24px] border border-white/[0.08] px-6 py-9 md:px-9 md:py-11 overflow-hidden text-center"
           style={{
             background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)",
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 16px 36px -12px rgba(0,0,0,0.4)",
           }}
         >
           {/* Decorative quote marks */}
-          <Quote className="absolute -top-2 left-5 w-16 h-16 md:w-20 md:h-20 text-[#FF2D6F]/10 -scale-x-100" aria-hidden />
-          <Quote className="absolute -bottom-3 right-5 w-16 h-16 md:w-20 md:h-20 text-[#FF2D6F]/10" aria-hidden />
+          <Quote className="absolute -top-2 left-4 w-14 h-14 md:w-16 md:h-16 text-[#FF2D6F]/10 -scale-x-100" aria-hidden />
+          <Quote className="absolute -bottom-3 right-4 w-14 h-14 md:w-16 md:h-16 text-[#FF2D6F]/10" aria-hidden />
 
-          {/* Stars */}
-          <div className="relative flex justify-center gap-1 mb-5 md:mb-6">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="w-5 h-5 md:w-6 md:h-6 text-[#FFD24A] fill-[#FFD24A]" />
-            ))}
-          </div>
-
-          <p className="relative mx-auto text-[18px] md:text-[24px] lg:text-[27px] leading-relaxed text-white/90 font-medium max-w-3xl text-balance">
-            “We&apos;ve used Prime Line for 6 events now. The difference is{" "}
-            <span className="ds-accent-text">night and day</span>. They{" "}
-            <span className="ds-accent-text">own the entire production</span> so I can actually focus on my guests.”
-          </p>
-
-          <div className="relative mt-7 md:mt-8 flex items-center justify-center gap-3">
+          {/* Author at the top */}
+          <div className="relative flex items-center justify-center gap-3 mb-5">
             <div
               className="w-11 h-11 rounded-full bg-gradient-to-br from-[#FF2D6F] to-[#FF5E3A] grid place-items-center text-white font-bold text-[14px]"
               style={{ boxShadow: "0 8px 24px -8px rgba(255,45,111,0.6)" }}
@@ -124,6 +112,19 @@ export function LandingWhyUs() {
               <p className="text-white/50 text-[12px]">Event Producer</p>
             </div>
           </div>
+
+          {/* Stars */}
+          <div className="relative flex justify-center gap-1 mb-4">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star key={i} className="w-5 h-5 text-[#FFD24A] fill-[#FFD24A]" />
+            ))}
+          </div>
+
+          <p className="relative text-[17px] md:text-[20px] leading-relaxed text-white/90 font-medium text-balance">
+            “We&apos;ve used Prime Line for 6 events now. The difference is{" "}
+            <span className="ds-accent-text">night and day</span>. They{" "}
+            <span className="ds-accent-text">own the entire production</span> so I can actually focus on my guests.”
+          </p>
         </div>
       </div>
     </section>
